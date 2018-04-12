@@ -48,7 +48,7 @@ KafkaRPC.prototype.makeRequest = function (topic_name, content, callback) {
             {
                 topic: topic_name, messages: JSON.stringify({
                     correlationId: correlationId,
-                    replyTo: 'fl_response_topic',
+                    replyTo: 'fandango_response_topic',
                     data: content
                 }),
                 partition: 0
@@ -73,9 +73,9 @@ KafkaRPC.prototype.setupResponseQueue = function (producer, topic_name, next) {
     console.log('1');
 
     self = this;
-    var chunk_requests = {};
+
     //subscribe to messages
-    var consumer = self.connection.getConsumer('fl_response_topic');
+    var consumer = self.connection.getConsumer('fandango_response_topic');
     consumer.on('message', function (message) {
         var data = JSON.parse(message.value);
         console.log('msg received');
