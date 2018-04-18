@@ -1,38 +1,87 @@
 import React, { Component } from 'react';
+import { Carousel } from 'react-bootstrap';
 import './landing.css';
+import moviePicture from './blackpanther.jpg';
+import slide1 from './slide1.jpg';
+import slide2 from './slide2.jpg';
+import slide3 from './slide3.jpg';
 
 class LandingContent extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            index: 0,
+            direction: null,
+            topMovies: []
+        };
+
+        this.handleSelect = this.handleSelect.bind(this);
+    }
+
+    componentDidMount() {
+    }
+
+    handleSelect(selectedIndex, e) {
+        this.setState({
+            index: selectedIndex,
+            direction: e.direction
+        });
+    }
+
+
     render() {
         return (
-            <div className="col-12 mr-top-10">
-                <div id="recipeCarousel" className="carousel slide col-10 offset-md-1 " data-ride="carousel">
-                    <div className="carousel-inner w-100" role="listbox">
-                        <div className="carousel-item row no-gutters active">
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/222/fff?text=1" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/444?text=2" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/888?text=3" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/111/fff?text=4" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/111/fff?text=4" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/111/fff?text=4" /></div>
-                        </div>
-                        <div className="carousel-item row no-gutters">
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280?text=5" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/555?text=6" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/333/fff?text=7" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/bbb?text=8" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/111/fff?text=4" /></div>
-                            <div className="col-2 float-left"><img alt="Movie Poster" className="carousel-img" src="http://placehold.it/350x280/111/fff?text=4" /></div>
-                        </div>
-                    </div>
-                    <a className="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="sr-only">Previous</span>
-                    </a>
-                    <a className="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="sr-only">Next</span>
-                    </a>
+            <div>
+                <div className="col-md-offset-1 col-md-10 mr-top-25">
+                    <Carousel
+                        activeIndex={this.state.index}
+                        direction={this.state.direction}
+                        onSelect={this.handleSelect}>
+                        <Carousel.Item>
+                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <div className="item row no-gutters">
+                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                            </div>
+                        </Carousel.Item>
+                    </Carousel>
                 </div>
+                <div className="col-md-offset-1 col-md-10 mr-top-50 mr-bottom-25">
+                    <Carousel>
+                        <Carousel.Item>
+                            <img className="lg-carousel-img" alt="900x500" src={slide1} />
+                            <Carousel.Caption>
+                                <h3>Tribeca Film Festival Preview</h3>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img className="lg-carousel-img" alt="900x500" src={slide2} />
+                            <Carousel.Caption>
+                                <h3>Get To know Amy Scummer</h3>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img className="lg-carousel-img" alt="900x500" src={slide3} />
+                            <Carousel.Caption>
+                                <h3>Protect the world we love</h3>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                    </Carousel>
+                </div>
+
             </div>
         )
     }

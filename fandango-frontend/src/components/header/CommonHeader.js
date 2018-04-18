@@ -9,8 +9,8 @@ class CommonHeader extends Component {
       <div>
         <div className="ad-topbanner"></div>
         <div className="brand-bar">
-          <div className="col-12">
-            <div className="offset-md-8 col-4 float-right header-link">
+          <div className="col-md-12">
+            <div className="col-md-offset-8 col-md-4 float-right header-link">
               <a href="">Gift Cards</a> |
             <a href="">Offers</a> |
             <a href=""
@@ -121,12 +121,11 @@ class CommonHeader extends Component {
             <li><a href="">JOIN FANDANGO <span className="vip-text">VIP</span></a></li>
           </ul>
         </div>
-        <div className="col-12 sub-header">
-          <div className="offset-md-2 col-10">
-            <div className="col-2"></div>
-            <div className="movie-ticket-header row">
-              <div className="ticket-label">BUY MOVIE TICKETS </div>
-              <a href="" className="movie-tickets-header--see-all ">SEE ALL MOVIES</a>
+        <div className="col-md-12 sub-header">
+          <div className="col-md-offset-2 col-md-10 pd-left-0">
+            <div className="movie-ticket-header col-md-12 clearfix">
+              <div className="col-md-2 pd-left-0 pd-right-0 ticket-label float-left">BUY MOVIE TICKETS </div>
+              <a href="" className="col-md-2 pd-left-0 movie-tickets-header--see-all ">SEE ALL MOVIES</a>
             </div>
           </div>
         </div>

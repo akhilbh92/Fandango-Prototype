@@ -325,6 +325,7 @@ label.mobile_menu span {
 .movie-ticket-header{
 	list-style: none;
 	padding-left: 0px;
+	float: left;
 }
 .movie-tickets-header--see-all {
     margin: 0;
@@ -333,13 +334,27 @@ label.mobile_menu span {
     font-weight: 700;
 	text-transform: uppercase;
 	line-height: 3;
+	float: left;
+    margin-left: -30px;
 }
 .mr-top-10{
 	margin-top: 10px;
+}
+.mr-top-25{
+	margin-top: 25px;
+}
+.mr-top-50{
+	margin-top: 50px;
 }
 .mr-right-0{
 	margin-right: 0px !important;
 }
 .vip-text{
 	color: #F15500;
+}
+.pd-left-0{
+	padding-left: 0px;
+}
+.pd-right-0{
+	padding-right: 0px;
 }
