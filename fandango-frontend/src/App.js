@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter} from 'react-router-dom';
-import Landing from "./components/Landing/Landing";
+import RoutesComponent from "./components/RoutesComponent/RoutesComponent";
 
 class App extends Component {
     render() {
@@ -9,7 +9,7 @@ class App extends Component {
             <div className="App">
 
                 <BrowserRouter>
-                    <Landing/>
+                    <RoutesComponent/>
                 </BrowserRouter>
             </div>
         );
