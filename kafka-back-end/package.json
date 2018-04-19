@@ -12,10 +12,12 @@
     "kafka-node": "^2.2.3",
     "lodash": "^4.17.5",
     "mongodb": "^2.2.31",
+    "mysql2": "^1.5.3",
     "nodemon": "^1.17.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-authenticate": "^1.2.0",
+    "sequelize": "^4.37.6",
     "server": "^1.0.18",
     "underscore": "^1.8.3"
   }
