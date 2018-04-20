@@ -121,14 +121,6 @@ class CommonHeader extends Component {
             <li><a href="">JOIN FANDANGO <span className="vip-text">VIP</span></a></li>
           </ul>
         </div>
-        <div className="col-md-12 sub-header">
-          <div className="col-md-offset-2 col-md-10 pd-left-0">
-            <div className="movie-ticket-header col-md-12 clearfix">
-              <div className="col-md-2 pd-left-0 pd-right-0 ticket-label float-left">BUY MOVIE TICKETS </div>
-              <a href="" className="col-md-2 pd-left-0 movie-tickets-header--see-all ">SEE ALL MOVIES</a>
-            </div>
-          </div>
-        </div>
       </div>
     )
   }
