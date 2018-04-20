@@ -132,12 +132,12 @@ app.use(function(req, res, next) {
 });
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: reactServerURL,
   credentials: true
 }));
 
 // app.use(fileUpload());
-app.use('/public', express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
 // catch 404 and forward to error handler
