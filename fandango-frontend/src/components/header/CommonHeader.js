@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import './header.css';
 import fandangoLogo from './fandango-logo.jpg';
 
@@ -13,8 +14,8 @@ class CommonHeader extends Component {
             <div className="col-md-offset-8 col-md-4 float-right header-link">
               <a href="">Gift Cards</a> |
             <a href="">Offers</a> |
-            <a href=""
-                className="hide-logged-in">Sign In</a>
+            <Link to="/login"
+                className="hide-logged-in">Sign In</Link>
             </div>
           </div>
         </div>
@@ -118,7 +119,7 @@ class CommonHeader extends Component {
                 </div>
               </div>
             </li>
-            <li><a href="">JOIN FANDANGO <span className="vip-text">VIP</span></a></li>
+            <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>
           </ul>
         </div>
         <div className="col-md-12 sub-header">
