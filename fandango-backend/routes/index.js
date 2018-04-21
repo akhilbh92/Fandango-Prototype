@@ -12,6 +12,9 @@ var editMovie = require('./admin/editMovie');
 var editHall = require('./admin/editHall');
 var editScreen = require('./admin/editScreen');
 
+//acquiring user logic
+const Signup = require ('./users/sign_up');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -62,4 +65,8 @@ router.post('/editScreen', function(req, res, next){
   editScreen.editScreenRouterFn(req, res, next);
 });
 
+router.post('/Signup', function (req,res,next) {
+    console.log('SIGNUP API');
+    Signup.signUpRouterFn(req,res,next);
+});
 module.exports = router;

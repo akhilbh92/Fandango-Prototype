@@ -22,8 +22,6 @@ class RoutesComponent extends Component {
                 <Route exact path="/dashboard" component={Dashboard} />
             </div>
         )
-
-
     }
 }
 
