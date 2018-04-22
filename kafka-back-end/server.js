@@ -36,7 +36,7 @@
 var connection =  new require('./kafka/Connection');
 
 var registrationTopicName = 'registration_topic';
-//var consumer = connection.getConsumer('admin');
+var consumer = connection.getConsumer('admin');
 
 var producer = connection.getProducer();
 
@@ -114,43 +114,6 @@ var editScreenHandler = require('./services/screens/editScreen');
 //         return;
 //     });
 // });
-
-
-//Consumer for users services
-const userServiceConsumer = connection.getConsumer('request');
-const userService = require('./services/users');
-
-userServiceConsumer.on('message', (message) => {
-    console.log('Received message on Topic ');
-    console.log(`Total Msg: ${JSON.stringify(message)}`);
-    console.log(`data: ${message.value}`);
-    const data = JSON.parse(message.value);
-
-    userService[data.data.key](data.data.value,function (err,res) {
-        console.log('after handle: %o',res);
-        var payloads = [
-            {
-                topic: data.replyTo,
-                messages: JSON.stringify({
-                    correlationId: data.correlationId,
-                    data : res
-                }),
-                partition : 0
-            }
-        ];
-
-        producer.send(payloads, function(err, data){
-            if(err){
-                console.log(err);
-            } else {
-                console.log('Data sent by Producer: ');
-                console.log(data);
-            }
-        });
-        return;
-    })
-
-});
 
 
 //Consumer for users services
