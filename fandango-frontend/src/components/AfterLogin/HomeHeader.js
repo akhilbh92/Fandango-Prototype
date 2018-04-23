@@ -14,8 +14,8 @@ class HomeHeader extends Component {
                         <div className="col-md-offset-8 col-md-4 float-right header-link">
                             <a href="">Gift Cards</a> |
                             <a href="">Offers</a> |
-                            <Link to="/login"
-                                  className="hide-logged-in">Sign In</Link>
+                            <Link to="/"
+                                  className="hide-logged-in">Sign Out</Link>
                         </div>
                     </div>
                 </div>

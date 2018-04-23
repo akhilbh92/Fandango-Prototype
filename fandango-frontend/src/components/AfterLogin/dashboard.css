@@ -126,3 +126,80 @@ li :visited{
     text-decoration: none;
 }
 
+.site-wrap {
+    position: relative;
+    min-width: 320px;
+    overflow: hidden;
+    min-height: 1000px;
+    background-color: #EBEBEB;
+}
+
+.account-view{
+    height: 75px;
+    border: 1px solid;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.account-font{
+    position: absolute;
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 20px;
+    font-weight: bold;
+
+}
+
+.account-details{
+    position: absolute;
+    font-style: italic ;
+    margin-left: 30%;
+    padding-top: 30px;
+    padding-left: 10px;
+}
+
+.account-edit{
+    position: absolute;
+    margin-left: 90%;
+    padding-top: 25px;
+    padding-left: 10px;
+}
+
+.preferences-view{
+    height: 75px;
+    border: 1px solid;
+    padding-top: 10px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+.preferences-expand{
+    border: 1px solid;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.first-element{
+    padding-top: 20px;
+    padding-left: 20px;
+    text-align: left;
+
+}
+
+.save-button{
+    background-color: #FF7900;
+    color: white;
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+
+
+
+
