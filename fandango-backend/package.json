@@ -33,7 +33,8 @@
     "passport-local-authenticate": "^1.2.0",
     "serve-favicon": "~2.4.5",
     "server": "^1.0.18",
-    "validate.js": "^0.12.0"
+    "validate.js": "^0.12.0",
+    "moment": "^2.22.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",

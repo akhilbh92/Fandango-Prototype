@@ -11,55 +11,73 @@ var getScreen = require('./admin/getScreen');
 var editMovie = require('./admin/editMovie');
 var editHall = require('./admin/editHall');
 var editScreen = require('./admin/editScreen');
+var addMovieSchedule = require('./moviehall/addMovieSchedule');
+var getMovieSchedule = require('./moviehall/getMovieSchedule');
+var deleteMovieSchedule = require('./moviehall/deleteMovieSchedule');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/addMovie', function(req, res, next){
-    console.log('ADD MOVIE API');
-    addMovie.addMovieRouterFn(req, res, next);
+router.post('/addMovie', function (req, res, next) {
+  console.log('ADD MOVIE API');
+  addMovie.addMovieRouterFn(req, res, next);
 });
 
-router.post('/getMovies', function(req, res, next){
+router.post('/getMovies', function (req, res, next) {
   console.log('GET MOVIES API');
   getMovie.getMovieRouterFn(req, res, next);
 });
 
-router.post('/addHall', function(req, res, next){
+router.post('/addHall', function (req, res, next) {
   console.log('ADD HALL API');
   addHall.addHallRouterFn(req, res, next);
 });
 
-router.post('/getHalls', function(req, res, next){
+router.post('/getHalls', function (req, res, next) {
   console.log('GET HALLS API');
   getHall.getHallRouterFn(req, res, next);
 });
 
-router.post('/addScreen', function(req, res, next){
+router.post('/addScreen', function (req, res, next) {
   console.log('ADD SCREEN API');
   addScreen.addScreenRouterFn(req, res, next);
 });
 
-router.post('/getScreens', function(req, res, next){
+router.post('/getScreens', function (req, res, next) {
   console.log('GET SCREENS API');
   getScreen.getScreenRouterFn(req, res, next);
 });
 
-router.post('/editMovie', function(req, res, next){
+router.post('/editMovie', function (req, res, next) {
   console.log('EDIT MOVIE API');
   editMovie.editMovieRouterFn(req, res, next);
 });
 
-router.post('/editHall', function(req, res, next){
+router.post('/editHall', function (req, res, next) {
   console.log('EDIT HALL API');
   editHall.editHallRouterFn(req, res, next);
 });
 
-router.post('/editScreen', function(req, res, next){
+router.post('/editScreen', function (req, res, next) {
   console.log('EDIT SCREEN API');
   editScreen.editScreenRouterFn(req, res, next);
+});
+
+router.post('/addMovieSchedule', function (req, res, next) {
+  console.log('ADD MOVIE SCHEDULE API');
+  addMovieSchedule.addMovieScheduleRouterFn(req, res, next);
+});
+
+router.post('/getMovieSchedules', function (req, res, next) {
+  console.log('GET MOVIE SCHEDULES API');
+  getMovieSchedule.getMovieScheduleRouterFn(req, res, next);
+});
+
+router.delete('/deleteMovieSchedule', function (req, res, next) {
+  console.log('Delete MOVIE SCHEDULES API');
+  deleteMovieSchedule.deleteMovieScheduleRouterFn(req, res, next);
 });
 
 module.exports = router;
