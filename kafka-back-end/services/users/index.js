@@ -29,5 +29,31 @@ module.exports = {
         }catch (e) {
             cb(e,null);
         }
+    },
+    getUserById: async function (body,cb) {
+        try{
+            const user = await usermodel.findAll({
+                where:{
+                    userId:body.userId,
+                }
+            });
+            cb(null,user[0]);
+        }catch (e) {
+            cb(e,null);
+        }
+    },
+    deleteUser: async function(body,cb){
+        const deletionUserId = body.userId;
+        try{
+            const user = await usermodel.destroy({
+                where: {
+                    "userId": deletionUserId
+                }
+            });
+            cb(null,true);
+        }catch (e) {
+            cb(e,null)
+        }
+
     }
 };
