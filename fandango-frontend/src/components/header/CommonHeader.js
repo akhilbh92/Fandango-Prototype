@@ -122,6 +122,8 @@ class CommonHeader extends Component {
             <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>
           </ul>
         </div>
+          <div style={{borderTop: '3px solid rgb(241, 85, 0)'}}></div>
+
       </div>
     )
   }

@@ -42,7 +42,7 @@ var producer = connection.getProducer();
 
 
 // Add additional topic handlers
-var loginHandler = require('./services/registration/login');
+var loginHandler = require('./services/users/index');
 var addMovieHandler = require('./services/movies/addMovie');
 var getMoviesHandler = require('./services/movies/getMovies');
 var editMovieHandler = require('./services/movies/editMovie');
@@ -104,13 +104,47 @@ consumer.on('message', (message) => {
     handler.handle_request(data.data.value, function (err, res) {
         console.log('after handle: %o', res);
         var payloads = [{
-            topic: data.replyTo,
-            messages: JSON.stringify({
-                correlationId: data.correlationId,
-                data: res
-            }),
-            partition: 0
-        }];
+                topic: data.replyTo,
+                messages: JSON.stringify({
+                    correlationId: data.correlationId,
+                    data: res
+                }),
+                partition: 0
+            }];
+
+        producer.send(payloads, function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Data sent by Producer: ');
+                console.log(data);
+            }
+        });
+        return;
+    });
+});
+
+//Consumer for users services
+const userServiceConsumer = connection.getConsumer('request');
+const userService = require('./services/users');
+
+userServiceConsumer.on('message', (message) => {
+    console.log(`Total Msg: ${JSON.stringify(message)}`);
+    console.log(`data: ${message.value}`);
+    const data = JSON.parse(message.value);
+
+    userService[data.data.key](data.data.value, function (err, res) {
+        console.log('after handle: %o', res);
+        var payloads = [
+            {
+                topic: data.replyTo,
+                messages: JSON.stringify({
+                    correlationId: data.correlationId,
+                    data: res
+                }),
+                partition: 0
+            }
+        ];
 
         producer.send(payloads, function (err, data) {
             if (err) {

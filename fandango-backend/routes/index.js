@@ -15,6 +15,12 @@ var addMovieSchedule = require('./moviehall/addMovieSchedule');
 var getMovieSchedule = require('./moviehall/getMovieSchedule');
 var deleteMovieSchedule = require('./moviehall/deleteMovieSchedule');
 
+//acquiring user logic
+const Signup = require ('./users/sign_up');
+const Signin = require ('./users/login');
+const logout = require('./users/logout');
+const deleteUser = require('./users/deleteuser');
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -78,6 +84,26 @@ router.post('/getMovieSchedules', function (req, res, next) {
 router.delete('/deleteMovieSchedule', function (req, res, next) {
   console.log('Delete MOVIE SCHEDULES API');
   deleteMovieSchedule.deleteMovieScheduleRouterFn(req, res, next);
+});
+
+router.post('/Signup', function (req,res,next) {
+    console.log('SIGNUP API');
+    Signup.signUpRouterFn(req,res,next);
+});
+
+router.post('/Signin', function (req,res,next) {
+    console.log('SIGN IN API');
+    Signin.loginRouterFn(req,res,next);
+});
+
+router.post('/Signout', function (req,res,next) {
+    console.log('SIGN OUT API');
+    logout.logoutRouterFn(req,res,next);
+});
+
+router.post('/deleteUser', function (req,res,next) {
+    console.log('DELETE USER API');
+    deleteUser.deleteUserRouterFn(req,res,next);
 });
 
 module.exports = router;

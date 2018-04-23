@@ -6,7 +6,9 @@ const Sequelize = require ('sequelize');
         port: 3306,
         dialect: 'mysql',
         operatorsAliases: false,
-
+        dialectOptions: {
+            insecureAuth: true
+        },
         pool: {
             max: 5,
             min: 0,

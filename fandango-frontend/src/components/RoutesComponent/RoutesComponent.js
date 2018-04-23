@@ -4,7 +4,9 @@ import Landing from "../Landing/Landing";
 import ScheduleMovie from "../MovieHall/ScheduleMovie";
 import ScheduleMovieTimeOverview from "../MovieHall/ScheduleMovieTime";
 import Login from '../login/Login';
-import Signup from '../login/Signup'
+import Signup from '../login/Signup';
+import Home from '../AfterLogin/Home';
+import Dashboard from  '../AfterLogin/Dashboard';
 
 class RoutesComponent extends Component {
 
@@ -16,10 +18,10 @@ class RoutesComponent extends Component {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/schedulemovie" component={ScheduleMovie} />
                 <Route exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/dashboard" component={Dashboard} />
             </div>
         )
-
-
     }
 }
 

@@ -79,12 +79,11 @@ var logger = require('morgan');
 // var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
-var passport = require('passport');
 var index = require('./routes/index');
 var session = require("express-session");
 var mongoSessionURL = "mongodb://admin:admin@ds023644.mlab.com:23644/fandangodb";
 var mongoStore = require("connect-mongo")(session);
-var passportFile = require('./routes/passport')(passport);
+var passportFile = require('./routes/users/passport');
 var favicon = require('serve-favicon');
 var methodOverride = require('method-override');
 var fs = require('fs');
@@ -119,8 +118,8 @@ app.use(session({
   })
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passportFile.initialize());
+app.use(passportFile.session());
 
 //Cross-Origin connection
 app.use(function(req, res, next) {
