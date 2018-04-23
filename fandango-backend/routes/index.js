@@ -14,6 +14,7 @@ var editScreen = require('./admin/editScreen');
 
 //acquiring user logic
 const Signup = require ('./users/sign_up');
+const Signin = require ('./users/login');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -69,4 +70,10 @@ router.post('/Signup', function (req,res,next) {
     console.log('SIGNUP API');
     Signup.signUpRouterFn(req,res,next);
 });
+
+router.post('/Signin', function (req,res,next) {
+    console.log('SIGN IN API');
+    Signin.loginRouterFn(req,res,next);
+});
+
 module.exports = router;

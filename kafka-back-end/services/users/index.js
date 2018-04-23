@@ -1,4 +1,6 @@
 const usermodel = require('../../models/Users');
+const bcrypt = require('bcrypt');
+
 
 module.exports = {
     getUserByEmail: async function (body,cb) {
@@ -16,10 +18,11 @@ module.exports = {
     },
     Signup: async function (body,cb) {
         try {
+            const saltedhash = await bcrypt.hash(body.password, 10);
             const user = await usermodel.create({
                 email: body.email,
-                password: body.password,
-                fname: body.fname,
+                password_hash: saltedhash,
+                first_name: body.fname,
                 role: body.role
             });
             cb(null,user)
