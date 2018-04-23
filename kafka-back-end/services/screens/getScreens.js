@@ -1,6 +1,5 @@
 var modelScreen = require('./../../models/Screen');
 
-
 function handle_request(msg, callback){
     let condition = {};
     if(!msg.screenNum) {
@@ -15,7 +14,10 @@ function handle_request(msg, callback){
     }
     console.log(`Incoming Query message: ${JSON.stringify(condition)}`);
     modelScreen.Screen.findAll({
-        where : [condition]
+        where : [condition],
+        order: [
+            ['screen_num', 'ASC']
+        ]
     }).then((movie) => {
         callback(null, movie)
     });
