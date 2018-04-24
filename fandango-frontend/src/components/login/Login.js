@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import fandangoLogo from './fandango-logo.jpg'
+import { bindActionCreators } from 'redux';
+import fandangoLogo from './fandango-logo.jpg';
+import { connect } from 'react-redux';
+import {loginUser} from "../../actions";
+import * as API from  './../../api/apicall_for_users';
+
+
 import './login.css'
 
 class Login extends Component{
 
+    constructor(props){
+        super(props);
+
+        this.state ={
+            email: '',
+            password: ''
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+
+    handleSubmit = (userdata) => {
+
+        API.doLogin(userdata.payload)
+            .then((status) => {
+                console.log(this.props.user.email);
+            });
+    };
+
     render(){
         return(
-            <div class="site-wrap signin vipsignin">
+            <div class="site-wrep signin vipsignin">
                 <div>
                 <header id="registration-header" class="registration-header" role="banner">
                     <nav  class="nav-bar">
@@ -42,10 +68,30 @@ class Login extends Component{
                         </p>
 
                         <label for="UsernameBox" >Email Address</label>
-                        <input  type="text" id="UsernameBox" />
+                        <input
+                            type="text"
+                            id="UsernameBox"
+                            onChange={(event)=>{
+                                this.setState({
+                                    email:event.target.value,
+                                    type:true
+                                });
+                            }}
+                            required
+                        />
                         <label for="PasswordBox" >Password</label>
-                        <input  type="password" id="PasswordBox" />
-                        <button class="btn-cta full-width" alternatetext="Sign In">Sign In</button>
+                        <input
+                            type="password"
+                            id="PasswordBox"
+                            onChange={(event)=>{
+                                this.setState({
+                                    password:event.target.value,
+                                    type:true
+                                });
+                            }}
+                            required
+                        />
+                        <button class="btn-cta full-width" alternatetext="Sign In" onClick={() => this.handleSubmit(this.props.loginUser(this.state))}>Sign In</button>
 
                     </div>
 
@@ -59,4 +105,14 @@ class Login extends Component{
     }
 }
 
-export default (Login);
+function mapStateToProps(state){
+    return{
+        user: state.loginUser
+    }
+}
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({loginUser: loginUser}, dispatch)
+}
+
+
+export default connect(mapStateToProps, matchDispatchToProps)(Login);
