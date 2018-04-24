@@ -11,7 +11,7 @@ class AccountPreferences extends  Component {
                 <div className="site-wrap" >
                     <HomeHeader/>
 
-                    <div class="page-header-container">
+                    <div class="dashboard">
                         <div class="row">
                             <div class="large-12 columns">
                                 <h1 class="page-header vip-logo " >
