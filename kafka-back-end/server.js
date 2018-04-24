@@ -52,9 +52,11 @@ var editHallHandler = require('./services/halls/editHall');
 var addScreenHandler = require('./services/screens/addScreen');
 var getScreensHandler = require('./services/screens/getScreens');
 var editScreenHandler = require('./services/screens/editScreen');
+var getLimitedMoviesHandler = require('./services/movies/getLimitedMovies');
 var addMovieScheduleHandler = require('./services/movieschedule/addMovieSchedule');
 var deleteMovieScheduleHandler = require('./services/movieschedule/deleteMovieSchedule');
 var getAllMovieScheduleByHallScreenDateHandler = require('./services/movieschedule/getAllMovieScheduleByHallScreenDate');
+var getRevenueByMovieHandler = require('./services/movieschedule/getRevenueByMovie');
 
 consumer.on('message', (message) => {
     console.log('Received message on Topic ');
@@ -91,6 +93,9 @@ consumer.on('message', (message) => {
         case 'editScreen':
             handler = editScreenHandler;
             break;
+        case 'getLimitedMovie':
+            handler = getLimitedMoviesHandler;
+            break;
         case 'addMovieSchedule':
             handler = addMovieScheduleHandler;
             break;
@@ -100,17 +105,20 @@ consumer.on('message', (message) => {
         case 'deleteMovieSchedule':
             handler = deleteMovieScheduleHandler;
             break;
+        case 'getRevenueByMovie':
+            handler = getRevenueByMovieHandler;
+            break;
     }
     handler.handle_request(data.data.value, function (err, res) {
         console.log('after handle: %o', res);
         var payloads = [{
-                topic: data.replyTo,
-                messages: JSON.stringify({
-                    correlationId: data.correlationId,
-                    data: res
-                }),
-                partition: 0
-            }];
+            topic: data.replyTo,
+            messages: JSON.stringify({
+                correlationId: data.correlationId,
+                data: res
+            }),
+            partition: 0
+        }];
 
         producer.send(payloads, function (err, data) {
             if (err) {

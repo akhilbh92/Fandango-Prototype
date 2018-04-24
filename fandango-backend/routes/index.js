@@ -11,13 +11,15 @@ var getScreen = require('./admin/getScreen');
 var editMovie = require('./admin/editMovie');
 var editHall = require('./admin/editHall');
 var editScreen = require('./admin/editScreen');
+var getLimitedMovies = require('./admin/getLimitedMovies');
 var addMovieSchedule = require('./moviehall/addMovieSchedule');
 var getMovieSchedule = require('./moviehall/getMovieSchedule');
 var deleteMovieSchedule = require('./moviehall/deleteMovieSchedule');
+var getRevenueByMovie = require('./moviehall/getRevenueByMovie');
 
 //acquiring user logic
-const Signup = require ('./users/sign_up');
-const Signin = require ('./users/login');
+const Signup = require('./users/sign_up');
+const Signin = require('./users/login');
 const logout = require('./users/logout');
 const deleteUser = require('./users/deleteuser');
 const getProfile = require("./users/getProfile");
@@ -73,6 +75,16 @@ router.post('/editScreen', function (req, res, next) {
   editScreen.editScreenRouterFn(req, res, next);
 });
 
+router.post('/getLimitedMovie', function (req, res, next) {
+  console.log('GET Limited MOVIES API');
+  getLimitedMovies.getLimitedMovieRouterFn(req, res, next);
+});
+
+router.post('/getRevenueByMovie', function (req, res, next) {
+  console.log('GET Revenue by MOVIES API');
+  getRevenueByMovie.getRevenueByMovieRouterFn(req, res, next);
+});
+
 router.post('/addMovieSchedule', function (req, res, next) {
   console.log('ADD MOVIE SCHEDULE API');
   addMovieSchedule.addMovieScheduleRouterFn(req, res, next);
@@ -88,24 +100,24 @@ router.delete('/deleteMovieSchedule', function (req, res, next) {
   deleteMovieSchedule.deleteMovieScheduleRouterFn(req, res, next);
 });
 
-router.post('/Signup', function (req,res,next) {
-    console.log('SIGNUP API');
-    Signup.signUpRouterFn(req,res,next);
+router.post('/Signup', function (req, res, next) {
+  console.log('SIGNUP API');
+  Signup.signUpRouterFn(req, res, next);
 });
 
-router.post('/Signin', function (req,res,next) {
-    console.log('SIGN IN API');
-    Signin.loginRouterFn(req,res,next);
+router.post('/Signin', function (req, res, next) {
+  console.log('SIGN IN API');
+  Signin.loginRouterFn(req, res, next);
 });
 
-router.post('/Signout', function (req,res,next) {
-    console.log('SIGN OUT API');
-    logout.logoutRouterFn(req,res,next);
+router.post('/Signout', function (req, res, next) {
+  console.log('SIGN OUT API');
+  logout.logoutRouterFn(req, res, next);
 });
 
-router.post('/deleteUser', function (req,res,next) {
-    console.log('DELETE USER API');
-    deleteUser.deleteUserRouterFn(req,res,next);
+router.post('/deleteUser', function (req, res, next) {
+  console.log('DELETE USER API');
+  deleteUser.deleteUserRouterFn(req, res, next);
 });
 
 router.post('/getProfile', function (req,res,next) {
@@ -117,6 +129,5 @@ router.post('/updateProfile', function (req,res,next) {
     console.log('UPDATE PROFILE API');
     updateProfile.updateProfileRouterFn(req,res,next);
 });
-
 
 module.exports = router;
