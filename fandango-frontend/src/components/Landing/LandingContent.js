@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 import './landing.css';
-import moviePicture from './blackpanther.jpg';
+import moviePicture from './default-image.jpg';
 import slide1 from './slide1.jpg';
 import slide2 from './slide2.jpg';
 import slide3 from './slide3.jpg';
+import * as API from '../../api/API';
 
 class LandingContent extends Component {
 
@@ -21,6 +22,16 @@ class LandingContent extends Component {
     }
 
     componentDidMount() {
+        API.getLimitedMovies(12)
+            .then((resultData) => {
+                if (!!resultData.data) {
+                    this.setState({
+                        topMovies: resultData.data
+                    });
+                }else{
+                    console.log("no movies in the database")
+                }
+            });
     }
 
     handleSelect(selectedIndex, e) {
@@ -32,6 +43,22 @@ class LandingContent extends Component {
 
 
     render() {
+        const firstSixNode =
+            this.state.topMovies.map((movie, index) => {
+                if (index <= 5) {
+                    return <div className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
+                } else {
+                    return;
+                }
+            });
+        const afterSixNode =
+            this.state.topMovies.map((movie, index) => {
+                if (index > 5) {
+                    return <div className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
+                } else {
+                    return;
+                }
+            });
         return (
             <div>
                 <div className="col-md-12 sub-header">
@@ -48,22 +75,10 @@ class LandingContent extends Component {
                         direction={this.state.direction}
                         onSelect={this.handleSelect}>
                         <Carousel.Item>
-                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                            <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
+                            {firstSixNode}
                         </Carousel.Item>
                         <Carousel.Item>
-                            <div className="item row no-gutters">
-                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                                <div className="col-md-2 float-left"><img alt="Movie Poster" className="carousel-img" src={moviePicture} /></div>
-                            </div>
+                            {afterSixNode}
                         </Carousel.Item>
                     </Carousel>
                 </div>
@@ -90,7 +105,7 @@ class LandingContent extends Component {
                     </Carousel>
                 </div>
 
-            </div>
+            </div >
         )
     }
 }

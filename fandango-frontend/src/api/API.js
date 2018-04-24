@@ -19,6 +19,21 @@ export const getMovies = () =>
         return error;
     });
 
+export const getLimitedMovies = (noOfRecords) =>
+    fetch(`${api}/getMovies`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ count: noOfRecords })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const getHalls = () =>
     fetch(`${api}/getHalls`, {
         method: 'POST',
