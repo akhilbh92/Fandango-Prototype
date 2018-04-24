@@ -45,7 +45,9 @@ module.exports = {
     deleteUser: async function(body,cb){
         const deletionUserId = body.userId;
         try{
-            const user = await usermodel.destroy({
+            const user = await usermodel.update({
+                is_archive:true
+            },{
                 where: {
                     "userId": deletionUserId
                 }
@@ -55,5 +57,29 @@ module.exports = {
             cb(e,null)
         }
 
+    },
+    getProfileById: async function (body,cb) {
+        const userId = body["userId"];
+        try{
+            const profile = await usermodel.findAll({
+                where:{
+                    userId:userId,
+                },
+                attributes: {
+                    exclude: ['userId','role','password_hash','credit_card_number','expiration','is_archive','updatedAt','createdAt']
+                }
+            });
+            cb(null,profile[0])
+        }catch (e) {
+            cb(e,null);
+        }
+    },
+    updateProfileById: async function(body,cb){
+        try{
+            const rows = await usermodel.upsert(body);
+            cb(null,rows);
+        }catch (e) {
+            cb(e,null);
+        }
     }
 };

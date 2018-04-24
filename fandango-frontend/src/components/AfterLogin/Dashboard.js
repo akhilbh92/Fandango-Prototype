@@ -11,7 +11,7 @@ class Dashboard extends  Component {
                 <div className="site-wrap">
                     <HomeHeader/>
 
-                    <div class="page-header-container">
+                    <div class="dashboard">
                         <div class="row">
                             <div class="large-12 columns">
                                 <h1 class="page-header vip-logo " >
@@ -33,11 +33,11 @@ class Dashboard extends  Component {
                         <h2 class="account-font">BASIC INFORMATION</h2>
                         <p class="account-details">Change your personal information of your Fandango VIP account here..</p>
                         <div class="account-edit">
-                           <Link to="/preferences">
+                            <Link to="/preferences">
                                 <button type="button" class="btn btn-default btn-sm" style={{ backgroundColor: "#3d3d3d", color: "white"}}>
                                     <span class="glyphicon glyphicon-edit" style={{ color: "white"}}></span> Edit
                                 </button>
-                           </Link>
+                            </Link>
                         </div>
                     </div>
 
@@ -46,9 +46,9 @@ class Dashboard extends  Component {
                         <p class="account-details">Change the email address of your Fandango VIP account..</p>
                         <div class="account-edit">
                             <Link to="/preferences">
-                            <button type="button" class="btn btn-default btn-sm" style={{ backgroundColor: "#3d3d3d", color: "white"}}>
-                                <span class="glyphicon glyphicon-edit" style={{ color: "white"}}></span> Edit
-                            </button>
+                                <button type="button" class="btn btn-default btn-sm" style={{ backgroundColor: "#3d3d3d", color: "white"}}>
+                                    <span class="glyphicon glyphicon-edit" style={{ color: "white"}}></span> Edit
+                                </button>
                             </Link>
                         </div>
                     </div>
@@ -70,9 +70,9 @@ class Dashboard extends  Component {
                         <p class="account-details">Change the password of your Fandango VIP account..</p>
                         <div class="account-edit">
                             <Link to="/preferences">
-                            <button type="button" class="btn btn-default btn-sm" style={{ backgroundColor: "#3d3d3d", color: "white"}}>
-                                <span class="glyphicon glyphicon-edit" style={{ color: "white"}}></span> Edit
-                            </button>
+                                <button type="button" class="btn btn-default btn-sm" style={{ backgroundColor: "#3d3d3d", color: "white"}}>
+                                    <span class="glyphicon glyphicon-edit" style={{ color: "white"}}></span> Edit
+                                </button>
                             </Link>
                         </div>
                     </div>
@@ -82,20 +82,15 @@ class Dashboard extends  Component {
                         <p class="account-details">Save a credit/debit card to your account. It's faster and OPTIONAL!!..</p>
                         <div class="account-edit">
                             <Link to="/preferences">
-                            <button type="button" class="btn btn-default btn-sm" style={{ backgroundColor: "#3d3d3d", color: "white"}}>
-                                <span class="glyphicon glyphicon-edit" style={{ color: "white"}}></span> Edit
-                            </button>
+                                <button type="button" class="btn btn-default btn-sm" style={{ backgroundColor: "#3d3d3d", color: "white"}}>
+                                    <span class="glyphicon glyphicon-edit" style={{ color: "white"}}></span> Edit
+                                </button>
                             </Link>
                         </div>
                     </div>
-
                 </div>
             </div>
         )
-
-
     }
-
 }
-
 export default Dashboard;
