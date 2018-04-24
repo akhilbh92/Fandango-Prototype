@@ -5,7 +5,7 @@ let resFormat = require("../../helpers/res_format");
 
 let deleteUserRouterFn = async function (req, res, next) {
     const deleteUserId = req.body["deleteuserId"];
-    const userId = req.session.passport.user.userid;
+    const userId = req.session.passport.user.userId;
 
     let checkAuthUserById = function (userId) {
         return new Promise(function (resolve, reject) {

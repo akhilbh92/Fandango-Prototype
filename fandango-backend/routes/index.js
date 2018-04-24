@@ -20,6 +20,8 @@ const Signup = require ('./users/sign_up');
 const Signin = require ('./users/login');
 const logout = require('./users/logout');
 const deleteUser = require('./users/deleteuser');
+const getProfile = require("./users/getProfile");
+const updateProfile = require('./users/updateProfile');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -106,4 +108,17 @@ router.post('/deleteUser', function (req,res,next) {
     deleteUser.deleteUserRouterFn(req,res,next);
 });
 
+<<<<<<< Updated upstream
+=======
+router.post('/getProfile', function (req,res,next) {
+    console.log('GET PROFILE API');
+    getProfile.getProfileRouterFn(req,res,next);
+});
+
+router.post('/updateProfile', function (req,res,next) {
+    console.log('UPDATE PROFILE API');
+    updateProfile.updateProfileRouterFn(req,res,next);
+});
+
+>>>>>>> Stashed changes
 module.exports = router;
