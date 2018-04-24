@@ -120,8 +120,6 @@ router.post('/deleteUser', function (req, res, next) {
   deleteUser.deleteUserRouterFn(req, res, next);
 });
 
-<<<<<<< Updated upstream
-=======
 router.post('/getProfile', function (req,res,next) {
     console.log('GET PROFILE API');
     getProfile.getProfileRouterFn(req,res,next);
@@ -132,5 +130,4 @@ router.post('/updateProfile', function (req,res,next) {
     updateProfile.updateProfileRouterFn(req,res,next);
 });
 
->>>>>>> Stashed changes
 module.exports = router;
