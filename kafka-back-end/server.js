@@ -32,13 +32,13 @@
 
 // });
 
-
+//
 var connection = new require('./kafka/Connection');
 
-var registrationTopicName = 'registration_topic';
-var consumer = connection.getConsumer('admin');
+ var registrationTopicName = 'registration_topic';
+ var consumer = connection.getConsumer('admin');
 
-var producer = connection.getProducer();
+ var producer = connection.getProducer();
 
 
 // Add additional topic handlers
