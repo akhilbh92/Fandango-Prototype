@@ -3,6 +3,8 @@ import CommonHeader from '../header/CommonHeader';
 import './moviehall.css';
 import * as API from '../../api/API';
 import { Link } from 'react-router-dom';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 var dateFormat = require('dateformat');
 
 class ScheduleMovie extends Component {
@@ -29,27 +31,31 @@ class ScheduleMovie extends Component {
     }
 
     render() {
-        
-        const movieNode = this.state.movieList.map((movie, index) => {
-            return (
-                <li className="visual-item" key={index}>
-                    <a className="visual-container">
-                        <img className="visual-thumb img-size" alt="I Feel Pretty showtimes and tickets"
-                            src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/204918/SuperTroopers2_OfficialPost.jpg" />
-                    </a>
-                    <div className="visual-detail">
-                        <Link to={'/schedulemovie/' + movie.id}>
-                            <button
-                                className="btn-link visual-title dark"
-                                type="button"
-                            >{movie.movie_name}
-                            </button>
-                        </Link>
-                        <span className="visual-sub-title">Releases {dateFormat(movie.release_date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</span>
-                    </div>
-                </li>
-            )
-        });
+        const columns = [{
+            Header: 'Poster',
+            accessor: 'photos',
+            width: 150,
+            style: { 'whiteSpace': 'unset' },
+            Cell: props => (<img className="visual-thumb img-size" alt="I Feel Pretty showtimes and tickets"
+                src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/204918/SuperTroopers2_OfficialPost.jpg" />)
+        }, {
+            Header: 'Movie Name',
+            accessor: 'movie_name',
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            Cell: props => (<Link to={'/schedulemovie/' + props.row._original.id}>
+                <button
+                    className="btn-link visual-sub-title dark"
+                    type="button"
+                    style={{ 'display':'block','margin':'auto','line-height': "100px" }}
+                >{props.row._original.movie_name}
+                </button>
+            </Link>)
+        }, {
+            Header: 'Release Date',
+            accessor: 'release_date',
+            style: { 'textAlign': 'right', 'fontSize': '20px' },
+            Cell: props => (<span className="visual-sub-title" style={{ 'line-height': "100px" }}>Releases {dateFormat(props.row._original.release_date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</span>)
+        }]
         return (
             <div>
                 <CommonHeader />
@@ -60,9 +66,12 @@ class ScheduleMovie extends Component {
                 </div>
                 <div className="col-md-12 movie-ls-group pd-left-0">
                     <div className="col-md-offset-2 col-md-9 pd-left-0">
-                        <ul className="visual-list movie-list pd-left-0">
-                            {movieNode}
-                        </ul>
+                        < ReactTable
+                            minRows={0}
+                            defaultPageSize={5}
+                            filterable={true}
+                            data={this.state.movieList}
+                            columns={columns} />
                     </div>
                 </div>
             </div>

@@ -8,7 +8,6 @@ class CommonHeader extends Component {
   render() {
     return (
       <div>
-        <div className="ad-topbanner"></div>
         <div className="brand-bar">
           <div className="col-md-12">
             <div className="col-md-offset-8 col-md-4 float-right header-link">
@@ -22,7 +21,7 @@ class CommonHeader extends Component {
         <div>
           <ul className="fandango-nav">
             <li>
-              <a href="">
+              <a href="/">
                 <img alt="Movie Poster" src={fandangoLogo} className="header-logo" /></a>
             </li>
             <li id="global-search">
@@ -36,7 +35,7 @@ class CommonHeader extends Component {
               </form>
             </li>
             <li className="drop-menu"><a href="">MOVIES</a>
-              <div className="fulldrop">
+              {/* <div className="fulldrop">
                 <div className="column">
                   <ul>
                     <li>.</li>
@@ -78,10 +77,10 @@ class CommonHeader extends Component {
                     <li><a href="">Scripts</a></li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </li>
             <li className="drop-menu"><a href="">MOVIE TIMES + TICKETS</a>
-              <div className="fulldrop">
+              {/* <div className="fulldrop">
                 <div className="column large-column">
                   <h3>Where are you located? Here are our top cities</h3>
                 </div>
@@ -117,7 +116,7 @@ class CommonHeader extends Component {
                     <li><a href="">San Jose, CA</a></li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </li>
             <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>
           </ul>

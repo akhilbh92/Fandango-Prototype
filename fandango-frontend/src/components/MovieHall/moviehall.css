@@ -4,7 +4,6 @@
     padding: 0;
 }
 .schedule-page-header {
-    color: #fff;
     margin: 20px 0 2px;
     float: left;
     font-weight: 600;
@@ -77,8 +76,8 @@
     overflow: hidden;
 }
 .img-size{
-    width: 170px;
-    height: 250px;
+    width: 100px;
+    height: 100px;
 }
 .modal{ display:block; }
 .label-color{
@@ -131,4 +130,10 @@
   .delete-icon-btn{
     font-size: 18px;
     color: #ff7900;
+}
+.ReactTable .-pagination .-btn{
+    background-color: #F15500 !important;
+    opacity: 0.5 !important;
+    color: black !important;
+    font-weight: bolder !important;
 }

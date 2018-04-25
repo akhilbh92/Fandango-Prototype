@@ -28,7 +28,7 @@ class LandingContent extends Component {
                     this.setState({
                         topMovies: resultData.data
                     });
-                }else{
+                } else {
                     console.log("no movies in the database")
                 }
             });
@@ -46,7 +46,7 @@ class LandingContent extends Component {
         const firstSixNode =
             this.state.topMovies.map((movie, index) => {
                 if (index <= 5) {
-                    return <div className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
+                    return <div key={index} className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
                 } else {
                     return;
                 }
@@ -54,7 +54,7 @@ class LandingContent extends Component {
         const afterSixNode =
             this.state.topMovies.map((movie, index) => {
                 if (index > 5) {
-                    return <div className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
+                    return <div key={index} className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
                 } else {
                     return;
                 }
@@ -69,19 +69,21 @@ class LandingContent extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-offset-1 col-md-10 mr-top-25">
-                    <Carousel
-                        activeIndex={this.state.index}
-                        direction={this.state.direction}
-                        onSelect={this.handleSelect}>
-                        <Carousel.Item>
-                            {firstSixNode}
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            {afterSixNode}
-                        </Carousel.Item>
-                    </Carousel>
-                </div>
+                {this.state.topMovies !== undefined && this.state.topMovies.length > 0 &&
+                    <div className="col-md-offset-1 col-md-10 mr-top-25">
+                        <Carousel
+                            activeIndex={this.state.index}
+                            direction={this.state.direction}
+                            onSelect={this.handleSelect}>
+                            <Carousel.Item>
+                                {firstSixNode}
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                {afterSixNode}
+                            </Carousel.Item>
+                        </Carousel>
+                    </div>
+                }
                 <div className="col-md-offset-1 col-md-10 mr-top-50 mr-bottom-25">
                     <Carousel>
                         <Carousel.Item>
