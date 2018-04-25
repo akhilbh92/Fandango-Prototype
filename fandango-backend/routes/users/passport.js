@@ -23,7 +23,8 @@ passport.use('local', new LocalStrategy({
 
                     if(check){
                         done(null, {
-                            "userId": results.userId
+                            "userId": results.userId,
+                            "role": results.role
                         });
                     }else{
                         done(null, false, 'Incorrect username or password');
