@@ -6,9 +6,10 @@ import ScheduleMovieTimeOverview from "../MovieHall/ScheduleMovieTime";
 import Login from '../login/Login';
 import Signup from '../login/Signup';
 import Home from '../AfterLogin/Home';
-import Dashboard from  '../AfterLogin/Dashboard';
+import Dashboard from '../AfterLogin/Dashboard';
 import AccountPreferences from "../AfterLogin/AccountPreferences";
 import AllMovies from "../MoviesList/AllMovies";
+import CancelBooking from "../MovieHall/CancelBooking";
 
 class RoutesComponent extends Component {
 
@@ -23,7 +24,8 @@ class RoutesComponent extends Component {
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/preferences" component={AccountPreferences} />
-                <Route exact path ="/allmovies" component={AllMovies} />
+                <Route exact path="/allmovies" component={AllMovies} />
+                <Route exact path="/cancelbooking" component={CancelBooking} />
             </div>
         )
     }

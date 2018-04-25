@@ -109,6 +109,36 @@ export const getMovieSchedules = (movieScheduleJson) =>
         return error;
     });
 
+export const searchUserBooking = (bookingId) =>
+    fetch(`${api}/searchBookingById`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ bookingId: bookingId })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const cancelUserBooking = (bookingId) =>
+    fetch(`${api}/cancelUserBooking`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ bookingId: bookingId })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();
