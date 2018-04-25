@@ -9,6 +9,7 @@ import Home from '../AfterLogin/Home';
 import Dashboard from  '../AfterLogin/Dashboard';
 import AccountPreferences from "../AfterLogin/AccountPreferences";
 import AllMovies from "../MoviesList/AllMovies";
+import Movie_detail from '../Moviedetail/movidetail';
 
 class RoutesComponent extends Component {
 
@@ -24,6 +25,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/preferences" component={AccountPreferences} />
                 <Route exact path ="/allmovies" component={AllMovies} />
+                <Route exact path ="/moviedetail" component={Movie_detail} />
             </div>
         )
     }
