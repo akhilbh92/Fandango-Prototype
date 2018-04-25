@@ -12,6 +12,7 @@
     "bcrypt": "^2.0.1",
     "kafka-node": "^2.2.3",
     "lodash": "^4.17.5",
+    "moment": "^2.22.1",
     "mongodb": "^2.2.31",
     "mysql2": "^1.5.3",
     "nodemon": "^1.17.2",
@@ -20,7 +21,6 @@
     "passport-local-authenticate": "^1.2.0",
     "sequelize": "^4.37.6",
     "server": "^1.0.18",
-    "underscore": "^1.8.3",
-    "moment": "^2.22.1"
+    "underscore": "^1.8.3"
   }
 }

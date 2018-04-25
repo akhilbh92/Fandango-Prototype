@@ -153,12 +153,12 @@ li {
     padding: 80px 0 136px;
 }
 
-.site-wrap.signin {
+.site-wrep.signin {
     min-height: 860px;
 }
 
-.site-wrap {
-    background: #000000;
+.site-wrep {
+    background-color: #000000;
 }
 
 .signin {
@@ -167,7 +167,7 @@ li {
     margin: 0 0 0 0;
 }
 
-.site-wrap {
+.site-wrep {
     background-size: cover;
 }
 

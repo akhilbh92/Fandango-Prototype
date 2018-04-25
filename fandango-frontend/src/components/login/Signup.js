@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import fandangoLogo from './fandango-logo.jpg'
 import './login.css'
+import * as API from  './../../api/apicall_for_users';
 
 class Signup extends Component{
 
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            fname: ''
+        }
+
+        this.handleSignUp = this.handleSignUp.bind(this);
+
+    }
+
+    handleSignUp = () => {
+        API.doSignup(this.state)
+    }
+
     render(){
         return(
-            <div class="site-wrap signin vipsignin">
+            <div class="site-wrep signin vipsignin">
                 <div>
                     <header id="registration-header" class="registration-header" role="banner">
                         <nav  class="nav-bar">
@@ -41,15 +58,47 @@ class Signup extends Component{
 
                         </p>
                         <label for="FirstnameBox" >First Name</label>
-                        <input  type="text" id="FirstnameBox" />
+                        <input
+                            type="text"
+                            id="FirstnameBox"
+                            onChange={(event)=>{
+                                this.setState({
+                                    fname:event.target.value,
+                                    type:true
+                                });
+                            }}
+                            required
+                            autoFocus
+                        />
                         <label for="UsernameBox" >Email Address</label>
-                        <input  type="text" id="UsernameBox" />
+                        <input
+                            type="text"
+                            id="UsernameBox"
+                            onChange={(event)=>{
+                                this.setState({
+                                    email:event.target.value,
+                                    type:true
+                                });
+                            }}
+                            required
+                        />
                         <label for="PasswordBox" >Password</label>
-                        <input  type="password" id="PasswordBox" />
+                        <input
+                            type="password"
+                            id="PasswordBox"
+                            onChange={(event)=>{
+                                this.setState({
+                                    password:event.target.value,
+                                    type:true
+                                });
+                            }}
+                            required
+
+                        />
                         <small class="password-instruction">Password should be at-least 8 in length.</small>
                         <label for="ConfirmPasswordBox" >Confirm Password</label>
                         <input  type="password" id="ConfirmPasswordBox" />
-                        <button class="btn-cta full-width" alternatetext="Join Now for Free">Join Now for Free</button>
+                        <button class="btn-cta full-width" alternatetext="Join Now for Free" onClick={()=> this.handleSignUp()}>Join Now for Free</button>
 
                     </div>
 
