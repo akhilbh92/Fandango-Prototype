@@ -7,8 +7,9 @@ var kafka = require('../../kafka/client');
 let resFormat = require("../../helpers/res_format");
 
 function getMovieRouterFn(req, res, next){
-    console.log('Add Movie hit');
+    console.log('Get Movie hit');
       kafka.make_request('admin', 'getMovie', {
+        id: req.body.id,
         movie_name: req.body.movieName
       }, function(err,results){
       console.log('In Kafka: %o', results);

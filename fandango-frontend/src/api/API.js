@@ -19,8 +19,38 @@ export const getMovies = () =>
         return error;
     });
 
+export const getMovieById = (movieId) =>
+    fetch(`${api}/getMovies`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({id: movieId})
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const topTenMovies = () =>
     fetch(`${api}/topTenMoviesByRevenue`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+
+export const topTenHalls = () =>
+    fetch(`${api}/topTenHallByTickets`, {
         method: 'GET',
         headers: {
             ...headers,
@@ -154,19 +184,63 @@ export const searchUserBooking = (bookingJson) =>
     });
 
 export const cancelUserBooking = (bookingId) =>
-    fetch(`${api}/cancelUserBooking`, {
+    fetch(`${api}/cancelBooking`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({ bookingId: bookingId })
+        body: JSON.stringify({ bill_id: bookingId })
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
         return error;
     });
+
+/* Upload a file */
+export const uploadFile = function (data, movieName){
+    var url = `${api}/uploadFile`;
+    return fetch(url, {
+              method: 'POST',
+              body: data,
+              credentials: 'include'
+            })
+  };
+
+
+export const addMovie = ( movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres) =>
+  fetch(`${api}/addMovie`, {
+      method: 'POST',
+      headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({movieName, description, trailer, photos, seeItIn, cast, releaseDate, movieLength, genres})
+  }).then(res => {
+      return successHandler(res);
+  }).catch(error => {
+      return error;
+  });
+
+  export const editMovie = (movieId, movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres) =>
+  fetch(`${api}/getMovies`, {
+      method: 'POST',
+      headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+          id: movieId,
+          movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres})
+  }).then(res => {
+      return successHandler(res);
+  }).catch(error => {
+      return error;
+  });
+
 
 let successHandler = (res) => {
     if (res.status === 401) {

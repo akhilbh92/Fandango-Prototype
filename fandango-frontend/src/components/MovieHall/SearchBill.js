@@ -7,13 +7,18 @@ import 'react-table/react-table.css';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import { ToastContainer, toast } from 'react-toastify';
+var dateFormat = require('dateformat');
 
 class SearchBill extends Component {
+
+    notify = (message) => toast(message);
 
     constructor(props) {
         super(props);
 
         this.state = {
+            isSearched: false,
             filterSelect: 1,
             bill_date: moment(),
             bill_month: 1,
@@ -36,14 +41,15 @@ class SearchBill extends Component {
     searchBill() {
         this.setState({ submitted: true });
         if (!!this.state.bill_date || !!this.state.bill_month) {
+            this.setState({ isSearched: true });
             let requestObj = {};
             if (this.state.filterSelect === 1) {
-                requestObj.bill_date = this.state.bill_date;
+                requestObj.bill_date = moment(this.state.bill_date).format('YYYY-MM-DD');
             } else {
                 requestObj.bill_month = this.state.bill_month;
             }
             API.searchUserBooking(requestObj)
-                .then(function (resultData) {
+                .then((resultData) => {
                     if (!!resultData.data) {
                         this.setState({
                             bookingList: resultData.data,
@@ -64,51 +70,51 @@ class SearchBill extends Component {
             bill_date: moment(),
             bill_month: 1,
             bookingList: [],
-            submitted: false
+            submitted: false,
+            isSearched: false
         });
     }
 
     render() {
         const columns = [{
             Header: 'Booking ID',
-            accessor: 'booking_id',
+            accessor: 'bill_id',
+            width: 200,
             style: { 'whiteSpace': 'unset' }
         }, {
             Header: 'Booking Date',
             accessor: 'booking_date',
-            style: { 'textAlign': 'right' }
-        }, {
-            Header: 'Movie',
-            accessor: 'movie_name',
-            style: { 'textAlign': 'right' }
-        }, {
-            Header: 'Movie Hall',
-            accessor: 'hall_name',
-            style: { 'textAlign': 'right' }
-        }, {
-            Header: 'Area',
-            accessor: 'city',
-            style: { 'textAlign': 'right' }
-        }, {
-            Header: 'Price',
-            accessor: 'price',
-            style: { 'textAlign': 'right' }
+            width: 200,
+            style: { 'textAlign': 'right' },
+            Cell: props => (<span className="visual-sub-title" style={{ 'fontWeight': '600' }}>{dateFormat(props.row._original.release_date, "dddd, mmmm dS, yyyy")}</span>)
         }, {
             Header: 'Customer Name',
             accessor: 'first_name',
-            style: { 'textAlign': 'right' }
+            style: { 'textAlign': 'right', 'whiteSpace': 'unset' },
+            Cell: props => (<span style={{ 'color': '#80808C' }}>{props.row._original.first_name + " " + props.row._original.last_name}</span>)
         }, {
-            Header: 'Action',
-            accessor: 'price',
-            style: { 'textAlign': 'right' },
-            Cell: props => (<div><button className="btn btn-link" onClick={() => {
-                this.cancelUserBooking(props.row._original.id);
-            }}><span className="fas fa-trash delete-icon-btn"></span> Cancel</button></div>)
+            Header: 'Movie',
+            accessor: 'movie_name',
+            style: { 'textAlign': 'right', 'whiteSpace': 'unset' }
+        }, {
+            Header: 'Movie Hall',
+            accessor: 'hall_name',
+            style: { 'textAlign': 'right', 'whiteSpace': 'unset' }
+        }, {
+            Header: 'Location',
+            accessor: 'first_name',
+            style: { 'textAlign': 'right', 'whiteSpace': 'unset' },
+            Cell: props => (<span style={{ 'color': '#80808C' }}>{props.row._original.street + ", " + props.row._original.city + ", " + props.row._original.state}</span>)
+        }, {
+            Header: 'Price',
+            accessor: 'total_price',
+            style: { 'textAlign': 'right' }
         }]
 
         return (
             <div>
                 <CommonHeader />
+                <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
                         <h2 className="schedule-page-header">Search <span className="page-header-emphasis"> Bills</span></h2>
@@ -139,7 +145,6 @@ class SearchBill extends Component {
                                     <DatePicker
                                         readOnly
                                         placeholderText="Select Date"
-                                        minDate={moment().add(1, 'days')}
                                         selected={this.state.bill_date}
                                         onChange={this.handleChange}
                                     />
@@ -176,13 +181,15 @@ class SearchBill extends Component {
                         </div>
                     </form>
                 </div>
-                {this.state.bookingList !== undefined && this.state.bookingList.length > 0 &&
-                    <div className="col-md-offset-2 col-md-9 pd-left-0">
+                {this.state.isSearched &&
+                    <div className="col-md-offset-2 col-md-9 pd-left-0 mr-top-25">
                         <div className="col-md-12 pd-left-0">
                             < ReactTable
                                 minRows={0}
+                                defaultPageSize={5}
+                                noDataText="No Bills Found"
                                 filterable={true}
-                                pagination={false}
+                                pagination={true}
                                 data={this.state.bookingList}
                                 columns={columns} />
                         </div>

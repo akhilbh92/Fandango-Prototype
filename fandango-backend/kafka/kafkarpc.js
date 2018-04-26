@@ -76,6 +76,34 @@ KafkaRPC.prototype.setupResponseQueue = function (producer, topic_name, next) {
 
     //subscribe to messages
     var consumer = self.connection.getConsumer('fandango_response_topic');
+
+    consumer.on('error', function (err) {
+        console.log(`Error: ${err}`);
+    })
+    
+
+    // Handle OffsetOutOfRange
+    var kafka = require('kafka-node');
+    var Client = kafka.Client;
+    var Offset = kafka.Offset;
+    var client = new Client('localhost:2181');
+    var offset = new Offset(client);
+
+    let topic = 'fandango_response_topic';
+
+    consumer.on('offsetOutOfRange', function (topic) {
+        console.log('offsetOutOfRange Error');
+        console.log(topic);
+        topic.maxNum = 2;
+        offset.fetch([topic], function (err, offsets) {
+        if (err) {
+            return console.error(err);
+        }
+        var min = Math.min.apply(null, offsets[topic.topic][topic.partition]);
+        consumer.setOffset(topic.topic, topic.partition, min);
+        });
+    });
+
     consumer.on('message', function (message) {
         var data = JSON.parse(message.value);
         console.log('msg received');

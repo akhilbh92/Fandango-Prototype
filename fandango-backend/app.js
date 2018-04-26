@@ -93,7 +93,7 @@ var reactServerURL = 'http://localhost:3000';
 
 const cors = require('cors');
 
-// var fileUpload = require('express-fileupload')
+var fileUpload = require('express-fileupload')
 
 var app = express();
 
@@ -135,7 +135,8 @@ app.use(cors({
   credentials: true
 }));
 
-// app.use(fileUpload());
+app.use(fileUpload());
+app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 

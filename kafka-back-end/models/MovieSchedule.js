@@ -6,7 +6,8 @@ const MovieSchedule = db.sequelize.define('movie_schedule', {
         type: Sequelize.DataTypes.UUID,
         defaultValue: Sequelize.DataTypes.UUIDV4,
         primaryKey: true
-    }, movie_id: {
+    },
+    movie_id: {
         type: Sequelize.INTEGER
     },
     hall_id: {

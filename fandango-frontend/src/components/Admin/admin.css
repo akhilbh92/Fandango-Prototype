@@ -1,0 +1,71 @@
+.admin-module {
+    background-color: dimgray;
+    padding: 100px;
+    font-family: 'Avenir LT Std', sans-serif;
+    padding-top: 150px;
+    padding-left: 300px;
+    padding-bottom: 600px;
+  }
+  
+  .admin-forms .form-control {
+    font-size: 2rem;
+    padding: 25px 15px;
+  }
+
+.admin-elements{
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+#search {
+    margin-top: -9px;
+    margin-left: -3px;
+}
+
+#dropdown{
+    z-index: -1;
+}
+
+#split-button-basic-1{
+    height: 44px;
+}
+
+.admin-forms input {
+    height: 42px;
+    width: 800px;
+}
+
+.admin-module label {
+    font-size: 150%;
+    color: tomato;
+    padding-bottom: 20px;
+}
+
+#hidden {
+    display: none;
+    color: red;
+    font-size: 120%;
+}
+
+.navbar {
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+/* @media all and (min-width: 480px) {
+    .Login {
+      padding: 60px 0;
+    }
+  
+    .Login form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  } */
+
+
+#pic {
+    width: 140px;
+    height: 140px;
+  }

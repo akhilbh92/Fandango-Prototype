@@ -47,18 +47,18 @@ class Login extends Component{
         return(
             <div className="site-wrep signin vipsignin">
                 <div>
-                <header id="registration-header" class="registration-header" role="banner">
+                <header id="registration-header" className="registration-header" role="banner">
                     <nav  className="nav-bar">
                         <div className="row">
                             <div className="large-11 large-centered columns">
                                 <ul className="inline-items">
                                     <li className="site-logo">
                                         <Link className="fandango-logo" to="/">
-                                            <img src={fandangoLogo} alt="Fandango Logo" class="brand-img" />
+                                            <img src={fandangoLogo} alt="Fandango Logo" className="brand-img" />
                                         </Link>
                                     </li>
                                 </ul>
-                                <div class="registration-mode right">
+                                <div className="registration-mode right">
 
                                     <span>Don't have a Fandango VIP Account?</span> &nbsp;<Link to="/signup" className="cta">Join now for free</Link>
 
@@ -72,14 +72,14 @@ class Login extends Component{
 
                 <div className="open-form">
                     <div className="sub-panel">
-                        <p className="join-header">FANDANGO<span class="page-header-emphasis">VIP</span>
+                        <p className="join-header">FANDANGO<span className="page-header-emphasis">VIP</span>
 
                             <span className="registration-caption hide-for-small-only"></span>
                             <span className="registration-caption show-for-small-only"></span>
 
                         </p>
 
-                        <label for="UsernameBox" >Email Address</label>
+                        <label htmlFor="UsernameBox" >Email Address</label>
                         <input
                             type="text"
                             id="UsernameBox"
@@ -91,7 +91,7 @@ class Login extends Component{
                             }}
                             required
                         />
-                        <label for="PasswordBox" >Password</label>
+                        <label htmlFor="PasswordBox" >Password</label>
                         <input
                             type="password"
                             id="PasswordBox"

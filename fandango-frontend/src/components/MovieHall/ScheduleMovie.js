@@ -68,6 +68,7 @@ class ScheduleMovie extends Component {
                     <div className="col-md-offset-2 col-md-9 pd-left-0">
                         < ReactTable
                             minRows={0}
+                            noDataText="No Movies Found"
                             defaultPageSize={5}
                             filterable={true}
                             data={this.state.movieList}
