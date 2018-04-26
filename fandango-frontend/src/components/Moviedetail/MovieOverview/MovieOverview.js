@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import './MovieOverview.css';
 import Rating from 'react-rating';
-// import stargrey from './star-grey.png'
-// import staryellow from './star-yellow.png'
+import stargrey from './star-grey.png'
+import staryellow from './staryellow.png'
 
 class MovieOverview extends Component {
-    render() {
-        return (
+    render(){
+        return(
+
             <div className="movie-overview-layout">
                 <div className="movie-overview-layout-left">
                     <section className="movie-overview-layout-left-section1">
                         <a className="movie-overview-layout-left-section1-poster" href="/">
                             <img className="movie-overview-layout-left-section1-poster-image"
-                                src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/202991/fan_postertwo_blackpanther_.jpg"
-                                alt="Black Panther Movie Poster" />
+                                 src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/202991/fan_postertwo_blackpanther_.jpg"
+                                 alt="Black Panther Movie Poster"/>
                         </a>
                         <ul className="movie-overview-layout-left-section1-detail">
                             <li>Released</li>
@@ -33,37 +34,37 @@ class MovieOverview extends Component {
                             <li className="movie-overview-layout-left-section1-detail-rating">
                                 {/*<div className="movie-overview-layout-left-section1-detail-rating-inner" data-star-rating="5">*/}
 
-                                {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
-                                {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
-                                {/*data-show-caption="true" data-value="5" title="Loved It">*/}
-                                {/*</a>*/}
+                                    {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
+                                       {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
+                                       {/*data-show-caption="true" data-value="5" title="Loved It">*/}
+                                    {/*</a>*/}
 
-                                {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
-                                {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
-                                {/*data-show-caption="true" data-value="4" title="Really Liked It">*/}
-                                {/*</a>*/}
+                                    {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
+                                       {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
+                                       {/*data-show-caption="true" data-value="4" title="Really Liked It">*/}
+                                    {/*</a>*/}
 
-                                {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
-                                {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
-                                {/*data-show-caption="true" data-value="3" title="Liked It">*/}
-                                {/*</a>*/}
+                                    {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
+                                       {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
+                                       {/*data-show-caption="true" data-value="3" title="Liked It">*/}
+                                    {/*</a>*/}
 
-                                {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
-                                {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
-                                {/*data-show-caption="true" data-value="2" title="Disliked It">*/}
-                                {/*</a>*/}
+                                    {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
+                                       {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
+                                       {/*data-show-caption="true" data-value="2" title="Disliked It">*/}
+                                    {/*</a>*/}
 
-                                {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
-                                {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
-                                {/*data-show-caption="true" data-value="1" title="Hated It">*/}
-                                {/*</a>*/}
+                                    {/*<a className="movie-overview-layout-left-section1-detail-rating-inner-star"*/}
+                                       {/*data-action="rate" data-id="202991" data-isnew="true" data-rate-movie="true"*/}
+                                       {/*data-show-caption="true" data-value="1" title="Hated It">*/}
+                                    {/*</a>*/}
 
                                 {/*</div>*/}
                                 <Rating
                                     placeholderRating={3.5}
-                                    // emptySymbol={<img src={stargrey} className="icon" />}
-                                    // placeholderSymbol={<img src={staryellow} className="icon" />}
-                                    // fullSymbol={<img src={staryellow} className="icon" />}
+                                    emptySymbol={<img src={stargrey} className="icon" />}
+                                    placeholderSymbol={<img src={staryellow} className="icon" />}
+                                    fullSymbol={<img src={staryellow} className="icon" />}
                                 />
                             </li>
                             <li className="movie-overview-layout-left-section1-detail-rating-number">62,607 Fan Ratings</li>

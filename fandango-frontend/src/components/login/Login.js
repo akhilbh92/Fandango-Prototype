@@ -17,7 +17,7 @@ class Login extends Component{
         this.state ={
             email: '',
             password: ''
-        }
+        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -25,30 +25,31 @@ class Login extends Component{
 
     handleSubmit = (userdata) => {
 
-        API.doLogin(userdata.payload)
+        API.doLogin(userdata)
             .then((status) => {
-                console.log(this.props.user.email);
+                this.props.loginUser(status.data);
+                console.log("YOu need:" + this.props.user.userId);
             });
     };
 
     render(){
         return(
-            <div class="site-wrep signin vipsignin">
+            <div className="site-wrep signin vipsignin">
                 <div>
                 <header id="registration-header" class="registration-header" role="banner">
-                    <nav  class="nav-bar">
-                        <div class="row">
-                            <div class="large-11 large-centered columns">
-                                <ul class="inline-items">
-                                    <li class="site-logo">
-                                        <Link class="fandango-logo" to="/">
+                    <nav  className="nav-bar">
+                        <div className="row">
+                            <div className="large-11 large-centered columns">
+                                <ul className="inline-items">
+                                    <li className="site-logo">
+                                        <Link className="fandango-logo" to="/">
                                             <img src={fandangoLogo} alt="Fandango Logo" class="brand-img" />
                                         </Link>
                                     </li>
                                 </ul>
                                 <div class="registration-mode right">
 
-                                    <span>Don't have a Fandango VIP Account?</span> &nbsp;<Link to="/signup" class="cta">Join now for free</Link>
+                                    <span>Don't have a Fandango VIP Account?</span> &nbsp;<Link to="/signup" className="cta">Join now for free</Link>
 
 
                                 </div>
@@ -60,10 +61,10 @@ class Login extends Component{
 
                 <div className="open-form">
                     <div className="sub-panel">
-                        <p class="join-header">FANDANGO<span class="page-header-emphasis">VIP</span>
+                        <p className="join-header">FANDANGO<span class="page-header-emphasis">VIP</span>
 
-                            <span class="registration-caption hide-for-small-only"></span>
-                            <span class="registration-caption show-for-small-only"></span>
+                            <span className="registration-caption hide-for-small-only"></span>
+                            <span className="registration-caption show-for-small-only"></span>
 
                         </p>
 
@@ -91,7 +92,7 @@ class Login extends Component{
                             }}
                             required
                         />
-                        <button class="btn-cta full-width" alternatetext="Sign In" onClick={() => this.handleSubmit(this.props.loginUser(this.state))}>Sign In</button>
+                        <button className="btn-cta full-width" alternatetext="Sign In" onClick={() => this.handleSubmit(this.state)}>Sign In</button>
 
                     </div>
 
