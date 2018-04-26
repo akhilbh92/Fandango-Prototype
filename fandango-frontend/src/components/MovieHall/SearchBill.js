@@ -7,6 +7,7 @@ import 'react-table/react-table.css';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 class SearchBill extends Component {
 
@@ -109,6 +110,7 @@ class SearchBill extends Component {
         return (
             <div>
                 <CommonHeader />
+                <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
                         <h2 className="schedule-page-header">Search <span className="page-header-emphasis"> Bills</span></h2>
