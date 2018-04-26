@@ -130,6 +130,11 @@
   .delete-icon-btn{
     font-size: 18px;
     color: #ff7900;
+}   
+.cancel-icon-btn{
+    font-size: 18px;
+    color: #ff7900;
+    font-weight: bolder;
 }
 .ReactTable .-pagination .-btn{
     background-color: #F15500 !important;

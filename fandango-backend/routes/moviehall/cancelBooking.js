@@ -9,7 +9,7 @@ let resFormat = require("../../helpers/res_format");
 function cancelBookingRouterFn(req, res, next) {
     console.log('Cancel Booking hit');
     kafka.make_request('admin', 'cancelBooking', {
-        id: req.body.bookingId
+        bill_id: req.body.bill_id
     }, function (err, results) {
         console.log('In Kafka: %o', results);
         if (err) {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import CommonHeader from '../header/CommonHeader';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './moviehall.css';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -38,6 +40,7 @@ class ScheduleMovieTimeOverview extends Component {
     }
 
     componentDidMount() {
+        console.log("this.props.user :",this.props.user);
         this.getMovieSchedulesByMovie();
         API.getHalls()
             .then((resultData) => {
@@ -349,4 +352,16 @@ class ScheduleMovieTimeOverview extends Component {
     }
 }
 
-export default ScheduleMovieTimeOverview;
+
+function mapStateToProps(state){
+    console.log("state:",state);
+    return{
+        user: state.loginUser
+    }
+}
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({},dispatch)
+}
+
+
+export default connect(mapStateToProps, matchDispatchToProps)(ScheduleMovieTimeOverview);
