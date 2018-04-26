@@ -109,15 +109,30 @@ export const getMovieSchedules = (movieScheduleJson) =>
         return error;
     });
 
-export const searchUserBooking = (bookingId) =>
-    fetch(`${api}/searchBookingById`, {
+export const getRevenueByMovie = () =>
+    fetch(`${api}/getRevenueByMovie`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({ bookingId: bookingId })
+        body: JSON.stringify({})
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const searchUserBooking = (bookingJson) =>
+    fetch(`${api}/searchBooking`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(bookingJson)
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
