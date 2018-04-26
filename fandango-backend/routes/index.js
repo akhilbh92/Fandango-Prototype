@@ -16,6 +16,8 @@ var addMovieSchedule = require('./moviehall/addMovieSchedule');
 var getMovieSchedule = require('./moviehall/getMovieSchedule');
 var deleteMovieSchedule = require('./moviehall/deleteMovieSchedule');
 var getRevenueByMovie = require('./moviehall/getRevenueByMovie');
+var cancelBooking = require('./moviehall/cancelBooking');
+var searchBooking = require('./moviehall/searchBooking');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -98,6 +100,16 @@ router.post('/getMovieSchedules', function (req, res, next) {
 router.delete('/deleteMovieSchedule', function (req, res, next) {
   console.log('Delete MOVIE SCHEDULES API');
   deleteMovieSchedule.deleteMovieScheduleRouterFn(req, res, next);
+});
+
+router.post('/cancelBooking', function (req,res,next) {
+  console.log('CANCEL BOOKING API');
+  cancelBooking.cancelBookingRouterFn(req,res,next);
+});
+
+router.post('/searchBooking', function (req,res,next) {
+  console.log('CANCEL BOOKING API');
+  searchBooking.searchBookingRouterFn(req,res,next);
 });
 
 router.post('/Signup', function (req, res, next) {
