@@ -35,10 +35,10 @@
 //
 var connection = new require('./kafka/Connection');
 
- var registrationTopicName = 'registration_topic';
- var consumer = connection.getConsumer('admin');
+var registrationTopicName = 'registration_topic';
+var consumer = connection.getConsumer('admin');
 
- var producer = connection.getProducer();
+var producer = connection.getProducer();
 
 
 // Add additional topic handlers
@@ -57,6 +57,8 @@ var addMovieScheduleHandler = require('./services/movieschedule/addMovieSchedule
 var deleteMovieScheduleHandler = require('./services/movieschedule/deleteMovieSchedule');
 var getAllMovieScheduleByHallScreenDateHandler = require('./services/movieschedule/getAllMovieScheduleByHallScreenDate');
 var getRevenueByMovieHandler = require('./services/movieschedule/getRevenueByMovie');
+var cancelBookingHandler = require('./services/movieschedule/cancelBooking');
+var searchBookingHandler = require('./services/movieschedule/searchBooking');
 
 consumer.on('message', (message) => {
     console.log('Received message on Topic ');
@@ -107,6 +109,12 @@ consumer.on('message', (message) => {
             break;
         case 'getRevenueByMovie':
             handler = getRevenueByMovieHandler;
+            break;
+        case 'cancelBooking':
+            handler = cancelBookingHandler;
+            break;
+        case 'searchBooking':
+            handler = searchBookingHandler;
             break;
     }
     handler.handle_request(data.data.value, function (err, res) {
