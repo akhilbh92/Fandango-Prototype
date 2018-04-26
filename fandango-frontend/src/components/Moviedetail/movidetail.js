@@ -1,11 +1,22 @@
 import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
-import MovieOverview from './MovieOverview/MovieOverview'
-
+import MoveOverview from './MovieOverview/MovieOverview'
+import MovieCrew from './MovieCrew/MovieCrew'
+import MovieTickets from './MovieTickets/MovieTickets';
 
 class Movie_detail extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            ActiveComponent: <MovieTickets/>
+        }
+    }
+
     render(){
+
+
         return(
             <div>
                 <HomeHeader/>
@@ -44,14 +55,14 @@ class Movie_detail extends Component {
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.setState({...this.state,ActiveComponent:<MoveOverview/>})}>
                                                     Overview
-                                                </a>
+                                                </label>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.setState({...this.state,ActiveComponent:<MovieTickets/>})}>
                                                     Movie Times + tickets
-                                                </a>
+                                                </label>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
                                                 <a className="movie-detail-section-subnav-item-link">
@@ -67,11 +78,13 @@ class Movie_detail extends Component {
                                     </div>
                                 </div>
                             </section>
-                            <MovieOverview/>
-
+                            {this.state.ActiveComponent}
                         </div>
+                            <MovieCrew/>
                     </div>
+
                 </div>
+
             </div>);
     };
 }
