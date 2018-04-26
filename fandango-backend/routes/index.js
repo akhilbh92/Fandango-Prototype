@@ -17,6 +17,9 @@ var getMovieSchedule = require('./moviehall/getMovieSchedule');
 var deleteMovieSchedule = require('./moviehall/deleteMovieSchedule');
 var getRevenueByMovie = require('./moviehall/getRevenueByMovie');
 var uploadFile = require('./admin/uploadFile');
+var cancelBooking = require('./moviehall/cancelBooking');
+var searchBooking = require('./moviehall/searchBooking');
+var topTenMoviesByRevenue = require('./admin/topTenMoviesByRevenue');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -86,6 +89,11 @@ router.post('/getRevenueByMovie', function (req, res, next) {
   getRevenueByMovie.getRevenueByMovieRouterFn(req, res, next);
 });
 
+router.get('/topTenMoviesByRevenue', function (req, res, next) {
+    console.log('GET Top TEN movies by Revenue API');
+    topTenMoviesByRevenue.topTenMoviesByRevenueRouterFn(req, res, next);
+});
+
 router.post('/addMovieSchedule', function (req, res, next) {
   console.log('ADD MOVIE SCHEDULE API');
   addMovieSchedule.addMovieScheduleRouterFn(req, res, next);
@@ -99,6 +107,16 @@ router.post('/getMovieSchedules', function (req, res, next) {
 router.delete('/deleteMovieSchedule', function (req, res, next) {
   console.log('Delete MOVIE SCHEDULES API');
   deleteMovieSchedule.deleteMovieScheduleRouterFn(req, res, next);
+});
+
+router.post('/cancelBooking', function (req,res,next) {
+  console.log('CANCEL BOOKING API');
+  cancelBooking.cancelBookingRouterFn(req,res,next);
+});
+
+router.post('/searchBooking', function (req,res,next) {
+  console.log('CANCEL BOOKING API');
+  searchBooking.searchBookingRouterFn(req,res,next);
 });
 
 router.post('/Signup', function (req, res, next) {

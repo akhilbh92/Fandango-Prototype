@@ -1,22 +1,11 @@
 import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
-import MoveOverview from './MovieOverview/MovieOverview'
-import MovieCrew from './MovieCrew/MovieCrew'
+import MovieReview from "./MovieOverview/MovieReview";
 
 
-class Movie_detail extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            ActiveComponent: <MoveOverview/>
-        }
-    }
-
+class Movie_detail_review extends Component {
     render(){
-
-
         return(
             <div>
                 <HomeHeader/>
@@ -46,7 +35,7 @@ class Movie_detail extends Component {
 
 
 
-                                            Rampage (2018)
+                                            Rampage (2018) <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
 
 
 
@@ -55,14 +44,14 @@ class Movie_detail extends Component {
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
                                             <li className="movie-detail-section-subnav-item">
-                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.setState({...this.state,ActiveComponent:<MoveOverview/>})}>
+                                                <a className="movie-detail-section-subnav-item-link">
                                                     Overview
-                                                </label>
+                                                </a>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <label className="movie-detail-section-subnav-item-link">
+                                                <a className="movie-detail-section-subnav-item-link">
                                                     Movie Times + tickets
-                                                </label>
+                                                </a>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
                                                 <a className="movie-detail-section-subnav-item-link">
@@ -78,15 +67,13 @@ class Movie_detail extends Component {
                                     </div>
                                 </div>
                             </section>
-                            {this.state.ActiveComponent}
+                            <MovieReview/>
+
                         </div>
-                            <MovieCrew/>
                     </div>
-
                 </div>
-
             </div>);
     };
 }
 
-export default Movie_detail;
+export default Movie_detail_review;

@@ -35,10 +35,10 @@
 //
 var connection = new require('./kafka/Connection');
 
- var registrationTopicName = 'registration_topic';
- var consumer = connection.getConsumer('admin');
+var registrationTopicName = 'registration_topic';
+var consumer = connection.getConsumer('admin');
 
- var producer = connection.getProducer();
+var producer = connection.getProducer();
 
 
 // Add additional topic handlers
@@ -57,6 +57,9 @@ var addMovieScheduleHandler = require('./services/movieschedule/addMovieSchedule
 var deleteMovieScheduleHandler = require('./services/movieschedule/deleteMovieSchedule');
 var getAllMovieScheduleByHallScreenDateHandler = require('./services/movieschedule/getAllMovieScheduleByHallScreenDate');
 var getRevenueByMovieHandler = require('./services/movieschedule/getRevenueByMovie');
+var cancelBookingHandler = require('./services/movieschedule/cancelBooking');
+var searchBookingHandler = require('./services/movieschedule/searchBooking');
+var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRevenue');
 
 consumer.on('error', function (err) {
     console.log(`Error: ${err}`);
@@ -90,7 +93,7 @@ consumer.on('offsetOutOfRange', function (topic) {
 
 consumer.on('message', (message) => {
     console.log('Received message on Topic ');
-    console.log(`Total Msg: ${JSON.stringify(message)}`)
+    console.log(`Total Msg: ${JSON.stringify(message)}`);
     console.log(`data: ${message.value}`)
     var data = JSON.parse(message.value);
     let handler;
@@ -137,6 +140,15 @@ consumer.on('message', (message) => {
             break;
         case 'getRevenueByMovie':
             handler = getRevenueByMovieHandler;
+            break;
+        case 'cancelBooking':
+            handler = cancelBookingHandler;
+            break;
+        case 'searchBooking':
+            handler = searchBookingHandler;
+            break;
+        case 'topTenMoviesByRevenue':
+            handler = topTenMoviesByRevenue;
             break;
     }
     handler.handle_request(data.data.value, function (err, res) {

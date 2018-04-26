@@ -154,3 +154,7 @@
     font-size: 16px;
     margin-top: 4px;
 }
+.datepicker-div .react-datepicker__input-container input{
+    margin-top: 5px;
+    height: 40px;
+}

@@ -15,6 +15,15 @@ import AdminHome from '../Admin/AdminHome';
 import AdminHallForm from '../Admin/HallForm';
 import AdminMovieForm from '../Admin/MovieForm';
 import AddMovieForm from '../Admin/form';
+import RevenueByMovie from '../MovieHall/RevenueByMovie';
+import SearchBill from '../MovieHall/SearchBill';
+import Movie_detail_review from "../Moviedetail/moviedetail-review";
+import TopTenMoviesByRevenue from "../AdminAnalytics/topTenMoviesByRevenue";
+import MovieTickets from '../MovieTickets/MovieTickets';
+import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
+import EnterTickets from './../Payments/EnterTickets';
+import PaymentInfo from './../Payments/PaymentInfo';
+
 
 
 class RoutesComponent extends Component {
@@ -31,13 +40,21 @@ class RoutesComponent extends Component {
                 <Route exact path="/preferences" component={AccountPreferences} />
                 <Route exact path="/allmovies" component={AllMovies} />
                 <Route exact path="/cancelbooking" component={CancelBooking} />
+                <Route exact path="/searchbill" component={SearchBill} />
                 <Route exact path ="/moviedetail" component={Movie_detail} />
                 <Route exact path ="/admin" component={AdminHome} />
                 <Route exact path="/admin/movies/:movieId" component={AdminMovieForm} />
                 <Route exact path="/admin/halls/:hallId" component={AdminHallForm} />
                 <Route exact path="/form" component={AddMovieForm} />
+                <Route exact path ="/movierevenue" component={RevenueByMovie} />
+                <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
+                <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
+                <Route exact path = "/movietickets" component={MovieTickets}/>
+                <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <Route exact path ="/entertickets" component={EnterTickets} />
+                <Route exact path ="/paymentinfo" component={PaymentInfo} />
             </div>
-        )
+        );
     }
 }
 
