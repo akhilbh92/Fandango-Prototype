@@ -11,6 +11,7 @@ import AccountPreferences from "../AfterLogin/AccountPreferences";
 import AllMovies from "../MoviesList/AllMovies";
 import CancelBooking from "../MovieHall/CancelBooking";
 import Movie_detail from '../Moviedetail/movidetail';
+import Movie_detail_review from "../Moviedetail/moviedetail-review";
 
 class RoutesComponent extends Component {
 
@@ -28,6 +29,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/allmovies" component={AllMovies} />
                 <Route exact path="/cancelbooking" component={CancelBooking} />
                 <Route exact path ="/moviedetail" component={Movie_detail} />
+                <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
             </div>
         )
     }

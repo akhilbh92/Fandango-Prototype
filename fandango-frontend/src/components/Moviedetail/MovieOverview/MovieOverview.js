@@ -2,11 +2,12 @@ import React, { Component} from 'react';
 import './MovieOverview.css';
 import Rating from 'react-rating';
 import stargrey from './star-grey.png'
-import staryellow from './star-yellow.png'
+import staryellow from './staryellow.png'
 
 class MovieOverview extends Component {
     render(){
         return(
+
             <div className="movie-overview-layout">
                 <div className="movie-overview-layout-left">
                     <section className="movie-overview-layout-left-section1">
