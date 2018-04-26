@@ -6,7 +6,7 @@ const db = require('../../db/mysql');
 function handle_request(msg, callback) {
     console.log(`Incoming message: ${JSON.stringify(msg)}`);
     let condition = {};
-    let query = "select halls.hall_name,SUM(billings.no_of_seats) as total_no_of_tickets from billings,movie_schedules,movies,halls where " +
+    let query = "select halls.hall_name,sum(total_price) as revenue,SUM(billings.no_of_seats) as total_no_of_tickets from billings,movie_schedules,movies,halls where " +
         "movies.id = movie_schedules.movie_id AND " +
         "billings.movie_schedule_id = movie_schedules.id AND " +
         "movie_schedules.hall_id = halls.id AND " +

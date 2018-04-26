@@ -10,17 +10,16 @@ let resFormat = require("../../helpers/res_format");
 function uploadFileRouterFn(req, res, next){
     console.log('Upload File hit');
     let imageFile = req.files.file;
+    let serverFileName = req.body.filename + '_' + shortid.generate() + '.jpg'
     console.log('File path:')
     console.log(path.join(__dirname , '..', '..',  'posters',  'photo.jpg'))
-    imageFile.mv(path.join(__dirname , '..', '..',  'public/posters', req.body.filename + '_' + shortid.generate() + '.jpg')), function(err) {
+    imageFile.mv(path.join(__dirname , '..', '..',  'public/posters', serverFileName)), function(err) {
       if (err) {
         return res.status(500).send(err);
         }
       };
-      res.status(200).json({file: `/public/posters/photo.jpg` });
+      res.status(200).json({file: `/public/posters/${serverFileName}` });
     }
-  
-        // res.json({file: `public/${req.body.filename}.jpg`});
 
    
 module.exports = { uploadFileRouterFn };
