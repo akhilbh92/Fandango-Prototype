@@ -58,9 +58,11 @@ var deleteMovieScheduleHandler = require('./services/movieschedule/deleteMovieSc
 var getAllMovieScheduleByHallScreenDateHandler = require('./services/movieschedule/getAllMovieScheduleByHallScreenDate');
 var getRevenueByMovieHandler = require('./services/movieschedule/getRevenueByMovie');
 
+var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRevenue');
+
 consumer.on('message', (message) => {
     console.log('Received message on Topic ');
-    console.log(`Total Msg: ${JSON.stringify(message)}`)
+    console.log(`Total Msg: ${JSON.stringify(message)}`);
     console.log(`data: ${message.value}`)
     var data = JSON.parse(message.value);
     let handler;
@@ -108,6 +110,8 @@ consumer.on('message', (message) => {
         case 'getRevenueByMovie':
             handler = getRevenueByMovieHandler;
             break;
+        case 'topTenMoviesByRevenue':
+            handler = topTenMoviesByRevenue;
     }
     handler.handle_request(data.data.value, function (err, res) {
         console.log('after handle: %o', res);

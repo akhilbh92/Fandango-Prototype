@@ -16,6 +16,7 @@ var addMovieSchedule = require('./moviehall/addMovieSchedule');
 var getMovieSchedule = require('./moviehall/getMovieSchedule');
 var deleteMovieSchedule = require('./moviehall/deleteMovieSchedule');
 var getRevenueByMovie = require('./moviehall/getRevenueByMovie');
+var topTenMoviesByRevenue = require('./admin/topTenMoviesByRevenue');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -83,6 +84,11 @@ router.post('/getLimitedMovie', function (req, res, next) {
 router.post('/getRevenueByMovie', function (req, res, next) {
   console.log('GET Revenue by MOVIES API');
   getRevenueByMovie.getRevenueByMovieRouterFn(req, res, next);
+});
+
+router.get('/topTenMoviesByRevenue', function (req, res, next) {
+    console.log('GET Top TEN movies by Revenue API');
+    topTenMoviesByRevenue.topTenMoviesByRevenueRouterFn(req, res, next);
 });
 
 router.post('/addMovieSchedule', function (req, res, next) {
