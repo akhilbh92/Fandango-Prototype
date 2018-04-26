@@ -20,6 +20,7 @@ var uploadFile = require('./admin/uploadFile');
 var cancelBooking = require('./moviehall/cancelBooking');
 var searchBooking = require('./moviehall/searchBooking');
 var topTenMoviesByRevenue = require('./admin/topTenMoviesByRevenue');
+var cityWiseMovieRevenue = require('./admin/cityWiseMovieRevenue');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -87,6 +88,11 @@ router.post('/getLimitedMovie', function (req, res, next) {
 router.post('/getRevenueByMovie', function (req, res, next) {
   console.log('GET Revenue by MOVIES API');
   getRevenueByMovie.getRevenueByMovieRouterFn(req, res, next);
+});
+
+router.post('/getCityWiseRevenueByMovie', function (req, res, next) {
+    console.log('GET City Wise Revenue by MOVIE');
+    cityWiseMovieRevenue.cityWiseMovieRevenueRouterFn(req, res, next);
 });
 
 router.get('/topTenMoviesByRevenue', function (req, res, next) {
