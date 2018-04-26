@@ -60,6 +60,8 @@ var getRevenueByMovieHandler = require('./services/movieschedule/getRevenueByMov
 var cancelBookingHandler = require('./services/movieschedule/cancelBooking');
 var searchBookingHandler = require('./services/movieschedule/searchBooking');
 var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRevenue');
+var cityWiseMovieRevenue = require('./services/adminanalytics/cityWiseMovieRevenue');
+var topTenHallByTickets = require('./services/adminanalytics/topTenHallByTickets');
 
 consumer.on('error', function (err) {
     console.log(`Error: ${err}`);
@@ -150,7 +152,14 @@ consumer.on('message', (message) => {
         case 'topTenMoviesByRevenue':
             handler = topTenMoviesByRevenue;
             break;
+        case 'cityWiseMovieRevenue':
+            handler = cityWiseMovieRevenue;
+            break;
+        case 'topTenHallByTickets':
+            handler = topTenHallByTickets;
+            break;
     }
+
     handler.handle_request(data.data.value, function (err, res) {
         console.log('after handle: %o', res);
         var payloads = [{
