@@ -6,6 +6,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 var dateFormat = require('dateformat');
+var _ = require('lodash');
 
 class CancelBooking extends Component {
 
@@ -24,7 +25,19 @@ class CancelBooking extends Component {
     cancelUserBooking() {
         API.cancelUserBooking(this.state.bookingId)
             .then((resultData) => {
-                this.state.bookingList.map(obj => (resultData.data.bill_id === obj.bill_id) || resultData.data);
+                if (resultData !== undefined && resultData.data !== undefined && resultData.data !== null) {
+                    this.notify(resultData.meta.message);
+                    let index = this.state.bookingList.findIndex(bookingObj => bookingObj.bill_id == resultData.data.bill_id);
+                    let bookingObj = this.state.bookingList[index];
+                    bookingObj.status = 'C';
+                    let tempBookingList = _.cloneDeep(this.state.bookingList);
+                    tempBookingList.splice(index, 1, bookingObj);
+                    this.setState({
+                        bookingList: tempBookingList
+                    });
+                } else {
+                    this.notify("There is some issue cancelling Booking.");
+                }
             }).catch(error => {
                 this.notify(error);
             });
@@ -35,7 +48,7 @@ class CancelBooking extends Component {
         if (!!this.state.bookingId) {
             API.searchUserBooking({ bill_id: this.state.bookingId })
                 .then((resultData) => {
-                    if (resultData.data != undefined && resultData.data.length > 0) {
+                    if (resultData.data !== undefined && resultData.data.length > 0) {
                         this.setState({
                             bookingList: resultData.data,
                             submitted: false
@@ -115,7 +128,7 @@ class CancelBooking extends Component {
                     <form>
                         <div className="form-group row">
                             <label htmlFor="searchBooking" className="col-sm-3 col-form-label booking-id-font">Enter Booking ID</label>
-                            <div className={'col-sm-4 ' + (this.state.submitted && this.state.bookingId == undefined ? ' has-error' : '')}>
+                            <div className={'col-sm-4 ' + (this.state.submitted && this.state.bookingId === undefined ? ' has-error' : '')}>
                                 <input type="text" id="searchBooking" name="searchBooking"
                                     className="form-control booking-input"
                                     value={this.state.bookingId}
@@ -124,7 +137,7 @@ class CancelBooking extends Component {
                                             bookingId: event.target.value
                                         })
                                     }} />
-                                {this.state.submitted && this.state.bookingId == undefined &&
+                                {this.state.submitted && this.state.bookingId === undefined &&
                                     <div className="help-block">Booking ID is required</div>
                                 }
                             </div>

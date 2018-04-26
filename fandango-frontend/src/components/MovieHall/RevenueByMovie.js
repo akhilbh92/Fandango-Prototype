@@ -54,6 +54,7 @@ class RevenueByMovie extends Component {
         return (
             <div>
                 <CommonHeader />
+                <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
                         <h2 className="schedule-page-header">Total Revenue List of <span className="page-header-emphasis"> MOVIES</span></h2>
