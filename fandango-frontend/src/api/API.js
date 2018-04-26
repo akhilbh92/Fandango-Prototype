@@ -33,6 +33,21 @@ export const topTenMovies = () =>
         return error;
     });
 
+
+export const topTenHalls = () =>
+    fetch(`${api}/topTenHallByTickets`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const getLimitedMovies = (noOfRecords) =>
     fetch(`${api}/getMovies`, {
         method: 'POST',
