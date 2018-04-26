@@ -11,7 +11,10 @@ import AccountPreferences from "../AfterLogin/AccountPreferences";
 import AllMovies from "../MoviesList/AllMovies";
 import CancelBooking from "../MovieHall/CancelBooking";
 import Movie_detail from '../Moviedetail/movidetail';
+import RevenueByMovie from '../MovieHall/RevenueByMovie';
+import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
+import TopTenMoviesByRevenue from "../AdminAnalytics/topTenMoviesByRevenue";
 
 class RoutesComponent extends Component {
 
@@ -28,10 +31,13 @@ class RoutesComponent extends Component {
                 <Route exact path="/preferences" component={AccountPreferences} />
                 <Route exact path="/allmovies" component={AllMovies} />
                 <Route exact path="/cancelbooking" component={CancelBooking} />
+                <Route exact path="/searchbill" component={SearchBill} />
                 <Route exact path ="/moviedetail" component={Movie_detail} />
+                <Route exact path ="/movierevenue" component={RevenueByMovie} />
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
+                <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
             </div>
-        )
+        );
     }
 }
 

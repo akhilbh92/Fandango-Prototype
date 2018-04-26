@@ -1,7 +1,7 @@
-const Sequelize = require ('sequelize');
-const db = require ('../db/mysql');
+const Sequelize = require('sequelize');
+const db = require('../db/mysql');
 
-const Billing =  db.sequelize.define('Billing', {
+const Billing = db.sequelize.define('Billing', {
     bill_id: {
         type: Sequelize.DataTypes.UUID,
         defaultValue: Sequelize.DataTypes.UUIDV4,
@@ -13,23 +13,27 @@ const Billing =  db.sequelize.define('Billing', {
     },
     movie_schedule_id: {
         type: Sequelize.DataTypes.STRING,
-        required:true
+        required: true
     },
     total_price: {
         type: Sequelize.DataTypes.FLOAT,
-        required:true
+        required: true
     },
     tax: {
         type: Sequelize.DataTypes.FLOAT,
-        required:true
+        required: true
     },
     no_of_seats: {
         type: Sequelize.DataTypes.INTEGER,
-        required:true
+        required: true
     },
     booking_date: {
         type: Sequelize.DataTypes.DATE,
-        defaultValue:Sequelize.DataTypes.NOW
+        defaultValue: Sequelize.DataTypes.NOW
+    },
+    status: {
+        type: Sequelize.DataTypes.STRING,
+        required: true
     }
 });
 

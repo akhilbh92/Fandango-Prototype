@@ -1,8 +1,12 @@
-const Sequelize = require ('sequelize');
-const db = require ('../db/mysql');
+const Sequelize = require('sequelize');
+const db = require('../db/mysql');
 
-const MovieSchedule =  db.sequelize.define('movie_schedule', {
-    movie_id: {
+const MovieSchedule = db.sequelize.define('movie_schedule', {
+    id: {
+        type: Sequelize.DataTypes.UUID,
+        defaultValue: Sequelize.DataTypes.UUIDV4,
+        primaryKey: true
+    }, movie_id: {
         type: Sequelize.INTEGER
     },
     hall_id: {
@@ -25,6 +29,5 @@ const MovieSchedule =  db.sequelize.define('movie_schedule', {
     }
 });
 
-
+MovieSchedule.sync();
 module.exports = { MovieSchedule };
-        

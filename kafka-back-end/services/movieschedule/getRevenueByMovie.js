@@ -8,12 +8,12 @@ function handle_request(msg, callback) {
     console.log(`Incoming message: ${JSON.stringify(msg)}`);
     let condition = {};
     let query = "SELECT " +
-        " SUM(total_price) as total_revenue, movies.movie_name, movies.id " +
+        " SUM(billings.total_price) as total_revenue, movies.movie_name, movies.id " +
         " FROM `movie_schedules` as ms JOIN" +
-        " billing ON ms.id = billing.movie_schedule_id LEFT JOIN" +
-        " movies ON movies.id = movie_schedules.movie_id ";
+        " billings ON ms.id = billings.movie_schedule_id LEFT JOIN" +
+        " movies ON movies.id = ms.movie_id WHERE billings.status = 'A'";
     if (msg.movie_id) {
-        query = query + "WHERE ms.movie_id = " + msg.movie_id
+        query = query + "AND ms.movie_id = " + msg.movie_id
     }
     query = query + " GROUP BY ms.movie_id;"
     console.log(`Incoming Query message:`, query);

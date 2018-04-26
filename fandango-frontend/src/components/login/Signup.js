@@ -24,22 +24,22 @@ class Signup extends Component{
 
     render(){
         return(
-            <div class="site-wrep signin vipsignin">
+            <div className="site-wrep signin vipsignin">
                 <div>
-                    <header id="registration-header" class="registration-header" role="banner">
-                        <nav  class="nav-bar">
-                            <div class="row">
-                                <div class="large-11 large-centered columns">
-                                    <ul class="inline-items">
-                                        <li class="site-logo">
-                                            <Link class="fandango-logo" to="/">
-                                                <img src={fandangoLogo} alt="Fandango Logo" class="brand-img" />
+                    <header id="registration-header" className="registration-header" role="banner">
+                        <nav  className="nav-bar">
+                            <div className="row">
+                                <div className="large-11 large-centered columns">
+                                    <ul className="inline-items">
+                                        <li className="site-logo">
+                                            <Link className="fandango-logo" to="/">
+                                                <img src={fandangoLogo} alt="Fandango Logo" className="brand-img" />
                                             </Link>
                                         </li>
                                     </ul>
-                                    <div class="registration-mode right">
+                                    <div className="registration-mode right">
 
-                                        <span>Already have a Fandango VIP Account?</span> &nbsp;<Link to="/login" class="cta">SIGN IN</Link>
+                                        <span>Already have a Fandango VIP Account?</span> &nbsp;<Link to="/login" className="cta">SIGN IN</Link>
 
 
                                     </div>
@@ -51,13 +51,13 @@ class Signup extends Component{
 
                 <div className="sign-form">
                     <div className="sub-panel">
-                        <p class="join-header">FANDANGO<span class="page-header-emphasis">VIP</span>
+                        <p className="join-header">FANDANGO<span className="page-header-emphasis">VIP</span>
 
-                            <span class="registration-caption hide-for-small-only">(And Become eligible for VIP+ Points)</span>
-                            <span class="registration-caption show-for-small-only">(And Become eligible for VIP+ Points)</span>
+                            <span className="registration-caption hide-for-small-only">(And Become eligible for VIP+ Points)</span>
+                            <span className="registration-caption show-for-small-only">(And Become eligible for VIP+ Points)</span>
 
                         </p>
-                        <label for="FirstnameBox" >First Name</label>
+                        <label htmlFor="FirstnameBox" >First Name</label>
                         <input
                             type="text"
                             id="FirstnameBox"
@@ -70,7 +70,7 @@ class Signup extends Component{
                             required
                             autoFocus
                         />
-                        <label for="UsernameBox" >Email Address</label>
+                        <label htmlFor="UsernameBox" >Email Address</label>
                         <input
                             type="text"
                             id="UsernameBox"
@@ -82,7 +82,7 @@ class Signup extends Component{
                             }}
                             required
                         />
-                        <label for="PasswordBox" >Password</label>
+                        <label htmlFor="PasswordBox" >Password</label>
                         <input
                             type="password"
                             id="PasswordBox"
@@ -95,10 +95,10 @@ class Signup extends Component{
                             required
 
                         />
-                        <small class="password-instruction">Password should be at-least 8 in length.</small>
-                        <label for="ConfirmPasswordBox" >Confirm Password</label>
+                        <small className="password-instruction">Password should be at-least 8 in length.</small>
+                        <label htmlFor="ConfirmPasswordBox" >Confirm Password</label>
                         <input  type="password" id="ConfirmPasswordBox" />
-                        <button class="btn-cta full-width" alternatetext="Join Now for Free" onClick={()=> this.handleSignUp()}>Join Now for Free</button>
+                        <button className="btn-cta full-width" alternatetext="Join Now for Free" onClick={()=> this.handleSignUp()}>Join Now htmlFor Free</button>
 
                     </div>
 

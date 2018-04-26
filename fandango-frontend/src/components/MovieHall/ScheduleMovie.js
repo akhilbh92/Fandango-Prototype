@@ -46,7 +46,7 @@ class ScheduleMovie extends Component {
                 <button
                     className="btn-link visual-sub-title dark"
                     type="button"
-                    style={{ 'display':'block','margin':'auto','line-height': "100px" }}
+                    style={{ 'display':'block','margin':'auto','lineHeight': "100px" }}
                 >{props.row._original.movie_name}
                 </button>
             </Link>)
@@ -54,7 +54,7 @@ class ScheduleMovie extends Component {
             Header: 'Release Date',
             accessor: 'release_date',
             style: { 'textAlign': 'right', 'fontSize': '20px' },
-            Cell: props => (<span className="visual-sub-title" style={{ 'line-height': "100px" }}>Releases {dateFormat(props.row._original.release_date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</span>)
+            Cell: props => (<span className="visual-sub-title" style={{ 'lineHeight': "100px" }}>Releases {dateFormat(props.row._original.release_date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</span>)
         }]
         return (
             <div>
