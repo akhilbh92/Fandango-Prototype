@@ -16,6 +16,7 @@ var addMovieSchedule = require('./moviehall/addMovieSchedule');
 var getMovieSchedule = require('./moviehall/getMovieSchedule');
 var deleteMovieSchedule = require('./moviehall/deleteMovieSchedule');
 var getRevenueByMovie = require('./moviehall/getRevenueByMovie');
+var uploadFile = require('./admin/uploadFile');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -128,6 +129,11 @@ router.post('/getProfile', function (req,res,next) {
 router.post('/updateProfile', function (req,res,next) {
     console.log('UPDATE PROFILE API');
     updateProfile.updateProfileRouterFn(req,res,next);
+});
+
+router.post('/uploadFile', function (req,res,next) {
+  console.log('UPLOAD FILE API');
+  uploadFile.uploadFileRouterFn(req,res,next);
 });
 
 module.exports = router;
