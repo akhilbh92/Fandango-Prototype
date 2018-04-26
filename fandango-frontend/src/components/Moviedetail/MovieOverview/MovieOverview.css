@@ -348,7 +348,6 @@
 
 
 
-
 #SECTION_1 {
     box-sizing: border-box;
     color: rgb(76, 76, 76);
@@ -1444,3 +1443,66 @@
     outline: rgb(74, 167, 246) none 0px;
 }/*#DIV_54*/
 
+
+.addreview-header{
+    height: 70px;
+    background-color: white;
+    margin-top: 2px;
+
+}
+.addreview-header-font{
+    position:absolute;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+
+.addreview-header-star{
+    position: absolute;
+    padding-top: 18px;
+    padding-left: 70%;
+}
+
+.addreview-body{
+    margin-top: 1px ;
+    min-height: 200px;
+    background-color: white;
+    margin-top: 2px;
+}
+
+.addreview-body-input{
+    padding-top: 12%;
+    padding-left: 10px;
+    width: 90%
+}
+
+.addreview-title-font{
+    position:absolute;
+    margin-top: 2%;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 50px;
+}
+
+.addreview-body-font{
+    position:absolute;
+    margin-top: 4%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.addreview-textarea-input{
+    padding-top: 6%;
+    padding-left: 10px;
+    width: 90%;
+    height: 250px;
+
+}
+
+.cancel-button{
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}

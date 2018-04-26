@@ -11,12 +11,12 @@ function addMovieRouterFn(req, res, next){
       kafka.make_request('admin', 'addMovie', {
           movie_name: req.body.movieName,
           description: req.body.description,
-          // see_it_in: req.body.seeItIn,
-          // trailer: req.body.trailer,
-          // photos : req.body.photos,
-          // cast: req.body.cast,
-          // movie_length: req.body.movieLength,
-          // release_date: req.body.releaseDate,
+          seeItIn: req.body.seeItIn,
+          trailer: req.body.trailer,
+          photos : req.body.photos,
+          cast: req.body.cast,
+          movieLength: req.body.movieLength,
+          releaseDate: req.body.releaseDate,
           genres: req.body.genres
     }, function(err,results){
       console.log('In Kafka: %o', results);

@@ -168,6 +168,33 @@ export const cancelUserBooking = (bookingId) =>
         return error;
     });
 
+/* Upload a file */
+export const uploadFile = function (data, movieName){
+    var url = `${api}/uploadFile`;
+    return fetch(url, {
+              method: 'POST',
+              body: data,
+              credentials: 'include'
+            })
+  };
+
+
+export const addMovie = ( movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres) =>
+  fetch(`${api}/addMovie`, {
+      method: 'POST',
+      headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({movieName, description, trailer, photos, seeItIn, cast, releaseDate, movieLength, genres})
+  }).then(res => {
+      return successHandler(res);
+  }).catch(error => {
+      return error;
+  });
+
+
 let successHandler = (res) => {
     if (res.status === 401) {
         // UserHelper.redirectToLogin();

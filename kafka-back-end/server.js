@@ -60,6 +60,38 @@ var getRevenueByMovieHandler = require('./services/movieschedule/getRevenueByMov
 var cancelBookingHandler = require('./services/movieschedule/cancelBooking');
 var searchBookingHandler = require('./services/movieschedule/searchBooking');
 var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRevenue');
+var cityWiseMovieRevenue = require('./services/adminanalytics/cityWiseMovieRevenue');
+var topTenHallByTickets = require('./services/adminanalytics/topTenHallByTickets');
+
+consumer.on('error', function (err) {
+    console.log(`Error: ${err}`);
+})
+
+/*************************************************************************************/
+
+// Handle OffsetOutOfRange Error
+
+var kafka = require('kafka-node');
+var Client = kafka.Client;
+var Offset = kafka.Offset;
+var client = new Client('localhost:2181');
+var offset = new Offset(client);
+
+let topic = 'admin';
+
+consumer.on('offsetOutOfRange', function (topic) {
+    console.log('offsetOutOfRange Error')
+    topic.maxNum = 2;
+    offset.fetch([topic], function (err, offsets) {
+      if (err) {
+        return console.error(err);
+      }
+      var min = Math.min.apply(null, offsets[topic.topic][topic.partition]);
+      consumer.setOffset(topic.topic, topic.partition, min);
+    });
+  });
+
+/*************************************************************************************/
 
 consumer.on('message', (message) => {
     console.log('Received message on Topic ');
@@ -120,7 +152,14 @@ consumer.on('message', (message) => {
         case 'topTenMoviesByRevenue':
             handler = topTenMoviesByRevenue;
             break;
+        case 'cityWiseMovieRevenue':
+            handler = cityWiseMovieRevenue;
+            break;
+        case 'topTenHallByTickets':
+            handler = topTenHallByTickets;
+            break;
     }
+
     handler.handle_request(data.data.value, function (err, res) {
         console.log('after handle: %o', res);
         var payloads = [{
