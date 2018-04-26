@@ -3,14 +3,14 @@ import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
 import MoveOverview from './MovieOverview/MovieOverview'
 import MovieCrew from './MovieCrew/MovieCrew'
-import MovieTickets from './MovieTickets/MovieTickets';
+
 
 class Movie_detail extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            ActiveComponent: <MovieTickets/>
+            ActiveComponent: <MoveOverview/>
         }
     }
 
@@ -60,7 +60,7 @@ class Movie_detail extends Component {
                                                 </label>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.setState({...this.state,ActiveComponent:<MovieTickets/>})}>
+                                                <label className="movie-detail-section-subnav-item-link">
                                                     Movie Times + tickets
                                                 </label>
                                             </li>

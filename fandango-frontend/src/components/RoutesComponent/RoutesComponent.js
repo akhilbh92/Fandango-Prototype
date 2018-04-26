@@ -15,6 +15,7 @@ import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
 import TopTenMoviesByRevenue from "../AdminAnalytics/topTenMoviesByRevenue";
+import MovieTickets from '../MovieTickets/MovieTickets';
 
 class RoutesComponent extends Component {
 
@@ -36,6 +37,7 @@ class RoutesComponent extends Component {
                 <Route exact path ="/movierevenue" component={RevenueByMovie} />
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
                 <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
+                <Route exact path = "/movietickets" component={MovieTickets}/>
             </div>
         );
     }
