@@ -16,6 +16,10 @@ import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
 import TopTenMoviesByRevenue from "../AdminAnalytics/topTenMoviesByRevenue";
 import MovieTickets from '../MovieTickets/MovieTickets';
+import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
+import EnterTickets from './../Payments/EnterTickets';
+import PaymentInfo from './../Payments/PaymentInfo';
+
 
 class RoutesComponent extends Component {
 
@@ -38,6 +42,9 @@ class RoutesComponent extends Component {
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
                 <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
                 <Route exact path = "/movietickets" component={MovieTickets}/>
+                <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <Route exact path ="/entertickets" component={EnterTickets} />
+                <Route exact path ="/paymentinfo" component={PaymentInfo} />
             </div>
         );
     }
