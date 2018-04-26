@@ -161,8 +161,10 @@ class CancelBooking extends Component {
                         <div className="col-md-12 pd-left-0">
                             < ReactTable
                                 minRows={0}
+                                defaultPageSize={5}
+                                noDataText="No Bookings Found"
                                 filterable={true}
-                                pagination={false}
+                                pagination={true}
                                 data={this.state.bookingList}
                                 columns={columns} />
                         </div>

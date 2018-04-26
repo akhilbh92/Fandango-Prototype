@@ -234,8 +234,10 @@ class ScheduleMovieTimeOverview extends Component {
                     <div className="col-md-12 pd-left-0">
                         < ReactTable
                             minRows={0}
+                            noDataText="No Movies Found"
                             filterable={true}
-                            pagination={false}
+                            pagination={true}
+                            defaultPageSize={5}
                             data={this.state.movieSchedules}
                             columns={columns} />
                     </div>

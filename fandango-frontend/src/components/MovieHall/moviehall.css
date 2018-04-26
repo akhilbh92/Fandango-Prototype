@@ -79,6 +79,10 @@
     width: 100px;
     height: 100px;
 }
+.revenue-img-size{
+    width: 50px;
+    height: 50px;
+}
 .modal{ display:block; }
 .label-color{
     color: black;
@@ -162,4 +166,7 @@
 .datepicker-div .react-datepicker__input-container input{
     margin-top: 5px;
     height: 40px;
+}
+.rt-noData{
+    z-index: 0 !important;
 }

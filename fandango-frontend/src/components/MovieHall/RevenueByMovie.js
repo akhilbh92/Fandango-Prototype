@@ -36,19 +36,26 @@ class RevenueByMovie extends Component {
         const columns = [{
             Header: 'Poster',
             accessor: 'photos',
-            style: { 'whiteSpace': 'unset' }
+            width: 150,
+            style: { 'whiteSpace': 'unset' },
+            Cell: props => (<img className="visual-thumb revenue-img-size" alt="I Feel Pretty showtimes and tickets"
+                src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/204918/SuperTroopers2_OfficialPost.jpg" />)
         }, {
             Header: 'Movie Name',
             accessor: 'movie_name',
-            style: { 'textAlign': 'right' }
-        }, {
-            Header: 'Release Date',
-            accessor: 'release_date',
-            style: { 'textAlign': 'right' }
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            Cell: props => (
+                <span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original.movie_name}</span>)
         }, {
             Header: 'Total Revenue',
-            accessor: 'hall_name',
-            style: { 'textAlign': 'right' }
+            accessor: 'total_revenue',
+            style: { 'whiteSpace': 'unset', 'fontSize': '20px' },
+            Cell: props => (
+                <span className="visual-sub-title dark"
+                    style={{ 'display': 'block', 'margin': 'auto' }}>
+                    {props.row._original.total_revenue}</span>)
         }]
 
         return (
@@ -64,8 +71,10 @@ class RevenueByMovie extends Component {
                     <div className="col-md-12 pd-left-0">
                         < ReactTable
                             minRows={0}
+                            defaultPageSize={5}
+                            noDataText="No Movies Found"
                             filterable={true}
-                            pagination={false}
+                            pagination={true}
                             data={this.state.revenueMovieList}
                             columns={columns} />
                     </div>
@@ -73,7 +82,6 @@ class RevenueByMovie extends Component {
             </div>
         )
     }
-
 }
 
 export default RevenueByMovie;
