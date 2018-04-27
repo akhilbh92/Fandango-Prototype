@@ -5,16 +5,16 @@ import { connect } from 'react-redux';
 import './header.css';
 import fandangoLogo from './fandango-logo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
-import {doSignOut} from '../../api/apicall_for_users';
-import {loginUser} from "../../actions";
+import { doSignOut } from '../../api/apicall_for_users';
+import { loginUser } from "../../actions";
 
 class CommonHeader extends Component {
 
-  signout(){
-      doSignOut({}).then((response)=>{
-          this.props.loginUser(null);
-          window.location = "/"
-      })
+  signout() {
+    doSignOut({}).then((response) => {
+      this.props.loginUser(null);
+      window.location = "/"
+    })
   }
 
   render() {
@@ -27,15 +27,16 @@ class CommonHeader extends Component {
             <a href="">Offers</a> |
             {(this.props.user === undefined || this.props.user === null) && <Link to="/login"
                 className="hide-logged-in">Sign In</Link>}
-                {(this.props.user !== undefined && this.props.user !== null) && <button
-                className="btn btn-link hide-logged-in" type="button" onClick={()=>{this.signout()}}>Sign Out</button>}
+              {(this.props.user !== undefined && this.props.user !== null) && <button
+                className="btn btn-link hide-logged-in" type="button" onClick={() => { this.signout() }}>Sign Out</button>}
             </div>
           </div>
         </div>
         <div>
           <ul className="fandango-nav">
             <li>
-              <LinkContainer to="/">
+              <LinkContainer to={this.props.user !== undefined && this.props.user !== null && this.props.user.role == 1 ? '/admin' :
+                this.props.user !== undefined && this.props.user !== null && this.props.user.role == 2 ? '/mhadmin' : this.props.user !== undefined && this.props.user !== null && this.props.user.role == 3 ? '/home' : '/'}>
                 <a>
                   <img alt="Fandango Poster" src={fandangoLogo} className="header-logo" />
                 </a>
