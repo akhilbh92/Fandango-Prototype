@@ -28,13 +28,13 @@ passport.use('local', new LocalStrategy({
                             "hall_id":results.hall_id
                         });
                     }else{
-                        done(null, false, 'Incorrect username or password');
+                        done(null, false, 'Incorrect Email or Password');
                     }
                 }catch (err) {
                     done(err,null,null);
                 }
             }else{
-                done(null, false, 'Incorrect username or password');
+                done(null, false, 'Incorrect Email or Password');
             }
         }
     );
