@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import fandangoLogo from './fandango-logo.jpg'
 import './login.css'
 import * as API from  './../../api/apicall_for_users';
+import Message from '../Message/Message'
+
 
 class Signup extends Component{
 
@@ -11,16 +13,145 @@ class Signup extends Component{
         this.state = {
             email: '',
             password: '',
-            fname: ''
+            password2: '',
+            fname: '',
+            message: '',
+            emailmessage: '',
+            fnamemessage: '',
+            password1message: '',
+            password2message: '',
+            password12message: '',
+            emailerror: 0,
+            fnameerror: 0,
+            passworderror: 0
         }
 
         this.handleSignUp = this.handleSignUp.bind(this);
 
     }
 
-    handleSignUp = () => {
-        API.doSignup(this.state)
+    handleSignUp = (userdata) => {
+        this.setState({
+            emailmessage: '',
+            fnamemessage: '',
+            password1message: '',
+            password2message: '',
+            password12message: '',
+            emailerror: 0,
+            fnameerror: 0,
+            passworderror: 0,
+            type: true
+        },()=>this.handleFirstName(userdata));
     }
+
+    handleFirstName =(userdata) => {
+
+        if(this.state.fname.length == 0){
+            this.setState({
+                fnamemessage: 'First Name should not be empty',
+                fnameerror: 1,
+                type: true
+            },()=>this.handleEmail(userdata));
+        }
+        else{
+            this.handleEmail(userdata);
+        }
+    }
+
+    handleEmail = (userdata) => {
+        var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+        if (!re.test(this.state.email) ) {
+            this.setState({
+                emailmessage: 'Invalid Email Address',
+                emailerror: 1,
+                type: true
+            },()=>this.handleEmailLength(userdata));
+        }
+        else{
+            this.handleEmailLength(userdata)
+        }
+
+    }
+
+    handleEmailLength =(userdata) => {
+
+        if(this.state.email.length == 0){
+            this.setState({
+                emailmessage: 'Email should not be empty',
+                emailerror: 1,
+                type: true
+            },()=>this.handlePassword1(userdata));
+        }
+        else{
+            this.handlePassword1(userdata);
+        }
+    }
+
+
+    handlePassword1 =(userdata) => {
+
+        if(this.state.password.length == 0){
+            this.setState({
+                password1message: 'Password should not be empty',
+                passworderror: 1,
+                type: true
+            },()=>this.handlePassword2(userdata));
+        }
+        else{
+            this.handlePassword2(userdata);
+        }
+    }
+
+    handlePassword2 =(userdata) => {
+
+        if(this.state.password2.length == 0){
+            this.setState({
+                password2message: 'Password should not be empty',
+                passworderror: 1,
+                type: true
+            },()=>this.handlePassword12(userdata));
+        }
+        else{
+            this.handlePassword12(userdata);
+        }
+    }
+
+    handlePassword12 =(userdata) => {
+
+        if(this.state.password != this.state.password2){
+            this.setState({
+                password12message: 'Passwords do not match',
+                passworderror: 1,
+                type: true
+            },()=>this.AfterValidation(userdata));
+        }
+        else{
+            this.AfterValidation(userdata);
+        }
+    }
+
+    AfterValidation= (userdata) => {
+        if( this.state.fnameerror != 1 && this.state.emailerror != 1 && this.state.passworderror!= 1){
+            API.doSignup(userdata)
+                .then((status) => {
+                    if(status.message == 'The password is too weak' || status.message == 'User Already Exist in the system with this email address.') {
+
+                        this.setState({
+
+                                    message: status.message
+                                })
+
+                    }
+                    else{
+                        this.setState({
+                            message: status.meta.message
+                        })
+                    }
+                });
+        }
+
+    }
+
 
     render(){
         return(
@@ -49,7 +180,7 @@ class Signup extends Component{
                     </header>
                 </div>
 
-                <div className="sign-form">
+                <div className="sign-form" style={{ minHeight: '550px'}}>
                     <div className="sub-panel">
                         <p className="join-header">FANDANGO<span className="page-header-emphasis">VIP</span>
 
@@ -70,6 +201,7 @@ class Signup extends Component{
                             required
                             autoFocus
                         />
+                        <Message message={this.state.fnamemessage}/>
                         <label htmlFor="UsernameBox" >Email Address</label>
                         <input
                             type="text"
@@ -82,6 +214,7 @@ class Signup extends Component{
                             }}
                             required
                         />
+                        <Message message={this.state.emailmessage}/>
                         <label htmlFor="PasswordBox" >Password</label>
                         <input
                             type="password"
@@ -95,11 +228,24 @@ class Signup extends Component{
                             required
 
                         />
-                        <small className="password-instruction">Password should be at-least 8 in length.</small>
+                        <Message message={this.state.password1message}/>
+                        <small className="password-instruction">Password should be alphanumeric with one symbol, one uppercase letter and  at-least 8 in length.</small>
                         <label htmlFor="ConfirmPasswordBox" >Confirm Password</label>
-                        <input  type="password" id="ConfirmPasswordBox" />
-                        <button className="btn-cta full-width" alternatetext="Join Now for Free" onClick={()=> this.handleSignUp()}>Join Now htmlFor Free</button>
-
+                        <input
+                            type="password"
+                            id="ConfirmPasswordBox"
+                            onChange={(event)=>{
+                                this.setState({
+                                    password2:event.target.value,
+                                    type:true
+                                });
+                            }}
+                            required
+                        />
+                        <Message message={this.state.password2message}/>
+                        <Message message={this.state.password12message}/>
+                        <button className="btn-cta full-width" alternatetext="Join Now for Free" onClick={()=> this.handleSignUp(this.state)}>Join Now For Free</button>
+                        <Message  message={this.state.message} />
                     </div>
 
                 </div>
