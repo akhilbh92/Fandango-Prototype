@@ -9,6 +9,7 @@ let resFormat = require("../../helpers/res_format");
 function searchBookingRouterFn(req, res, next) {
     console.log('Search User Booking By ID hit');
     kafka.make_request('admin', 'searchBooking', {
+        hall_id: req.body.hall_id,
         bill_id: req.body.bill_id,
         bill_date: req.body.bill_date,
         bill_month: req.body.bill_month
