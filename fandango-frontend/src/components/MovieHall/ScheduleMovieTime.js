@@ -178,13 +178,21 @@ class ScheduleMovieTimeOverview extends Component {
         }
 
         let clearForm = () => {
+            if (this.state.screenList.length > 0) {
+                this.setState({
+                    screen_id: this.state.screenList[0].id
+                })
+            }
+            if (this.state.hallList.length > 0) {
+                this.setState({
+                    hall_id: this.state.hallList[0].id
+                })
+            }
             this.setState({
                 id: 0,
                 show_date: null,
                 show_time: null,
                 price: '',
-                hall_id: 0,
-                screen_id: 0,
                 submitted: false,
                 open: false
             })
