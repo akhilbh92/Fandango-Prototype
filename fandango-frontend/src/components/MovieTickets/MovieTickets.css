@@ -125,7 +125,7 @@
     -webkit-transform-origin: 640px 48.5px;
 }/*#DIV_2*/
 
-#DIV_2:after {
+#TICKETS_DIV_2:after {
     border-bottom-color: rgb(76, 76, 76);
     border-left-color: rgb(76, 76, 76);
     border-right-color: rgb(76, 76, 76);
@@ -170,7 +170,7 @@
     -webkit-transform-origin: 0px 0px;
 }/*#DIV_2:after*/
 
-#DIV_2:before {
+#TICKETS_DIV_2:before {
     border-bottom-color: rgb(76, 76, 76);
     border-left-color: rgb(76, 76, 76);
     border-right-color: rgb(76, 76, 76);
@@ -1405,6 +1405,7 @@
 }/*#datepickerBUTTON_44:before*/
 
 #datepickerBUTTON_45 {
+
     bottom: 0px;
     color: rgb(76, 76, 76);
     cursor: pointer;
@@ -1430,37 +1431,12 @@
     border-bottom: 0px none rgb(76, 76, 76);
     border-left: 1px solid rgb(235, 235, 235);
     font: normal normal 400 normal 0px / normal proxima-nova, Helvetica, Arial, sans-serif;
-    outline: rgb(76, 76, 76) none 0px;
+    /*outline: rgb(76, 76, 76) none 0px;*/
+
+
+
 }/*#datepickerBUTTON_45*/
 
-#datepickerBUTTON_45:after {
-    background-position: 9px 50%;
-    bottom: 0px;
-    box-sizing: border-box;
-    color: rgb(76, 76, 76);
-    content: '""';
-    cursor: pointer;
-    display: block;
-    height: 40px;
-    left: 25.5156px;
-    opacity: 0.8;
-    position: absolute;
-    right: 0px;
-    text-decoration: none solid rgb(76, 76, 76);
-    text-size-adjust: 100%;
-    top: 0px;
-    width: 20px;
-    column-rule-color: rgb(76, 76, 76);
-    perspective-origin: 10px 20px;
-    transform-origin: 10px 20px;
-    user-select: none;
-    caret-color: rgb(76, 76, 76);
-    background: rgba(0, 0, 0, 0) url("https://images.fandango.com/fandango-www/screenplay/assets/images/desktop/icons/global/right-arrow.svg") no-repeat scroll 9px 50% / auto padding-box border-box;
-    border: 0px none rgb(76, 76, 76);
-    font: normal normal 400 normal 0px / normal proxima-nova, Helvetica, Arial, sans-serif;
-    margin: 42.5px 0px;
-    outline: rgb(76, 76, 76) none 0px;
-}/*#datepickerBUTTON_45:after*/
 
 #datepickerBUTTON_45:before {
     bottom: 0px;

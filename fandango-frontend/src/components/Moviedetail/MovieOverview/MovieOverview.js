@@ -169,10 +169,6 @@ class MovieOverview extends Component {
                         </section>
                     </div>
                 </section>
-
-
-
-
             </div>
         );
     }

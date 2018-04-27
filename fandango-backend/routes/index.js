@@ -30,6 +30,7 @@ const logout = require('./users/logout');
 const deleteUser = require('./users/deleteuser');
 const getProfile = require("./users/getProfile");
 const updateProfile = require('./users/updateProfile');
+const checkLogin = require('./users/checklogin');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -164,6 +165,11 @@ router.post('/updateProfile', function (req,res,next) {
 router.post('/uploadFile', function (req,res,next) {
   console.log('UPLOAD FILE API');
   uploadFile.uploadFileRouterFn(req,res,next);
+});
+
+router.post('/checklogin', function (req,res,next) {
+    console.log('CHECK SESSION API');
+    checkLogin.checkLoginRouterFn(req,res,next);
 });
 
 module.exports = router;
