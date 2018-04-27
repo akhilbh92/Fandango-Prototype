@@ -34,6 +34,21 @@ export const getMovieById = (movieId) =>
         return error;
     });
 
+export const getHallById = (hallId) =>
+    fetch(`${api}/getHalls`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({id: hallId})
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const topTenMovies = () =>
     fetch(`${api}/topTenMoviesByRevenue`, {
         method: 'GET',
@@ -240,6 +255,41 @@ export const addMovie = ( movieName, description, trailer, photos, seeItIn, cast
   }).catch(error => {
       return error;
   });
+
+  export const editHall = (hallId, hallName, street, city, state, zipcode, totalScreens) =>
+    fetch(`${api}/editHall`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            id: hallId,
+            hallName, street, city, state, zipcode, 
+            screen_nums: totalScreens })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const addHall = (hallName, street, city, state, zipcode, totalScreens) =>
+    fetch(`${api}/addHall`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            hallName, street, city, state, zipcode, 
+            screen_nums: totalScreens })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
 
 
 let successHandler = (res) => {

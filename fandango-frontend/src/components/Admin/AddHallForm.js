@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Search from './Search';
 import NavBar from './Navigation';
-import MovieForm from './MovieForm';
+import HallForm from './HallForm';
 import CommonHeader from '../header/CommonHeader';
 
-class AddMovieForm extends Component {
+class AddHallForm extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -13,20 +13,19 @@ class AddMovieForm extends Component {
     }
     componentDidMount(){
         this.setState({
-            group: 'Movies'
+            group: 'Theatres'
         })
     }
     render(){
-        console.log(this.props);
         return (
             <div> 
-                <CommonHeader />
-                <Search group={this.state.group} placeholder='Search for Movies' />
+                 <CommonHeader />
+                <Search group={this.state.group} placeholder='Search for Theatres' />
                 <NavBar />
-                <MovieForm /> 
+                <HallForm /> 
             </div>
         );
     }
 }
-  
-export default AddMovieForm;
+
+export default AddHallForm;

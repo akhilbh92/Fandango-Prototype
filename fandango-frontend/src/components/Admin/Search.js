@@ -95,9 +95,6 @@ class Search extends Component {
     }
 
     render(){
-        // console.log('Rendering...');
-        // console.log(this.state.initialItems);
-        // console.log(this.state.items);
         return (
             <div className="filter-list">
                 <form>

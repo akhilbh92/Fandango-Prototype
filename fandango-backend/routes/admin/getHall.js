@@ -9,6 +9,7 @@ let resFormat = require("../../helpers/res_format");
 function getHallRouterFn(req, res, next){
     console.log('Get Hall hit');
       kafka.make_request('admin', 'getHall', {
+        id: req.body.id,
         hall_name: req.body.hallName
       }, function(err,results){
       console.log('In Kafka: %o', results);
