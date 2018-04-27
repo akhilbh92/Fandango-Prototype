@@ -11,7 +11,7 @@ function handle_request(msg, callback) {
         " SUM(billings.total_price) as total_revenue, movies.movie_name, movies.photos, movies.id " +
         " FROM `movie_schedules` as ms JOIN" +
         " billings ON ms.id = billings.movie_schedule_id LEFT JOIN" +
-        " movies ON movies.id = ms.movie_id WHERE billings.status = 'A'";
+        " movies ON movies.id = ms.movie_id WHERE billings.status = 'A' AND hall_id =" + msg.hall_id;
     if (msg.movie_id) {
         query = query + "AND ms.movie_id = " + msg.movie_id
     }

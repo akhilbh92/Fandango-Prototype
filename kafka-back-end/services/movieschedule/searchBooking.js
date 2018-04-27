@@ -15,18 +15,21 @@ function handle_request(msg, callback) {
         " users ON users.userId = billings.user_id JOIN " +
         " movie_schedules ON movie_schedules.id = billings.movie_schedule_id JOIN " +
         " movies ON movies.id = movie_schedules.movie_id JOIN " +
-        " halls ON halls.id = movie_schedules.hall_id ";
+        " halls ON halls.id = movie_schedules.hall_id WHERE ";
+    if (msg.hall_id) {
+        query = query + " movie_schedules.hall_id = '" + msg.hall_id + "' AND "
+    }
     if (msg.bill_id) {
-        query = query + "WHERE billings.bill_id LIKE CONCAT('" + msg.bill_id + "', '%');"
+        query = query + " billings.bill_id LIKE CONCAT('" + msg.bill_id + "', '%');"
     } else if (msg.bill_date) {
-        query = query + "WHERE DATE(booking_date) = '" + msg.bill_date + "';"
+        query = query + " DATE(booking_date) = '" + msg.bill_date + "';"
     } else if (msg.bill_month) {
-        query = query + "WHERE MONTH(booking_date) = '" + msg.bill_month + "';"
+        query = query + " MONTH(booking_date) = '" + msg.bill_month + "';"
     }
     console.log(`Incoming Query message:`, query);
     db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT })
         .then((billingList) => {
-            console.log("billingList:",billingList);
+            console.log("billingList:", billingList);
             callback(null, billingList)
         });
 }
