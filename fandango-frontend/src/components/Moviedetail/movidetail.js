@@ -80,7 +80,7 @@ class Movie_detail extends Component {
                             </section>
                             {this.state.ActiveComponent}
                         </div>
-                            <MovieCrew/>
+                            {/*<MovieCrew/>*/}
                     </div>
 
                 </div>

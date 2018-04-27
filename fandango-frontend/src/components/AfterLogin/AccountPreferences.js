@@ -11,24 +11,20 @@ class AccountPreferences extends  Component {
                 <div className="site-wrap" >
                     <HomeHeader/>
 
-                    <div class="dashboard">
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <h1 class="page-header vip-logo " >
-                                    My Account <span class="page-header-emphasis">FANDANGO</span>
-                                    <span class="page-header-emphasis">VIP</span>
-                                </h1>
-                                <nav class="page-navigation">
-                                    <ul class="page-navigation-list">
-                                        <li class="page-navigation-item"><Link class="page-navigation-link" to="/dashboard">Account Settings</Link></li>
-                                        <li class="page-navigation-item"><Link class="page-navigation-link" to="/purchasehistory">Purchase History</Link></li>
+                    <div id="TICKETS_SECTION_1">
+                        <div id="TICKETS_DIV_2">
+                            <div id="TICKETS_DIV_3">
+                                <h1 id="H1_4">FANDANGO <span id="SPAN_5">VIP<span id="SPAN_6"></span></span></h1>
+                                <nav className="page-navigation">
+                                    <ul className="page-navigation-list">
+                                        <li className="page-navigation-item" style={{ paddingTop: '15px', color: 'white'}}><Link className="page-navigation-link" to="/dashboard">Account Settings</Link></li>
+                                        <li className="page-navigation-item"><Link className="page-navigation-link" to="/purchasehistory">Purchase History</Link></li>
 
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-offset-2 col-md-8 preferences-view">
                         <h2 class="account-font">BASIC INFORMATION</h2>
                     </div>

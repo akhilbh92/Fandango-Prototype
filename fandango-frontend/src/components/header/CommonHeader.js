@@ -5,8 +5,16 @@ import { connect } from 'react-redux';
 import './header.css';
 import fandangoLogo from './fandango-logo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
+import {doSignOut} from '../../api/apicall_for_users';
 
 class CommonHeader extends Component {
+
+  signout(){
+      doSignOut({}).then((response)=>{
+          this.props.loginUser(null);
+          this.props.redirectURL("/");
+      })
+  }
 
   render() {
     return (
@@ -18,8 +26,8 @@ class CommonHeader extends Component {
             <a href="">Offers</a> |
             {(this.props.user === undefined || this.props.user === null) && <Link to="/login"
                 className="hide-logged-in">Sign In</Link>}
-              {(this.props.user !== undefined && this.props.user !== null) && <Link to="/"
-                className="hide-logged-in">Sign Out</Link>}
+              {(this.props.user !== undefined && this.props.user !== null) && <Link
+                className="hide-logged-in" to="/">Sign Out</Link>}
             </div>
           </div>
         </div>

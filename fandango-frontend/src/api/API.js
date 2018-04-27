@@ -183,6 +183,22 @@ export const getRevenueByMovie = (dataJson) =>
         return error;
     });
 
+export const getCityWiseRevenueByMovie = (movie_id) =>
+    fetch(`${api}/getCityWiseRevenueByMovie`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({movie_id})
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+
 export const searchUserBooking = (bookingJson) =>
     fetch(`${api}/searchBooking`, {
         method: 'POST',

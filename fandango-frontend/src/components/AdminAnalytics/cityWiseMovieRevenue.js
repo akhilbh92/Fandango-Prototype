@@ -1,12 +1,22 @@
-import React,{Component} from 'react';
-import {Pie} from 'react-chartjs-2';
-import {Link} from 'react-router-dom';
+import React, {Component} from 'react';
+import * as API from '../../api/API';
+import MovieSearchRevenue from './movieSearchRevenue';
 
-class CityWiseMovieRevenue extends Component{
+class CityWiseMovieRevenue extends Component {    
+    componentDidMount(){
+        API.getCityWiseRevenueByMovie(this.props.match.params.movieId).then((res)=> {
+            console.log(res);
+        })
+    }
+
     render(){
-        return(<div>
-            City Wise movie revenue
-        </div>);
+        return(
+            <div>
+                <br />
+                 <h3> City wise  Movie Revenue </h3>
+                 <MovieSearchRevenue />
+            </div>
+        );
     }
 }
 

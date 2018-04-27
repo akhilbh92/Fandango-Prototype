@@ -12,8 +12,6 @@ class HomeHeader extends Component {
     return (
       <div>
         <CommonHeader />
-        <ContentHeader />
-        <LandingContent />
       </div>
     )
   }
