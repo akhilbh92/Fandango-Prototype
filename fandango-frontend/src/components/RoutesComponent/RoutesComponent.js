@@ -29,11 +29,27 @@ import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
 
 
 class RoutesComponent extends Component {
+
+    constructor(props){
+        super(props);
+        this.redirectURL = this.redirectURL.bind(this);
+    }
+
+    redirectURL = (url) => {
+
+        this.props.history.push(url);
+
+    }
     render() {
         return (
             <div>
                 <Route exact path="/" component={Landing} />
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/login" render={() => (
+                    <div>
+
+                        <Login redirectURL={this.redirectURL} />
+                    </div>
+                )}/>
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/schedulemovie" component={ScheduleMovie} />
                 <Route exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
