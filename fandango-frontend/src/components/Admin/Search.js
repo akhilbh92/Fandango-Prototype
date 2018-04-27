@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as API from '../../api/API';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class Search extends Component {
@@ -105,7 +105,15 @@ class Search extends Component {
                 <Alert bsStyle="warning" id="hidden">
                     <strong>Warning!</strong> Please Select Movies or Theatres.
                 </Alert>
-                <List items={this.state.items} routePath={this.state.routePath}/>
+                {
+                    this.props.forStats &&
+                    <ul> <StatsList items={this.state.items} />  </ul>
+                }
+                {
+                    !this.props.forStats &&
+                    <List items={this.state.items} routePath={this.state.routePath}/>
+                }
+               
             </div>
         );
     }
@@ -120,6 +128,23 @@ class List extends Component {
             this.props.items.map(function(item,index) {
                 return (
                     <Link className="list-group-item" to={route + item.id} data-category={item} key={index}>{item.movie_name || item.hall_name}</Link>
+                );
+            })
+            }
+        </ul>
+        );
+    }
+}
+
+class StatsList extends Component {
+    render(){
+        let route = '/citywiserevenue/';
+        return (
+        <ul className="list-group">
+        {
+            this.props.items.map(function(item,index) {
+                return (
+                    <Link className="list-group-item" to={route + item.id} data-category={item} key={index}>{item.movie_name }</Link>
                 );
             })
             }
