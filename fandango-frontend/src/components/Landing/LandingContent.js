@@ -48,7 +48,7 @@ class LandingContent extends Component {
                 if (index <= 5) {
                     return <div key={index} className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
                 } else {
-                    return;
+                    return '';
                 }
             });
         const afterSixNode =
@@ -56,7 +56,7 @@ class LandingContent extends Component {
                 if (index > 5) {
                     return <div key={index} className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
                 } else {
-                    return;
+                    return '';
                 }
             });
         return (

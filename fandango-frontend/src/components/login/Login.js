@@ -5,6 +5,7 @@ import fandangoLogo from './fandango-logo.jpg';
 import { connect } from 'react-redux';
 import {loginUser} from "../../actions";
 import * as API from  './../../api/apicall_for_users';
+import Message from '../Message/Message'
 
 
 import './login.css'
@@ -16,7 +17,8 @@ class Login extends Component{
 
         this.state ={
             email: '',
-            password: ''
+            password: '',
+            message: ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,9 +29,18 @@ class Login extends Component{
 
         API.doLogin(userdata)
             .then((status) => {
-                this.props.loginUser(status.data);
-                console.log("YOu need:" + this.props.user.userId);
-            });
+                    if(status.meta.message == "login successful") {
+                        this.props.loginUser(status.data);
+                        console.log("YOu need:" + this.props.user.userId);
+                        this.props.redirectURL("/home");
+
+                     }
+                     else {
+                        this.setState({
+                            message: status.data,
+                        });
+                        }
+                });
     };
 
     render(){
@@ -93,6 +104,7 @@ class Login extends Component{
                             required
                         />
                         <button className="btn-cta full-width" alternatetext="Sign In" onClick={() => this.handleSubmit(this.state)}>Sign In</button>
+                        <Message  message={this.state.message} />
 
                     </div>
 

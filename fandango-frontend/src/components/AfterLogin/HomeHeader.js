@@ -13,8 +13,8 @@ class HomeHeader extends Component {
                         <div className="col-md-offset-8 col-md-4 float-right header-link">
                             <a href="">Gift Cards</a> |
                             <a href="">Offers</a> |
-                            <Link to="/login"
-                                  className="hide-logged-in">Sign In</Link>
+                            <Link to="/"
+                                  className="hide-logged-in">Sign Out</Link>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ class HomeHeader extends Component {
                 </div>
               </div> */}
                         </li>
-                        <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>
+                        <li><Link to="/dashboard">MY <span className="vip-text">VIP</span> ACCOUNT</Link></li>
                     </ul>
                 </div>
                 <div style={{borderTop: '3px solid rgb(241, 85, 0)'}}></div>
