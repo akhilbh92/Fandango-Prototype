@@ -48,7 +48,7 @@ class RoutesComponent extends Component {
     render() {
         return (
             <div>
-                <Route exact path="/" component={Landing} />
+                <PrivateRoute exact path="/" component={Landing} />
                 <Route exact path="/login" render={() => (
                     <div>
 
@@ -58,7 +58,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/schedulemovie" component={ScheduleMovie} />
                 <Route exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
-                <Route exact path="/home" component={Home} />
+                <PrivateRoute exact path="/home" component={Home} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/preferences" component={AccountPreferences} />
                 <Route exact path="/allmovies" component={AllMovies} />

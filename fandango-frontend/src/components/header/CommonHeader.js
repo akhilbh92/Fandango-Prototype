@@ -6,13 +6,14 @@ import './header.css';
 import fandangoLogo from './fandango-logo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
 import {doSignOut} from '../../api/apicall_for_users';
+import {loginUser} from "../../actions";
 
 class CommonHeader extends Component {
 
   signout(){
       doSignOut({}).then((response)=>{
           this.props.loginUser(null);
-          this.props.redirectURL("/");
+          window.location = "/"
       })
   }
 
@@ -26,8 +27,8 @@ class CommonHeader extends Component {
             <a href="">Offers</a> |
             {(this.props.user === undefined || this.props.user === null) && <Link to="/login"
                 className="hide-logged-in">Sign In</Link>}
-              {(this.props.user !== undefined && this.props.user !== null) && <Link
-                className="hide-logged-in" to="/">Sign Out</Link>}
+                {(this.props.user !== undefined && this.props.user !== null) && <button
+                className="btn btn-link hide-logged-in" type="button" onClick={()=>{this.signout()}}>Sign Out</button>}
             </div>
           </div>
         </div>
@@ -151,7 +152,7 @@ function mapStateToProps(state) {
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch)
+  return bindActionCreators({ loginUser: loginUser }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(CommonHeader);
