@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import fandangoLogo from './fandango-logo.jpg'
-import './login.css'
+import fandangoLogo from './fandango-logo.jpg';
+import './login.css';
+import { ToastContainer, toast } from 'react-toastify';
 import * as API from  './../../api/apicall_for_users';
 import Message from '../Message/Message'
 
 
 class Signup extends Component{
+
+    notify = (message1) => toast(message1);
 
     constructor(props){
         super(props);
@@ -144,8 +147,9 @@ class Signup extends Component{
                     }
                     else{
                         this.setState({
-                            message: status.meta.message
+                            message: ''
                         })
+                        this.notify(status.meta.message);
                     }
                 });
         }
@@ -156,6 +160,7 @@ class Signup extends Component{
     render(){
         return(
             <div className="site-wrep signin vipsignin">
+                <ToastContainer />
                 <div>
                     <header id="registration-header" className="registration-header" role="banner">
                         <nav  className="nav-bar">
