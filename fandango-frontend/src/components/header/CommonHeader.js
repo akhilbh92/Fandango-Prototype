@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './header.css';
 import fandangoLogo from './fandango-logo.jpg';
+import { LinkContainer } from 'react-router-bootstrap';
+import {doSignOut} from '../../api/apicall_for_users';
 
 class CommonHeader extends Component {
+
+  signout(){
+      doSignOut({}).then((response)=>{
+          this.props.loginUser(null);
+          this.props.redirectURL("/");
+      })
+  }
 
   render() {
     return (
@@ -13,16 +24,21 @@ class CommonHeader extends Component {
             <div className="col-md-offset-8 col-md-4 float-right header-link">
               <a href="">Gift Cards</a> |
             <a href="">Offers</a> |
-            <Link to="/login"
-                className="hide-logged-in">Sign In</Link>
+            {(this.props.user === undefined || this.props.user === null) && <Link to="/login"
+                className="hide-logged-in">Sign In</Link>}
+              {(this.props.user !== undefined && this.props.user !== null) && <Link
+                className="hide-logged-in" to="/">Sign Out</Link>}
             </div>
           </div>
         </div>
         <div>
           <ul className="fandango-nav">
             <li>
-              <a href="/">
-                <img alt="Movie Poster" src={fandangoLogo} className="header-logo" /></a>
+              <LinkContainer to="/">
+                <a>
+                  <img alt="Fandango Poster" src={fandangoLogo} className="header-logo" />
+                </a>
+              </LinkContainer>
             </li>
             <li id="global-search">
               <form action="/search" autoComplete="off" role="search" noValidate="">
@@ -118,14 +134,24 @@ class CommonHeader extends Component {
                 </div>
               </div> */}
             </li>
-            <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>
+            {(this.props.user !== undefined && this.props.user !== null) && <li><Link to="/dashboard">MY <span className="vip-text">VIP</span> ACCOUNT</Link></li>}
+            {(this.props.user === undefined || this.props.user === null) && <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>}
           </ul>
         </div>
-          <div style={{borderTop: '3px solid rgb(241, 85, 0)'}}></div>
+        <div style={{ borderTop: '3px solid rgb(241, 85, 0)' }}></div>
 
       </div>
     )
   }
 }
 
-export default CommonHeader;
+function mapStateToProps(state) {
+  return {
+    user: state.loginUser
+  }
+}
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(CommonHeader);

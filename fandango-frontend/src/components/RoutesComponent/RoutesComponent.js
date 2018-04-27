@@ -24,15 +24,17 @@ import MovieTickets from '../MovieTickets/MovieTickets';
 import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
 import EnterTickets from './../Payments/EnterTickets';
 import PaymentInfo from './../Payments/PaymentInfo';
+import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
 
+import PrivateRoute from './PrivateRoute'
 
 class RoutesComponent extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.redirectURL = this.redirectURL.bind(this);
     }
@@ -41,7 +43,8 @@ class RoutesComponent extends Component {
 
         this.props.history.push(url);
 
-    }
+    };
+
     render() {
         return (
             <div>
@@ -51,7 +54,7 @@ class RoutesComponent extends Component {
 
                         <Login redirectURL={this.redirectURL} />
                     </div>
-                )}/>
+                )} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/schedulemovie" component={ScheduleMovie} />
                 <Route exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
@@ -61,8 +64,8 @@ class RoutesComponent extends Component {
                 <Route exact path="/allmovies" component={AllMovies} />
                 <Route exact path="/cancelbooking" component={CancelBooking} />
                 <Route exact path="/searchbill" component={SearchBill} />
-                <Route exact path ="/moviedetail" component={Movie_detail} />
-                <Route exact path ="/admin" component={AdminHome} />
+                <Route exact path="/moviedetail" component={Movie_detail} />
+                <Route exact path="/admin" component={AdminHome} />
                 <Route exact path="/admin/movies/:movieId" component={EditMovieForm} />
                 <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
                 <Route exact path ="/admin/addMovie" component={AddMovieForm} />
@@ -78,6 +81,8 @@ class RoutesComponent extends Component {
                 <Route exact path="/citywiserevenue/:movieId" component={CityWiseMovieRevenue}/>
                
                 <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold}/>
+                <PrivateRoute exact path="/test" component={Home}/>
+                <Route exact path="/mhadmin" component={MovieHallAdminHome} />
             </div>
         );
     }

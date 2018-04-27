@@ -1,12 +1,12 @@
-const Sequelize = require ('sequelize');
-const db = require ('../db/mysql');
+const Sequelize = require('sequelize');
+const db = require('../db/mysql');
 
-const Users =  db.sequelize.define('Users', {
+const Users = db.sequelize.define('Users', {
     userId: {
         type: Sequelize.DataTypes.UUID,
         defaultValue: Sequelize.DataTypes.UUIDV4,
         primaryKey: true
-    },role: {
+    }, role: {
         type: Sequelize.DataTypes.INTEGER,
         defaultValue: 3
     },
@@ -45,6 +45,10 @@ const Users =  db.sequelize.define('Users', {
     },
     expiration: {
         type: Sequelize.DataTypes.DATE
+    },
+    hall_id: {
+        type: Sequelize.DataTypes.INTEGER,
+        defaultValue: null
     },
     is_archive: {
         type: Sequelize.DataTypes.BOOLEAN

@@ -36,7 +36,7 @@
 var connection = new require('./kafka/Connection');
 
 var registrationTopicName = 'registration_topic';
-var consumer = connection.getConsumer('admin');
+
 
 var producer = connection.getProducer();
 
@@ -63,9 +63,7 @@ var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRev
 var cityWiseMovieRevenue = require('./services/adminanalytics/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./services/adminanalytics/topTenHallByTickets');
 
-consumer.on('error', function (err) {
-    console.log(`Error: ${err}`);
-})
+
 
 /*************************************************************************************/
 
@@ -79,6 +77,9 @@ var offset = new Offset(client);
 
 let topic = 'admin';
 
+consumer.on('error', function (err) {
+    console.log(`Error: ${err}`);
+})
 consumer.on('offsetOutOfRange', function (topic) {
     console.log('offsetOutOfRange Error')
     topic.maxNum = 2;
@@ -93,6 +94,7 @@ consumer.on('offsetOutOfRange', function (topic) {
 
 /*************************************************************************************/
 
+var consumer = connection.getConsumer('admin');
 consumer.on('message', (message) => {
     console.log('Received message on Topic ');
     console.log(`Total Msg: ${JSON.stringify(message)}`);

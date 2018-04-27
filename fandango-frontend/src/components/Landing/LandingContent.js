@@ -61,14 +61,6 @@ class LandingContent extends Component {
             });
         return (
             <div>
-                <div className="col-md-12 sub-header">
-                    <div className="col-md-offset-2 col-md-10 pd-left-0">
-                        <div className="movie-ticket-header col-md-12 clearfix">
-                            <div className="col-md-2 pd-left-0 pd-right-0 ticket-label float-left">BUY MOVIE TICKETS </div>
-                            <a href="" className="col-md-2 pd-left-0 movie-tickets-header--see-all ">SEE ALL MOVIES</a>
-                        </div>
-                    </div>
-                </div>
                 {this.state.topMovies !== undefined && this.state.topMovies.length > 0 &&
                     <div className="col-md-offset-1 col-md-10 mr-top-25">
                         <Carousel

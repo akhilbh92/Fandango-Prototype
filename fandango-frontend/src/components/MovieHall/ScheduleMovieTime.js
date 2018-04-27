@@ -12,6 +12,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import _ from 'lodash';
+import SubHeader from './SubHeader';
 var Modal = require('react-bootstrap-modal');
 
 class ScheduleMovieTimeOverview extends Component {
@@ -40,9 +41,9 @@ class ScheduleMovieTimeOverview extends Component {
     }
 
     componentDidMount() {
-        console.log("this.props.user :",this.props.user);
+        console.log("this.props.user :", this.props.user);
         this.getMovieSchedulesByMovie();
-        API.getHalls()
+        API.getHalls({ id: this.props.user.hall_id })
             .then((resultData) => {
                 if (!!resultData.data) {
                     this.setState({
@@ -95,7 +96,7 @@ class ScheduleMovieTimeOverview extends Component {
     }
 
     getMovieSchedulesByMovie() {
-        API.getMovieSchedules({ movie_id: this.props.match.params.movieId })
+        API.getMovieSchedules({ movie_id: this.props.match.params.movieId, hall_id: this.props.user.hall_id })
             .then((resultData) => {
                 if (!!resultData.data) {
                     this.setState({
@@ -221,6 +222,7 @@ class ScheduleMovieTimeOverview extends Component {
             <div>
                 <ToastContainer />
                 <CommonHeader />
+                <SubHeader />
                 <div className=" col-md-12 page-header-container clearfix">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
                         <h2 className="schedule-page-header">MOVIES <span className="page-header-emphasis">SCHEDULES</span></h2>
@@ -355,14 +357,14 @@ class ScheduleMovieTimeOverview extends Component {
 }
 
 
-function mapStateToProps(state){
-    console.log("state:",state);
-    return{
+function mapStateToProps(state) {
+    console.log("state:", state);
+    return {
         user: state.loginUser
     }
 }
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({},dispatch)
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch)
 }
 
 

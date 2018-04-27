@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CommonHeader from '../header/CommonHeader';
+import SubHeader from './SubHeader';
 import './moviehall.css';
 import * as API from '../../api/API';
 import { Link } from 'react-router-dom';
@@ -46,7 +47,7 @@ class ScheduleMovie extends Component {
                 <button
                     className="btn-link visual-sub-title dark"
                     type="button"
-                    style={{ 'display':'block','margin':'auto','lineHeight': "100px" }}
+                    style={{ 'display': 'block', 'margin': 'auto', 'lineHeight': "100px" }}
                 >{props.row._original.movie_name}
                 </button>
             </Link>)
@@ -59,6 +60,7 @@ class ScheduleMovie extends Component {
         return (
             <div>
                 <CommonHeader />
+                <SubHeader />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
                         <h2 className="schedule-page-header">SCHEDULE UPCOMING <span className="page-header-emphasis">MOVIES</span></h2>
