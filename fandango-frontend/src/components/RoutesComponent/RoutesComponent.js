@@ -26,6 +26,7 @@ import EnterTickets from './../Payments/EnterTickets';
 import PaymentInfo from './../Payments/PaymentInfo';
 import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 
+import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
 
@@ -76,7 +77,9 @@ class RoutesComponent extends Component {
                 <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />
                 <Route exact path ="/entertickets" component={EnterTickets} />
                 <Route exact path ="/paymentinfo" component={PaymentInfo} />
-                <Route exact path="/citywiserevenue" component={CityWiseMovieRevenue}/>
+                <Route exact path="/citywiserevenue" component={MovieSearchRevenue}/>
+                <Route exact path="/citywiserevenue/:movieId" component={CityWiseMovieRevenue}/>
+               
                 <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold}/>
                 <PrivateRoute exact path="/test" component={Home}/>
                 <Route exact path="/mhadmin" component={MovieHallAdminHome} />
