@@ -5,6 +5,9 @@ import './moviehall.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
+import SubHeader from './SubHeader';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 var dateFormat = require('dateformat');
 var _ = require('lodash');
 
@@ -46,7 +49,8 @@ class CancelBooking extends Component {
     searchUserBooking() {
         this.setState({ submitted: true });
         if (!!this.state.bookingId) {
-            API.searchUserBooking({ bill_id: this.state.bookingId })
+            this.setState({ bookingList: [] });
+            API.searchUserBooking({ bill_id: this.state.bookingId, hall_id: this.props.user.hall_id })
                 .then((resultData) => {
                     if (resultData.data !== undefined && resultData.data.length > 0) {
                         this.setState({
@@ -118,6 +122,7 @@ class CancelBooking extends Component {
         return (
             <div>
                 <CommonHeader />
+                <SubHeader />
                 <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
@@ -175,4 +180,13 @@ class CancelBooking extends Component {
     }
 }
 
-export default CancelBooking;
+function mapStateToProps(state) {
+    return {
+        user: state.loginUser
+    }
+}
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(CancelBooking);

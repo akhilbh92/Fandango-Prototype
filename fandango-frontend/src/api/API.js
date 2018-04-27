@@ -93,7 +93,7 @@ export const getLimitedMovies = (noOfRecords) =>
         return error;
     });
 
-export const getHalls = () =>
+export const getHalls = (hallJson) =>
     fetch(`${api}/getHalls`, {
         method: 'POST',
         headers: {
@@ -101,7 +101,7 @@ export const getHalls = () =>
             'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({})
+        body: JSON.stringify(hallJson)
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
@@ -168,7 +168,7 @@ export const getMovieSchedules = (movieScheduleJson) =>
         return error;
     });
 
-export const getRevenueByMovie = () =>
+export const getRevenueByMovie = (dataJson) =>
     fetch(`${api}/getRevenueByMovie`, {
         method: 'POST',
         headers: {
@@ -176,7 +176,7 @@ export const getRevenueByMovie = () =>
             'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({})
+        body: JSON.stringify(dataJson)
     }).then(res => {
         return successHandler(res);
     }).catch(error => {

@@ -24,6 +24,7 @@ import MovieTickets from '../MovieTickets/MovieTickets';
 import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
 import EnterTickets from './../Payments/EnterTickets';
 import PaymentInfo from './../Payments/PaymentInfo';
+import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
@@ -31,7 +32,7 @@ import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
 
 class RoutesComponent extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.redirectURL = this.redirectURL.bind(this);
     }
@@ -50,7 +51,7 @@ class RoutesComponent extends Component {
 
                         <Login redirectURL={this.redirectURL} />
                     </div>
-                )}/>
+                )} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/schedulemovie" component={ScheduleMovie} />
                 <Route exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
@@ -60,21 +61,22 @@ class RoutesComponent extends Component {
                 <Route exact path="/allmovies" component={AllMovies} />
                 <Route exact path="/cancelbooking" component={CancelBooking} />
                 <Route exact path="/searchbill" component={SearchBill} />
-                <Route exact path ="/moviedetail" component={Movie_detail} />
-                <Route exact path ="/admin" component={AdminHome} />
+                <Route exact path="/moviedetail" component={Movie_detail} />
+                <Route exact path="/admin" component={AdminHome} />
                 <Route exact path="/admin/movies/:movieId" component={EditMovieForm} />
                 <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
-                <Route exact path ="/admin/addMovie" component={AddMovieForm} />
-                <Route exact path ="/admin/addHall" component={AddHallForm} />
-                <Route exact path ="/movierevenue" component={RevenueByMovie} />
-                <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
-                <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
-                <Route exact path = "/movietickets" component={MovieTickets}/>
-                <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />
-                <Route exact path ="/entertickets" component={EnterTickets} />
-                <Route exact path ="/paymentinfo" component={PaymentInfo} />
-                <Route exact path="/citywiserevenue" component={CityWiseMovieRevenue}/>
-                <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold}/>
+                <Route exact path="/admin/addMovie" component={AddMovieForm} />
+                <Route exact path="/admin/addHall" component={AddHallForm} />
+                <Route exact path="/movierevenue" component={RevenueByMovie} />
+                <Route exact path="/moviedetailreview" component={Movie_detail_review} />
+                <Route exact path="/toptenmovies" component={TopTenMoviesByRevenue} />
+                <Route exact path="/movietickets" component={MovieTickets} />
+                <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <Route exact path="/entertickets" component={EnterTickets} />
+                <Route exact path="/paymentinfo" component={PaymentInfo} />
+                <Route exact path="/citywiserevenue" component={CityWiseMovieRevenue} />
+                <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold} />
+                <Route exact path="/mhadmin" component={MovieHallAdminHome} />
             </div>
         );
     }

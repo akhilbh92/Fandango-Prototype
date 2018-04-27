@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import fandangoLogo from './fandango-logo.jpg';
 import { connect } from 'react-redux';
-import {loginUser} from "../../actions";
-import * as API from  './../../api/apicall_for_users';
+import { loginUser } from "../../actions";
+import * as API from './../../api/apicall_for_users';
 import Message from '../Message/Message'
-
-
 import './login.css'
 
-class Login extends Component{
+class Login extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state ={
+        this.state = {
             email: '',
             password: '',
             message: ''
@@ -29,45 +27,50 @@ class Login extends Component{
 
         API.doLogin(userdata)
             .then((status) => {
-                    if(status.meta.message == "login successful") {
-                        this.props.loginUser(status.data);
-                        console.log("YOu need:" + this.props.user.userId);
+                if (status.meta.message == "login successful") {
+                    this.props.loginUser(status.data);
+                    console.log("YOu need:" + this.props.user.userId);
+                    if (this.props.user.role === 1) {
+                        this.props.redirectURL("/admin");
+                    } else if (this.props.user.role === 2) {
+                        this.props.redirectURL("/mhadmin");
+                    } else if (this.props.user.role === 3) {
                         this.props.redirectURL("/home");
-
-                     }
-                     else {
-                        this.setState({
-                            message: status.data,
-                        });
-                        }
-                });
+                    }
+                }
+                else {
+                    this.setState({
+                        message: status.data,
+                    });
+                }
+            });
     };
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="site-wrep signin vipsignin">
                 <div>
-                <header id="registration-header" className="registration-header" role="banner">
-                    <nav  className="nav-bar">
-                        <div className="row">
-                            <div className="large-11 large-centered columns">
-                                <ul className="inline-items">
-                                    <li className="site-logo">
-                                        <Link className="fandango-logo" to="/">
-                                            <img src={fandangoLogo} alt="Fandango Logo" className="brand-img" />
-                                        </Link>
-                                    </li>
-                                </ul>
-                                <div className="registration-mode right">
+                    <header id="registration-header" className="registration-header" role="banner">
+                        <nav className="nav-bar">
+                            <div className="row">
+                                <div className="large-11 large-centered columns">
+                                    <ul className="inline-items">
+                                        <li className="site-logo">
+                                            <Link className="fandango-logo" to="/">
+                                                <img src={fandangoLogo} alt="Fandango Logo" className="brand-img" />
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                    <div className="registration-mode right">
 
-                                    <span>Don't have a Fandango VIP Account?</span> &nbsp;<Link to="/signup" className="cta">Join now for free</Link>
+                                        <span>Don't have a Fandango VIP Account?</span> &nbsp;<Link to="/signup" className="cta">Join now for free</Link>
 
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </nav>
-                </header>
+                        </nav>
+                    </header>
                 </div>
 
                 <div className="open-form">
@@ -83,10 +86,10 @@ class Login extends Component{
                         <input
                             type="text"
                             id="UsernameBox"
-                            onChange={(event)=>{
+                            onChange={(event) => {
                                 this.setState({
-                                    email:event.target.value,
-                                    type:true
+                                    email: event.target.value,
+                                    type: true
                                 });
                             }}
                             required
@@ -95,16 +98,16 @@ class Login extends Component{
                         <input
                             type="password"
                             id="PasswordBox"
-                            onChange={(event)=>{
+                            onChange={(event) => {
                                 this.setState({
-                                    password:event.target.value,
-                                    type:true
+                                    password: event.target.value,
+                                    type: true
                                 });
                             }}
                             required
                         />
                         <button className="btn-cta full-width" alternatetext="Sign In" onClick={() => this.handleSubmit(this.state)}>Sign In</button>
-                        <Message  message={this.state.message} />
+                        <Message message={this.state.message} />
 
                     </div>
 
@@ -118,13 +121,13 @@ class Login extends Component{
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         user: state.loginUser
     }
 }
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({loginUser: loginUser}, dispatch)
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ loginUser: loginUser }, dispatch)
 }
 
 

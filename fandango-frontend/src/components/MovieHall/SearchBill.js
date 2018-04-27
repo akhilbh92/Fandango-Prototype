@@ -8,6 +8,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer, toast } from 'react-toastify';
+import SubHeader from './SubHeader';
 var dateFormat = require('dateformat');
 
 class SearchBill extends Component {
@@ -114,6 +115,7 @@ class SearchBill extends Component {
         return (
             <div>
                 <CommonHeader />
+                <SubHeader/>
                 <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">

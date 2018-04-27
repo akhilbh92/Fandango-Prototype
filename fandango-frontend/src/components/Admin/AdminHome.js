@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import Search from './Search';
 import NavBar from './Navigation';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
-import './admin.css'
+import './admin.css';
+import '../MovieHall/subheader.css';
 
 
 class Admin extends Component {
@@ -30,7 +31,7 @@ class Admin extends Component {
 
     render(renderDropdownButton) {
         return (
-            <div className="container-body" id="outer-container">
+            <div className="container-body admin-sub-header" id="outer-container">
                 <CommonHeader />
                 <NavBar />
                 <div className= "admin-module">          

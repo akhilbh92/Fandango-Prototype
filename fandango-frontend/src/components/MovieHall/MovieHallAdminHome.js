@@ -3,8 +3,7 @@ import CommonHeader from '../header/CommonHeader';
 import { withRouter } from 'react-router-dom';
 import SubHeader from './SubHeader';
 import LandingContent from '../Landing/LandingContent';
-import './admin.css'
-
+import './subheader.css';
 
 class MovieHallAdminHome extends Component {
     constructor(props) {
@@ -12,7 +11,6 @@ class MovieHallAdminHome extends Component {
         this.state = {
 
         }
-        this.handleSelect = this.handleSelect.bind(this);
     }
 
     render() {
