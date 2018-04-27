@@ -8,6 +8,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import SubHeader from './SubHeader';
 var dateFormat = require('dateformat');
 
@@ -48,6 +50,9 @@ class SearchBill extends Component {
                 requestObj.bill_date = moment(this.state.bill_date).format('YYYY-MM-DD');
             } else {
                 requestObj.bill_month = this.state.bill_month;
+            }
+            if (this.props.user !== undefined && this.props.user.role === 2) {
+                requestObj.hall_id = this.props.user.hall_id;
             }
             API.searchUserBooking(requestObj)
                 .then((resultData) => {
@@ -115,7 +120,7 @@ class SearchBill extends Component {
         return (
             <div>
                 <CommonHeader />
-                <SubHeader/>
+                <SubHeader />
                 <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
@@ -138,12 +143,12 @@ class SearchBill extends Component {
                                             filterSelect: event.target.value
                                         });
                                     }}>
-                                    <option value="1">Filter By Date</option>
-                                    <option value="2">Filter By Month</option>
+                                    <option value={1}>Filter By Date</option>
+                                    <option value={2}>Filter By Month</option>
                                 </select>
                             </div>
                             <div className='col-md-2 datepicker-div'>
-                                {this.state.filterSelect === 1 &&
+                                {this.state.filterSelect == 1 &&
                                     <DatePicker
                                         readOnly
                                         placeholderText="Select Date"
@@ -151,7 +156,7 @@ class SearchBill extends Component {
                                         onChange={this.handleChange}
                                     />
                                 }
-                                {this.state.filterSelect === 2 &&
+                                {this.state.filterSelect == 2 &&
                                     <select className="form-control"
                                         id="billMonth"
                                         name="billMonth"
@@ -202,4 +207,14 @@ class SearchBill extends Component {
     }
 }
 
-export default SearchBill;
+function mapStateToProps(state) {
+    return {
+        user: state.loginUser
+    }
+}
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch)
+}
+
+
+export default connect(mapStateToProps, matchDispatchToProps)(SearchBill);
