@@ -33,7 +33,7 @@ class Admin extends Component {
             <div className="container-body" id="outer-container">
                 <CommonHeader />
                 <NavBar />
-                <div className= "admin-module">
+                <div className= "admin-module">          
                     <label> <i> Search for Movies or Theatres </i>  </label> 
                     <div className='admin-elements' id='dropdown'> 
                         <div className = "admin-forms"> 

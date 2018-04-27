@@ -21,6 +21,7 @@
 #search {
     margin-top: -9px;
     margin-left: -3px;
+    width: 900px;
 }
 
 #dropdown{
@@ -28,7 +29,8 @@
 }
 
 #split-button-basic-1{
-    height: 44px;
+    height: 54px;
+    width: 110%;
 }
 
 .admin-forms input {
@@ -69,3 +71,14 @@
     width: 140px;
     height: 140px;
   }
+
+ #response-message{
+    color: green;
+    display: none;
+    background-color: greenyellow;
+    font-weight: bold;
+    border: 2px solid forestgreen;
+    padding: 9px;
+    border-radius: 3px;
+    width: 500px;
+ } 

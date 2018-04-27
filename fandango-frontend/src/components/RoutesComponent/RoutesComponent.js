@@ -12,9 +12,10 @@ import AllMovies from "../MoviesList/AllMovies";
 import CancelBooking from "../MovieHall/CancelBooking";
 import Movie_detail from '../Moviedetail/movidetail';
 import AdminHome from '../Admin/AdminHome';
-import AdminHallForm from '../Admin/HallForm';
-import AdminMovieForm from '../Admin/MovieForm';
-// import AddMovieForm from '../Admin/AddMovieForm';
+import EditHallForm from '../Admin/EditHallForm';
+import EditMovieForm from '../Admin/EditMovieForm';
+import AddMovieForm from '../Admin/AddMovieForm';
+import AddHallForm from '../Admin/AddHallForm';
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
@@ -45,8 +46,10 @@ class RoutesComponent extends Component {
                 <Route exact path="/searchbill" component={SearchBill} />
                 <Route exact path ="/moviedetail" component={Movie_detail} />
                 <Route exact path ="/admin" component={AdminHome} />
-                <Route exact path="/admin/movies/:movieId" component={AdminMovieForm} />
-                <Route exact path="/admin/halls/:hallId" component={AdminHallForm} />
+                <Route exact path="/admin/movies/:movieId" component={EditMovieForm} />
+                <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
+                <Route exact path ="/admin/addMovie" component={AddMovieForm} />
+                <Route exact path ="/admin/addHall" component={AddHallForm} />
                 <Route exact path ="/movierevenue" component={RevenueByMovie} />
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
                 <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
