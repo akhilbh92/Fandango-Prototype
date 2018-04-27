@@ -1,6 +1,7 @@
-import {connect} from "react-redux";
-import {checkLogin} from '../../api/apicall_for_users';
+import { connect } from "react-redux";
+import { checkLogin } from '../../api/apicall_for_users';
 import React, { Component } from 'react';
+import Loading from './loading.gif';
 
 import {
     Route,
@@ -11,9 +12,9 @@ import {
 
 
 
-class PrivateRoute extends Component{
+class PrivateRoute extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = null
     }
@@ -22,23 +23,23 @@ class PrivateRoute extends Component{
         try {
             const data = await checkLogin({});
             this.setState(data);
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
     }
 
     render() {
         const response = this.state;
-        if(response === null){
-            return <div>Loading...</div>
-        }else{
-            if(typeof response["data"] === "object"){
+        if (response === null) {
+            return <div><img style={{'textAlign':'center','marginTop':'100px'}} src={Loading} /></div>
+        } else {
+            if (typeof response["data"] === "object") {
                 this.props.SetSession(response["data"]);
                 return <this.props.componentname {...this.props.dataprops} />
-            }else{
+            } else {
                 return <Redirect to={{
                     pathname: '/login',
-                }}/>;
+                }} />;
             }
         }
     }
@@ -48,7 +49,7 @@ PrivateRoute = connect(
     null,
     dispatch => {
         return {
-            SetSession: (session)=>{
+            SetSession: (session) => {
                 dispatch({
                     type: "LOGIN_USER",
                     "payload": session
@@ -59,9 +60,9 @@ PrivateRoute = connect(
 )(PrivateRoute);
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-    return <Route {...rest} render={(props)=>{
-        return <PrivateRoute dataprops={props} componentname={Component}/>
-    }}/>
+    return <Route {...rest} render={(props) => {
+        return <PrivateRoute dataprops={props} componentname={Component} />
+    }} />
 };
 
 export default ProtectedRoute
