@@ -18,29 +18,75 @@ class Login extends Component{
         this.state ={
             email: '',
             password: '',
-            message: ''
+            message: '',
+            emailmessage: '',
+            passwormessage: '',
+            emailerror: 0,
+            passworderror: 0
+
+
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
     handleSubmit = (userdata) => {
+        this.setState({
+            emailmessage: '',
+            passwordmessage: '',
+            emailerror: 0,
+            passworderror: 0,
+            type: true
+        },()=>this.handleEmail(userdata));
+    }
 
-        API.doLogin(userdata)
-            .then((status) => {
-                    if(status.meta.message == "login successful") {
+    handleEmail =(userdata) => {
+
+        if(this.state.email.length == 0){
+            this.setState({
+                emailmessage: 'Email should not be empty',
+                emailerror: 1,
+                type: true
+            },()=>this.handlePassword(userdata));
+        }
+        else{
+            this.handlePassword(userdata);
+        }
+    }
+
+    handlePassword =(userdata) => {
+
+        if(this.state.password.length == 0){
+            this.setState({
+                passwordmessage: 'Password should not be empty',
+                passworderror: 1,
+                type: true
+            },()=>this.AfterValidation(userdata));
+        }
+        else{
+            this.AfterValidation(userdata);
+        }
+    }
+
+    AfterValidation = (userdata) => {
+
+        if(this.state.emailerror != 1 && this.state.passworderror != 1) {
+            API.doLogin(userdata)
+                .then((status) => {
+                    if (status.meta.message == "login successful") {
                         this.props.loginUser(status.data);
-                        console.log("YOu need:" + this.props.user.userId);
+                        console.log("YOu need:" + this.props.user.role);
+                        console.log("YOu also need:" + this.props.user.userId);
                         this.props.redirectURL("/home");
 
-                     }
-                     else {
+                    }
+                    else {
                         this.setState({
                             message: status.data,
                         });
-                        }
+                    }
                 });
+        }
     };
 
     render(){
@@ -91,6 +137,7 @@ class Login extends Component{
                             }}
                             required
                         />
+                        <Message message={this.state.emailmessage}/>
                         <label htmlFor="PasswordBox" >Password</label>
                         <input
                             type="password"
@@ -103,6 +150,7 @@ class Login extends Component{
                             }}
                             required
                         />
+                        <Message message={this.state.passwordmessage}/>
                         <button className="btn-cta full-width" alternatetext="Sign In" onClick={() => this.handleSubmit(this.state)}>Sign In</button>
                         <Message  message={this.state.message} />
 
