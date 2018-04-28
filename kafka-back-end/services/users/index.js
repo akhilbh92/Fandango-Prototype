@@ -75,11 +75,34 @@ module.exports = {
         }
     },
     updateProfileById: async function(body,cb){
+        const checkpassword = async function(oldpassword){
+            const oldpassword_hash = await usermodel.findById(body.userId,{
+                attributes: ['password_hash']
+            });
+            const bool =  await bcrypt.compare(oldpassword,oldpassword_hash.password_hash);
+            return bool;
+        };
+
         try{
+            delete body.password_hash;
+            if(body.oldpassword && body.newpassword){
+                if(!await checkpassword(body.oldpassword)){
+                    cb(null,"Invalid current password");
+                    return;
+                }else{
+                    body.password_hash = await bcrypt.hash(body.newpassword, 10);
+                    delete body.oldpassword;
+                    delete body.newpassword;
+                }
+            }else{
+                delete body.oldpassword;
+                delete body.newpassword;
+            }
+
             const rows = await usermodel.upsert(body);
-            cb(null,rows);
+            cb(null,"profile updated");
         }catch (e) {
-            cb(e,null);
+            cb(null,e);
         }
     }
 };

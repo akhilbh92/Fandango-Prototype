@@ -9,7 +9,7 @@ let updateProfileRouterFn = async function (req, res, next) {
     // const body = req.body;
     // body["userId"] = userId;
 
-    let userId = req.session.passport.uyser.userId;
+    let userId = req.session.passport.user.userId;
     let body = req.body;
     body["userId"] = userId;
 
@@ -50,6 +50,12 @@ let updateProfileRouterFn = async function (req, res, next) {
                         reject(err);
                         return;
                     }
+                    if(results.name === "SequelizeUniqueConstraintError"){
+                        const err = new Error("This email is already associated with another user");
+                        err.status = 400;
+                        reject(err)
+                        return;
+                    }
                     resolve(results);
                 });
         });
@@ -57,7 +63,7 @@ let updateProfileRouterFn = async function (req, res, next) {
 
     try {
         const profile = await updateProfileById(body);
-        let resObj = new resFormat("profile updated");
+        let resObj = new resFormat(profile);
         return res.status(resObj.getStatus()).json(resObj.log());
 
     } catch (err) {

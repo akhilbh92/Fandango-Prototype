@@ -136,6 +136,9 @@ consumer.on('message', (message) => {
             break;
         default:
             userService[data.data.key](data.data.value, function (err, res) {
+                if(err){
+                    res = err;
+                }
                 console.log('after handle: %o', res);
                 var payloads = [
                     {
