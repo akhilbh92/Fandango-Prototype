@@ -11,8 +11,9 @@ function handle_request(msg, callback){
         screen_type: msg.screen_type,
         total_seats: msg.total_seats
         });
-    }).then(() => {
+    }).then((addedScreen) => {
         let result= {};
+        result.data = addedScreen;
         result.message = 'Screen added to the theatre';
         callback(null, result);
     });

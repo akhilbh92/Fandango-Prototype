@@ -7,3 +7,11 @@ export const loginUser = (userinfo) => {
         payload: userinfo
     }
 };
+
+export const searchCriteria = (info) => {
+    console.log(info);
+    return{
+        type: 'SEARCH_CRITERIA',
+        payload: info
+    }
+};

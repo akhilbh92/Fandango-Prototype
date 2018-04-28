@@ -13,8 +13,9 @@ function handle_request(msg, callback){
             zipcode : msg.zipcode,
             screen_nums: msg.screen_nums
         });
-    }).then(() => {
+    }).then((addedHall) => {
         let result= {};
+        result.data = addedHall;
         result.message = 'Theatre added';
         callback(null, result);
     });
