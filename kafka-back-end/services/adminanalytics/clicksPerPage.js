@@ -42,7 +42,7 @@ function handle_request(msg, callback) {
                             }
                                 console.log(result1);
                                 clicksPerPageCollection.aggregate([{$match:{event:"movie_click"}},
-                                        {$group: {_id:"$movie_id",total_count:{$sum:1}}}],
+                                        {$group: {_id:"$movie_name",total_count:{$sum:1}}}],
                                     function(err, result2) {
                                         if(err) {
                                             callback(err,null);

@@ -2,33 +2,25 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Bar,Pie} from 'react-chartjs-2';
 import * as API from  '../../api/API';
-import log4javascript from 'log4javascript';
-var log1 = log4javascript.getLogger();
-
 
 class ClicksPerPage extends Component{
     constructor(props){
         super(props);
 
         this.state={
-            Data:{}
+            PageClicksData:{},
+            MovieClicksData:{},
         };
 
-        this.handleClick = this.handleClick.bind(this);
+        //this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
-        var ajaxAppender = new log4javascript.AjaxAppender('http://localhost:3001/api/logger');
-        //ajaxAppender.setBatchSize(1); // send in batches of 10
-        ajaxAppender.setTimed(true);
-        ajaxAppender.setTimerInterval(1000); // send every 1 seconds (unit is milliseconds)
-        ajaxAppender.setSendAllOnUnload(); // send all remaining messages on window.beforeunload()
-        log1.addAppender(ajaxAppender);
 
         API.clicksPerPage()
             .then((resultData) => {
-                if (!!resultData.data) {
-                    const clicks_per_page = resultData.data;
+                if (!!resultData.data && !!resultData.data.page_clicks && !!resultData.data.movie_clicks) {
+                    const clicks_per_page = resultData.data.page_clicks;
                     let page_names = [];
                     let total_clicks = [];
                     clicks_per_page.forEach(click => {
@@ -38,7 +30,7 @@ class ClicksPerPage extends Component{
                     console.log(`${JSON.stringify(page_names)}`);
                     console.log(`${JSON.stringify(total_clicks)}`);
                     this.setState({
-                        Data: {
+                        PageClicksData: {
                             labels: page_names,
                             datasets:[
                                 {
@@ -56,21 +48,55 @@ class ClicksPerPage extends Component{
                             ]
                         }
                     });
+
+                    //Handling Movie Clicks
+
+                    const clicks_per_movie = resultData.data.movie_clicks;
+                    let movie_names = [];
+                    let total_clicks_movie = [];
+                    clicks_per_movie.forEach(click => {
+                        movie_names.push(click._id);
+                        total_clicks_movie.push(click.total_count);
+                    });
+                    console.log(`${JSON.stringify(movie_names)}`);
+                    console.log(`${JSON.stringify(total_clicks_movie)}`);
+                    this.setState({
+                        MovieClicksData: {
+                            labels: movie_names,
+                            datasets:[
+                                {
+                                    label:'Top 10 Movie Clicks',
+                                    data: total_clicks_movie,
+                                    backgroundColor:[
+                                        'rgba(255,105,145,0.6)',
+                                        'rgba(155,100,210,0.6)',
+                                        'rgba(90,178,255,0.6)',
+                                        'rgba(240,134,67,0.6)',
+                                        'rgba(120,120,120,0.6)',
+                                        'rgba(250,55,197,0.6)'
+                                    ]
+                                }
+                            ]
+                        }
+                    });
                 } else {
-                    console.log("There are no clicks per page");
+                    console.log("There are no logs entries");
                 }
             });
     }
 
-    handleClick() {
-        log1.info('{"event":"page_click","page_name":"ClicksPerPage","count":"1"}');
-    }
-
     render(){
-        return(<div onClick={this.handleClick}>
+        return(<div>
+                <div>
                 <Pie
-                    data = {this.state.Data}
+                    data = {this.state.PageClicksData}
                     options = {{ maintainAspectRatio: true }} />
+            </div>
+            <div>
+                <Pie
+                    data = {this.state.MovieClicksData}
+                    options = {{ maintainAspectRatio: true }} />
+            </div>
             </div>
         );
     }
