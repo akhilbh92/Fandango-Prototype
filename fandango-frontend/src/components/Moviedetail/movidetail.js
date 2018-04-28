@@ -4,6 +4,7 @@ import './moviedetail.css'
 import MoveOverview from './MovieOverview/MovieOverview'
 import { Link } from 'react-router-dom'
 import {connect} from "react-redux";
+import {log1} from "../../App";
 
 
 class Movie_detail extends Component {
@@ -13,6 +14,10 @@ class Movie_detail extends Component {
         this.state = {
             ActiveComponent: <MoveOverview/>
         }
+    }
+
+    componentDidMount(){
+        log1.info(`{"event":"movie_click","movie_id":"${this.props.movie.id}","movie_name":"${this.props.movie.movie_name}","count":"1"}`);
     }
 
     render(){

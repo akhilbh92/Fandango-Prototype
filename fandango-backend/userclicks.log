@@ -114,3 +114,12 @@
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:22:27.172Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:23:06.214Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:23:06.612Z"}
+{"event":"movie_click","movie_id":"30","movie_name":"BatMan VS Superman","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:48:38.072Z"}
+{"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:52:45.276Z"}
+{"event":"movie_click","movie_id":"28","movie_name":"Batman Begins","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:02.373Z"}
+{"event":"movie_click","movie_id":"29","movie_name":"La La Land","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:07.820Z"}
+{"event":"movie_click","movie_id":"30","movie_name":"BatMan VS Superman","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:12.860Z"}
+{"event":"movie_click","movie_id":"31","movie_name":"Rampage","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:19.741Z"}
+{"event":"movie_click","movie_id":"32","movie_name":"Pacific Rim Uprising","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:25.334Z"}
+{"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:31.253Z"}
+{"event":"movie_click","movie_id":"28","movie_name":"Batman Begins","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:35.782Z"}
