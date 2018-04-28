@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import './MovieTickets.css'
 import HomeHeader from './../AfterLogin/HomeHeader'
+import MovieDetailBox from '../MovieDetailBox/MovieDetailBox'
+
 
 class Movie_Tickets extends Component{
 
@@ -12,8 +14,50 @@ class Movie_Tickets extends Component{
         document.body.style.backgroundColor = null;
     }
 
+    constructor(props){
+        super(props);
+            this.state = {
+                startDate: new Date(),
+                currentIndex: 0,
+                monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ],
+                dayNames: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+                highlightedKey : 0
+            }
+    }
+
+    handleDateClick(e){
+        this.setState({
+            ...this.state,
+            highlightedKey: parseInt(e.target.attributes[0].nodeValue)
+        })
+    };
+
+    SixDays(){
+        const result = [];
+        const date = new Date(this.state.startDate);
+        let count = 4;
+
+        for (let i=0;i<7;i++){
+            date.setDate(date.getDate() + 1);
+
+            if(i === this.state.highlightedKey){
+                result.push(<li test={i} id={"datepickerLI_"+count} key={i} onClick={(e)=>{this.handleDateClick(e)}}>
+                    <div test={i} style={{background: "rgb(51, 51, 51) none repeat scroll 0% 0% / auto padding-box border-box",color: "rgb(255, 255, 255)"}} id={"datepickerA_"+(count+1)}> <span test={i} style={{background: "rgb(241, 85, 0) none repeat scroll 0% 0% / auto padding-box border-box",color: "rgb(255, 255, 255)"}} id={"datepickerSPAN_"+(count+2)}>{this.state.dayNames[date.getDay()]}</span> <span test={i} style={{color: "rgb(255, 255, 255)"}} id={"datepickerSPAN_"+(count+3)}>{this.state.monthNames[date.getMonth()]}</span> <span test={i} style={{color: "rgb(255, 255, 255)"}} id={"datepickerSPAN_"+(count+4)}>{date.getDate()}</span></div>
+                </li>);
+            }else{
+                result.push(<li test={i} id={"datepickerLI_"+count} key={i} onClick={(e)=>{this.handleDateClick(e)}}>
+                    <div test={i} id={"datepickerA_"+(count+1)}> <span test={i} id={"datepickerSPAN_"+(count+2)}>{this.state.dayNames[date.getDay()]}</span> <span test={i} id={"datepickerSPAN_"+(count+3)}>{this.state.monthNames[date.getMonth()]}</span> <span test={i} id={"datepickerSPAN_"+(count+4)}>{date.getDate()}</span></div>
+                </li>);
+            }
+            count = count + 5;
+        }
+        return result;
+    }
 
     render(){
+
         return (
             <div>
                 <HomeHeader/>
@@ -40,20 +84,6 @@ class Movie_Tickets extends Component{
                                 <li id="LI_15">
                                     <a href="/rampage-2018-207628/movie-reviews" id="A_16">Movie Reviews</a>
                                 </li>
-                                {/*<li id="LI_17">*/}
-                                    {/*<a href="https://www.fandango.com/movie-trailer/rampage2018-trailer/207628" id="A_18">Trailers</a>*/}
-                                {/*</li>*/}
-                                {/*<li id="LI_19">*/}
-                                    {/*<a href="#" id="A_20">More</a>*/}
-                                    {/*<ul id="UL_21">*/}
-                                        {/*<li id="LI_22">*/}
-                                            {/*<a href="https://www.fandango.com/rampage2018_207628/moviephotosposters" id="A_23">Photos + Posters</a>*/}
-                                        {/*</li>*/}
-                                        {/*<li id="LI_24">*/}
-                                            {/*<a href="/rampage-2018-207628/cast-and-crew" id="A_25">Cast + Crew</a>*/}
-                                        {/*</li>*/}
-                                    {/*</ul>*/}
-                                {/*</li>*/}
                             </ul>
                         </div>
                     </div>
@@ -65,30 +95,7 @@ class Movie_Tickets extends Component{
                         <div id="datepickerDIV_1">
                             <section id="datepickerSECTION_2">
                                 <ul id="datepickerUL_3">
-                                    <li id="datepickerLI_4">
-                                        <a href="?date=2018-04-26" id="datepickerA_5"> <span id="datepickerSPAN_6">Today</span> <span id="datepickerSPAN_7">Apr</span> <span id="datepickerSPAN_8">26</span></a>
-                                    </li>
-                                    <li id="datepickerLI_9">
-                                        <a href="?date=2018-04-27" id="datepickerA_10"> <span id="datepickerSPAN_11">Fri</span> <span id="datepickerSPAN_12">Apr</span> <span id="datepickerSPAN_13">27</span></a>
-                                    </li>
-                                    <li id="datepickerLI_14">
-                                        <a href="?date=2018-04-28" id="datepickerA_15"> <span id="datepickerSPAN_16">Sat</span> <span id="datepickerSPAN_17">Apr</span> <span id="datepickerSPAN_18">28</span></a>
-                                    </li>
-                                    <li id="datepickerLI_19">
-                                        <a href="?date=2018-04-29" id="datepickerA_20"> <span id="datepickerSPAN_21">Sun</span> <span id="datepickerSPAN_22">Apr</span> <span id="datepickerSPAN_23">29</span></a>
-                                    </li>
-                                    <li id="datepickerLI_24">
-                                        <a href="?date=2018-04-30" id="datepickerA_25"> <span id="datepickerSPAN_26">Mon</span> <span id="datepickerSPAN_27">Apr</span> <span id="datepickerSPAN_28">30</span></a>
-                                    </li>
-                                    <li id="datepickerLI_29">
-                                        <a href="?date=2018-05-01" id="datepickerA_30"> <span id="datepickerSPAN_31">Tue</span> <span id="datepickerSPAN_32">May</span> <span id="datepickerSPAN_33">01</span></a>
-                                    </li>
-                                    <li id="datepickerLI_34">
-                                        <a href="?date=2018-05-02" id="datepickerA_35"> <span id="datepickerSPAN_36">Wed</span> <span id="datepickerSPAN_37">May</span> <span id="datepickerSPAN_38">02</span></a>
-                                    </li>
-                                    <li id="datepickerLI_39">
-                                        <a href="?date=2018-05-03" id="datepickerA_40"> <span id="datepickerSPAN_41">Thu</span> <span id="datepickerSPAN_42">May</span> <span id="datepickerSPAN_43">03</span></a>
-                                    </li>
+                                    {this.SixDays()}
                                 </ul>
                                 <button id="datepickerBUTTON_44">
                                     Previous
@@ -99,7 +106,17 @@ class Movie_Tickets extends Component{
                             </section>
                         </div>
                     </div>
+                    <div style={{display:"flex",width:"74.35%",height:"100%"}}>
+                        <div className="msp__movie-details-container">
+                            <MovieDetailBox/>
+                        </div>
+                        <div className="theaters">
+                            <MovieHallsBox/>
+                        </div>
+                    </div>
+
                 </div>
+
 
 
 

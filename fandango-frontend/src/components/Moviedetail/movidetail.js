@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
 import MoveOverview from './MovieOverview/MovieOverview'
-import MovieCrew from './MovieCrew/MovieCrew'
+import { Link } from 'react-router-dom'
 
 
 class Movie_detail extends Component {
@@ -60,9 +60,9 @@ class Movie_detail extends Component {
                                                 </label>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <label className="movie-detail-section-subnav-item-link">
+                                                <Link to = "/movietickets" className="movie-detail-section-subnav-item-link">
                                                     Movie Times + tickets
-                                                </label>
+                                                </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
                                                 <a className="movie-detail-section-subnav-item-link">
