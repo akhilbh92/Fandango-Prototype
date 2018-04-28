@@ -74,6 +74,7 @@ var Client = kafka.Client;
 var Offset = kafka.Offset;
 var client = new Client('localhost:2181');
 var offset = new Offset(client);
+var consumer = connection.getConsumer('admin');
 
 let topic = 'admin';
 
@@ -94,7 +95,7 @@ consumer.on('offsetOutOfRange', function (topic) {
 
 /*************************************************************************************/
 
-var consumer = connection.getConsumer('admin');
+
 consumer.on('message', (message) => {
     console.log('Received message on Topic ');
     console.log(`Total Msg: ${JSON.stringify(message)}`);

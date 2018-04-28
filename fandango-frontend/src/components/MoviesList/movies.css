@@ -12,7 +12,7 @@
 }
 
 .page-header-container {
-    margin: 0 0 27px;
+    margin: 0;
     padding: 0;
 }
 
@@ -170,4 +170,30 @@ h1, h2, h3, h4, h5, h6 {
 .buy-tickets{
     background-color: #FF7900;
     color: white;
+}
+
+.genre-list{
+    height: 50px;
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: left;
+
+
+}
+
+.sub-genre{
+    margin-left: 15px;
+    background-color: white;
+    color: #32b4ff;
+    border-radius: 0px;
+}
+
+.btn:hover {
+    background-color: #32b4ff !important; ;
+    color: white !important;
+}
+
+.btn:active {
+    background-color: #32b4ff !important; ;
+    color: white !important;
 }

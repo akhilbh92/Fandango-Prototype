@@ -7,8 +7,16 @@ import fandangoLogo from './fandango-logo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
 import { doSignOut } from '../../api/apicall_for_users';
 import { loginUser } from "../../actions";
+import {searchCriteria} from "../../actions";
 
 class CommonHeader extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+       criteria: ''
+    }
+  }
 
   signout() {
     doSignOut({}).then((response) => {
@@ -16,6 +24,11 @@ class CommonHeader extends Component {
       window.location = "/"
     })
   }
+
+    handleSearch = (userdata) => {
+        console.log(userdata);
+        window.location = "/searchresult"
+    }
 
   render() {
     return (
@@ -46,13 +59,29 @@ class CommonHeader extends Component {
               <form action="/search" autoComplete="off" role="search" noValidate="">
                 <div className="fan-autocomplete">
                   <div className="fan-autocomplete-results"></div>
-                  <input className="fan-input style-search" type="text" name="q" placeholder="Enter City + State, ZIP Code, or Movie" />
+                  <input
+                      className="fan-input style-search"
+                      type="text"
+                      name="q"
+                      placeholder="Enter City + State, ZIP Code, or Movie"
+                      onChange={(event) => {
+                          this.setState({
+                              criteria: event.target.value,
+                              type: true
+                          });
+                      }}
+                  />
                 </div>
-                <input type="hidden" name="mode" value="general" />
-                <button className="fan-btn fan-btn-style-go" type="button">Go</button>
+                <input
+                    type="hidden"
+                    name="mode"
+                    value="general"
+
+                />
+                <button className="fan-btn fan-btn-style-go" type="button" onClick={() => this.handleSearch(this.props.searchCriteria(this.state))}>Go</button>
               </form>
             </li>
-            <li className="drop-menu"><a href="">MOVIES</a>
+            <li className="drop-menu"><Link to="/allmovies">MOVIES</Link>
               {/* <div className="fulldrop">
                 <div className="column">
                   <ul>
@@ -149,11 +178,12 @@ class CommonHeader extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.loginUser
+    user: state.loginUser,
+    criteria: state.searchCriteria
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUser: loginUser }, dispatch)
+  return bindActionCreators({ loginUser: loginUser, searchCriteria: searchCriteria }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(CommonHeader);
