@@ -2,9 +2,7 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Bar,Pie} from 'react-chartjs-2';
 import * as API from  '../../api/API';
-import log4javascript from 'log4javascript';
-var log1 = log4javascript.getLogger();
-
+import {log1} from '../../App';
 
 class TopTenHallByTicketsSold extends Component{
     constructor(props){
@@ -18,12 +16,6 @@ class TopTenHallByTicketsSold extends Component{
     }
 
     componentDidMount() {
-        var ajaxAppender = new log4javascript.AjaxAppender('http://localhost:3001/api/logger');
-        //ajaxAppender.setBatchSize(1); // send in batches of 10
-        ajaxAppender.setTimed(true);
-        ajaxAppender.setTimerInterval(100); // send every 1 seconds (unit is milliseconds)
-        ajaxAppender.setSendAllOnUnload(); // send all remaining messages on window.beforeunload()
-        log1.addAppender(ajaxAppender);
 
         API.topTenHalls()
             .then((resultData) => {
