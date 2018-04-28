@@ -75,3 +75,17 @@
 .crew-div2{
     width: 800px;
 }
+
+.crew-info{
+
+    margin-top: 12px;
+    min-height: 400px;
+    background-color: #262626;
+}
+
+.crew-font{
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 20px;
+    color: white;
+}

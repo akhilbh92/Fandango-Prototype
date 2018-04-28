@@ -19,6 +19,7 @@ import AddHallForm from '../Admin/AddHallForm';
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
+import Movie_detail_crew from "../Moviedetail/moviedetail-crew";
 import TopTenMoviesByRevenue from "../AdminAnalytics/topTenMoviesByRevenue";
 import MovieTickets from '../MovieTickets/MovieTickets';
 import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
@@ -80,6 +81,7 @@ class RoutesComponent extends Component {
                 <Route exact path ="/admin/addHall" component={AddHallForm} />
                 <PrivateRoute exact path ="/movierevenue" component={RevenueByMovie} />
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
+                <Route exact path ="/moviedetailcrew" component={Movie_detail_crew} />
                 <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
                 <Route exact path = "/movietickets" component={MovieTickets}/>
                 <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />

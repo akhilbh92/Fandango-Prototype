@@ -3,6 +3,7 @@
     margin-right: auto;
     margin-left: auto;
     max-width: 1280px;
+    min-height: 525px;
     box-sizing: border-box;
     display: block;
     color: #4C4C4C;
