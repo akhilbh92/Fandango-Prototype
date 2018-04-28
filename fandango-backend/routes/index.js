@@ -22,6 +22,7 @@ var searchBooking = require('./moviehall/searchBooking');
 var topTenMoviesByRevenue = require('./admin/topTenMoviesByRevenue');
 var cityWiseMovieRevenue = require('./admin/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./admin/topTenHallByTickets');
+var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -107,6 +108,11 @@ router.get('/topTenMoviesByRevenue', function (req, res, next) {
 router.get('/topTenHallByTickets', function (req, res, next) {
     console.log('GET Top TEN Halls by no of tickets sold Last Month API');
     topTenHallByTickets.topTenHallByTicketsRouterFn(req, res, next);
+});
+
+router.post('/movierevenuebyadmin', function (req, res, next) {
+    console.log('GET Revenue by MOVIES API by fandango admin');
+    MovieRevenueByAdmin.MovieRevenueByAdminRouterFn(req, res, next);
 });
 
 router.post('/addMovieSchedule', function (req, res, next) {

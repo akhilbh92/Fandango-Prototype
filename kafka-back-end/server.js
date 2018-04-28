@@ -29,6 +29,7 @@ var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRev
 var cityWiseMovieRevenue = require('./services/adminanalytics/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./services/adminanalytics/topTenHallByTickets');
 var clicksPerPage = require('./services/adminanalytics/clicksPerPage');
+var movieRevenueByAdmin = require('./services/adminanalytics/movieRevenueByAdmin');
 
 const userService = Object.assign(require('./services/users'),require('./services/ratings'));
 
@@ -137,6 +138,9 @@ consumer.on('message', (message) => {
             break;
         case 'clicksPerPage':
             handler = clicksPerPage;
+            break;
+        case 'movierevenuebyadmin':
+            handler = movieRevenueByAdmin;
             break;
         default:
             userService[data.data.key](data.data.value, function (err, res) {

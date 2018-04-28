@@ -123,3 +123,6 @@
 {"event":"movie_click","movie_id":"32","movie_name":"Pacific Rim Uprising","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:25.334Z"}
 {"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:31.253Z"}
 {"event":"movie_click","movie_id":"28","movie_name":"Batman Begins","count":"1","level":"info","message":"","timestamp":"2018-04-28T20:53:35.782Z"}
+{"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:40:41.061Z"}
+{"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:41:25.604Z"}
+{"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:42:22.330Z"}
