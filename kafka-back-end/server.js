@@ -48,6 +48,7 @@ var Client = kafka.Client;
 var Offset = kafka.Offset;
 var client = new Client('localhost:2181');
 var offset = new Offset(client);
+var consumer = connection.getConsumer('admin');
 
 let topic = 'admin';
 

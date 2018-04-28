@@ -50,6 +50,13 @@
     font-size: 120%;
 }
 
+#hidden-alert {
+    display: none;
+    color: red;
+    font-size: 120%;
+    width: 900px;
+}
+
 .navbar {
     margin-bottom: 0px;
     border-radius: 0px;

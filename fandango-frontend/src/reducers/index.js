@@ -3,8 +3,12 @@
 
 import { combineReducers } from 'redux';
 import loginReducer from './reducer-login';
+import criteriaReducer from './reducer-criteria';
+
 const allReducers =  combineReducers({
     loginUser: loginReducer,
+    searchCriteria: criteriaReducer
+
 });
 
 export default allReducers;

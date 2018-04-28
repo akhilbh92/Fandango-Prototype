@@ -188,6 +188,7 @@ class HallForm extends Component {
                 <div className="col-sm-3"> </div>                
                 <div className="col-sm-5"> <p id='response-message'> Hall added successfully </p> </div>
                 <Button id="submit-button"  className="col-sm-2 btn btn-primary" onClick={this.handleSubmit}> Add Hall </Button>
+                <br /> <br />
             </form>
             </div>
         );
