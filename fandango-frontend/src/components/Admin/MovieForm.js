@@ -45,7 +45,7 @@ class MovieForm extends React.Component {
 
     uploadPhotos(){
         if(this.state.movieName === '') {
-            document.getElementById('hidden').style.display = 'block';
+            document.getElementById('hidden-alert').style.display = 'block';
             return;
         }
         const data = new FormData();
@@ -79,17 +79,11 @@ class MovieForm extends React.Component {
     }
 
     render() {
-        document.getElementById('movieForm').addEventListener("click", function(){
-            document.getElementById("hidden").style.display = "none";
-        });
       return (
         <div id="movieForm"> 
         <br />
             <h3 id="form-header"> <strong> Add Movie Details </strong> </h3> 
                 <br/>
-            <Alert bsStyle="warning" id='hidden'>
-                <strong>Input Error</strong> Please enter the movie name, followed by file upload.
-            </Alert>
             <form>
                 <br /><br />
                 <div className= "admin-forms">
@@ -103,6 +97,7 @@ class MovieForm extends React.Component {
                                 value={this.state.movieName}
                                 required 
                                 onChange={(event) => {
+                                    document.getElementById("hidden-alert").style.display = "none";
                                     this.setState({
                                         movieName: event.target.value
                                     });
@@ -281,11 +276,18 @@ class MovieForm extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <br />
+                <div className="col-sm-2"> </div>         
+                <Alert className="col-sm-9" bsStyle="warning" id='hidden-alert'>
+                    <strong>Input Error</strong> Please enter the movie name, followed by file upload.
+                </Alert>
                 
-                <br /> <br />
+                <br />
                 <div className="col-sm-3"> </div>                
                 <div className="col-sm-5"> <p id='response-message'> Movie added successfully </p> </div>
                 <Button id="submit-button"  className="col-sm-2 btn btn-primary" onClick={this.handleSubmit}> Add Movie </Button>
+                <br/> <br/>
             </form> <br/>
         </div>
       );

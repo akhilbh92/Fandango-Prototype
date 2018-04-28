@@ -32,26 +32,28 @@ class Admin extends Component {
     render(renderDropdownButton) {
         return (
             <div className="container-body admin-sub-header" id="outer-container">
-                <CommonHeader />
-                <NavBar />
-                <div className= "admin-module">          
-                    <label> <i> Search for Movies or Theatres </i>  </label> 
-                    <div className='admin-elements' id='dropdown'> 
-                        <div className = "admin-forms"> 
-                            <DropdownButton
-                                bsStyle = 'primary'
-                                title = {this.state.dropdownTitle}
-                                id = {`split-button-basic-1`}
-                                onSelect = {this.handleSelect}
-                                >
-                                <MenuItem eventKey="1">Movies</MenuItem>
-                                <MenuItem eventKey="2">Theatres</MenuItem>
-                            </DropdownButton>  
+                <div className= "admin">      
+                    <CommonHeader />
+                    <NavBar />
+                    <div className= "admin-module">          
+                        <label> <i> Search for Movies or Theatres </i>  </label> 
+                        <div className='admin-elements' id='dropdown'> 
+                            <div className = "admin-forms"> 
+                                <DropdownButton
+                                    bsStyle = 'primary'
+                                    title = {this.state.dropdownTitle}
+                                    id = {`split-button-basic-1`}
+                                    onSelect = {this.handleSelect}
+                                    >
+                                    <MenuItem eventKey="1">Movies</MenuItem>
+                                    <MenuItem eventKey="2">Theatres</MenuItem>
+                                </DropdownButton>  
+                            </div>
                         </div>
-                    </div>
-                    <div className='admin-elements' id='search'> 
-                        <div className = "admin-forms"> 
-                            <Search group={this.state.dropdownTitle} placeholder='Search'/>
+                        <div className='admin-elements' id='search'> 
+                            <div className = "admin-forms"> 
+                                <Search group={this.state.dropdownTitle} placeholder='Search'/>
+                            </div>
                         </div>
                     </div>
                 </div>

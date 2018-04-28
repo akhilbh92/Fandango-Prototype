@@ -20,7 +20,7 @@ class EditMovieForm extends Component {
     render(){
         console.log(this.props);
         return (
-            <div> 
+            <div id='FullMovieForm'> 
                 <CommonHeader />
                 <Search group={this.state.group} placeholder='Search for Movies' />
                 <NavBar />
