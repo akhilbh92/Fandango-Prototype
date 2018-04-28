@@ -9,14 +9,15 @@ function handle_request(msg, callback){
         description: msg.description,
         see_it_in: msg.seeItIn,
         trailer: msg.trailer,
-        photos : msg.photos.toString(),
+        photos : msg.photos,
         cast: msg.cast,
         movie_length: msg.movieLength,
         release_date: msg.releaseDate,
         genres: msg.genres
         });
-    }).then(() => {
+    }).then((addedMovie) => {
         let result= {};
+        result.data = addedMovie;
         result.message = 'Movie added';
         callback(null, result);
     });
