@@ -31,6 +31,7 @@ const deleteUser = require('./users/deleteuser');
 const getProfile = require("./users/getProfile");
 const updateProfile = require('./users/updateProfile');
 const checkLogin = require('./users/checklogin');
+const addRating = require('./ratings/addrating');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -170,6 +171,11 @@ router.post('/uploadFile', function (req,res,next) {
 router.post('/checklogin', function (req,res,next) {
     console.log('CHECK SESSION API');
     checkLogin.checkLoginRouterFn(req,res,next);
+});
+
+router.post('/addRating', function (req,res,next) {
+    console.log('ADD RATING API');
+    addRating.addRatingRouterFn(req,res,next)
 });
 
 module.exports = router;

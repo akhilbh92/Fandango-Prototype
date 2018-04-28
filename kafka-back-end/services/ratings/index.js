@@ -1,9 +1,12 @@
 const ratingmodel = require('../../models/Ratings');
 
 module.exports = {
-    addRating: async function(body,cb){
-        console.log(body);
-        cb(null,body);
-        //const rating = await ratingmodel.create(body);
+    addRating: async function(body,cb) {
+        try {
+            const rating = await ratingmodel.create(body);
+            cb(null, true)
+        } catch (err) {
+            cb(err, null)
+        }
     }
 };
