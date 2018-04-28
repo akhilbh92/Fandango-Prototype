@@ -19,6 +19,7 @@ import AddHallForm from '../Admin/AddHallForm';
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
+import Movie_detail_crew from "../Moviedetail/moviedetail-crew";
 import TopTenMoviesByRevenue from "../AdminAnalytics/topTenMoviesByRevenue";
 import MovieTickets from '../MovieTickets/MovieTickets';
 import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
@@ -29,11 +30,13 @@ import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
+
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
 
 import SearchResult from '../MoviesList/SearchResult'
 
 import PrivateRoute from './PrivateRoute'
+import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
 
 class RoutesComponent extends Component {
 
@@ -80,6 +83,7 @@ class RoutesComponent extends Component {
                 <Route exact path ="/admin/addHall" component={AddHallForm} />
                 <PrivateRoute exact path ="/movierevenue" component={RevenueByMovie} />
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
+                <Route exact path ="/moviedetailcrew" component={Movie_detail_crew} />
                 <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
                 <Route exact path = "/movietickets" component={MovieTickets}/>
                 <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />
@@ -105,6 +109,7 @@ class RoutesComponent extends Component {
                 )} />
                 <Route exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
+                <Route exact path="/clicksperpage" component={ClicksPerPage}/>
             </div>
         );
     }

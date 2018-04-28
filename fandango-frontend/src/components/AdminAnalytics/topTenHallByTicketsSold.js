@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Bar,Pie} from 'react-chartjs-2';
 import * as API from  '../../api/API';
-
+import {log1} from '../../App';
 
 class TopTenHallByTicketsSold extends Component{
     constructor(props){
@@ -11,9 +11,12 @@ class TopTenHallByTicketsSold extends Component{
         this.state={
             Data:{}
         };
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
+
         API.topTenHalls()
             .then((resultData) => {
                 if (!!resultData.data) {
@@ -54,8 +57,12 @@ class TopTenHallByTicketsSold extends Component{
             });
     }
 
+    handleClick() {
+        log1.info('{"event":"page_click","page_name":"TopTenHallsPage","count":"1"}');
+    }
+
     render(){
-        return(<div>
+        return(<div onClick={this.handleClick}>
                 <Pie
                     data = {this.state.Data}
                     options = {{ maintainAspectRatio: true }} />
