@@ -83,7 +83,6 @@ class RoutesComponent extends Component {
                 <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold}/>
                 <PrivateRoute exact path="/test" component={Home}/>
                 <PrivateRoute exact path="/mhadmin" component={MovieHallAdminHome} />
-                <Route exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
             </div>
         );
