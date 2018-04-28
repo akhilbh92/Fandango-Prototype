@@ -30,6 +30,7 @@ import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
+
 import SearchResult from '../MoviesList/SearchResult'
 
 import PrivateRoute from './PrivateRoute'
@@ -93,6 +94,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/citywiserevenue/:movieId" component={CityWiseMovieRevenue}/>
                 <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold}/>
                 <PrivateRoute exact path="/test" component={Home}/>
+
                 <PrivateRoute exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
                 <Route exact path="/searchresult" render={() => (
@@ -101,6 +103,8 @@ class RoutesComponent extends Component {
                         <SearchResult redirectURL={this.redirectURL} />
                     </div>
                 )} />
+                <Route exact path="/mhadmin" component={MovieHallAdminHome} />
+                <Route exact path="/purchasehistory" component={PurchaseHistory} />
             </div>
         );
     }
