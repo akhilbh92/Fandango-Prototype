@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import fandangoLogo from './../login/fandango-logo.jpg';
 import {Link} from 'react-router-dom';
+import Message from '../Message/Message';
 
 
 class EnterTickets extends Component{
+
+
 
     render(){
         return(
@@ -47,11 +50,24 @@ class EnterTickets extends Component{
                         <hr />
                         <div>
                             Tickets:
-                            <input type="number" style={{ width:'50px', marginLeft: '42%'}}/>
+                            <input
+                                type="number"
+                                style={{ width:'50px', marginLeft: '42%'}}
+                                onChange={(event) => {
+                                    this.setState({
+                                        tickets: event.target.value,
+                                        type: true
+                                    });
+                                }}
+                            />
+
                         </div>
                         <hr />
 
-                        <Link to=""><button type="button" className="btn btn-warning" style={{ backgroundColor: "#F15500"}}>BUY TICKETS</button></Link>
+                        <Link to=""><button
+                            type="button"
+                            className="btn btn-warning"
+                            style={{ backgroundColor: "#F15500"}}>BUY TICKETS</button></Link>
 
 
                     </div>

@@ -3,6 +3,7 @@ import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
 import MoveOverview from './MovieOverview/MovieOverview'
 import { Link } from 'react-router-dom'
+import {connect} from "react-redux";
 
 
 class Movie_detail extends Component {
@@ -78,6 +79,12 @@ class Movie_detail extends Component {
                                     </div>
                                 </div>
                             </section>
+                            <div className="footer-overview">
+                                <h4 className="footer-overview-font">{this.props.movie.movie_name}   <span style={{ color: "#f15500"}}>Synopsis</span></h4>
+                                <div style={{marginLeft: "25%", width:"50%", textAlign: "center",marginTop: '20px'}}>
+                                <h4 className="footer-overview-font" style={{ paddingTop: '0px'}}>{this.props.movie.description} </h4>
+                                </div>
+                            </div>
                             {this.state.ActiveComponent}
                         </div>
                             {/*<MovieCrew/>*/}
@@ -89,4 +96,11 @@ class Movie_detail extends Component {
     };
 }
 
-export default Movie_detail;
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
+    }
+}
+
+
+export default connect(mapStateToProps)(Movie_detail);

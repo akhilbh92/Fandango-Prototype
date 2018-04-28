@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './movies.css'
 import * as API from './../../api/apicall_for_users';
+import {bindActionCreators} from "redux";
+import {selectedMovie} from "../../actions";
 
 
 
@@ -36,13 +38,18 @@ class SearchResult extends Component{
             <div className="page-header-container">
                 <div className="row">
                     <div className="large-12 columns">
-                        <h2 className="page-header">SHOWING RESULTS FOR "{this.props.criteria.criteria}"</h2>
+                        <h2 className="page-header">SHOWING RESULTS FOR <span style={{ color: "#F15500"}}>"{this.props.criteria.criteria}"</span></h2>
                     </div>
                 </div>
             </div>
 
         )
     }
+
+    handleSubmit = () => {
+        this.props.redirectURL("/moviedetail");
+    }
+
 
     renderMovies(){
         return this.state.movies.map((movie) => {
@@ -59,7 +66,7 @@ class SearchResult extends Component{
                             <img src={movie.photos} className="img-peculiar"/>
                         </div>
                         <div className="movie-heading">
-                            <h4>{movie.movie_name}</h4>
+                            <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{ movie.movie_name}</h4>
                         </div>
                         <div className="movie-extra-details">
                             <h5 className="gap">Release date: {movie.release_date}</h5>
@@ -114,9 +121,12 @@ class SearchResult extends Component{
 
 function mapStateToProps(state){
     return{
-        criteria: state.searchCriteria
+        criteria: state.searchCriteria,
+        movie: state.selectedMovie
     }
 }
 
-
-export default connect(mapStateToProps)(SearchResult);
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({selectedMovie: selectedMovie}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(SearchResult);
