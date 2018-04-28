@@ -79,8 +79,7 @@ class MovieForm extends React.Component {
     }
 
     render() {
-        console.log(this.state.movieLength);
-        document.addEventListener("click", function(){
+        document.getElementById('movieForm').addEventListener("click", function(){
             document.getElementById("hidden").style.display = "none";
         });
       return (
