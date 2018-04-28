@@ -29,7 +29,7 @@ var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRev
 var cityWiseMovieRevenue = require('./services/adminanalytics/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./services/adminanalytics/topTenHallByTickets');
 
-const userService = require('./services/users');
+const userService = Object.assign(require('./services/users'),require('./services/ratings'));
 
 consumer.addTopics(['request'], function (err, added) {
     if(err) {
@@ -147,7 +147,7 @@ consumer.on('message', (message) => {
                         partition: 0
                     }
                 ];
-        
+
                 producer.send(payloads, function (err, data) {
                     if (err) {
                         console.log(err);
