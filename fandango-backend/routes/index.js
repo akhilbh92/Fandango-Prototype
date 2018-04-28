@@ -32,6 +32,7 @@ const getProfile = require("./users/getProfile");
 const updateProfile = require('./users/updateProfile');
 const checkLogin = require('./users/checklogin');
 const addRating = require('./ratings/addrating');
+const getRatings = require('./ratings/getRatings');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -176,6 +177,11 @@ router.post('/checklogin', function (req,res,next) {
 router.post('/addRating', function (req,res,next) {
     console.log('ADD RATING API');
     addRating.addRatingRouterFn(req,res,next)
+});
+
+router.post('/getRatings', function (req,res,next) {
+    console.log('GET RATING API');
+    getRatings.getRatingsRouterFn(req,res,next)
 });
 
 module.exports = router;
