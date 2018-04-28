@@ -29,6 +29,7 @@ let loginRouterFn = function (req, res, next) {
             let resObj = new resFormat(info).customMeta({
                 message: 'login failed'
             });
+            resObj.setStatus(400);
             return res.status(resObj.getStatus()).json(resObj.log());
         }
 
