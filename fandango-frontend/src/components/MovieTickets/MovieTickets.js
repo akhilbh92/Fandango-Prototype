@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import './MovieTickets.css'
 import HomeHeader from './../AfterLogin/HomeHeader'
 import MovieDetailBox from '../MovieDetailBox/MovieDetailBox'
-
+import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
 
 class Movie_Tickets extends Component{
 
