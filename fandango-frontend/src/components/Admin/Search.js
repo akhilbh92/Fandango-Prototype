@@ -63,13 +63,13 @@ class Search extends Component {
             }
             if(name.toLowerCase().search(event.target.value.toLowerCase()) !== -1) {
                 if(event.target.value === ""){
-                    console.log('No Data:')
+                    console.log('No Data:');
                     this.setState({
                         items: []
                     });
                     return [];
                 } else {
-                    console.log('Data found:')
+                    console.log('Data found:');
                     itemsArray.push(totalList[index]);
                 }
             } 

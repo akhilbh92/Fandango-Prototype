@@ -29,11 +29,13 @@ import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
+
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
 
 import SearchResult from '../MoviesList/SearchResult'
 
 import PrivateRoute from './PrivateRoute'
+import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
 
 class RoutesComponent extends Component {
 
@@ -105,6 +107,7 @@ class RoutesComponent extends Component {
                 )} />
                 <Route exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
+                <Route exact path="/clicksperpage" component={ClicksPerPage}/>
             </div>
         );
     }

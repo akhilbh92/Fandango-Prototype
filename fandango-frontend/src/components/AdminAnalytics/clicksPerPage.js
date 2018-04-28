@@ -6,7 +6,7 @@ import log4javascript from 'log4javascript';
 var log1 = log4javascript.getLogger();
 
 
-class TopTenHallByTicketsSold extends Component{
+class ClicksPerPage extends Component{
     constructor(props){
         super(props);
 
@@ -21,32 +21,29 @@ class TopTenHallByTicketsSold extends Component{
         var ajaxAppender = new log4javascript.AjaxAppender('http://localhost:3001/api/logger');
         //ajaxAppender.setBatchSize(1); // send in batches of 10
         ajaxAppender.setTimed(true);
-        ajaxAppender.setTimerInterval(100); // send every 1 seconds (unit is milliseconds)
+        ajaxAppender.setTimerInterval(1000); // send every 1 seconds (unit is milliseconds)
         ajaxAppender.setSendAllOnUnload(); // send all remaining messages on window.beforeunload()
         log1.addAppender(ajaxAppender);
 
-        API.topTenHalls()
+        API.clicksPerPage()
             .then((resultData) => {
                 if (!!resultData.data) {
-                    const halls_data = resultData.data;
-                    let hall_names = [];
-                    let hall_revenue = [];
-                    let hall_tickets_sold = [];
-                    halls_data.forEach(hall_data => {
-                        hall_names.push(hall_data.hall_name);
-                        hall_revenue.push(hall_data.revenue);
-                        hall_tickets_sold.push(hall_data.total_no_of_tickets)
+                    const clicks_per_page = resultData.data;
+                    let page_names = [];
+                    let total_clicks = [];
+                    clicks_per_page.forEach(click => {
+                        page_names.push(click._id);
+                        total_clicks.push(click.total_count);
                     });
-                    console.log(`${JSON.stringify(hall_names)}`);
-                    console.log(`${JSON.stringify(hall_revenue)}`);
-                    console.log(`${JSON.stringify(hall_tickets_sold)}`);
+                    console.log(`${JSON.stringify(page_names)}`);
+                    console.log(`${JSON.stringify(total_clicks)}`);
                     this.setState({
                         Data: {
-                            labels: hall_names,
+                            labels: page_names,
                             datasets:[
                                 {
-                                    label:'Top Ten Movies By Revenue',
-                                    data: hall_revenue,
+                                    label:'Total Clicks Per Page Dashboard',
+                                    data: total_clicks,
                                     backgroundColor:[
                                         'rgba(255,105,145,0.6)',
                                         'rgba(155,100,210,0.6)',
@@ -60,13 +57,13 @@ class TopTenHallByTicketsSold extends Component{
                         }
                     });
                 } else {
-                    console.log("There are no tickets sold in last month");
+                    console.log("There are no clicks per page");
                 }
             });
     }
 
     handleClick() {
-        log1.info('{"event":"page_click","page_name":"TopTenHallsPage","count":"1"}');
+        log1.info('{"event":"page_click","page_name":"ClicksPerPage","count":"1"}');
     }
 
     render(){
@@ -79,4 +76,4 @@ class TopTenHallByTicketsSold extends Component{
     }
 }
 
-export default TopTenHallByTicketsSold;
+export default ClicksPerPage;
