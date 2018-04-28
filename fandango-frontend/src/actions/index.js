@@ -8,6 +8,14 @@ export const loginUser = (userinfo) => {
     }
 };
 
+export const selectedMovie = (movieinfo) => {
+    console.log(movieinfo);
+    return{
+        type: 'SELECTED_MOVIE',
+        payload: movieinfo
+    }
+};
+
 export const searchCriteria = (info) => {
     console.log(info);
     return{
