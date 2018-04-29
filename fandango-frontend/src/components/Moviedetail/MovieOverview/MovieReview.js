@@ -4,8 +4,122 @@ import Rating from 'react-rating';
 import {Link} from 'react-router-dom';
 import stargrey from './star-grey.png';
 import staryellow from './staryellow.png';
+import {connect} from "react-redux";
+import * as API from './../../../api/apicall_for_users';
+import {selectedReview} from "../../../actions";
+import {bindActionCreators} from "redux";
 
 class MovieReview extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.state={
+            movie_id: this.props.movie.id.toString(),
+            reviews: [],
+            ratings: ''
+        }
+    }
+
+    componentDidMount(){
+        API.getRatings(this.state)
+            .then((result) => {
+                this.setState({
+                    ratings: result.data.aggregates,
+                    reviews: result.data.ratings,
+                });
+
+            })
+    }
+
+    updateReview = () => {
+        window.location = "/moviedetailupdatereview";
+    }
+
+
+    renderLink(){
+        var display = "yes";
+        this.state.reviews.map((review) => {
+            if(review.userId == this.props.user.userId){
+                display="no";
+            }
+        })
+
+        if(display == "no"){
+            return (<div></div>)
+        }
+        else{
+            return(
+                <div className="submit-review">
+                    <Link to="/moviedetailaddreview">TELL US WHAT YOU THINK!!</Link>
+                </div>
+            )
+        }
+    }
+
+
+    renderReviews(){
+         return this.state.reviews.map((review) => {
+             if(review.userId != this.props.user.userId) {
+                 return (
+                     <div className="review-tab">
+                         <div className="star-review-pos">
+                             <Rating
+                                 placeholderRating={review.rating}
+                                 emptySymbol={<img src={stargrey} className="icon"/>}
+                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
+                                 fullSymbol={<img src={staryellow} className="icon"/>}
+                             />
+
+                         </div>
+                         <div className="review-spacing">
+                             <h4>{review.review_title}</h4>
+                         </div>
+                         <div className="reviewer-name">
+                             <h5>Review By: {review.first_name}</h5>
+                         </div>
+                         <div className="review-body">
+                             <h6>{review.review_body}
+                             </h6>
+                         </div>
+                     </div>
+                 )
+             }
+             else{
+                 return (
+                     <div className="review-tab">
+                         <div className="star-review-pos">
+                             <Rating
+                                 placeholderRating={review.rating}
+                                 emptySymbol={<img src={stargrey} className="icon"/>}
+                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
+                                 fullSymbol={<img src={staryellow} className="icon"/>}
+                             />
+
+                         </div>
+                         <div className="review-spacing">
+                             <h4>{review.review_title}</h4>
+                         </div>
+                         <div className="reviewer-name">
+                             <h5>Review By: {review.first_name}</h5>
+                         </div>
+                         <div className="review-body">
+                             <h6>{review.review_body}
+                             </h6>
+                         </div>
+                         <div style={{}}>
+                             <button type="button" className="btn" style={{ marginTop: "120px", marginLeft: '80%', backgroundColor: '#f15500' }} onClick={() => this.updateReview(this.props.selectedReview(review))}>EDIT</button>
+                         </div>
+                     </div>
+                 )
+             }
+
+        })
+    }
+
+
+
+
     render(){
         return(
 
@@ -89,119 +203,18 @@ class MovieReview extends Component {
                         <h3 className="review-header-font">FANS SAY</h3>
                         <div className="star-pos">
                             <Rating
-                                placeholderRating={3.5}
+                                placeholderRating={this.state.ratings.avgrating}
                                 emptySymbol={<img src={stargrey} className="icon" />}
                                 placeholderSymbol={<img src={staryellow} className="icon" />}
                                 fullSymbol={<img src={staryellow} className="icon" />}
                             />
                         </div>
-                        <h6 className="fans-rating"> 62,677 Fan Ratings</h6>
+                        <h6 className="fans-rating"> {this.state.ratings.totalrating} Fan Ratings</h6>
 
                     </div>
-                    <div className="submit-review">
-                        <Link to="/moviedetailaddreview">TELL US WHAT YOU THINK!!</Link>
-                    </div>
-                    <div className="review-tab">
-                        <div className="star-review-pos">
-                            <Rating
-                                placeholderRating={3.5}
-                                emptySymbol={<img src={stargrey} className="icon" />}
-                                placeholderSymbol={<img src={staryellow} className="icon" />}
-                                fullSymbol={<img src={staryellow} className="icon" />}
-                            />
 
-                        </div>
-                        <div className="review-spacing">
-                            <h2>REVIEW TITLE</h2>
-                        </div>
-                        <div className="reviewer-name">
-                            <h5>BY REVIEWER NAME</h5>
-                        </div>
-                        <div className="review-body">
-                            <h6>Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                            </h6>
-                        </div>
-                    </div>
-
-                    <div className="review-tab">
-                        <div className="star-review-pos">
-                            <Rating
-                                placeholderRating={3.5}
-                                emptySymbol={<img src={stargrey} className="icon" />}
-                                placeholderSymbol={<img src={staryellow} className="icon" />}
-                                fullSymbol={<img src={staryellow} className="icon" />}
-                            />
-
-                        </div>
-
-                        <div className="review-spacing">
-                            <h2>REVIEW TITLE</h2>
-                        </div>
-                        <div className="reviewer-name">
-                            <h5>BY REVIEWER NAME</h5>
-                        </div>
-                        <div className="review-body">
-                            <h6>Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                            </h6>
-                        </div>
-                    </div>
-
-                    <div className="review-tab">
-                        <div className="star-review-pos">
-                            <Rating
-                                placeholderRating={3.5}
-                                emptySymbol={<img src={stargrey} className="icon" />}
-                                placeholderSymbol={<img src={staryellow} className="icon" />}
-                                fullSymbol={<img src={staryellow} className="icon" />}
-                            />
-
-                        </div>
-
-                        <div className="review-spacing">
-                            <h2>REVIEW TITLE</h2>
-                        </div>
-                        <div className="reviewer-name">
-                            <h5>BY REVIEWER NAME</h5>
-                        </div>
-                        <div className="review-body">
-                            <h6>Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                            </h6>
-                        </div>
-                    </div>
-
-                    <div className="review-tab">
-                        <div className="star-review-pos">
-                            <Rating
-                                placeholderRating={3.5}
-                                emptySymbol={<img src={stargrey} className="icon" />}
-                                placeholderSymbol={<img src={staryellow} className="icon" />}
-                                fullSymbol={<img src={staryellow} className="icon" />}
-                            />
-
-                        </div>
-
-                        <div className="review-spacing">
-                            <h2>REVIEW TITLE</h2>
-                        </div>
-                        <div className="reviewer-name">
-                            <h5>BY REVIEWER NAME</h5>
-                        </div>
-                        <div className="review-body">
-                            <h6>Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                                Well acted, not as good as other superhero movies, boring but watchable.
-                            </h6>
-                        </div>
-                    </div>
-
-
-
+                    {this.renderLink()}
+                    {this.renderReviews()}
 
 
                 </div>
@@ -210,4 +223,15 @@ class MovieReview extends Component {
     }
 }
 
-export default MovieReview;
+function mapStateToProps(state){
+    return{
+        user: state.loginUser,
+        movie: state.selectedMovie,
+        review: state.selectedReview
+    }
+}
+
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({selectedReview: selectedReview}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(MovieReview);

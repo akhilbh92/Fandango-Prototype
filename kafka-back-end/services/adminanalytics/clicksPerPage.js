@@ -50,7 +50,18 @@ function handle_request(msg, callback) {
                                         }
                                         console.log(result2);
                                         //callback(null, result);
-                                        callback(null, {"page_clicks":result1,"movie_clicks":result2});
+                                        clicksPerPageCollection.aggregate([{$match:{event:"section_click"}},
+                                                {$group: {_id:"$genre_name",total_count:{$sum:1}}}],
+                                            function(err, result3) {
+                                                if(err) {
+                                                    callback(err,null);
+                                                    return;
+                                                }
+                                                console.log(result3);
+                                                //callback(null, result);
+                                                callback(null, {"page_clicks":result1,"movie_clicks":result2,"section_clicks":result3});
+                                            });
+                                        //callback(null, {"page_clicks":result1,"movie_clicks":result2});
                                     });
                             });
                     })

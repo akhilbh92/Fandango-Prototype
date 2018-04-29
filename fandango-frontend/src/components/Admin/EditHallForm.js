@@ -4,6 +4,7 @@ import NavBar from './Navigation';
 import HallForm from './HallForm';
 import * as API from '../../api/API';
 import CommonHeader from '../header/CommonHeader';
+import '../MovieHall/subheader.css';
 
 class EditHallForm extends Component {
     constructor(props){
@@ -25,9 +26,8 @@ class EditHallForm extends Component {
     }
     render(){
         return (
-            <div> 
+            <div className="admin-sub-header">  
                 <CommonHeader />
-                <Search group={this.state.group} /> 
                 <NavBar />
                 {
                     this.state.isCompMounted && 

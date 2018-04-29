@@ -1,28 +1,28 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Search from './Search';
 import NavBar from './Navigation';
 import HallForm from './HallForm';
 import CommonHeader from '../header/CommonHeader';
 
 class AddHallForm extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             group: ''
         };
     }
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             group: 'Theatres'
         })
     }
-    render(){
+    render() {
         return (
-            <div> 
-                 <CommonHeader />
-                <Search group={this.state.group} placeholder='Search for Theatres' />
+            <div className="admin-sub-header">
+                <CommonHeader />
                 <NavBar />
-                <HallForm /> 
+                <Search group={this.state.group} placeholder='Search for Theatres' />
+                <HallForm />
             </div>
         );
     }

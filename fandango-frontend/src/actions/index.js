@@ -16,6 +16,14 @@ export const selectedMovie = (movieinfo) => {
     }
 };
 
+export const selectedReview = (reviewinfo) => {
+    console.log(reviewinfo);
+    return{
+        type: 'SELECTED_REVIEW',
+        payload: reviewinfo
+    }
+};
+
 export const searchCriteria = (info) => {
     console.log(info);
     return{

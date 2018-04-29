@@ -8,15 +8,15 @@ import {connect} from "react-redux";
 import * as API from './../../../api/apicall_for_users';
 
 
-class MovieAddReview extends Component {
+class MovieUpdateReview extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            rating: '',
+            rating: this.props.review.rating,
             movie_id: this.props.movie.id.toString(),
-            review_title: '',
-            review_body: ''
+            review_title: this.props.review.review_title,
+            review_body: this.props.review.review_body
         }
     }
 
@@ -117,7 +117,7 @@ class MovieAddReview extends Component {
                         <h3 className="addreview-header-font">PLEASE RATE THE MOVIE FROM 1-5 STARS</h3>
                         <div className="addreview-header-star">
                             <Rating
-
+                                placeholderRating={this.props.review.rating}
                                 emptySymbol={<img src={stargrey} className="icon"/>}
                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
                                 fullSymbol={<img src={staryellow} className="icon"/>}
@@ -136,6 +136,7 @@ class MovieAddReview extends Component {
                         <div className="addreview-body-input">
                             <input
                                 type="text"
+                                placeholder={this.props.review.review_title}
                                 onChange={(event) => {
                                     this.setState({
                                         review_title: event.target.value,
@@ -149,6 +150,7 @@ class MovieAddReview extends Component {
                         <div className="addreview-textarea-input">
                             <textarea
                                 type="text"
+                                placeholder={this.props.review.review_body}
                                 style={{height: '200px'}}
                                 onChange={(event) => {
                                     this.setState({
@@ -162,9 +164,9 @@ class MovieAddReview extends Component {
                         <Link to="/moviedetailreview">
                             <button className="btn btn-danger cancel-button">CANCEL</button>
                         </Link>
-                            <button className="btn btn-primary cancel-button" style={{marginLeft: '10px'}}
-                                    onClick={() => this.AddReview(this.state)}>SAVE REVIEW
-                            </button>
+                        <button className="btn btn-primary cancel-button" style={{marginLeft: '10px'}}
+                                onClick={() => this.AddReview(this.state)}>SAVE REVIEW
+                        </button>
 
                     </div>
                 </div>
@@ -176,9 +178,10 @@ class MovieAddReview extends Component {
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        review: state.selectedReview
     }
 }
 
 
-export default connect(mapStateToProps)(MovieAddReview);
+export default connect(mapStateToProps)(MovieUpdateReview);

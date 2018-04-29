@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {selectedMovie} from "../../actions";
 import * as API from './../../api/apicall_for_users';
+import {log1} from "../../App";
 
 class AllMovies extends Component{
 
@@ -18,6 +19,7 @@ class AllMovies extends Component{
             movies_tofilter: []
 
         }
+        this.handleCaptureLessSeen = this.handleCaptureLessSeen.bind(this);
     }
 
     componentDidMount(){
@@ -32,6 +34,8 @@ class AllMovies extends Component{
 
 
     filterMovies = (filter) => {
+        let msg = '{"event":"section_click","section_name":"filter_genre","genre_name":"'+filter.toString()+'"}';
+        log1.info(msg);
         this.setState({
             filter: filter,
             movies_tofilter: this.state.movies.filter(movie => movie.genres.toLocaleLowerCase().includes(filter.toLowerCase()))
@@ -106,6 +110,10 @@ class AllMovies extends Component{
 
     handleSubmit = () => {
         this.props.redirectURL("/moviedetail");
+    }
+
+    handleCaptureLessSeen(section_type){
+        alert(section_type);
     }
 
     render(){

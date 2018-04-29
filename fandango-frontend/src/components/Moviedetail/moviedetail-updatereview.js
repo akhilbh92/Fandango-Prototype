@@ -1,28 +1,11 @@
 import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
-import MoveOverview from './MovieOverview/MovieOverview'
-import { Link } from 'react-router-dom'
-import {connect} from "react-redux";
-import {log1} from "../../App";
+import MovieUpdateReview from "./MovieOverview/MovieUpdateReview";
 
 
-class Movie_detail extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            ActiveComponent: <MoveOverview/>
-        }
-    }
-
-    componentDidMount(){
-        log1.info(`{"event":"movie_click","movie_id":"${this.props.movie.id}","movie_name":"${this.props.movie.movie_name}","count":"1"}`);
-    }
-
+class Movie_detail_updatereview extends Component {
     render(){
-
-
         return(
             <div>
                 <HomeHeader/>
@@ -52,7 +35,7 @@ class Movie_detail extends Component {
 
 
 
-                                            Rampage (2018)
+                                            Rampage (2018) <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
 
 
 
@@ -61,19 +44,19 @@ class Movie_detail extends Component {
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
                                             <li className="movie-detail-section-subnav-item">
-                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.setState({...this.state,ActiveComponent:<MoveOverview/>})}>
+                                                <a className="movie-detail-section-subnav-item-link">
                                                     Overview
-                                                </label>
+                                                </a>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <Link to = "/movietickets" className="movie-detail-section-subnav-item-link">
+                                                <a className="movie-detail-section-subnav-item-link">
                                                     Movie Times + tickets
-                                                </Link>
+                                                </a>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">
+                                                <a className="movie-detail-section-subnav-item-link">
                                                     REVIEWS
-                                                </Link>
+                                                </a>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
                                                 <a className="movie-detail-section-subnav-item-link">
@@ -84,28 +67,13 @@ class Movie_detail extends Component {
                                     </div>
                                 </div>
                             </section>
-                            <div className="footer-overview">
-                                <h4 className="footer-overview-font">{this.props.movie.movie_name}   <span style={{ color: "#f15500"}}>Synopsis</span></h4>
-                                <div style={{marginLeft: "25%", width:"50%", textAlign: "center",marginTop: '20px'}}>
-                                <h4 className="footer-overview-font" style={{ paddingTop: '0px'}}>{this.props.movie.description} </h4>
-                                </div>
-                            </div>
-                            {this.state.ActiveComponent}
+                            <MovieUpdateReview/>
+
                         </div>
-                            {/*<MovieCrew/>*/}
                     </div>
-
                 </div>
-
             </div>);
     };
 }
 
-function mapStateToProps(state){
-    return{
-        movie: state.selectedMovie
-    }
-}
-
-
-export default connect(mapStateToProps)(Movie_detail);
+export default Movie_detail_updatereview;

@@ -63,6 +63,20 @@ export const topTenMovies = () =>
         return error;
     });
 
+export const movieReviewGraphAPI = () =>
+    fetch(`${api}/moviereviewgraph`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const clicksPerPage = () =>
     fetch(`${api}/api/getlogs`, {
         method: 'GET',
@@ -197,6 +211,21 @@ export const getRevenueByMovie = (dataJson) =>
         return error;
     });
 
+export const getRevenueByMoviePerHall = (dataJson) =>
+    fetch(`${api}/movierevenuebyadmin`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(dataJson)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const getProfile = (dataJson) =>
     fetch(`${api}/getProfile`, {
         method: 'POST',
@@ -250,7 +279,7 @@ export const getUserByEmail = (email) =>
             'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({email})
+        body: JSON.stringify({ email })
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
@@ -378,14 +407,15 @@ export const addScreen = (hallId, screenNum, screenType, totalSeats) =>
         },
         credentials: 'include',
         body: JSON.stringify({
-            hallId, screenNum, screenType, totalSeats })
+            hallId, screenNum, screenType, totalSeats
+        })
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
         return error;
     });
 
-export const updateProfile = (userId, email, role, first_name, last_name, 
+export const updateProfile = (userId, email, role, first_name, last_name,
     address, city, state, zipcode, phone_number, hall_id) =>
     fetch(`${api}/updateProfile`, {
         method: 'POST',

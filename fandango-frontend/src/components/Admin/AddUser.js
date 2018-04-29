@@ -7,7 +7,9 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 class AddUser extends Component {
+
     notify = (msg) => toast(msg);
+    
     constructor(props){
         super(props);
         this.state = {
@@ -31,7 +33,7 @@ class AddUser extends Component {
 
     render(){
         return (
-            <div id='UpdateUser'> 
+            <div id='UpdateUser' className="admin-sub-header"> 
                 <CommonHeader />
                 <NavBar />
                 <form>
