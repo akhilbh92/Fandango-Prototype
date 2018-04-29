@@ -91,6 +91,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/toptenmovies" component={TopTenMoviesByRevenue} />
                 <Route exact path="/movietickets" component={MovieTickets} />
                 <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <Route exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
                 <Route exact path="/entertickets" render={() => (
                     <div>
 
