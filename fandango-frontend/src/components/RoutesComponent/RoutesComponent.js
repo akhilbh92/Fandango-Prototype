@@ -41,6 +41,7 @@ import SearchResult from '../MoviesList/SearchResult'
 
 import PrivateRoute from './PrivateRoute'
 import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
+import MovieReviewGraph from '../AdminAnalytics/movieReviewGraph';
 
 class RoutesComponent extends Component {
 
@@ -117,6 +118,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
                 <Route exact path="/clicksperpage" component={ClicksPerPage}/>
+                <Route exact path="/moviereviewgraph" component={MovieReviewGraph}/>
             </div>
         );
     }

@@ -24,6 +24,7 @@ var topTenMoviesByRevenue = require('./admin/topTenMoviesByRevenue');
 var cityWiseMovieRevenue = require('./admin/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./admin/topTenHallByTickets');
 var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
+var movieReviewGraph = require('./admin/movieReviewGraph');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -120,6 +121,12 @@ router.get('/topTenHallByTickets', function (req, res, next) {
 router.post('/movierevenuebyadmin', function (req, res, next) {
     console.log('GET Revenue by MOVIES API by fandango admin');
     MovieRevenueByAdmin.MovieRevenueByAdminRouterFn(req, res, next);
+});
+
+
+router.get('/moviereviewgraph', function (req, res, next) {
+    console.log('GET Movies by Reviews API by fandango admin');
+    movieReviewGraph.movieReviewGraphRouterFn(req, res, next);
 });
 
 router.post('/addMovieSchedule', function (req, res, next) {

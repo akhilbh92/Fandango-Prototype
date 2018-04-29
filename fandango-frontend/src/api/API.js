@@ -63,6 +63,20 @@ export const topTenMovies = () =>
         return error;
     });
 
+export const movieReviewGraphAPI = () =>
+    fetch(`${api}/moviereviewgraph`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const clicksPerPage = () =>
     fetch(`${api}/api/getlogs`, {
         method: 'GET',
