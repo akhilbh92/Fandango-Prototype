@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './MovieHallsBox.css'
 
 class Movie_Halls extends Component{
+
     render(){
         return <div>
             <div id="movehallsDIV_1">
