@@ -126,3 +126,5 @@
 {"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:40:41.061Z"}
 {"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:41:25.604Z"}
 {"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:42:22.330Z"}
+{"event":"movie_click","movie_id":"29","movie_name":"La La Land","count":"1","level":"info","message":"","timestamp":"2018-04-29T02:47:31.390Z"}
+{"event":"movie_click","movie_id":"29","movie_name":"La La Land","count":"1","level":"info","message":"","timestamp":"2018-04-29T02:47:47.285Z"}

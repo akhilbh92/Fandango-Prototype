@@ -1,9 +1,12 @@
 import React from 'react';
 import * as API from '../../api/API';
 import {Alert, Button} from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 class MovieForm extends React.Component {
+    notify = (msg) => toast(msg);
+
     constructor(props){
         super(props);
         this.state = {
@@ -45,7 +48,8 @@ class MovieForm extends React.Component {
 
     uploadPhotos(){
         if(this.state.movieName === '') {
-            document.getElementById('hidden-alert').style.display = 'block';
+            // document.getElementById('hidden-alert').style.display = 'block'
+            this.notify('Please enter the movie name, followed by file upload.');
             return;
         }
         const data = new FormData();
@@ -66,13 +70,15 @@ class MovieForm extends React.Component {
             API.editMovie(this.props.movieId,this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
                 this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
                 this.state.genres).then((data)=> {
-                    document.getElementById('response-message').style.display = 'block';
+                    this.notify('Movie updated successfully');
                 });
         } else {
             API.addMovie(this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
                 this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
                 this.state.genres).then((data)=> {
-                    document.getElementById('response-message').style.display = 'block';
+                    this.notify('Movie saved successfully');
+                }).catch((err)=> {
+                    this.notify(err);
                 });
         }
         event.preventDefault();
@@ -97,7 +103,7 @@ class MovieForm extends React.Component {
                                 value={this.state.movieName}
                                 required 
                                 onChange={(event) => {
-                                    document.getElementById("hidden-alert").style.display = "none";
+                                    // document.getElementById("hidden-alert").style.display = "none";
                                     this.setState({
                                         movieName: event.target.value
                                     });
@@ -273,20 +279,14 @@ class MovieForm extends React.Component {
                                 }
                             </div>
                             <Button id="upload-button"  className="col-sm-1 btn btn-light" onClick={this.uploadPhotos}> Upload </Button>
+                            <ToastContainer />
                         </div>
                     </div>
                 </div>
-
                 <br />
-                <div className="col-sm-2"> </div>         
-                <Alert className="col-sm-9" bsStyle="warning" id='hidden-alert'>
-                    <strong>Input Error</strong> Please enter the movie name, followed by file upload.
-                </Alert>
-                
-                <br />
-                <div className="col-sm-3"> </div>                
-                <div className="col-sm-5"> <p id='response-message'> Movie added successfully </p> </div>
-                <Button id="submit-button"  className="col-sm-2 btn btn-primary" onClick={this.handleSubmit}> Add Movie </Button>
+                <div className="col-sm-8"> </div>        
+                <Button id="submit-button"  className="col-sm-1 btn btn-primary" onClick={this.handleSubmit}> Add Movie </Button>
+                <ToastContainer />
                 <br/> <br/>
             </form> <br/>
         </div>

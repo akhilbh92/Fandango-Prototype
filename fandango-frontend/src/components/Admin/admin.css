@@ -115,3 +115,29 @@
 .hall-list li{
     list-style-type: none;
 }
+
+.form-buttons {
+    float: left;
+}
+
+.screen-form .form-group {
+    float: left;
+}
+
+.screenButton{
+    padding-top: 34px;
+    padding-left: 10px;
+}
+
+.screenButton #trash {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.screenButton #save {
+    margin-left: 50px;
+}
+
+.screen-title {
+    padding-top: 34px;
+}

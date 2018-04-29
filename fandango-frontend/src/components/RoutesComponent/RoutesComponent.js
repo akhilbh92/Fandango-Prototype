@@ -16,7 +16,6 @@ import EditHallForm from '../Admin/EditHallForm';
 import EditMovieForm from '../Admin/EditMovieForm';
 import AddMovieForm from '../Admin/AddMovieForm';
 import AddHallForm from '../Admin/AddHallForm';
-import AddScreenForm from '../Admin/AddScreenForm';
 import AddUser from '../Admin/AddUser';
 import UpdateUser from '../Admin/UpdateUser';
 
@@ -85,7 +84,6 @@ class RoutesComponent extends Component {
                 <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
                 <Route exact path ="/admin/addMovie" component={AddMovieForm} />
                 <Route exact path ="/admin/addHall" component={AddHallForm} />
-                <Route exact path ="/admin/addScreen" component={AddScreenForm} />
                 <Route exact path ="/admin/addUser" component={AddUser} />
                 <Route exact path ="/admin/updateUser" component={UpdateUser} />
                 <PrivateRoute exact path ="/movierevenue" component={RevenueByMovie} />

@@ -2,19 +2,26 @@ import React, {Component} from 'react';
 import Search from './Search';
 import NavBar from './Navigation';
 import HallForm from './HallForm';
+import * as API from '../../api/API';
 import CommonHeader from '../header/CommonHeader';
 
 class EditHallForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            group: ''
+            group: '',
+            allScreens: [],
+            isCompMounted: false
         };
     }
     componentDidMount(){
-        this.setState({
-            group: 'Theatres'
-        })
+        API.getScreensByHall({hallId: this.props.match.params.hallId}).then((result)=>{
+            this.setState({
+                allScreens : result.data,
+                group: 'Theatres',
+                isCompMounted: true
+            })
+        });
     }
     render(){
         return (
@@ -22,7 +29,13 @@ class EditHallForm extends Component {
                 <CommonHeader />
                 <Search group={this.state.group} /> 
                 <NavBar />
-                <HallForm hallId={this.props.match.params.hallId}/>
+                {
+                    this.state.isCompMounted && 
+                    <HallForm 
+                    hallId={this.props.match.params.hallId}
+                    allScreens={this.state.allScreens}
+                    />
+                }
             </div>
         );
     }

@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import * as API from '../../api/API';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 class UserForm extends Component {
+    notify = (msg) => toast(msg);
+
     constructor(props){
         super(props);
         this.state = {
@@ -37,9 +41,9 @@ class UserForm extends Component {
                 phoneNumber: res.phone_number,
                 hallId: res.hall_id
             });
-            document.getElementById('form-header').innerHTML = 'Update User Profile';
-            document.getElementById('submit-user').innerHTML = 'Update User';
-            document.getElementById('response-message').innerHTML = 'User Profile updated successfully';
+            // document.getElementById('form-header').innerHTML = 'Update User Profile';
+            // document.getElementById('submit-user').innerHTML = 'Update User';
+            // document.getElementById('response-message').innerHTML = 'User Profile updated successfully';
         }
     }
 
@@ -48,17 +52,18 @@ class UserForm extends Component {
         API.updateProfile(this.state.userId, this.props.email, this.state.role, this.state.firstName, this.state.lastName, 
             this.state.address, this.state.city, this.state.state, this.state.zipcode, this.state.phoneNumber, 
             this.state.hallId). then((result) => {
-                document.getElementById('response-message').style.display = 'block';
+                this.notify('User Profile updated successfully');
+            }).catch((err)=>{
+                this.notify(err);
             });
         } 
-        document.getElementById('response-message').style.display = 'block';
     }
 
     render(){
         return (
             <div className='UpdateUserForm'> 
                 <br />
-                <h3 id="form-header"> <strong> Add User Profile </strong> </h3> 
+                <h3 id="form-header"> <strong> Update User Profile </strong> </h3> 
                 <br /><br />
                 <form> 
                 <div className= "admin-forms">
@@ -273,7 +278,8 @@ class UserForm extends Component {
                 <br />
                 <div className="col-sm-3"> </div>                
                 <div className="col-sm-5"> <p id='response-message'> User Profile added successfully </p> </div>
-                <Button id="submit-user"  className="col-sm-2 btn btn-primary" onClick={this.handleSubmit}> Add User </Button>
+                <Button id="submit-user"  className="col-sm-2 btn btn-primary" onClick={this.handleSubmit}> Update User </Button>
+                <ToastContainer />
                 <br/> <br/>
                 </form>
                
