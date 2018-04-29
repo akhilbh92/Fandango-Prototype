@@ -107,8 +107,6 @@ class RoutesComponent extends Component {
                         <SearchResult redirectURL={this.redirectURL} />
                     </div>
                 )} />
-                <Route exact path="/mhadmin" component={MovieHallAdminHome} />
-                <Route exact path="/purchasehistory" component={PurchaseHistory} />
                 <Route exact path="/clicksperpage" component={ClicksPerPage}/>
             </div>
         );

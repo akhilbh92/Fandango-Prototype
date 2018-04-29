@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import * as CardValidator from '../Helper/CardValidator';
 let state_regex_pattern = require('../Helper/StateRegex');
 let zipcode_regex = require('../Helper/ZipcodeRegex');
+let emailRegex = require('../Helper/EmailRegex');
+let phoneNoRegex = require('../Helper/PhoneNumberRegex');
 
 class AccountPreferences extends Component {
 
@@ -102,15 +104,38 @@ class AccountPreferences extends Component {
     }
 
     validateConfirmEmail() {
-        if (this.state.newPassword != this.state.confirmPassword) {
+        if (this.state.newEmail !== this.state.confirmEmail) {
             return false;
         } else {
             return true;
         }
     }
 
+    validateEmail(email) {
+        if (email == "") {
+            return false;
+        }
+        else if (!emailRegex.test(email)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    validatePhoneNo(phoneNo) {
+        if (phoneNo == "") {
+            return false;
+        }
+        else if (!phoneNoRegex.test(phoneNo)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     validateConfirmPhoneNo() {
-        console.log("inside phone method")
         if (this.state.newPhone != this.state.confirmPhone) {
             return false;
         } else {
@@ -127,7 +152,6 @@ class AccountPreferences extends Component {
     }
 
     validateExpiration() {
-        console.log("inside expiration")
         if (this.state.expiration == "") {
             return false;
         } else {
@@ -145,7 +169,6 @@ class AccountPreferences extends Component {
 
     updateBasicInfoDetails() {
         this.setState({ basicInfoSubmitted: true });
-        console.log("validate state :", this.validateState());
         if (!!this.state.first_name && !!this.state.address
             && !!this.state.city && !!this.state.state && this.validateState()
             && this.validateZipcode()) {
@@ -163,22 +186,39 @@ class AccountPreferences extends Component {
     }
     updateEmailDetails() {
         this.setState({ emailSubmitted: true });
-        if (!!this.state.newEmail && !!this.state.confirmEmail && this.validateConfirmEmail()) {
+        if (!!this.state.newEmail && !!this.state.confirmEmail && this.validateConfirmEmail()
+            && this.validateEmail(this.state.newEmail) && this.validateEmail(this.state.confirmEmail)) {
             let updatedUserObj = {};
             updatedUserObj.userId = this.state.userId;
-            updatedUserObj.email = this.state.email;
-            this.updateUserDetails(updatedUserObj);
-            this.setState({ emailSubmitted: false });
+            updatedUserObj.email = this.state.newEmail;
+            this.updateUserDetails(updatedUserObj)
+                .then(() => {
+                    this.setState({
+                        email: updatedUserObj.email,
+                        newEmail: '',
+                        confirmEmail: '',
+                        emailSubmitted: false
+                    });
+                });
         }
     }
     updatePhoneDetails() {
         this.setState({ phoneSubmitted: true });
-        if (!!this.state.newPhone && !!this.state.confirmPhone && this.validateConfirmPhoneNo()) {
+        if (!!this.state.newPhone && !!this.state.confirmPhone && this.validateConfirmPhoneNo()
+            && this.validatePhoneNo(this.state.newPhone) && this.validatePhoneNo(this.state.confirmPhone)) {
             let updatedUserObj = {};
             updatedUserObj.userId = this.state.userId;
-            updatedUserObj.phone_number = this.state.phone_number;
-            this.updateUserDetails(updatedUserObj);
-            this.setState({ phoneSubmitted: false });
+            updatedUserObj.phone_number = this.state.newPhone;
+            this.updateUserDetails(updatedUserObj)
+                .then(() => {
+                    this.setState({
+                        phone_number: updatedUserObj.phone_number,
+                        newPhone: '',
+                        confirmPhone: '',
+                        phoneSubmitted: false
+                    });
+                }).catch(error => {
+                });
         }
     }
     updatePasswordDetails() {
@@ -186,10 +226,18 @@ class AccountPreferences extends Component {
         if (!!this.state.newPassword && !!this.state.confirmPassword && this.validateConfirmPassword()) {
             let updatedUserObj = {};
             updatedUserObj.userId = this.state.userId;
-            updatedUserObj.oldPassword = this.state.currentPassword;
-            updatedUserObj.newPassword = this.state.newPassword;
-            this.updateUserDetails(updatedUserObj);
-            this.setState({ passwordSubmitted: false });
+            updatedUserObj.oldpassword = this.state.currentPassword;
+            updatedUserObj.newpassword = this.state.newPassword;
+            this.updateUserDetails(updatedUserObj)
+                .then(() => {
+                    this.setState({
+                        currentPassword: '',
+                        newPassword: '',
+                        confirmPassword: '',
+                        passwordSubmitted: false
+                    });
+                }).catch(error => {
+                });
         }
     }
 
@@ -207,16 +255,21 @@ class AccountPreferences extends Component {
     }
 
     updateUserDetails(updatedUserObj) {
-        API.updateUserDetails(updatedUserObj)
-            .then((resultData) => {
-                if (!!resultData.data) {
-                    this.notify(resultData.data);
-                } else {
-                    console.log("No User From this ID Available");
-                }
-            }).catch(error => {
-                this.notify(error);
-            });
+        return new Promise((resolve, reject) => {
+            API.updateUserDetails(updatedUserObj)
+                .then((resultData) => {
+                    if (!!resultData.data) {
+                        this.notify(resultData.data);
+                        resolve();
+                    } else {
+                        this.notify(resultData.message);
+                        return reject();
+                    }
+                }).catch(error => {
+                    this.notify(error);
+                    return reject(error);
+                });
+        });
 
     }
 
@@ -329,7 +382,7 @@ class AccountPreferences extends Component {
                     <div className="col-md-offset-2 col-md-8 preferences-expand">
                         <h5 className="first-element">Current Email</h5>
                         <h5 className="first-element" style={{ fontWeight: 'bold' }}>{this.state.email}</h5>
-                        <div className={(this.state.emailSubmitted && (!this.state.newEmail) ? ' has-error' : '')}>
+                        <div className={(this.state.emailSubmitted && (!this.state.newEmail || !(this.validateEmail(this.state.newEmail))) ? ' has-error' : '')}>
                             <h5 className="first-element">New Email</h5>
                             <input type="text" style={{ marginLeft: '20px', width: '40%' }}
                                 value={this.state.newEmail}
@@ -338,11 +391,11 @@ class AccountPreferences extends Component {
                                         newEmail: event.target.value
                                     });
                                 }} />
-                            {this.state.emailSubmitted && (!this.state.newEmail) &&
+                            {this.state.emailSubmitted && (!this.state.newEmail || !(this.validateEmail(this.state.newEmail))) &&
                                 <div><div style={{ float: 'left', paddingTop: '0px' }} className="help-block first-element">New Email is Invalid</div><br /></div>
                             }
                         </div>
-                        <div className={(this.state.emailSubmitted && (!this.state.confirmEmail || !(this.validateConfirmEmail())) ? ' has-error' : '')}>
+                        <div className={(this.state.emailSubmitted && (!this.state.confirmEmail || !(this.validateEmail(this.state.confirmEmail)) || !(this.validateConfirmEmail())) ? ' has-error' : '')}>
                             <h5 className="first-element">Confirm Email</h5>
                             <input type="text" style={{ marginLeft: '20px', width: '40%' }}
                                 value={this.state.confirmEmail}
@@ -351,7 +404,7 @@ class AccountPreferences extends Component {
                                         confirmEmail: event.target.value
                                     });
                                 }} />
-                            {this.state.emailSubmitted && (!this.state.confirmEmail || !(this.validateConfirmEmail())) &&
+                            {this.state.emailSubmitted && (!this.state.confirmEmail || !(this.validateEmail(this.state.confirmEmail)) || !(this.validateConfirmEmail())) &&
                                 <div><div style={{ float: 'left', paddingTop: '0px' }} className="help-block first-element">Confirm Email is Invalid</div><br /></div>
                             }
                         </div>
@@ -364,9 +417,10 @@ class AccountPreferences extends Component {
                         <h2 className="account-font">CHANGE PHONE</h2>
                     </div>
                     <div className="col-md-offset-2 col-md-8 preferences-expand">
+                        <h5 className="first-element">{"Phone format should be 000-000-000/(000) 000-000"}</h5>
                         <h5 className="first-element">Current Phone</h5>
                         <h5 className="first-element" style={{ fontWeight: 'bold' }}>{this.state.phone_number}</h5>
-                        <div className={(this.state.phoneSubmitted && (!this.state.newPhone) ? ' has-error' : '')}>
+                        <div className={(this.state.phoneSubmitted && (!this.state.newPhone || !(this.validatePhoneNo(this.state.newPhone))) ? ' has-error' : '')}>
                             <h5 className="first-element">New Phone</h5>
                             <input type="text" style={{ marginLeft: '20px', width: '40%' }}
                                 value={this.state.newPhone}
@@ -375,11 +429,11 @@ class AccountPreferences extends Component {
                                         newPhone: event.target.value
                                     });
                                 }} />
-                            {this.state.phoneSubmitted && (!this.state.newPhone) &&
+                            {this.state.phoneSubmitted && (!this.state.newPhone || !(this.validatePhoneNo(this.state.newPhone))) &&
                                 <div><div style={{ float: 'left', paddingTop: '0px' }} className="help-block first-element">New Phone Number is Invalid</div><br /></div>
                             }
                         </div>
-                        <div className={(this.state.phoneSubmitted && (!this.state.confirmPhone || !(this.validateConfirmPhoneNo())) ? ' has-error' : '')}>
+                        <div className={(this.state.phoneSubmitted && (!this.state.confirmPhone || !(this.validatePhoneNo(this.state.confirmPhone)) || !(this.validateConfirmPhoneNo())) ? ' has-error' : '')}>
                             <h5 className="first-element">Confirm Phone</h5>
                             <input type="text" style={{ marginLeft: '20px', width: '40%' }}
                                 value={this.state.confirmPhone}
@@ -388,7 +442,7 @@ class AccountPreferences extends Component {
                                         confirmPhone: event.target.value
                                     });
                                 }} />
-                            {this.state.phoneSubmitted && (!this.state.confirmPhone || !(this.validateConfirmPhoneNo())) &&
+                            {this.state.phoneSubmitted && (!this.state.confirmPhone || !(this.validatePhoneNo(this.state.confirmPhone)) || !(this.validateConfirmPhoneNo())) &&
                                 <div><div style={{ float: 'left', paddingTop: '0px' }} className="help-block first-element">Confirm Phone Number is Invalid</div><br /></div>
                             }
                         </div>
