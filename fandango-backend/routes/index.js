@@ -37,6 +37,7 @@ const checkLogin = require('./users/checklogin');
 const addRating = require('./ratings/addrating');
 const getRatings = require('./ratings/getRatings');
 const getmovieschedulebydate = require('./movieschedule/getmovieschedulebydate');
+const bookMovie = require('./Billing/bookMovie');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -209,4 +210,10 @@ router.post('/getmovieschedulebydate', function (req,res,next) {
     console.log('GET MOVIE SCHEDULE BY DATE API');
     getmovieschedulebydate.getmovieschedulebydateRouterFn(req,res,next)
 });
+
+router.post('/bookMovie', function (req,res,next) {
+    console.log('BOOOK MOVIE API');
+    bookMovie.bookMovieRouterFn(req,res,next)
+});
+
 module.exports = router;
