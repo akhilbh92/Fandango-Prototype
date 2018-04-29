@@ -430,7 +430,7 @@
     perspective-origin: 310px 175px;
     transform-origin: 310px 175px;
     caret-color: rgb(76, 76, 76);
-    background: rgba(0, 0, 0, 0) url("https://images.fandango.com/imagerelay/500/0/video.fandango.com/MPX/image/NBCU_Fandango/962/923/thumb_762A69FF-CA69-4A88-8234-8F85E31E65EE.jpg/image.jpg/redesign/static/img/noxSquare.jpg") repeat scroll 50% 50% / cover padding-box border-box;
+    /*background: rgba(0, 0, 0, 0) url("https://images.fandango.com/imagerelay/500/0/video.fandango.com/MPX/image/NBCU_Fandango/962/923/thumb_762A69FF-CA69-4A88-8234-8F85E31E65EE.jpg/image.jpg/redesign/static/img/noxSquare.jpg") repeat scroll 50% 50% / cover padding-box border-box;*/
     border: 0px none rgb(76, 76, 76);
     border-radius: 0 0 0 0;
     font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;
