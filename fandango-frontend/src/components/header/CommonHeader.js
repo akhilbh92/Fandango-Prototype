@@ -20,8 +20,9 @@ class CommonHeader extends Component {
 
   signout() {
     doSignOut({}).then((response) => {
-      this.props.loginUser(null);
+
       window.location = "/"
+        this.props.loginUser(null);
     })
   }
 

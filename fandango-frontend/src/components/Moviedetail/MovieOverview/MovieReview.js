@@ -31,7 +31,25 @@ class MovieReview extends Component {
     }
 
 
+    renderLink(){
+        var display = "yes";
+        this.state.reviews.map((review) => {
+            if(review.userId == this.props.user.userId){
+                display="no";
+            }
+        })
 
+        if(display == "no"){
+            return (<div></div>)
+        }
+        else{
+            return(
+                <div className="submit-review">
+                    <Link to="/moviedetailaddreview">TELL US WHAT YOU THINK!!</Link>
+                </div>
+            )
+        }
+    }
 
 
     renderReviews(){
@@ -158,9 +176,7 @@ class MovieReview extends Component {
                         <h6 className="fans-rating"> {this.state.ratings.totalrating} Fan Ratings</h6>
 
                     </div>
-                    {/*<div className="submit-review">*/}
-                        {/*<Link to="/moviedetailaddreview">TELL US WHAT YOU THINK!!</Link>*/}
-                    {/*</div>*/}
+
                     {this.renderLink()}
                     {this.renderReviews()}
 
