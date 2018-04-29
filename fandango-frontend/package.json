@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "card-validator": "^4.3.0",
     "chart.js": "^2.7.2",
     "dateformat": "^3.0.3",
     "express-fileupload": "^0.4.0",
