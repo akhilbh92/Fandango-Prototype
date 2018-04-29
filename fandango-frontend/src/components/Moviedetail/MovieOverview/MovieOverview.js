@@ -5,6 +5,8 @@ import stargrey from './star-grey.png'
 import staryellow from './staryellow.png'
 import {connect} from "react-redux";
 import * as API from "../../../api/apicall_for_users";
+import YouTube from 'react-youtube';
+
 
 class MovieOverview extends Component {
 
@@ -110,6 +112,11 @@ class MovieOverview extends Component {
                     <div id="DIV_2">
                         <div id="DIV_3">
                             <div id="DIV_4">
+                                <YouTube
+                                    videoId={this.props.movie.trailer}
+                                    autoplay={true}
+                                    opts={{"height": '135%',"width": '130%'}}
+                                />
                             </div>
                         </div>
 
