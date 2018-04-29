@@ -19,7 +19,6 @@ import AddHallForm from '../Admin/AddHallForm';
 import AddScreenForm from '../Admin/AddScreenForm';
 import AddUser from '../Admin/AddUser';
 import UpdateUser from '../Admin/UpdateUser';
-
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
