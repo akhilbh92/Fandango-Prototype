@@ -385,8 +385,8 @@ export const addScreen = (hallId, screenNum, screenType, totalSeats) =>
         return error;
     });
 
-export const updateProfile = (userId, email, role, first_name, last_name, 
-    address, city, state, zipcode, phone_number, hall_id) =>
+export const updateProfile = (userId, email, role, first_name, last_name,
+                              address, city, state, zipcode, phone_number, hall_id) =>
     fetch(`${api}/updateProfile`, {
         method: 'POST',
         headers: {
