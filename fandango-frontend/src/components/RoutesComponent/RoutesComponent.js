@@ -30,14 +30,11 @@ import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
 import EnterTickets from './../Payments/EnterTickets';
 import PaymentInfo from './../Payments/PaymentInfo';
 import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
-
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
-
 import SearchResult from '../MoviesList/SearchResult'
-
 import PrivateRoute from './PrivateRoute'
 import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
 import MovieReviewGraph from '../AdminAnalytics/movieReviewGraph';
@@ -116,7 +113,6 @@ class RoutesComponent extends Component {
                 )} />
                 <Route exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
-
                 <Route exact path="/clicksperpage" component={ClicksPerPage}/>
                 <Route exact path="/moviereviewgraph" component={MovieReviewGraph}/>
             </div>
