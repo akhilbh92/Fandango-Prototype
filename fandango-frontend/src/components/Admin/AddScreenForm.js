@@ -3,6 +3,7 @@ import NavBar from './Navigation';
 import CommonHeader from '../header/CommonHeader';
 import { DropdownButton, MenuItem, Button, Alert } from 'react-bootstrap';
 import * as API from '../../api/API';
+import '../MovieHall/subheader.css';
 
 class AddScreenForm extends Component {
     constructor(props){
@@ -67,7 +68,7 @@ class AddScreenForm extends Component {
         }
         
         return (
-            <div className="screenForm"> 
+            <div className="screenForm admin-sub-header"> 
                 <CommonHeader />
                 <NavBar />
                 <form> 

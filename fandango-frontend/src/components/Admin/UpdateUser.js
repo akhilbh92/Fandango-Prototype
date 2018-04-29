@@ -4,6 +4,7 @@ import CommonHeader from '../header/CommonHeader';
 import { Button } from 'react-bootstrap';
 import UserForm from './UserForm';
 import * as API from '../../api/API';
+import '../MovieHall/subheader.css';
 
 class UpdateUser extends Component {
     constructor(props){
@@ -28,7 +29,7 @@ class UpdateUser extends Component {
 
     render(){
         return (
-            <div id='UpdateUser'> 
+            <div id='UpdateUser' className="admin-sub-header">  
                 <CommonHeader />
                 <NavBar />
                 <div className= "searchUser">

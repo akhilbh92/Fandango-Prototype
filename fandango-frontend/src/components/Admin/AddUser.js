@@ -3,6 +3,7 @@ import NavBar from './Navigation';
 import CommonHeader from '../header/CommonHeader';
 import { Alert, Button } from 'react-bootstrap';
 import * as API from '../../api/apicall_for_users';
+import '../MovieHall/subheader.css';
 
 class AddUser extends Component {
     constructor(props){
@@ -30,7 +31,7 @@ class AddUser extends Component {
 
     render(){
         return (
-            <div id='UpdateUser'> 
+            <div id='UpdateUser' className="admin-sub-header"> 
                 <CommonHeader />
                 <NavBar />
                 <form>
