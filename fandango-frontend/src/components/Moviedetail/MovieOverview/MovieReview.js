@@ -33,7 +33,6 @@ class MovieReview extends Component {
     renderLink(){
         var display = "";
         this.state.reviews.map((review) => {
-          if(review.fname)
         })
 
 

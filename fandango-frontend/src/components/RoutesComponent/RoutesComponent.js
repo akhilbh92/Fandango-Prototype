@@ -19,7 +19,6 @@ import AddHallForm from '../Admin/AddHallForm';
 import AddScreenForm from '../Admin/AddScreenForm';
 import AddUser from '../Admin/AddUser';
 import UpdateUser from '../Admin/UpdateUser';
-
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
@@ -30,16 +29,11 @@ import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
 import EnterTickets from './../Payments/EnterTickets';
 import PaymentInfo from './../Payments/PaymentInfo';
 import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
-
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
-
-import PurchaseHistory from '../AfterLogin/PurchaseHistory';
-
 import SearchResult from '../MoviesList/SearchResult'
-
 import PrivateRoute from './PrivateRoute'
 import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
 import MovieReviewGraph from '../AdminAnalytics/movieReviewGraph';
