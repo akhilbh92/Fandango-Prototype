@@ -23,5 +23,5 @@ const Hall =  db.sequelize.define('hall', {
     });
 
 Hall.sync();
-module.exports =  Hall ;
+module.exports = {Hall}  ;
         

@@ -11,6 +11,7 @@ var getScreen = require('./admin/getScreen');
 var editMovie = require('./admin/editMovie');
 var editHall = require('./admin/editHall');
 var editScreen = require('./admin/editScreen');
+var getUserByEmail = require('./admin/getUserByEmail');
 var getLimitedMovies = require('./admin/getLimitedMovies');
 var addMovieSchedule = require('./moviehall/addMovieSchedule');
 var getMovieSchedule = require('./moviehall/getMovieSchedule');
@@ -23,6 +24,7 @@ var topTenMoviesByRevenue = require('./admin/topTenMoviesByRevenue');
 var cityWiseMovieRevenue = require('./admin/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./admin/topTenHallByTickets');
 var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
+var movieReviewGraph = require('./admin/movieReviewGraph');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -85,6 +87,12 @@ router.post('/editScreen', function (req, res, next) {
   editScreen.editScreenRouterFn(req, res, next);
 });
 
+router.post('/getUserByEmail', function (req, res, next) {
+  console.log('GET USER BY EMAIL API');
+  getUserByEmail.getUserByEmailRouterFn(req, res, next);
+});
+
+
 router.post('/getLimitedMovie', function (req, res, next) {
   console.log('GET Limited MOVIES API');
   getLimitedMovies.getLimitedMovieRouterFn(req, res, next);
@@ -113,6 +121,12 @@ router.get('/topTenHallByTickets', function (req, res, next) {
 router.post('/movierevenuebyadmin', function (req, res, next) {
     console.log('GET Revenue by MOVIES API by fandango admin');
     MovieRevenueByAdmin.MovieRevenueByAdminRouterFn(req, res, next);
+});
+
+
+router.get('/moviereviewgraph', function (req, res, next) {
+    console.log('GET Movies by Reviews API by fandango admin');
+    movieReviewGraph.movieReviewGraphRouterFn(req, res, next);
 });
 
 router.post('/addMovieSchedule', function (req, res, next) {

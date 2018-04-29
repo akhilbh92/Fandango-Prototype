@@ -146,6 +146,7 @@ class Signup extends Component{
 
                     }
                     else{
+                        
                         this.setState({
                             message: ''
                         })

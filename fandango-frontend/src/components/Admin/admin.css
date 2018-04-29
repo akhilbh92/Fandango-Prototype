@@ -89,3 +89,29 @@
     border-radius: 3px;
     width: 500px;
  } 
+
+ .searchUser{
+     background-color: rgba(124, 110, 110, 0.637);
+     padding-top: 20px;
+ }
+
+ .searchUser h4{
+    color: black;
+    font-weight: bold;
+ }
+
+ .UpdateUserForm {
+    background-color: white;
+ }
+
+ .user-gap{
+     height: 40px;
+ }
+
+ #response{
+     display: none;
+ }
+
+.hall-list li{
+    list-style-type: none;
+}

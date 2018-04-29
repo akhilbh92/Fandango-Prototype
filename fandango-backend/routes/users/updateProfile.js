@@ -10,8 +10,8 @@ let updateProfileRouterFn = async function (req, res, next) {
     // body["userId"] = userId;
 
     let userId = req.session.passport.user.userId;
-    let body = req.body;
-    body["userId"] = userId;
+    let body;
+    //body["userId"] = userId;
 
     try{
         if(req.user){

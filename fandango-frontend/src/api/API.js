@@ -63,6 +63,20 @@ export const topTenMovies = () =>
         return error;
     });
 
+export const movieReviewGraphAPI = () =>
+    fetch(`${api}/moviereviewgraph`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const clicksPerPage = () =>
     fetch(`${api}/api/getlogs`, {
         method: 'GET',
@@ -242,6 +256,21 @@ export const getCityWiseRevenueByMovie = (movie_id) =>
         return error;
     });
 
+export const getUserByEmail = (email) =>
+    fetch(`${api}/getUserByEmail`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({email})
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 
 export const searchUserBooking = (bookingJson) =>
     fetch(`${api}/searchBooking`, {
@@ -354,6 +383,39 @@ export const addHall = (hallName, street, city, state, zipcode, totalScreens) =>
         return error;
     });
 
+export const addScreen = (hallId, screenNum, screenType, totalSeats) =>
+    fetch(`${api}/addScreen`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            hallId, screenNum, screenType, totalSeats })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const updateProfile = (userId, email, role, first_name, last_name,
+                              address, city, state, zipcode, phone_number, hall_id) =>
+    fetch(`${api}/updateProfile`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            userId, email, role, first_name, last_name, address, city, state, zipcode, phone_number, hall_id
+        })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
 
 let successHandler = (res) => {
     if (res.status === 401) {

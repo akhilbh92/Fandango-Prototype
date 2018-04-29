@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db/mysql');
 
-const Billing = db.sequelize.define('Billing', {
+const Billing = db.sequelize.define('billing', {
     bill_id: {
         type: Sequelize.DataTypes.UUID,
         defaultValue: Sequelize.DataTypes.UUIDV4,

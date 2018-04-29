@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
     render(){
@@ -16,6 +16,15 @@ class NavBar extends Component {
                 </NavItem>
                 <NavItem eventKey={3} href="/admin/addHall">
                     Add Halls
+                </NavItem>
+                <NavItem eventKey={3} href="/admin/addScreen">
+                    Add Screens
+                </NavItem>
+                <NavItem eventKey={4} href="/admin/addUser">
+                    Add User
+                </NavItem>
+                <NavItem eventKey={4} href="/admin/updateUser">
+                    Update User
                 </NavItem>
                 </Nav>
             </Navbar.Collapse>

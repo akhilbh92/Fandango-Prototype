@@ -16,6 +16,10 @@ import EditHallForm from '../Admin/EditHallForm';
 import EditMovieForm from '../Admin/EditMovieForm';
 import AddMovieForm from '../Admin/AddMovieForm';
 import AddHallForm from '../Admin/AddHallForm';
+import AddScreenForm from '../Admin/AddScreenForm';
+import AddUser from '../Admin/AddUser';
+import UpdateUser from '../Admin/UpdateUser';
+
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
@@ -30,6 +34,7 @@ import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
+import PurchaseHistory from '../AfterLogin/PurchaseHistory';
 
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
 
@@ -37,6 +42,7 @@ import SearchResult from '../MoviesList/SearchResult'
 
 import PrivateRoute from './PrivateRoute'
 import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
+import MovieReviewGraph from '../AdminAnalytics/movieReviewGraph';
 
 class RoutesComponent extends Component {
 
@@ -46,7 +52,7 @@ class RoutesComponent extends Component {
     }
 
     redirectURL = (url) => {
-    debugger;
+        debugger;
         this.props.history.push(url);
 
     };
@@ -81,6 +87,9 @@ class RoutesComponent extends Component {
                 <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
                 <Route exact path ="/admin/addMovie" component={AddMovieForm} />
                 <Route exact path ="/admin/addHall" component={AddHallForm} />
+                <Route exact path ="/admin/addScreen" component={AddScreenForm} />
+                <Route exact path ="/admin/addUser" component={AddUser} />
+                <Route exact path ="/admin/updateUser" component={UpdateUser} />
                 <PrivateRoute exact path ="/movierevenue" component={RevenueByMovie} />
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
                 <Route exact path ="/moviedetailcrew" component={Movie_detail_crew} />
@@ -108,6 +117,7 @@ class RoutesComponent extends Component {
                     </div>
                 )} />
                 <Route exact path="/clicksperpage" component={ClicksPerPage}/>
+                <Route exact path="/moviereviewgraph" component={MovieReviewGraph}/>
             </div>
         );
     }
