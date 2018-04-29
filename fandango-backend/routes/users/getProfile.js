@@ -4,7 +4,29 @@ var kafka = require('../../kafka/client');
 let resFormat = require("../../helpers/res_format");
 
 let getProfileRouterFn = async function (req, res, next) {
-    const userId = req.session.passport.user.userId;
+    let userId = req.session.passport.user.userId;
+    try{
+        if(req.user){
+            if(req.user.role === 1){
+                if(req.body.userId){
+                    userId = req.body.userId;
+                }else{
+                     userId = req.session.passport.user.userId;
+                }
+            }else{
+                 userId = req.session.passport.user.userId;
+            }
+        }else{
+            const err = new Error("Session not found");
+            err.status = 403;
+            throw err;
+        }
+    }catch (e) {
+        let resObj = new resFormat(e);
+        return res.status(resObj.getStatus()).json(resObj.log());
+    }
+
+
 
     let getProfileById = function (userId) {
         return new Promise(function (resolve, reject) {

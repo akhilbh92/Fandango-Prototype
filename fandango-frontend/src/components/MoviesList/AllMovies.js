@@ -1,8 +1,10 @@
 import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './movies.css'
-import avengers from './avengers.jpg'
-//import {Link} from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import {selectedMovie} from "../../actions";
 import * as API from './../../api/apicall_for_users';
 
 class AllMovies extends Component{
@@ -76,7 +78,7 @@ class AllMovies extends Component{
                         <img src={movie.photos} className="img-peculiar"  />
                     </div>
                     <div className="movie-heading">
-                        <h4>{ movie.movie_name}</h4>
+                        <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{ movie.movie_name}</h4>
                     </div>
                     <div className="movie-extra-details">
                         <h5 className="gap">Release date: {movie.release_date}</h5>
@@ -100,6 +102,10 @@ class AllMovies extends Component{
             )
 
         })
+    }
+
+    handleSubmit = () => {
+        this.props.redirectURL("/moviedetail");
     }
 
     render(){
@@ -148,4 +154,12 @@ class AllMovies extends Component{
     }
 }
 
-export default AllMovies;
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
+    }
+}
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({selectedMovie: selectedMovie}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(AllMovies);

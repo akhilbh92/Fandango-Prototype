@@ -28,8 +28,10 @@ var searchBookingHandler = require('./services/movieschedule/searchBooking');
 var topTenMoviesByRevenue = require('./services/adminanalytics/topTenMoviesByRevenue');
 var cityWiseMovieRevenue = require('./services/adminanalytics/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./services/adminanalytics/topTenHallByTickets');
+var clicksPerPage = require('./services/adminanalytics/clicksPerPage');
+var movieRevenueByAdmin = require('./services/adminanalytics/movieRevenueByAdmin');
 
-const userService = require('./services/users');
+const userService = Object.assign(require('./services/users'),require('./services/ratings'));
 
 consumer.addTopics(['request'], function (err, added) {
     if(err) {
@@ -58,13 +60,13 @@ consumer.on('offsetOutOfRange', function (topic) {
     console.log('offsetOutOfRange Error')
     topic.maxNum = 2;
     offset.fetch([topic], function (err, offsets) {
-      if (err) {
-        return console.error(err);
-      }
-      var min = Math.min.apply(null, offsets[topic.topic][topic.partition]);
-      consumer.setOffset(topic.topic, topic.partition, min);
+        if (err) {
+            return console.error(err);
+        }
+        var min = Math.min.apply(null, offsets[topic.topic][topic.partition]);
+        consumer.setOffset(topic.topic, topic.partition, min);
     });
-  });
+});
 
 /*****************************/
 
@@ -134,8 +136,17 @@ consumer.on('message', (message) => {
         case 'topTenHallByTickets':
             handler = topTenHallByTickets;
             break;
+        case 'clicksPerPage':
+            handler = clicksPerPage;
+            break;
+        case 'movierevenuebyadmin':
+            handler = movieRevenueByAdmin;
+            break;
         default:
             userService[data.data.key](data.data.value, function (err, res) {
+                if(err){
+                    res = err;
+                }
                 console.log('after handle: %o', res);
                 var payloads = [
                     {
@@ -147,7 +158,7 @@ consumer.on('message', (message) => {
                         partition: 0
                     }
                 ];
-        
+
                 producer.send(payloads, function (err, data) {
                     if (err) {
                         console.log(err);
@@ -159,7 +170,7 @@ consumer.on('message', (message) => {
                 return;
             });
             return;
-        break;
+            break;
     }
 
     handler.handle_request(data.data.value, function (err, res) {

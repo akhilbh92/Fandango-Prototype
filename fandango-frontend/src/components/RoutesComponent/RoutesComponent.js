@@ -19,6 +19,7 @@ import AddHallForm from '../Admin/AddHallForm';
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
 import SearchBill from '../MovieHall/SearchBill';
 import Movie_detail_review from "../Moviedetail/moviedetail-review";
+import Movie_detail_crew from "../Moviedetail/moviedetail-crew";
 import TopTenMoviesByRevenue from "../AdminAnalytics/topTenMoviesByRevenue";
 import MovieTickets from '../MovieTickets/MovieTickets';
 import Movie_detail_addreview from "../Moviedetail/moviedetail-addreview";
@@ -29,10 +30,13 @@ import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
+
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
+
 import SearchResult from '../MoviesList/SearchResult'
 
 import PrivateRoute from './PrivateRoute'
+import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
 
 class RoutesComponent extends Component {
 
@@ -42,7 +46,7 @@ class RoutesComponent extends Component {
     }
 
     redirectURL = (url) => {
-
+    debugger;
         this.props.history.push(url);
 
     };
@@ -63,7 +67,12 @@ class RoutesComponent extends Component {
                 <PrivateRoute exact path="/home" component={Home} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/preferences" component={AccountPreferences} />
-                <Route exact path="/allmovies" component={AllMovies} />
+                <Route exact path="/allmovies" render={() => (
+                    <div>
+
+                        <AllMovies redirectURL={this.redirectURL} />
+                    </div>
+                )} />
                 <PrivateRoute exact path="/cancelbooking" component={CancelBooking} />
                 <PrivateRoute exact path="/searchbill" component={SearchBill} />
                 <Route exact path="/moviedetail" component={Movie_detail} />
@@ -74,18 +83,33 @@ class RoutesComponent extends Component {
                 <Route exact path ="/admin/addHall" component={AddHallForm} />
                 <PrivateRoute exact path ="/movierevenue" component={RevenueByMovie} />
                 <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
+                <Route exact path ="/moviedetailcrew" component={Movie_detail_crew} />
                 <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
                 <Route exact path = "/movietickets" component={MovieTickets}/>
                 <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />
-                <Route exact path ="/entertickets" component={EnterTickets} />
+                <Route exact path ="/entertickets" render={() => (
+                    <div>
+
+                        <EnterTickets redirectURL={this.redirectURL} />
+                    </div>
+                )} />
                 <Route exact path ="/paymentinfo" component={PaymentInfo} />
                 <Route exact path="/citywiserevenue" component={MovieSearchRevenue}/>
                 <Route exact path="/citywiserevenue/:movieId" component={CityWiseMovieRevenue}/>
                 <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold}/>
                 <PrivateRoute exact path="/test" component={Home}/>
+
                 <PrivateRoute exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
-                <Route exact path="/searchresult" component={SearchResult} />
+                <Route exact path="/searchresult" render={() => (
+                    <div>
+
+                        <SearchResult redirectURL={this.redirectURL} />
+                    </div>
+                )} />
+                <Route exact path="/mhadmin" component={MovieHallAdminHome} />
+                <Route exact path="/purchasehistory" component={PurchaseHistory} />
+                <Route exact path="/clicksperpage" component={ClicksPerPage}/>
             </div>
         );
     }

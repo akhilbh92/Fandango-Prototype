@@ -3,8 +3,11 @@ import './MovieOverview.css';
 import Rating from 'react-rating';
 import stargrey from './star-grey.png'
 import staryellow from './staryellow.png'
+import {connect} from "react-redux";
 
 class MovieOverview extends Component {
+
+
     render(){
         return(
 
@@ -83,8 +86,6 @@ class MovieOverview extends Component {
                     </section>
                 </div>
 
-
-
                 <section id="SECTION_1">
                     <div id="DIV_2">
                         <div id="DIV_3">
@@ -94,9 +95,18 @@ class MovieOverview extends Component {
 
                     </div>
                 </section>
+
+
             </div>
         );
     }
 }
 
-export default MovieOverview;
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
+    }
+}
+
+
+export default connect(mapStateToProps)(MovieOverview);

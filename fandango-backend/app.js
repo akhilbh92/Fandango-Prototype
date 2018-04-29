@@ -87,13 +87,17 @@ var passportFile = require('./routes/users/passport');
 var favicon = require('serve-favicon');
 var methodOverride = require('method-override');
 var fs = require('fs');
+var winston = require( 'winston' );
+var read_by_line = require('readline');
+
+var userClicks = require('./routes/admin/userclicks');
 
 // React Server URL
 var reactServerURL = 'http://localhost:3000';
 
 const cors = require('cors');
 
-var fileUpload = require('express-fileupload')
+var fileUpload = require('express-fileupload');
 
 var app = express();
 
@@ -101,8 +105,29 @@ var app = express();
 app.set('port', process.env.PORT || 3001);
 
 app.use(logger('dev'));
+
+//Set logging files
+var infoFilename =  path.join(__dirname,'..','logs','all', 'logfile.log');
+var errorFilename = path.join(__dirname,'..','logs', 'errors', 'errorfile.log');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//Log server settings
+var logger1 = new (winston.Logger)({
+    transports: [
+        new (winston.transports.File)({
+            name: 'analytics',
+            filename: 'userclicks.log',
+            level: 'info'
+        }),
+        new (winston.transports.File)({
+            name: 'error-file',
+            filename: 'error.log',
+            level: 'error'
+        })
+    ]
+});
 // app.use(cookieParser());
 
 app.use(session({
@@ -139,6 +164,48 @@ app.use(fileUpload());
 app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
+
+
+// logger api
+app.post ('/api/logger', function( req, res, next ) {
+    console.log(JSON.stringify(JSON.parse(req.body.message)));
+    logger1.log( req.body.level.toLowerCase() || 'error',
+        JSON.parse(req.body.message));
+    return res.send( 'OK' );
+});
+//End of logger
+
+app.get('/api/getlogs',function (req,res,next) {
+   /* fs.readFile('./userclicks.log', 'utf8', function (err,data) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log(data);
+    });*/
+
+    var log_Data = [];
+
+    var lineReader = read_by_line.createInterface({
+        input: require('fs').createReadStream('./userclicks.log')
+    });
+
+    lineReader.on('line', function (line) {
+        console.log('Line from file:', line);
+        log_Data.push(JSON.parse(line));
+    });
+
+    lineReader.on('close',function () {
+       console.log(log_Data);
+       req.body.clickData = log_Data;
+       console.log(req.body.clickData);
+       userClicks.ClicksPerPageRouterFn(req,res,next);
+    });
+
+})
+/**
+ .....
+ */
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

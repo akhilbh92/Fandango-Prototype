@@ -6,6 +6,9 @@ import ContentHeader from './ContentHeader';
 
 class Landing extends Component {
 
+    componentDidMount(){
+    }
+
     render() {
         return (
             <div className="container-body" id="outer-container">

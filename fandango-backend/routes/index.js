@@ -22,6 +22,7 @@ var searchBooking = require('./moviehall/searchBooking');
 var topTenMoviesByRevenue = require('./admin/topTenMoviesByRevenue');
 var cityWiseMovieRevenue = require('./admin/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./admin/topTenHallByTickets');
+var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -31,6 +32,8 @@ const deleteUser = require('./users/deleteuser');
 const getProfile = require("./users/getProfile");
 const updateProfile = require('./users/updateProfile');
 const checkLogin = require('./users/checklogin');
+const addRating = require('./ratings/addrating');
+const getRatings = require('./ratings/getRatings');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -107,6 +110,11 @@ router.get('/topTenHallByTickets', function (req, res, next) {
     topTenHallByTickets.topTenHallByTicketsRouterFn(req, res, next);
 });
 
+router.post('/movierevenuebyadmin', function (req, res, next) {
+    console.log('GET Revenue by MOVIES API by fandango admin');
+    MovieRevenueByAdmin.MovieRevenueByAdminRouterFn(req, res, next);
+});
+
 router.post('/addMovieSchedule', function (req, res, next) {
   console.log('ADD MOVIE SCHEDULE API');
   addMovieSchedule.addMovieScheduleRouterFn(req, res, next);
@@ -170,6 +178,16 @@ router.post('/uploadFile', function (req,res,next) {
 router.post('/checklogin', function (req,res,next) {
     console.log('CHECK SESSION API');
     checkLogin.checkLoginRouterFn(req,res,next);
+});
+
+router.post('/addRating', function (req,res,next) {
+    console.log('ADD RATING API');
+    addRating.addRatingRouterFn(req,res,next)
+});
+
+router.post('/getRatings', function (req,res,next) {
+    console.log('GET RATING API');
+    getRatings.getRatingsRouterFn(req,res,next)
 });
 
 module.exports = router;
