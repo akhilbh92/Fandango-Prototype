@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db/mysql');
 
-const Users = db.sequelize.define('Users', {
+const Users = db.sequelize.define('users', {
     userId: {
         type: Sequelize.DataTypes.UUID,
         defaultValue: Sequelize.DataTypes.UUIDV4,
