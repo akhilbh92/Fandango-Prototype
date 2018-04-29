@@ -64,9 +64,6 @@ module.exports = {
             const profile = await usermodel.findAll({
                 where:{
                     userId:userId,
-                },
-                attributes: {
-                    exclude: ['userId','role','password_hash','credit_card_number','expiration','is_archive','updatedAt','createdAt']
                 }
             });
             cb(null,profile[0])
@@ -80,6 +77,7 @@ module.exports = {
                 attributes: ['password_hash']
             });
             const bool =  await bcrypt.compare(oldpassword,oldpassword_hash.password_hash);
+            console.log("bool :",bool);
             return bool;
         };
 
@@ -100,7 +98,7 @@ module.exports = {
             }
 
             const rows = await usermodel.upsert(body);
-            cb(null,"profile updated");
+            cb(null,"User Profile Updated Successfully");
         }catch (e) {
             cb(null,e);
         }
