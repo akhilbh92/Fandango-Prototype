@@ -16,7 +16,6 @@ import EditHallForm from '../Admin/EditHallForm';
 import EditMovieForm from '../Admin/EditMovieForm';
 import AddMovieForm from '../Admin/AddMovieForm';
 import AddHallForm from '../Admin/AddHallForm';
-import AddScreenForm from '../Admin/AddScreenForm';
 import AddUser from '../Admin/AddUser';
 import UpdateUser from '../Admin/UpdateUser';
 import RevenueByMovie from '../MovieHall/RevenueByMovie';
@@ -81,10 +80,8 @@ class RoutesComponent extends Component {
                 <Route exact path="/admin" component={AdminHome} />
                 <Route exact path="/admin/movies/:movieId" component={EditMovieForm} />
                 <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
-<<<<<<< Updated upstream
                 <Route exact path="/admin/addMovie" component={AddMovieForm} />
                 <Route exact path="/admin/addHall" component={AddHallForm} />
-                <Route exact path="/admin/addScreen" component={AddScreenForm} />
                 <Route exact path="/admin/addUser" component={AddUser} />
                 <Route exact path="/admin/updateUser" component={UpdateUser} />
                 <PrivateRoute exact path="/movierevenue" component={RevenueByMovie} />
@@ -93,22 +90,8 @@ class RoutesComponent extends Component {
                 <Route exact path="/toptenmovies" component={TopTenMoviesByRevenue} />
                 <Route exact path="/movietickets" component={MovieTickets} />
                 <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <Route exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
                 <Route exact path="/entertickets" render={() => (
-=======
-                <Route exact path ="/admin/addMovie" component={AddMovieForm} />
-                <Route exact path ="/admin/addHall" component={AddHallForm} />
-                <Route exact path ="/admin/addScreen" component={AddScreenForm} />
-                <Route exact path ="/admin/addUser" component={AddUser} />
-                <Route exact path ="/admin/updateUser" component={UpdateUser} />
-                <PrivateRoute exact path ="/movierevenue" component={RevenueByMovie} />
-                <Route exact path ="/moviedetailreview" component={Movie_detail_review} />
-                <Route exact path ="/moviedetailcrew" component={Movie_detail_crew} />
-                <Route exact path = "/toptenmovies" component={TopTenMoviesByRevenue}/>
-                <Route exact path = "/movietickets" component={MovieTickets}/>
-                <Route exact path ="/moviedetailaddreview" component={Movie_detail_addreview} />
-                <Route exact path ="/moviedetailupdatereview" component={Movie_detail_updatereview} />
-                <Route exact path ="/entertickets" render={() => (
->>>>>>> Stashed changes
                     <div>
 
                         <EnterTickets redirectURL={this.redirectURL} />
