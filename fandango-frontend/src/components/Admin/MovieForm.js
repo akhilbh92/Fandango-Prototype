@@ -2,6 +2,7 @@ import React from 'react';
 import * as API from '../../api/API';
 import {Alert, Button} from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import URLRegex from '../Helper/URLRegex';
 
 
 class MovieForm extends React.Component {
@@ -18,7 +19,8 @@ class MovieForm extends React.Component {
             cast: '',
             movieLength: 0,
             genres: '',
-            releaseDate: '1900-01-01'
+            releaseDate: '1900-01-01',
+            trailerValidation: false
           };
         this.uploadPhotos = this.uploadPhotos.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,6 +48,23 @@ class MovieForm extends React.Component {
         }
     }
 
+    validateField(fieldType, value){
+        let fieldPromise = new Promise(function(resolve, reject){
+            let pattern;
+            switch (fieldType){
+                case 'URL':
+                    pattern = URLRegex;
+                    break;
+            }
+            if(pattern.test(value)) {
+                resolve(true)
+            } else {
+                reject(false);
+            }
+        });
+        return fieldPromise;
+    }
+
     uploadPhotos(){
         if(this.state.movieName === '') {
             // document.getElementById('hidden-alert').style.display = 'block'
@@ -66,21 +85,26 @@ class MovieForm extends React.Component {
     }
 
     handleSubmit(event){
-        if(this.props.movieId){
-            API.editMovie(this.props.movieId,this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
-                this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
-                this.state.genres).then((data)=> {
-                    this.notify('Movie updated successfully');
-                });
+        if(this.state.trailerValidation){
+            if(this.props.movieId){
+                API.editMovie(this.props.movieId,this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
+                    this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
+                    this.state.genres).then((data)=> {
+                        this.notify('Movie updated successfully');
+                    });
+            } else {
+                API.addMovie(this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
+                    this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
+                    this.state.genres).then((data)=> {
+                        this.notify('Movie saved successfully');
+                    }).catch((err)=> {
+                        this.notify(err);
+                    });
+            }
         } else {
-            API.addMovie(this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
-                this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
-                this.state.genres).then((data)=> {
-                    this.notify('Movie saved successfully');
-                }).catch((err)=> {
-                    this.notify(err);
-                });
+            this.notify('Inavlid Trailer Input');
         }
+        
         event.preventDefault();
     }
 
@@ -250,7 +274,9 @@ class MovieForm extends React.Component {
                         <label htmlFor="trailer"
                             className="col-sm-2 col-form-label label-color"><strong> Trailer</strong></label>
                         <div className={'col-sm-9' }>
-                            <input className="form-control"
+                        
+                        <input className="form-control"
+                                type="url"
                                 id="trailer"
                                 name="trailer"
                                 value={this.state.trailer}
@@ -258,10 +284,21 @@ class MovieForm extends React.Component {
                                 onChange={(event) => {
                                     this.setState({
                                         trailer: event.target.value
+                                    }), this.validateField('URL', event.target.value)
+                                    .then((res)=>{
+                                        this.setState({
+                                            trailerValidation: res
+                                        })
+                                    })
+                                    .catch((err) => {
+                                        this.setState({
+                                            trailerValidation: err
+                                        })
                                     });
                                 }}
                                 >
                             </input>
+                       
                         </div>
                     </div>
                 </div>
@@ -272,7 +309,7 @@ class MovieForm extends React.Component {
                             className="col-sm-2 col-form-label label-color"><strong> Photos</strong></label>
                         <div className={'col-sm-9' }>
                             <div id="photo-upload"> 
-                                <input ref={(ref) => {this.uploadInput = ref;}} type="file"/>
+                                <input ref={(ref) => {this.uploadInput = ref;}} type="file" accept='image/*'/>
                                 {
                                     this.state.photos && 
                                     <img id="pic" src={this.state.photos} alt="img" />

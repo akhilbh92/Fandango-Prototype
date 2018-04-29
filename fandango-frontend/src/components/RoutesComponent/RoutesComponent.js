@@ -38,6 +38,7 @@ import PrivateRoute from './PrivateRoute'
 import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
 import MovieReviewGraph from '../AdminAnalytics/movieReviewGraph';
 import RevenueByMoviePerHall from '../AdminAnalytics/RevenueByMoviePerHall';
+import TraceDiagram from '../AdminAnalytics/trace_diagram';
 
 class RoutesComponent extends Component {
 
@@ -90,6 +91,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/toptenmovies" component={TopTenMoviesByRevenue} />
                 <Route exact path="/movietickets" component={MovieTickets} />
                 <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <Route exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
                 <Route exact path="/entertickets" render={() => (
                     <div>
 
@@ -112,6 +114,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/clicksperpage" component={ClicksPerPage} />
                 <Route exact path="/moviereviewgraph" component={MovieReviewGraph} />
                 <Route exact path="/movierevenueperhall" component={RevenueByMoviePerHall} />
+                <Route exact path="/tracediagram" component={TraceDiagram}/>
             </div>
         );
     }
