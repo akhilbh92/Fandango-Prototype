@@ -11,6 +11,7 @@ var getScreen = require('./admin/getScreen');
 var editMovie = require('./admin/editMovie');
 var editHall = require('./admin/editHall');
 var editScreen = require('./admin/editScreen');
+var getUserByEmail = require('./admin/getUserByEmail');
 var getLimitedMovies = require('./admin/getLimitedMovies');
 var addMovieSchedule = require('./moviehall/addMovieSchedule');
 var getMovieSchedule = require('./moviehall/getMovieSchedule');
@@ -84,6 +85,12 @@ router.post('/editScreen', function (req, res, next) {
   console.log('EDIT SCREEN API');
   editScreen.editScreenRouterFn(req, res, next);
 });
+
+router.post('/getUserByEmail', function (req, res, next) {
+  console.log('GET USER BY EMAIL API');
+  getUserByEmail.getUserByEmailRouterFn(req, res, next);
+});
+
 
 router.post('/getLimitedMovie', function (req, res, next) {
   console.log('GET Limited MOVIES API');
