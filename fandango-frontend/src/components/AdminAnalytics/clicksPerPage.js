@@ -10,6 +10,7 @@ class ClicksPerPage extends Component{
         this.state={
             PageClicksData:{},
             MovieClicksData:{},
+            SectionClicksData:{}
         };
 
         //this.handleClick = this.handleClick.bind(this);
@@ -19,7 +20,7 @@ class ClicksPerPage extends Component{
 
         API.clicksPerPage()
             .then((resultData) => {
-                if (!!resultData.data && !!resultData.data.page_clicks && !!resultData.data.movie_clicks) {
+                if (!!resultData.data && !!resultData.data.page_clicks && !!resultData.data.movie_clicks && !!resultData.data.section_clicks) {
                     const clicks_per_page = resultData.data.page_clicks;
                     let page_names = [];
                     let total_clicks = [];
@@ -79,6 +80,37 @@ class ClicksPerPage extends Component{
                             ]
                         }
                     });
+
+                    //Capturing Area which is less seen
+
+                    const clicks_per_section = resultData.data.section_clicks;
+                    let section_names = [];
+                    let total_clicks_section = [];
+                    clicks_per_section.forEach(click => {
+                        section_names.push(click._id);
+                        total_clicks_section.push(click.total_count);
+                    });
+                    console.log(`${JSON.stringify(section_names)}`);
+                    console.log(`${JSON.stringify(total_clicks_section)}`);
+                    this.setState({
+                        SectionClicksData: {
+                            labels: section_names,
+                            datasets:[
+                                {
+                                    label:'Capturing Genres which is less seen',
+                                    data: total_clicks_section,
+                                    backgroundColor:[
+                                        'rgba(255,105,145,0.6)',
+                                        'rgba(155,100,210,0.6)',
+                                        'rgba(90,178,255,0.6)',
+                                        'rgba(240,134,67,0.6)',
+                                        'rgba(120,120,120,0.6)',
+                                        'rgba(250,55,197,0.6)'
+                                    ]
+                                }
+                            ]
+                        }
+                    });
                 } else {
                     console.log("There are no logs entries");
                 }
@@ -95,6 +127,12 @@ class ClicksPerPage extends Component{
             <div>
                 <Pie
                     data = {this.state.MovieClicksData}
+                    options = {{ maintainAspectRatio: true }} />
+            </div>
+            <div>
+                <Bar
+                    Label = "Capturing Genres which is less seen"
+                    data = {this.state.SectionClicksData}
                     options = {{ maintainAspectRatio: true }} />
             </div>
             </div>

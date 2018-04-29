@@ -167,7 +167,9 @@ app.use('/', index);
 
 
 // logger api
-app.post ('/api/logger', function( req, res, next ) {
+app.post('/api/logger', function( req, res, next ) {
+    console.log("Inside the log files");
+    //console.log(JSON.stringify(req.body.message));
     console.log(JSON.stringify(JSON.parse(req.body.message)));
     logger1.log( req.body.level.toLowerCase() || 'error',
         JSON.parse(req.body.message));
