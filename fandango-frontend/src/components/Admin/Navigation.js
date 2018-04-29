@@ -17,13 +17,10 @@ class NavBar extends Component {
                 <NavItem eventKey={3} href="/admin/addHall">
                     Add Halls
                 </NavItem>
-                <NavItem eventKey={3} href="/admin/addScreen">
-                    Add Screens
-                </NavItem>
                 <NavItem eventKey={4} href="/admin/addUser">
                     Add User
                 </NavItem>
-                <NavItem eventKey={4} href="/admin/updateUser">
+                <NavItem eventKey={5} href="/admin/updateUser">
                     Update User
                 </NavItem>
                 </Nav>

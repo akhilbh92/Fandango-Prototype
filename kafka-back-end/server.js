@@ -31,8 +31,10 @@ var topTenHallByTickets = require('./services/adminanalytics/topTenHallByTickets
 var clicksPerPage = require('./services/adminanalytics/clicksPerPage');
 var movieRevenueByAdmin = require('./services/adminanalytics/movieRevenueByAdmin');
 var movieReviewGraph = require('./services/adminanalytics/movieReviewGraph');
+var traceDiagram = require('./services/adminanalytics/traceDiagram');
 
-const userService = Object.assign(require('./services/users'),require('./services/ratings'),require('./services/movieschedule/getmovieschedulebydate'));
+const userService = Object.assign(require('./services/users'),require('./services/ratings'),
+    require('./services/movieschedule/getmovieschedulebydate'),require('./services/Billing'));
 
 consumer.addTopics(['request'], function (err, added) {
     if(err) {
@@ -145,6 +147,9 @@ consumer.on('message', (message) => {
             break;
         case 'moviereviewgraph':
             handler = movieReviewGraph;
+            break;
+        case 'tracediagram':
+            handler = traceDiagram;
             break;
         default:
             userService[data.data.key](data.data.value, function (err, res) {

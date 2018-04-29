@@ -5,7 +5,7 @@ module.exports = {
         const movie_id = body.movie_id;
         const show_date = body.show_date;
 
-        let sql = "select hall_name,street,city,state,zipcode,hall_id,price,show_time,screen_id " +
+        let sql = "select T1.id,hall_name,street,city,state,zipcode,hall_id,price,show_time,screen_id " +
             "from movie_schedules AS T1 INNER JOIN halls AS T2 ON T1.hall_id = T2.id " +
             "where show_date = '<date>' and movie_id = <movieid> ORDER BY hall_id ASC";
         sql = sql.replace('<date>', show_date).replace('<movieid>', movie_id);

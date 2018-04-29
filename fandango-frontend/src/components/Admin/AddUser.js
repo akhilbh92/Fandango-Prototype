@@ -3,9 +3,13 @@ import NavBar from './Navigation';
 import CommonHeader from '../header/CommonHeader';
 import { Alert, Button } from 'react-bootstrap';
 import * as API from '../../api/apicall_for_users';
-import '../MovieHall/subheader.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 class AddUser extends Component {
+
+    notify = (msg) => toast(msg);
+    
     constructor(props){
         super(props);
         this.state = {
@@ -18,13 +22,11 @@ class AddUser extends Component {
 
     handleSubmit(){
         API.doSignup(this.state).then((status) => {
-            console.log(status);
             if(status.message == 'The password is too weak' || status.message == 'User Already Exist in the system with this email address.') {
-                document.getElementById('hidden').innerHTML = status.message;
-                document.getElementById('hidden').style.display = 'block';
+                this.notify(status.message);
             }
             else {
-                document.getElementById('response').style.display = 'block';
+                this.notify('User Profile added successfully');
             }
         });
     }s
@@ -50,8 +52,6 @@ class AddUser extends Component {
                                     value={this.state.fName}
                                     required 
                                     onChange={(event) => {
-                                        document.getElementById('response').style.display = 'none';
-                                        document.getElementById('hidden').style.display = 'none';
                                         this.setState({
                                             fName: event.target.value
                                         });
@@ -73,8 +73,6 @@ class AddUser extends Component {
                                 value={this.state.email}
                                 required 
                                 onChange={(event) => {
-                                    document.getElementById('response').style.display = 'none';
-                                    document.getElementById('hidden').style.display = 'none';
                                     this.setState({
                                         email: event.target.value
                                     });
@@ -96,8 +94,6 @@ class AddUser extends Component {
                                 value={this.state.password}
                                 required 
                                 onChange={(event) => {
-                                    document.getElementById('response').style.display = 'none';
-                                    document.getElementById('hidden').style.display = 'none';
                                     this.setState({
                                         password: event.target.value
                                     });
@@ -109,20 +105,12 @@ class AddUser extends Component {
                 </div>
                 <br />
                 <div className="row"> 
-                    <div className="col-sm-2"> 
-                    
-                    </div>     
-                    <div className="col-sm-7"> 
-                        <Alert bsStyle="warning" id='hidden'>
-                        </Alert>
-                        <Alert bsStyle="success" id='response'>
-                        <strong> User Profile added successfully </strong>
-                        </Alert> 
-                    </div>         
+                    <div className="col-sm-9"> </div>        
                     <div className="col-sm-2">       
                         <Button id="submit-user"  className="btn btn-primary" onClick={this.handleSubmit}> Add User </Button>
-                        </div>      
-                        <br/> <br/>
+                        <ToastContainer />
+                    </div>      
+                    <br/> <br/>
                     </div>
                 </div>
                 </form>

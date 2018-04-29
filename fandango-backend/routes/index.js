@@ -25,6 +25,7 @@ var cityWiseMovieRevenue = require('./admin/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./admin/topTenHallByTickets');
 var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
 var movieReviewGraph = require('./admin/movieReviewGraph');
+var traceDiagramByAdmin = require('./admin/traceDiagramByAdmin');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -37,6 +38,7 @@ const checkLogin = require('./users/checklogin');
 const addRating = require('./ratings/addrating');
 const getRatings = require('./ratings/getRatings');
 const getmovieschedulebydate = require('./movieschedule/getmovieschedulebydate');
+const bookMovie = require('./Billing/bookMovie');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -130,6 +132,11 @@ router.get('/moviereviewgraph', function (req, res, next) {
     movieReviewGraph.movieReviewGraphRouterFn(req, res, next);
 });
 
+router.post('/tracediagram', function (req, res, next) {
+    console.log('GET trace diagram for a user by fandango admin');
+    traceDiagramByAdmin.traceDiagramByAdminRouterFn(req, res, next);
+});
+
 router.post('/addMovieSchedule', function (req, res, next) {
   console.log('ADD MOVIE SCHEDULE API');
   addMovieSchedule.addMovieScheduleRouterFn(req, res, next);
@@ -209,4 +216,10 @@ router.post('/getmovieschedulebydate', function (req,res,next) {
     console.log('GET MOVIE SCHEDULE BY DATE API');
     getmovieschedulebydate.getmovieschedulebydateRouterFn(req,res,next)
 });
+
+router.post('/bookMovie', function (req,res,next) {
+    console.log('BOOOK MOVIE API');
+    bookMovie.bookMovieRouterFn(req,res,next)
+});
+
 module.exports = router;

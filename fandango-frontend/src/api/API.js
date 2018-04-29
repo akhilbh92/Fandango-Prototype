@@ -77,6 +77,21 @@ export const movieReviewGraphAPI = () =>
         return error;
     });
 
+export const getTraceDiagram = (dataJson) =>
+    fetch(`${api}/tracediagram`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify(dataJson)
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const clicksPerPage = () =>
     fetch(`${api}/api/getlogs`, {
         method: 'GET',
