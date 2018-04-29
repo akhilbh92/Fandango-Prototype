@@ -34,6 +34,7 @@ import MovieHallAdminHome from '../MovieHall/MovieHallAdminHome';
 import MovieSearchRevenue from '../AdminAnalytics/movieSearchRevenue';
 import CityWiseMovieRevenue from '../AdminAnalytics/cityWiseMovieRevenue';
 import TopTenHallByTicketsSold from '../AdminAnalytics/topTenHallByTicketsSold';
+import PurchaseHistory from '../AfterLogin/PurchaseHistory';
 
 import PurchaseHistory from '../AfterLogin/PurchaseHistory';
 
@@ -117,8 +118,11 @@ class RoutesComponent extends Component {
                 )} />
                 <Route exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
+<<<<<<< Updated upstream
                 <Route exact path="/clicksperpage" component={ClicksPerPage}/>
                 <Route exact path="/moviereviewgraph" component={MovieReviewGraph}/>
+=======
+>>>>>>> Stashed changes
             </div>
         );
     }
