@@ -30,13 +30,9 @@ class MovieReview extends Component {
             })
     }
 
-    renderLink(){
-        var display = "";
-        this.state.reviews.map((review) => {
-        })
 
 
-    }
+
 
     renderReviews(){
          return this.state.reviews.map((review) => {
