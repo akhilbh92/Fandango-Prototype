@@ -6,6 +6,8 @@ import stargrey from './star-grey.png';
 import staryellow from './staryellow.png';
 import {connect} from "react-redux";
 import * as API from './../../../api/apicall_for_users';
+import {selectedReview} from "../../../actions";
+import {bindActionCreators} from "redux";
 
 class MovieReview extends Component {
 
@@ -28,6 +30,10 @@ class MovieReview extends Component {
                 });
 
             })
+    }
+
+    updateReview = () => {
+        window.location = "/moviedetailupdatereview";
     }
 
 
@@ -54,29 +60,59 @@ class MovieReview extends Component {
 
     renderReviews(){
          return this.state.reviews.map((review) => {
-            return(
-                <div className="review-tab">
-                    <div className="star-review-pos">
-                        <Rating
-                            placeholderRating={review.rating}
-                            emptySymbol={<img src={stargrey} className="icon" />}
-                            placeholderSymbol={<img src={staryellow} className="icon" />}
-                            fullSymbol={<img src={staryellow} className="icon" />}
-                        />
+             if(review.userId != this.props.user.userId) {
+                 return (
+                     <div className="review-tab">
+                         <div className="star-review-pos">
+                             <Rating
+                                 placeholderRating={review.rating}
+                                 emptySymbol={<img src={stargrey} className="icon"/>}
+                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
+                                 fullSymbol={<img src={staryellow} className="icon"/>}
+                             />
 
-                    </div>
-                    <div className="review-spacing">
-                        <h4>{review.review_title}</h4>
-                    </div>
-                    <div className="reviewer-name">
-                        <h5>Review By: {review.first_name}</h5>
-                    </div>
-                    <div className="review-body">
-                        <h6>{review.review_body}
-                        </h6>
-                    </div>
-                </div>
-            )
+                         </div>
+                         <div className="review-spacing">
+                             <h4>{review.review_title}</h4>
+                         </div>
+                         <div className="reviewer-name">
+                             <h5>Review By: {review.first_name}</h5>
+                         </div>
+                         <div className="review-body">
+                             <h6>{review.review_body}
+                             </h6>
+                         </div>
+                     </div>
+                 )
+             }
+             else{
+                 return (
+                     <div className="review-tab">
+                         <div className="star-review-pos">
+                             <Rating
+                                 placeholderRating={review.rating}
+                                 emptySymbol={<img src={stargrey} className="icon"/>}
+                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
+                                 fullSymbol={<img src={staryellow} className="icon"/>}
+                             />
+
+                         </div>
+                         <div className="review-spacing">
+                             <h4>{review.review_title}</h4>
+                         </div>
+                         <div className="reviewer-name">
+                             <h5>Review By: {review.first_name}</h5>
+                         </div>
+                         <div className="review-body">
+                             <h6>{review.review_body}
+                             </h6>
+                         </div>
+                         <div style={{}}>
+                             <button type="button" className="btn" style={{ marginTop: "120px", marginLeft: '80%', backgroundColor: '#f15500' }} onClick={() => this.updateReview(this.props.selectedReview(review))}>EDIT</button>
+                         </div>
+                     </div>
+                 )
+             }
 
         })
     }
@@ -190,9 +226,12 @@ class MovieReview extends Component {
 function mapStateToProps(state){
     return{
         user: state.loginUser,
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        review: state.selectedReview
     }
 }
 
-
-export default connect(mapStateToProps)(MovieReview);
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({selectedReview: selectedReview}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(MovieReview);
