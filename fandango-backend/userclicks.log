@@ -126,10 +126,50 @@
 {"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:40:41.061Z"}
 {"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:41:25.604Z"}
 {"event":"movie_click","movie_id":"27","movie_name":"Dark Knight","count":"1","level":"info","message":"","timestamp":"2018-04-28T21:42:22.330Z"}
-{"event":"movie_click","movie_id":"1","movie_name":"AVENGERS : INFINITY WAR MARATHON","count":"1","level":"info","message":"","timestamp":"2018-04-29T08:23:29.607Z"}
-{"event":"movie_click","movie_id":"1","movie_name":"AVENGERS : INFINITY WAR MARATHON","count":"1","level":"info","message":"","timestamp":"2018-04-29T08:25:55.687Z"}
-{"event":"movie_click","movie_id":"1","movie_name":"AVENGERS : INFINITY WAR MARATHON","count":"1","level":"info","message":"","timestamp":"2018-04-29T08:27:33.819Z"}
-{"event":"movie_click","movie_id":"1","movie_name":"AVENGERS : INFINITY WAR MARATHON","count":"1","level":"info","message":"","timestamp":"2018-04-29T08:32:13.219Z"}
-{"event":"movie_click","movie_id":"1","movie_name":"AVENGERS : INFINITY WAR MARATHON","count":"1","level":"info","message":"","timestamp":"2018-04-29T08:33:22.786Z"}
-{"event":"movie_click","movie_id":"1","movie_name":"AVENGERS : INFINITY WAR MARATHON","count":"1","level":"info","message":"","timestamp":"2018-04-29T08:34:48.830Z"}
-{"event":"movie_click","movie_id":"1","movie_name":"AVENGERS : INFINITY WAR MARATHON","count":"1","level":"info","message":"","timestamp":"2018-04-29T08:37:02.565Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:24:44.249Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:24:45.596Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:25:05.638Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:25:28.042Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:47:48.830Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:57:28.368Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:57:31.672Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-29T07:57:33.807Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"comedy","level":"info","message":"","timestamp":"2018-04-29T08:12:22.147Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"drama","level":"info","message":"","timestamp":"2018-04-29T08:12:28.291Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"kids","level":"info","message":"","timestamp":"2018-04-29T08:12:34.864Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"animated","level":"info","message":"","timestamp":"2018-04-29T08:12:38.493Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"animated","level":"info","message":"","timestamp":"2018-04-29T08:12:39.986Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"animated","level":"info","message":"","timestamp":"2018-04-29T08:12:41.507Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"action","level":"info","message":"","timestamp":"2018-04-29T08:12:43.785Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"action","level":"info","message":"","timestamp":"2018-04-29T08:12:46.063Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"action","level":"info","message":"","timestamp":"2018-04-29T08:12:48.433Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"romance","level":"info","message":"","timestamp":"2018-04-29T08:12:49.893Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"romance","level":"info","message":"","timestamp":"2018-04-29T08:12:51.236Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"romance","level":"info","message":"","timestamp":"2018-04-29T08:12:52.784Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"comedy","level":"info","message":"","timestamp":"2018-04-29T08:13:17.170Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"horror","level":"info","message":"","timestamp":"2018-04-29T08:13:23.648Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:27.293Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:27.964Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:28.604Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:29.126Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:29.308Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:29.468Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:29.622Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:29.788Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-04-29T08:13:29.954Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:17.742Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:37.146Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:37.295Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:37.533Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:37.673Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:37.844Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:37.991Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:38.134Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:38.277Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:38.454Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:38.617Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:38.767Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:38.935Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:39.076Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:39.226Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-04-29T08:15:39.354Z"}
