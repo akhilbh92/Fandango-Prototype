@@ -10,7 +10,7 @@ module.exports = {
         }
     },
     getRatings: function(body,cb){
-        let sql = "SELECT T2.first_name, rating, review_title, review_body FROM Ratings AS T1 INNER JOIN Users AS T2 ON T1.userId = T2.userId WHERE T1.movie_id = \'<placeholder>\'";
+        let sql = "SELECT T2.userId,T2.first_name, rating, review_title, review_body FROM Ratings AS T1 INNER JOIN Users AS T2 ON T1.userId = T2.userId WHERE T1.movie_id = \'<placeholder>\'";
         sql = sql.replace("<placeholder>",body["movie_id"]);
 
         let sqlagg = "SELECT AVG(rating) AS avgrating, COUNT(rating) AS totalrating FROM Ratings AS T1 WHERE T1.movie_id = 'placeholder'";
