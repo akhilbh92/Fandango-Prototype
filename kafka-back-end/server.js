@@ -32,7 +32,7 @@ var clicksPerPage = require('./services/adminanalytics/clicksPerPage');
 var movieRevenueByAdmin = require('./services/adminanalytics/movieRevenueByAdmin');
 var movieReviewGraph = require('./services/adminanalytics/movieReviewGraph');
 
-const userService = Object.assign(require('./services/users'),require('./services/ratings'));
+const userService = Object.assign(require('./services/users'),require('./services/ratings'),require('./services/movieschedule/getmovieschedulebydate'));
 
 consumer.addTopics(['request'], function (err, added) {
     if(err) {
