@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db/mysql');
 
-const Ratings = db.sequelize.define('Ratings', {
+const Ratings = db.sequelize.define('ratings', {
     userId: {
         type: Sequelize.DataTypes.UUID,
         required: true,
