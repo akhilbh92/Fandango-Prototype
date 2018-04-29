@@ -50,7 +50,7 @@ class RoutesComponent extends Component {
     }
 
     redirectURL = (url) => {
-    debugger;
+        debugger;
         this.props.history.push(url);
 
     };
