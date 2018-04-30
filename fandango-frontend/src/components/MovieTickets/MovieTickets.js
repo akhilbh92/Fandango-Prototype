@@ -3,6 +3,9 @@ import './MovieTickets.css'
 import HomeHeader from './../AfterLogin/HomeHeader'
 import MovieDetailBox from '../MovieDetailBox/MovieDetailBox'
 import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
+import {connect} from "react-redux";
+import { Link } from 'react-router-dom'
+
 
 class Movie_Tickets extends Component{
 
@@ -17,7 +20,7 @@ class Movie_Tickets extends Component{
     constructor(props){
         super(props);
             this.state = {
-                startDate: new Date(),
+                startDate: new Date(this.props.movie.release_date) > new Date() ? new Date(this.props.movie.release_date):new Date(),
                 currentIndex: 0,
                 monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -71,18 +74,18 @@ class Movie_Tickets extends Component{
                     <div id="TICKETS_DIV_2">
                         <div id="TICKETS_DIV_3">
                             <h1 id="H1_4">
-                                Rampage (2018) <span id="SPAN_5">times<span id="SPAN_6"></span></span>
+                                {this.props.movie.movie_name}<span id="SPAN_5">times<span id="SPAN_6"></span></span>
 
                             </h1>
                             <ul id="UL_8">
                                 <li id="LI_9">
-                                    <a href="/rampage-2018-207628/movie-overview" id="A_10">Overview</a>
+                                    <Link to="/moviedetail" id="A_10">Overview</Link>
                                 </li>
                                 <li id="LI_11">
-                                    <a href="/rampage-2018-207628/movie-times" id="A_12">Movie Times + Tickets</a>
+                                    <Link to="/movietickets" id="A_12">Movie Times + Tickets</Link>
                                 </li>
                                 <li id="LI_15">
-                                    <a href="/rampage-2018-207628/movie-reviews" id="A_16">Movie Reviews</a>
+                                    <Link to="/moviedetailreview" id="A_16">Movie Reviews</Link>
                                 </li>
                             </ul>
                         </div>
@@ -129,4 +132,12 @@ class Movie_Tickets extends Component{
     }
 }
 
-export default Movie_Tickets;
+
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
+    }
+}
+
+
+export default connect(mapStateToProps)(Movie_Tickets);

@@ -6,6 +6,7 @@ import stargrey from './star-grey.png';
 import staryellow from './staryellow.png';
 import {connect} from "react-redux";
 import * as API from './../../../api/apicall_for_users';
+import Message from '../../Message/Message'
 
 
 class MovieUpdateReview extends Component {
@@ -16,15 +17,66 @@ class MovieUpdateReview extends Component {
             rating: this.props.review.rating,
             movie_id: this.props.movie.id.toString(),
             review_title: this.props.review.review_title,
-            review_body: this.props.review.review_body
+            review_body: this.props.review.review_body,
+            titleerror: 0,
+            bodyerror: 0,
+            titleemptymessage: '',
+            bodyemptymessgae: '',
+
         }
     }
 
 
 
+
+
     AddReview = (userdata) => {
-        API.addRating(userdata);
-        window.location = "/moviedetailreview"
+        this.setState({
+            titleerror: 0,
+            bodyerror: 0,
+            titleemptymessage: '',
+            bodyemptymessgae: '',
+            type: true
+        }, () => this.handleEmptyTitle(userdata));
+    }
+
+    handleEmptyTitle = (userdata) => {
+
+        if (this.state.review_title.length == 0) {
+            this.setState({
+                titleemptymessage: 'Title should not be empty',
+                titleerror: 1,
+                type: true
+            }, () => this.handleEmptyBody(userdata));
+        }
+        else {
+            this.handleEmptyBody(userdata);
+        }
+    }
+
+
+    handleEmptyBody = (userdata) => {
+
+        if (this.state.review_body.length == 0) {
+            this.setState({
+                bodyemptymessage: 'Body should not be empty',
+                bodyerror: 1,
+                type: true
+            }, () => this.AfterValidation(userdata));
+        }
+        else {
+            this.AfterValidation(userdata);
+        }
+    }
+
+
+
+
+    AfterValidation = (userdata) => {
+        if( this.state.titleerror != 1 && this.state.bodyerror != 1) {
+            API.addRating(userdata);
+            window.location = "/moviedetailreview"
+        }
     }
 
 
@@ -117,7 +169,7 @@ class MovieUpdateReview extends Component {
                         <h3 className="addreview-header-font">PLEASE RATE THE MOVIE FROM 1-5 STARS</h3>
                         <div className="addreview-header-star">
                             <Rating
-                                placeholderRating={this.props.review.rating}
+                                placeholderRating={this.state.rating}
                                 emptySymbol={<img src={stargrey} className="icon"/>}
                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
                                 fullSymbol={<img src={staryellow} className="icon"/>}
@@ -136,7 +188,7 @@ class MovieUpdateReview extends Component {
                         <div className="addreview-body-input">
                             <input
                                 type="text"
-                                placeholder={this.props.review.review_title}
+                                value={this.state.review_title}
                                 onChange={(event) => {
                                     this.setState({
                                         review_title: event.target.value,
@@ -146,11 +198,13 @@ class MovieUpdateReview extends Component {
                             />
 
                         </div>
+                        <Message message={this.state.titleemptymessage} />
+
                         <p className="addreview-body-font">Body:</p>
                         <div className="addreview-textarea-input">
                             <textarea
                                 type="text"
-                                placeholder={this.props.review.review_body}
+                                value={this.state.review_body}
                                 style={{height: '200px'}}
                                 onChange={(event) => {
                                     this.setState({
@@ -160,6 +214,7 @@ class MovieUpdateReview extends Component {
                                 }}
                             />
                         </div>
+                        <Message message={this.state.bodyemptymessage} />
 
                         <Link to="/moviedetailreview">
                             <button className="btn btn-danger cancel-button">CANCEL</button>

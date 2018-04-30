@@ -79,7 +79,8 @@ class AllMovies extends Component{
             return(
                 <div className="col-md-offset-2 col-md-8 list-moviedetails">
                     <div className="img-style">
-                        <img src={movie.photos} className="img-peculiar"  />
+                        <img src={movie.photos} className="img-peculiar"
+                        alt={movie.movie_name + "Movie Poster"}/>
                     </div>
                     <div className="movie-heading">
                         <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{ movie.movie_name}</h4>

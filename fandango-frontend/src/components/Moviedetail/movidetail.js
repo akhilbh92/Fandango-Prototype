@@ -21,7 +21,8 @@ class Movie_detail extends Component {
     }
 
     render(){
-
+        let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
+        if(this.props.movie.photos)background =  this.props.movie.photos;
 
         return(
             <div>
@@ -40,7 +41,7 @@ class Movie_detail extends Component {
                                     </filter>
                                 </defs>
                                 <image className="js-backgroundBlur-image" x="0" y="0" width="100%" height="110%"
-                                       xlinkHref="//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg"
+                                       xlinkHref={background}
                                        preserveAspectRatio="xMidYMid slice" filter="url(#backgroundBlur)"></image>
                             </svg>
                         </div>
@@ -52,7 +53,7 @@ class Movie_detail extends Component {
 
 
 
-                                            Rampage (2018)
+                                            {this.props.movie.movie_name}
 
 
 

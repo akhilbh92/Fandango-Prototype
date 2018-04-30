@@ -39,11 +39,18 @@ class MovieReview extends Component {
 
     renderLink(){
         var display = "yes";
-        this.state.reviews.map((review) => {
-            if(review.userId == this.props.user.userId){
-                display="no";
-            }
-        })
+        if (this.props.user === undefined) {
+            display == "yes"
+        }
+        else if(this.props.user !== undefined && this.props.user !== null) {
+            this.state.reviews.map((review) => {
+
+                if (review.userId == this.props.user.userId) {
+                    display = "no";
+                }
+
+            })
+        }
 
         if(display == "no"){
             return (<div></div>)
@@ -59,62 +66,100 @@ class MovieReview extends Component {
 
 
     renderReviews(){
-         return this.state.reviews.map((review) => {
-             if(review.userId != this.props.user.userId) {
-                 return (
-                     <div className="review-tab">
-                         <div className="star-review-pos">
-                             <Rating
-                                 placeholderRating={review.rating}
-                                 emptySymbol={<img src={stargrey} className="icon"/>}
-                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
-                                 fullSymbol={<img src={staryellow} className="icon"/>}
-                             />
+        if(this.props.user === undefined || this.props.user === null){
+            return this.state.reviews.map((review) => {
+                console.log(review);
+                return (
+                    <div className="review-tab">
+                        <div className="star-review-pos">
+                            <Rating
+                                placeholderRating={review.rating}
+                                emptySymbol={<img src={stargrey} className="icon"/>}
+                                placeholderSymbol={<img src={staryellow} className="icon"/>}
+                                fullSymbol={<img src={staryellow} className="icon"/>}
+                            />
 
-                         </div>
-                         <div className="review-spacing">
-                             <h4>{review.review_title}</h4>
-                         </div>
-                         <div className="reviewer-name">
-                             <h5>Review By: {review.first_name}</h5>
-                         </div>
-                         <div className="review-body">
-                             <h6>{review.review_body}
-                             </h6>
-                         </div>
-                     </div>
-                 )
-             }
-             else{
-                 return (
-                     <div className="review-tab">
-                         <div className="star-review-pos">
-                             <Rating
-                                 placeholderRating={review.rating}
-                                 emptySymbol={<img src={stargrey} className="icon"/>}
-                                 placeholderSymbol={<img src={staryellow} className="icon"/>}
-                                 fullSymbol={<img src={staryellow} className="icon"/>}
-                             />
+                        </div>
+                        <div className="review-spacing">
+                            <h4>{review.review_title}</h4>
+                        </div>
+                        <div className="reviewer-name">
+                            <h5>Review By: {review.first_name}</h5>
+                        </div>
+                        <div className="review-body">
+                            <h6>{review.review_body}
+                            </h6>
+                        </div>
+                    </div>
+                )
+            })
 
-                         </div>
-                         <div className="review-spacing">
-                             <h4>{review.review_title}</h4>
-                         </div>
-                         <div className="reviewer-name">
-                             <h5>Review By: {review.first_name}</h5>
-                         </div>
-                         <div className="review-body">
-                             <h6>{review.review_body}
-                             </h6>
-                         </div>
-                         <div style={{}}>
-                             <button type="button" className="btn" style={{ marginTop: "120px", marginLeft: '80%', backgroundColor: '#f15500' }} onClick={() => this.updateReview(this.props.selectedReview(review))}>EDIT</button>
-                         </div>
-                     </div>
-                 )
-             }
+        }
 
-        })
+        else if(this.props.user !== undefined && this.props.user !== null)
+        {
+            return this.state.reviews.map((review) => {
+
+
+                if (review.userId != this.props.user.userId) {
+                    return (
+                        <div className="review-tab">
+                            <div className="star-review-pos">
+                                <Rating
+                                    placeholderRating={review.rating}
+                                    emptySymbol={<img src={stargrey} className="icon"/>}
+                                    placeholderSymbol={<img src={staryellow} className="icon"/>}
+                                    fullSymbol={<img src={staryellow} className="icon"/>}
+                                />
+
+                            </div>
+                            <div className="review-spacing">
+                                <h4>{review.review_title}</h4>
+                            </div>
+                            <div className="reviewer-name">
+                                <h5>Review By: {review.first_name}</h5>
+                            </div>
+                            <div className="review-body">
+                                <h6>{review.review_body}
+                                </h6>
+                            </div>
+                        </div>
+                    )
+                }
+                else {
+                    return (
+                        <div className="review-tab">
+                            <div className="star-review-pos">
+                                <Rating
+                                    placeholderRating={review.rating}
+                                    emptySymbol={<img src={stargrey} className="icon"/>}
+                                    placeholderSymbol={<img src={staryellow} className="icon"/>}
+                                    fullSymbol={<img src={staryellow} className="icon"/>}
+                                />
+
+                            </div>
+                            <div className="review-spacing">
+                                <h4>{review.review_title}</h4>
+                            </div>
+                            <div className="reviewer-name">
+                                <h5>Review By: {review.first_name}</h5>
+                            </div>
+                            <div className="review-body">
+                                <h6>{review.review_body}
+                                </h6>
+                            </div>
+                            <div style={{}}>
+                                <button type="button" className="btn"
+                                        style={{marginTop: "120px", marginLeft: '80%', backgroundColor: '#f15500'}}
+                                        onClick={() => this.updateReview(this.props.selectedReview(review))}>EDIT
+                                </button>
+                            </div>
+                        </div>
+                    )
+                }
+
+            })
+        }
     }
 
 
