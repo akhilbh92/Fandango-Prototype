@@ -16,6 +16,17 @@ export const selectedMovie = (movieinfo) => {
     }
 };
 
+export const selectedSchedule = (movie_schedule_id, price ) => {
+    //console.log(scheduleinfo);
+    return{
+        type: 'SELECTED_SCHEDULE',
+        payload: {
+            "movie_schedule_id": movie_schedule_id,
+            "price": price
+        }
+    }
+};
+
 export const doneBooking = (bookinginfo) => {
     console.log(bookinginfo);
     return{

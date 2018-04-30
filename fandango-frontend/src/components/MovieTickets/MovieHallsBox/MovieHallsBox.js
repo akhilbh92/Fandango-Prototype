@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { loginUser } from "../../../actions";
+import {doneBooking, loginUser, selectedSchedule} from "../../../actions";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './MovieHallsBox.css'
 import * as API from "../../../api/apicall_for_users";
 
 class Movie_Halls extends Component{
+
+    handleShowTime = (userdata) => {
+        window.location = '/entertickets';
+    }
 
     componentDidMount(){
         API.getmovieschedulebydate({
@@ -59,7 +63,7 @@ class Movie_Halls extends Component{
             const availableshowtimes = [];
 
             for(let k=0;k<show_time.length;k++){
-                availableshowtimes.push(<li key={k} id="movehallsLI_41"><a id="movehallsA_42">{this.tConvert(show_time[i].substring(0,show_time[i].length-3))}</a></li>);
+                availableshowtimes.push(<li key={k} id="movehallsLI_41"><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k]))} id="movehallsA_42">{this.tConvert(show_time[i].substring(0,show_time[i].length-3))}</button></li>);
             }
 
             halldivs.push(<div key={i}>
@@ -196,8 +200,14 @@ class Movie_Halls extends Component{
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        schedule: state.selectedSchedule
     }
 }
 
-export default connect(mapStateToProps)(Movie_Halls);
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ selectedSchedule: selectedSchedule }, dispatch)
+}
+
+
+export default connect(mapStateToProps, matchDispatchToProps)(Movie_Halls);
