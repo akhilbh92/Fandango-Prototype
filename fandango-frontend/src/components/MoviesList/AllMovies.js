@@ -75,6 +75,11 @@ class AllMovies extends Component{
 
 
     renderMovies(){
+        if(this.state.movies_tofilter.length == 0){
+            return(<h3 className="col-md-offset-2 col-md-8" style={{ textAlign: 'left', marginTop: '20px'}}>
+                NO MATCHING RESULTS
+            </h3>)
+        }
         return this.state.movies_tofilter.map((movie) => {
             return(
                 <div className="col-md-offset-2 col-md-8 list-moviedetails">

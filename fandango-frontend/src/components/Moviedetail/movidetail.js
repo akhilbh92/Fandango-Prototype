@@ -77,9 +77,9 @@ class Movie_detail extends Component {
                                                 </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to={"moviedetailcrew"} className="movie-detail-section-subnav-item-link">
                                                     CAST
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>

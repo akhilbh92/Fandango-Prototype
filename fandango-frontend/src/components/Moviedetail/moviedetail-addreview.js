@@ -3,6 +3,7 @@ import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
 import MovieAddReview from "./MovieOverview/MovieAddReview";
 import {connect} from "react-redux";
+import {Link} from 'react-router-dom';
 
 
 class Movie_detail_addreview extends Component {
@@ -39,7 +40,7 @@ class Movie_detail_addreview extends Component {
 
 
 
-                                            AVENGERS: INFINITY WAR <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
+                                            {this.props.movie.movie_name} <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
 
 
 
@@ -48,24 +49,24 @@ class Movie_detail_addreview extends Component {
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/moviedetail" className="movie-detail-section-subnav-item-link">
                                                     Overview
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/movietickets" className="movie-detail-section-subnav-item-link">
                                                     Movie Times + tickets
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">
                                                     REVIEWS
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/moviedetailcrew" className="movie-detail-section-subnav-item-link">
                                                     CAST
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>
