@@ -7,7 +7,6 @@ var kafka = require('../../kafka/client');
 let resFormat = require("../../helpers/res_format");
 
 function movieReviewGraphRouterFn(req, res, next){
-    console.log('Get Top Ten Movies By Review');
     kafka.make_request('admin', 'moviereviewgraph', {
     }, function(err,results){
         console.log('In Kafka: %o', results);

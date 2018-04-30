@@ -9,13 +9,11 @@ var _ = require('lodash');
 let resFormat = require("../../helpers/res_format");
 
 function addMovieScheduleRouterFn(req, res, next) {
-    console.log('Add Movie Schedule Function hit');
     kafka.make_request('admin', 'getMovieSchedules', {
         hall_id: req.body.hall_id,
         screen_id: req.body.screen_id,
         show_date: req.body.show_date
     }, function (err, results) {
-        // console.log('In Kafka: %o', results);
         if (err) {
             let resObj = new resFormat(err);
             return res.status(resObj.getStatus()).json(resObj.log());
@@ -37,7 +35,6 @@ function addMovieScheduleRouterFn(req, res, next) {
                         break;
                     }
                 }
-                console.log("validTime :", validTime);
                 if (validTime) {
                     kafka.make_request('admin', 'addMovieSchedule', {
                         id: req.body.id,

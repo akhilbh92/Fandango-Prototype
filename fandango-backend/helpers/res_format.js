@@ -7,29 +7,18 @@
  *
  */
 
-    //
-    //  Default status code for error
-    //
+//  Default status code for error
 let defaultErrorCode = 500;
-
-//
 //  Default status code for successfull operation
-//
 let defaultStatusCode = 200;
 
-//
 //  Default description
-//
 let defaultErrorDescription = {};
 
-//
 //  For use in logging statement
-//
 let logDividor = "----------------------------------------------------------\n";
 
-//
 //  Create the object which will store the data
-//
 function CustomResponse(data) {
 
     this.obj = {
@@ -38,49 +27,28 @@ function CustomResponse(data) {
         },
         data: {}
     };
-
-    //
     //  Set default success status code
-    //
     this.status = defaultStatusCode;
-
     if (data) {
-        //
         //	1. Detect if we got an error object
-        //
         if (data instanceof Error) {
-
-            //
-            //  Log error
-            //
-            console.error(logDividor + " ¯\(°_o)/¯  %s \n", data.message, data);
-
-            //
             //	Detect if we have http code for error if not then set default
-            //
             if (data.status) {
-
                 this.setStatus(data.status);
             } else {
-
-	            data.message = 'Internal server error';
+                data.message = 'Internal server error';
                 this.setStatus(defaultErrorCode);
             }
-
-            //
             //	1. Build the message
-            //
             this.obj = {
                 message: data.message,
                 description: (
-                                 !data.description
-                             ) ? defaultErrorDescription : data.description
+                    !data.description
+                ) ? defaultErrorDescription : data.description
             };
 
-            //
             //  In development env description will be complete err obj
             //  for debug
-            //
             if (process.env.NODE_ENV === 'development') {
 
                 this.obj.description = data;
@@ -103,7 +71,7 @@ function CustomResponse(data) {
 //
 //	Set a custom Meta
 //
-CustomResponse.prototype.customMeta = function(data) {
+CustomResponse.prototype.customMeta = function (data) {
     //
     //	1. Set the custom meta object
     //
@@ -118,7 +86,7 @@ CustomResponse.prototype.customMeta = function(data) {
 //
 //  Set a custom Http status Code
 //
-CustomResponse.prototype.setStatus = function(statusCode) {
+CustomResponse.prototype.setStatus = function (statusCode) {
     //
     //	1. Set the custom http code
     //
@@ -133,7 +101,7 @@ CustomResponse.prototype.setStatus = function(statusCode) {
 //
 //	Return the data object
 //
-CustomResponse.prototype.log = function() {
+CustomResponse.prototype.log = function () {
     //
     //	-> Show the whole message
     //
@@ -143,7 +111,7 @@ CustomResponse.prototype.log = function() {
 //
 //  Get a custom Http status code
 //
-CustomResponse.prototype.getStatus = function() {
+CustomResponse.prototype.getStatus = function () {
     //
     //	-> Return status
     //
