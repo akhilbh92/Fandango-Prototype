@@ -59,7 +59,21 @@ class Movie_Tickets extends Component{
         return result;
     }
 
+    formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
     render(){
+        const MovieHallsDate = new Date();
+        MovieHallsDate.setDate(this.state.startDate.getDate()+this.state.highlightedKey+1);
 
         return (
             <div>
@@ -114,7 +128,7 @@ class Movie_Tickets extends Component{
                             <MovieDetailBox/>
                         </div>
                         <div className="theaters">
-                            <MovieHallsBox/>
+                            <MovieHallsBox date={this.formatDate(MovieHallsDate)}/>
                         </div>
                     </div>
 
