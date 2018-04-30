@@ -19,6 +19,21 @@ export const getMovies = () =>
         return error;
     });
 
+
+export const getUsers = () =>
+    fetch(`${api}/getUsers`, {
+        method: 'GET',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
 export const getMovieById = (movieId) =>
     fetch(`${api}/getMovies`, {
         method: 'POST',

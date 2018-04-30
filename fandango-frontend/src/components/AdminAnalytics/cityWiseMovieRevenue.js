@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
 import * as API from '../../api/API';
 import MovieSearchRevenue from './movieSearchRevenue';
-import {Bar,Pie} from 'react-chartjs-2';
+import {Bar,Pie,Line} from 'react-chartjs-2';
+import CommonHeader from '../header/CommonHeader';
+import { withRouter } from 'react-router-dom';
+import NavBar from '../Admin/Navigation';
+import '../Admin/admin.css';
+import '../MovieHall/subheader.css';
 
 class CityWiseMovieRevenue extends Component {
     constructor(props){
         super(props);
 
         this.state={
-            Data:{}
+            Data:{},
+            movie_name:""
         };
     }
     componentDidMount(){
@@ -16,6 +22,7 @@ class CityWiseMovieRevenue extends Component {
             console.log(`Data is ${JSON.stringify(resultData)}`);
             if (resultData.data) {
                 const movie_city_data = resultData.data;
+                this.setState({movie_name:resultData.data[0].movie_name});
                 let city_names = [];
                 let city_revenue = [];
                 movie_city_data.forEach(city => {
@@ -38,7 +45,8 @@ class CityWiseMovieRevenue extends Component {
                                     'rgba(240,134,67,0.6)',
                                     'rgba(120,120,120,0.6)',
                                     'rgba(250,55,197,0.6)'
-                                ]
+                                ],
+                                fill:false
                             }
                         ]
                     }
@@ -52,13 +60,53 @@ class CityWiseMovieRevenue extends Component {
     render(){
         return(
             <div>
-                <br />
-                 <h3> City wise  Movie Revenue </h3>
                  <MovieSearchRevenue />
-                <div>
+                <div className=" col-md-12 page-header-container">
+                    <div className="col-md-offset-2 col-md-10 pd-left-0">
+                        <h2 className="schedule-page-header">Revenue for <span className="page-header-emphasis">{this.state.movie_name}</span> movie</h2>
+                    </div>
+                </div>
+                <div className="col-md-offset-4 col-md-4 col-md-offset-4">
                     <Pie
                         data = {this.state.Data}
-                        options = {{ maintainAspectRatio: true }} />
+                        width={100}
+                        height={250}
+                        options = {{
+                            maintainAspectRatio: false,
+                            legend: {
+                                position: 'left',
+                                labels: {
+                                    boxWidth: 10
+                                }
+                            }
+                        }} />
+                </div>
+                <div className="col-md-offset-1 col-md-10">
+                    <div className="col-md-6">
+                        <Bar
+                            width={100}
+                            height={250}
+                            data = {this.state.Data}
+                            options = {{
+                                maintainAspectRatio: false,
+                                legend: {
+                                    position: 'bottom',
+                                }
+                            }} />
+                    </div>
+
+                    <div className="col-md-6">
+                        <Line
+                            width={100}
+                            height={250}
+                            data = {this.state.Data}
+                            options = {{
+                                maintainAspectRatio: false,
+                                legend: {
+                                    position: 'bottom',
+                                }
+                            }} />
+                    </div>
                 </div>
             </div>
         );

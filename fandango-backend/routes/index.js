@@ -25,6 +25,7 @@ var topTenHallByTickets = require('./admin/topTenHallByTickets');
 var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
 var movieReviewGraph = require('./admin/movieReviewGraph');
 var traceDiagramByAdmin = require('./admin/traceDiagramByAdmin');
+var getUsers = require('./admin/getUsers');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -50,6 +51,13 @@ router.post('/addMovie', function (req, res, next) {
 router.post('/getMovies', function (req, res, next) {
   getMovie.getMovieRouterFn(req, res, next);
 });
+
+router.get('/getUsers', function (req, res, next) {
+    console.log('GET All Users API');
+    getUsers.getUsersRouterFn(req, res, next);
+});
+
+
 router.post('/addHall', function (req, res, next) {
   addHall.addHallRouterFn(req, res, next);
 });

@@ -139,7 +139,7 @@ class List extends Component {
 
 class StatsList extends Component {
     render() {
-        let route = '/citywiserevenue/';
+        let route = '/admin/citywiserevenue/';
         return (
             <ul className="list-group">
                 {

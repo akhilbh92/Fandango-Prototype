@@ -5,7 +5,6 @@
     font-weight: 700;
     position: relative;
     margin: 0;
-    color: white;
     text-decoration: none;
 }
 .admin-sub-header .navbar-nav li a::after{
