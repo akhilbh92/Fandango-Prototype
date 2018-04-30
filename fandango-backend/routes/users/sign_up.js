@@ -6,6 +6,7 @@ let password_pattern = require('../../helpers/password_pattern');
 
 let signUpRouterFn = async function (req, res, next) {
     let body = req.body;
+
     let checkPasswordPattern = function (body) {
         return new Promise(function (resolve, reject) {
             if (!password_pattern.test(body.password)) {

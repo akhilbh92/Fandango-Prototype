@@ -150,3 +150,22 @@ export const getmovieschedulebydate = (payload) =>
             return error;
         });
 
+
+export const bookMovie = (payload) =>
+    fetch(`${api}/bookMovie`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            return res;
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
