@@ -1,6 +1,6 @@
 import React from 'react';
 import * as API from '../../api/API';
-import {Alert, Button} from 'react-bootstrap';
+import {Button, ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import URLRegex from '../Helper/URLRegex';
 
@@ -20,7 +20,7 @@ class MovieForm extends React.Component {
             movieLength: 0,
             genres: '',
             releaseDate: '1900-01-01',
-            trailerValidation: false
+            trailerValidation: true
           };
         this.uploadPhotos = this.uploadPhotos.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -85,24 +85,37 @@ class MovieForm extends React.Component {
     }
 
     handleSubmit(event){
-        if(this.state.trailerValidation){
-            if(this.props.movieId){
-                API.editMovie(this.props.movieId,this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
-                    this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
-                    this.state.genres).then((data)=> {
-                        this.notify('Movie updated successfully');
-                    });
-            } else {
-                API.addMovie(this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
-                    this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
-                    this.state.genres).then((data)=> {
-                        this.notify('Movie saved successfully');
-                    }).catch((err)=> {
-                        this.notify(err);
-                    });
-            }
-        } else {
+        let now = new Date();
+        if(this.state.movieName === ''|| this.state.seeItIn === '' || this.state.releaseDate === '1900-01-01' || this.state.genres === '') {
+            this.notify('Please fill all mandatory fields');
+            return;
+        } else if(now.toISOString().split("T")[0] > this.state.releaseDate) {
+            this.notify('Release Date should be current or future date');
+            return;
+        } else if(typeof(this.state.movieLength)){
+            this.notify('Movie length must be a number denoting minutes');
+            return;
+        }
+
+        if(!this.state.trailerValidation){
             this.notify('Inavlid Trailer Input');
+            return;
+        }
+
+        if(this.props.movieId){
+            API.editMovie(this.props.movieId,this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
+                this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
+                this.state.genres).then((data)=> {
+                    this.notify('Movie updated successfully');
+                });
+        } else {
+            API.addMovie(this.state.movieName, this.state.description, this.state.trailer, this.state.photos, 
+                this.state.seeItIn, this.state.cast, this.state.movieLength, this.state.releaseDate, 
+                this.state.genres).then((data)=> {
+                    this.notify('Movie saved successfully');
+                }).catch((err)=> {
+                    this.notify(err);
+                });
         }
         
         event.preventDefault();
@@ -114,20 +127,19 @@ class MovieForm extends React.Component {
         <br />
             <h3 id="form-header"> <strong> Add Movie Details </strong> </h3> 
                 <br/>
-            <form>
+            <form >
                 <br /><br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row ">
                         <label htmlFor="movieName"
-                            className="col-sm-2 col-form-label label-color"><strong> Movie Name </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Movie Name </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="movieName"
                                 name="movieName"
+                                required
                                 value={this.state.movieName}
-                                required 
                                 onChange={(event) => {
-                                    // document.getElementById("hidden-alert").style.display = "none";
                                     this.setState({
                                         movieName: event.target.value
                                     });
@@ -147,7 +159,6 @@ class MovieForm extends React.Component {
                                 id="description"
                                 name="description"
                                 value={this.state.description}
-                                required
                                 onChange={(event) => {
                                     this.setState({
                                         description: event.target.value
@@ -162,9 +173,9 @@ class MovieForm extends React.Component {
                 <br />
     
                 <div className= "admin-forms">  
-                    <div className="form-group row">
+                    <div className="admin form-group required row ">
                         <label htmlFor="seeItIn"
-                            className="col-sm-2 col-form-label label-color"><strong> See It In</strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> See It In</strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="seeItIn"
@@ -181,7 +192,6 @@ class MovieForm extends React.Component {
                         </div>
                     </div>
                 </div>
-                
                 <br />
                 <div className= "admin-forms"> 
                     <div className="form-group row">
@@ -192,7 +202,6 @@ class MovieForm extends React.Component {
                                 id="cast"
                                 name="cast"
                                 value={this.state.cast}
-                                required
                                 onChange={(event) => {
                                     this.setState({
                                         cast: event.target.value
@@ -214,7 +223,6 @@ class MovieForm extends React.Component {
                                 id="movieLength"
                                 name="movieLength"
                                 value={this.state.movieLength}
-                                required
                                 onChange={(event) => {
                                     this.setState({
                                         movieLength: event.target.value
@@ -227,16 +235,16 @@ class MovieForm extends React.Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row ">
                         <label htmlFor="releaseDate"
-                            className="col-sm-2 col-form-label label-color"><strong> Release Date </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Release Date </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 type="date"
                                 id="releaseDate"
                                 name="releaseDate"
-                                value={this.state.releaseDate}
                                 required
+                                value={this.state.releaseDate}
                                 onChange={(event) => {
                                     this.setState({
                                         releaseDate: event.target.value
@@ -249,9 +257,9 @@ class MovieForm extends React.Component {
                 </div>
                 <br />
                 <div className= "admin-forms"> 
-                    <div className="form-group row">
+                    <div className="admin form-group required row ">
                         <label htmlFor="genres"
-                            className="col-sm-2 col-form-label label-color"><strong> Genres </strong></label>
+                            className="col-sm-2 col-form-label control-label  label-color"><strong> Genres </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="genres"
@@ -280,7 +288,6 @@ class MovieForm extends React.Component {
                                 id="trailer"
                                 name="trailer"
                                 value={this.state.trailer}
-                                required
                                 onChange={(event) => {
                                     this.setState({
                                         trailer: event.target.value

@@ -141,3 +141,20 @@
 .screen-title {
     padding-top: 34px;
 }
+
+.admin.form-group.required .control-label:after { 
+    content:"*";
+    color:red;
+    font-family: 'Glyphicons Halflings';
+    font-weight: normal;
+    font-size: 8px;
+    position: absolute;
+ }
+
+ .admin-forms button{
+     width: 332px;
+ }
+
+ .admin-forms a{
+    width: 326px;
+}
