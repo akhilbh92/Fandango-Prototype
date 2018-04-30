@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import * as API from './../../../api/apicall_for_users';
 import {selectedReview} from "../../../actions";
 import {bindActionCreators} from "redux";
-import MovieBox from './../../MovieDetailBox/MovieDetailBox'
+import MovieHallsBox from '../../MovieDetailBox/MovieDetailBox';
 
 class MovieReview extends Component {
 
@@ -171,7 +171,7 @@ class MovieReview extends Component {
 
             <div className="movie-overview-layout">
                 <div className="movie-overview-layout-left">
-                    <MovieBox />
+                    <MovieHallsBox/>
                 </div>
 
                 <div className="view-review-box  col-md-5">
