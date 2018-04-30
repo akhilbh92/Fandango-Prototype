@@ -59,7 +59,7 @@ class Movie_Halls extends Component{
             const availableshowtimes = [];
 
             for(let k=0;k<show_time.length;k++){
-                availableshowtimes.push(<li key={k} id="movehallsLI_41"><a id="movehallsA_42">{this.tConvert(show_time[i].substring(0,show_time[i].length-3))}</a></li>);
+                availableshowtimes.push(<li key={k} id="movehallsLI_41"><a id="movehallsA_42">{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</a></li>);
             }
 
             halldivs.push(<div key={i}>
