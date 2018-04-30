@@ -1,10 +1,10 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import './MovieOverview.css';
 import Rating from 'react-rating';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import stargrey from './star-grey.png';
 import staryellow from './staryellow.png';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import * as API from './../../../api/apicall_for_users';
 
 
@@ -20,13 +20,10 @@ class MovieAddReview extends Component {
         }
     }
 
-
-
     AddReview = (userdata) => {
         API.addRating(userdata);
         window.location = "/moviedetailreview"
     }
-
 
     render() {
         return (
@@ -36,8 +33,8 @@ class MovieAddReview extends Component {
                     <section className="movie-overview-layout-left-section1">
                         <a className="movie-overview-layout-left-section1-poster" href="/">
                             <img className="movie-overview-layout-left-section1-poster-image"
-                                 src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/202991/fan_postertwo_blackpanther_.jpg"
-                                 alt="Black Panther Movie Poster"/>
+                                src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/202991/fan_postertwo_blackpanther_.jpg"
+                                alt="Black Panther Movie Poster" />
                         </a>
                         <ul className="movie-overview-layout-left-section1-detail">
                             <li>Released</li>
@@ -85,9 +82,9 @@ class MovieAddReview extends Component {
                                 {/*</div>*/}
                                 <Rating
                                     placeholderRating={3.5}
-                                    emptySymbol={<img src={stargrey} className="icon"/>}
-                                    placeholderSymbol={<img src={staryellow} className="icon"/>}
-                                    fullSymbol={<img src={staryellow} className="icon"/>}
+                                    emptySymbol={<img src={stargrey} className="icon" />}
+                                    placeholderSymbol={<img src={staryellow} className="icon" />}
+                                    fullSymbol={<img src={staryellow} className="icon" />}
                                 />
                             </li>
                             <li className="movie-overview-layout-left-section1-detail-rating-number">62,607 Fan
@@ -118,10 +115,10 @@ class MovieAddReview extends Component {
                         <div className="addreview-header-star">
                             <Rating
 
-                                emptySymbol={<img src={stargrey} className="icon"/>}
-                                placeholderSymbol={<img src={staryellow} className="icon"/>}
-                                fullSymbol={<img src={staryellow} className="icon"/>}
-                                onChange={(value)=> {
+                                emptySymbol={<img src={stargrey} className="icon" />}
+                                placeholderSymbol={<img src={staryellow} className="icon" />}
+                                fullSymbol={<img src={staryellow} className="icon" />}
+                                onChange={(value) => {
                                     this.setState({
                                         rating: value
                                     })
@@ -149,7 +146,7 @@ class MovieAddReview extends Component {
                         <div className="addreview-textarea-input">
                             <textarea
                                 type="text"
-                                style={{height: '200px'}}
+                                style={{ height: '200px' }}
                                 onChange={(event) => {
                                     this.setState({
                                         review_body: event.target.value,
@@ -162,8 +159,8 @@ class MovieAddReview extends Component {
                         <Link to="/moviedetailreview">
                             <button className="btn btn-danger cancel-button">CANCEL</button>
                         </Link>
-                            <button className="btn btn-primary cancel-button" style={{marginLeft: '10px'}}
-                                    onClick={() => this.AddReview(this.state)}>SAVE REVIEW
+                        <button className="btn btn-primary cancel-button" style={{ marginLeft: '10px' }}
+                            onClick={() => this.AddReview(this.state)}>SAVE REVIEW
                             </button>
 
                     </div>
@@ -174,8 +171,8 @@ class MovieAddReview extends Component {
 
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return {
         movie: state.selectedMovie
     }
 }

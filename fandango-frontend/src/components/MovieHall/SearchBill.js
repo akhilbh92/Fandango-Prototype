@@ -97,7 +97,7 @@ class SearchBill extends Component {
             Header: 'Customer Name',
             accessor: 'first_name',
             style: { 'textAlign': 'right', 'whiteSpace': 'unset' },
-            Cell: props => (<span style={{ 'color': '#80808C' }}>{props.row._original.first_name + " " + props.row._original.last_name}</span>)
+            Cell: props => (<span style={{ 'color': '#80808C' }}>{props.row._original.first_name}</span>)
         }, {
             Header: 'Movie',
             accessor: 'movie_name',
