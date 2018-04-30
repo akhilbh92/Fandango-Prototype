@@ -6,6 +6,7 @@ import stargrey from './star-grey.png';
 import staryellow from './staryellow.png';
 import {connect} from "react-redux";
 import * as API from './../../../api/apicall_for_users';
+import Message from '../../Message/Message'
 
 
 class MovieAddReview extends Component {
@@ -16,16 +17,65 @@ class MovieAddReview extends Component {
             rating: '',
             movie_id: this.props.movie.id.toString(),
             review_title: '',
-            review_body: ''
+            review_body: '',
+            titleerror: 0,
+            bodyerror: 0,
+            titleemptymessage: '',
+            bodyemptymessgae: '',
+
+
+        }
+    }
+
+    AddReview = (userdata) => {
+        this.setState({
+            titleerror: 0,
+            bodyerror: 0,
+            titleemptymessage: '',
+            bodyemptymessgae: '',
+            type: true
+        }, () => this.handleEmptyTitle(userdata));
+    }
+
+    handleEmptyTitle = (userdata) => {
+
+        if (this.state.review_title.length == 0) {
+            this.setState({
+                titleemptymessage: 'Title should not be empty',
+                titleerror: 1,
+                type: true
+            }, () => this.handleEmptyBody(userdata));
+        }
+        else {
+            this.handleEmptyBody(userdata);
+        }
+    }
+
+
+    handleEmptyBody = (userdata) => {
+
+        if (this.state.review_body.length == 0) {
+            this.setState({
+                bodyemptymessage: 'Body should not be empty',
+                bodyerror: 1,
+                type: true
+            }, () => this.AfterValidation(userdata));
+        }
+        else {
+            this.AfterValidation(userdata);
         }
     }
 
 
 
-    AddReview = (userdata) => {
-        API.addRating(userdata);
-        window.location = "/moviedetailreview"
+
+    AfterValidation = (userdata) => {
+        if( this.state.titleerror != 1 && this.state.bodyerror != 1) {
+            API.addRating(userdata);
+            window.location = "/moviedetailreview"
+        }
     }
+
 
 
     render() {
@@ -145,6 +195,8 @@ class MovieAddReview extends Component {
                             />
 
                         </div>
+                        <Message message={this.state.titleemptymessage} />
+
                         <p className="addreview-body-font">Body:</p>
                         <div className="addreview-textarea-input">
                             <textarea
@@ -158,7 +210,7 @@ class MovieAddReview extends Component {
                                 }}
                             />
                         </div>
-
+                        <Message message={this.state.bodyemptymessage} />
                         <Link to="/moviedetailreview">
                             <button className="btn btn-danger cancel-button">CANCEL</button>
                         </Link>
