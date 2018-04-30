@@ -2,11 +2,16 @@ import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
 import MovieReview from "./MovieOverview/MovieReview";
+import {connect} from "react-redux";
 
 
 class Movie_detail_review extends Component {
     render(){
+        let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
+        if(this.props.movie.photos)background =  this.props.movie.photos;
+
         return(
+
             <div>
                 <HomeHeader/>
                 <div className="movie-detail-main">
@@ -23,7 +28,7 @@ class Movie_detail_review extends Component {
                                     </filter>
                                 </defs>
                                 <image className="js-backgroundBlur-image" x="0" y="0" width="100%" height="110%"
-                                       xlinkHref="//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg"
+                                       xlinkHref={background}
                                        preserveAspectRatio="xMidYMid slice" filter="url(#backgroundBlur)"></image>
                             </svg>
                         </div>
@@ -35,7 +40,7 @@ class Movie_detail_review extends Component {
 
 
 
-                                            Rampage (2018) <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
+                                            AVENGERS: INFINITY WAR <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
 
 
 
@@ -76,4 +81,11 @@ class Movie_detail_review extends Component {
     };
 }
 
-export default Movie_detail_review;
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
+    }
+}
+
+
+export default connect(mapStateToProps)(Movie_detail_review);

@@ -13,7 +13,8 @@ class Movie_Box extends Component{
         super(props);
         this.state={
             avgrating: 0,
-            totalrating: 0
+            totalrating: 0,
+            movie_id: this.props.movie.id
         }
     }
 
