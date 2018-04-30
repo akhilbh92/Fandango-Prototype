@@ -74,8 +74,9 @@ class MovieUpdateReview extends Component {
 
     AfterValidation = (userdata) => {
         if( this.state.titleerror != 1 && this.state.bodyerror != 1) {
-            API.addRating(userdata);
-            window.location = "/moviedetailreview"
+            API.addRating(userdata).then((res)=>{
+                window.location = "/moviedetailreview"
+            });
         }
     }
 
