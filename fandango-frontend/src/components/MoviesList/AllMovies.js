@@ -75,11 +75,17 @@ class AllMovies extends Component{
 
 
     renderMovies(){
+        if(this.state.movies_tofilter.length == 0){
+            return(<h3 className="col-md-offset-2 col-md-8" style={{ textAlign: 'left', marginTop: '20px'}}>
+                NO MATCHING RESULTS
+            </h3>)
+        }
         return this.state.movies_tofilter.map((movie) => {
             return(
                 <div className="col-md-offset-2 col-md-8 list-moviedetails">
                     <div className="img-style">
-                        <img src={movie.photos} className="img-peculiar"  />
+                        <img src={movie.photos} className="img-peculiar"
+                        alt={movie.movie_name + "Movie Poster"}/>
                     </div>
                     <div className="movie-heading">
                         <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{ movie.movie_name}</h4>

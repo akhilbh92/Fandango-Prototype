@@ -2,10 +2,15 @@ import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
 import MovieAddReview from "./MovieOverview/MovieAddReview";
+import {connect} from "react-redux";
+import {Link} from 'react-router-dom';
 
 
 class Movie_detail_addreview extends Component {
     render(){
+        let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
+        if(this.props.movie.photos)background =  this.props.movie.photos;
+
         return(
             <div>
                 <HomeHeader/>
@@ -23,7 +28,7 @@ class Movie_detail_addreview extends Component {
                                     </filter>
                                 </defs>
                                 <image className="js-backgroundBlur-image" x="0" y="0" width="100%" height="110%"
-                                       xlinkHref="//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg"
+                                       xlinkHref={background}
                                        preserveAspectRatio="xMidYMid slice" filter="url(#backgroundBlur)"></image>
                             </svg>
                         </div>
@@ -35,7 +40,7 @@ class Movie_detail_addreview extends Component {
 
 
 
-                                            Rampage (2018) <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
+                                            {this.props.movie.movie_name} <span style={{ color: "#F15500"}}> REVIEW + RATINGS</span>
 
 
 
@@ -44,24 +49,24 @@ class Movie_detail_addreview extends Component {
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/moviedetail" className="movie-detail-section-subnav-item-link">
                                                     Overview
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/movietickets" className="movie-detail-section-subnav-item-link">
                                                     Movie Times + tickets
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/moviedetailreview" className="movie-detail-section-subnav-item-link">
                                                     REVIEWS
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to="/moviedetailcrew" className="movie-detail-section-subnav-item-link">
                                                     CAST
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -76,4 +81,11 @@ class Movie_detail_addreview extends Component {
     };
 }
 
-export default Movie_detail_addreview;
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
+    }
+}
+
+
+export default connect(mapStateToProps)(Movie_detail_addreview);

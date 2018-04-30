@@ -13,7 +13,7 @@ let bookMovieRouterFn = async function (req,res,next) {
     }
 
     const body = req.body;
-    body['userId'] = req.user.userId;
+    body['user_id'] = req.user.userId;
     delete body['bill_id'];
     delete body['booking_date'];
 

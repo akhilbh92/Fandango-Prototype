@@ -24,6 +24,7 @@ var cityWiseMovieRevenue = require('./admin/cityWiseMovieRevenue');
 var topTenHallByTickets = require('./admin/topTenHallByTickets');
 var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
 var movieReviewGraph = require('./admin/movieReviewGraph');
+var traceDiagramByAdmin = require('./admin/traceDiagramByAdmin');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -93,6 +94,10 @@ router.post('/movierevenuebyadmin', function (req, res, next) {
 });
 router.get('/moviereviewgraph', function (req, res, next) {
     movieReviewGraph.movieReviewGraphRouterFn(req, res, next);
+});
+router.post('/tracediagram', function (req, res, next) {
+    console.log('GET trace diagram for a user by fandango admin');
+    traceDiagramByAdmin.traceDiagramByAdminRouterFn(req, res, next);
 });
 router.post('/addMovieSchedule', function (req, res, next) {
   addMovieSchedule.addMovieScheduleRouterFn(req, res, next);

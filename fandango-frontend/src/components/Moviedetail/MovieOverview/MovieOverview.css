@@ -354,6 +354,7 @@
     color: rgb(76, 76, 76);
     float: left;
     height: 541px;
+    margin-top: 12px;
     text-decoration: none solid rgb(76, 76, 76);
     text-size-adjust: 100%;
     width: 640px;
@@ -365,7 +366,7 @@
     border-radius: 0 0 0 0;
     font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;
     outline: rgb(76, 76, 76) none 0px;
-    padding: 0px 10px;
+    padding: 0px 0px;
 }/*#SECTION_1*/
 
 #DIV_2 {
@@ -384,8 +385,8 @@
     font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;
     outline: rgb(76, 76, 76) none 0px;
 
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
+    /*-webkit-margin-before: 1em;*/
+    /*-webkit-margin-after: 1em;*/
 }/*#DIV_2*/
 
 #DIV_3 {
@@ -430,69 +431,69 @@
     perspective-origin: 310px 175px;
     transform-origin: 310px 175px;
     caret-color: rgb(76, 76, 76);
-    background: rgba(0, 0, 0, 0) url("https://images.fandango.com/imagerelay/500/0/video.fandango.com/MPX/image/NBCU_Fandango/962/923/thumb_762A69FF-CA69-4A88-8234-8F85E31E65EE.jpg/image.jpg/redesign/static/img/noxSquare.jpg") repeat scroll 50% 50% / cover padding-box border-box;
+    /*background: rgba(0, 0, 0, 0) url("https://images.fandango.com/imagerelay/500/0/video.fandango.com/MPX/image/NBCU_Fandango/962/923/thumb_762A69FF-CA69-4A88-8234-8F85E31E65EE.jpg/image.jpg/redesign/static/img/noxSquare.jpg") repeat scroll 50% 50% / cover padding-box border-box;*/
     border: 0px none rgb(76, 76, 76);
     border-radius: 0 0 0 0;
     font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;
     outline: rgb(76, 76, 76) none 0px;
 }/*#DIV_4*/
 
-#DIV_4:after {
-    background-position: 50% 50%;
-    bottom: 0px;
-    box-sizing: border-box;
-    color: rgb(76, 76, 76);
-    content: '""';
-    cursor: pointer;
-    display: block;
-    height: 350px;
-    left: 0px;
-    opacity: 0.5;
-    position: absolute;
-    right: 0px;
-    text-decoration: none solid rgb(76, 76, 76);
-    text-size-adjust: 100%;
-    top: 0px;
-    width: 620px;
-    column-rule-color: rgb(76, 76, 76);
-    perspective-origin: 310px 175px;
-    transform-origin: 310px 175px;
-    caret-color: rgb(76, 76, 76);
-    background: rgba(0, 0, 0, 0) url("https://images.fandango.com/fandango-www/screenplay/assets/images/desktop/icons/global/icon-type-play-white.svg") no-repeat scroll 50% 50% / 110px 110px padding-box border-box;
-    border: 0px none rgb(76, 76, 76);
-    border-radius: 0 0 0 0;
-    font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;
-    outline: rgb(76, 76, 76) none 0px;
-    transition: opacity 0.6s ease 0s;
-}/*#DIV_4:after*/
+/*#DIV_4:after {*/
+    /*background-position: 50% 50%;*/
+    /*bottom: 0px;*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(76, 76, 76);*/
+    /*content: '""';*/
+    /*cursor: pointer;*/
+    /*display: block;*/
+    /*height: 350px;*/
+    /*left: 0px;*/
+    /*opacity: 0.5;*/
+    /*position: absolute;*/
+    /*right: 0px;*/
+    /*text-decoration: none solid rgb(76, 76, 76);*/
+    /*text-size-adjust: 100%;*/
+    /*top: 0px;*/
+    /*width: 620px;*/
+    /*column-rule-color: rgb(76, 76, 76);*/
+    /*perspective-origin: 310px 175px;*/
+    /*transform-origin: 310px 175px;*/
+    /*caret-color: rgb(76, 76, 76);*/
+    /*!*background: rgba(0, 0, 0, 0) url("https://images.fandango.com/fandango-www/screenplay/assets/images/desktop/icons/global/icon-type-play-white.svg") no-repeat scroll 50% 50% / 110px 110px padding-box border-box;*!*/
+    /*border: 0px none rgb(76, 76, 76);*/
+    /*border-radius: 0 0 0 0;*/
+    /*font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;*/
+    /*outline: rgb(76, 76, 76) none 0px;*/
+    /*transition: opacity 0.6s ease 0s;*/
+/*}!*#DIV_4:after*!*/
 
-#DIV_4:before {
-    bottom: 0px;
-    box-sizing: border-box;
-    color: rgb(76, 76, 76);
-    content: '"' '"';
-    cursor: pointer;
-    display: block;
-    height: 350px;
-    left: 0px;
-    position: absolute;
-    right: 0px;
-    text-align: center;
-    text-decoration: none solid rgb(76, 76, 76);
-    text-size-adjust: 100%;
-    top: 0px;
-    width: 620px;
-    column-rule-color: rgb(76, 76, 76);
-    perspective-origin: 310px 175px;
-    transform-origin: 310px 175px;
-    caret-color: rgb(76, 76, 76);
-    background: rgba(0, 0, 0, 0.2) none repeat scroll 0% 0% / auto padding-box border-box;
-    border: 0px none rgb(76, 76, 76);
-    border-radius: 0 0 0 0;
-    font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;
-    outline: rgb(76, 76, 76) none 0px;
-    transition: background-color 0.35s ease 0s;
-}/*#DIV_4:before*/
+/*#DIV_4:before {*/
+    /*bottom: 0px;*/
+    /*box-sizing: border-box;*/
+    /*color: rgb(76, 76, 76);*/
+    /*content: '"' '"';*/
+    /*cursor: pointer;*/
+    /*display: block;*/
+    /*height: 350px;*/
+    /*left: 0px;*/
+    /*position: absolute;*/
+    /*right: 0px;*/
+    /*text-align: center;*/
+    /*text-decoration: none solid rgb(76, 76, 76);*/
+    /*text-size-adjust: 100%;*/
+    /*top: 0px;*/
+    /*width: 620px;*/
+    /*column-rule-color: rgb(76, 76, 76);*/
+    /*perspective-origin: 310px 175px;*/
+    /*transform-origin: 310px 175px;*/
+    /*caret-color: rgb(76, 76, 76);*/
+    /*background: rgba(0, 0, 0, 0.2) none repeat scroll 0% 0% / auto padding-box border-box;*/
+    /*border: 0px none rgb(76, 76, 76);*/
+    /*border-radius: 0 0 0 0;*/
+    /*font: normal normal 400 normal 14px / normal proxima-nova, Helvetica, Arial, sans-serif;*/
+    /*outline: rgb(76, 76, 76) none 0px;*/
+    /*transition: background-color 0.35s ease 0s;*/
+/*}!*#DIV_4:before*!*/
 
 #DIV_5 {
     box-sizing: border-box;

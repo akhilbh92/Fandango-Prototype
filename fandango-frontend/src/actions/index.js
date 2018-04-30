@@ -16,6 +16,15 @@ export const selectedMovie = (movieinfo) => {
     }
 };
 
+export const doneBooking = (bookinginfo) => {
+    console.log(bookinginfo);
+    return{
+        type: 'DONE_BOOKING',
+        payload: bookinginfo
+    }
+};
+
+
 export const selectedReview = (reviewinfo) => {
     console.log(reviewinfo);
     return{

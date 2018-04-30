@@ -3,6 +3,8 @@ import * as API from '../../api/API';
 import {Alert, Button, Glyphicon} from 'react-bootstrap';
 import AddScreenForm from './AddScreenForm';
 import { ToastContainer, toast } from 'react-toastify';
+import stateRegex from '../Helper/StateRegex';
+import zipcodeRegex from '../Helper/ZipcodeRegex';
 
 class HallForm extends Component {
     notify = (msg) => toast(msg);
@@ -19,7 +21,9 @@ class HallForm extends Component {
             totalScreens: '',
             screensAdded: 0,
             screensArray: [],
-            isHallSaved: false
+            isHallSaved: false,
+            stateValidation: false,
+            zipcodeValidation: false
           };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addScreen = this.addScreen.bind(this);
@@ -87,7 +91,35 @@ class HallForm extends Component {
         })
     }
 
+    validateField(fieldType, value){
+        let fieldPromise = new Promise(function(resolve, reject){
+            let pattern;
+            switch (fieldType){
+                case 'state':
+                    pattern = stateRegex;
+                    break;
+                case 'zipcode':
+                    pattern = zipcodeRegex;
+                    break;
+            }
+            if(pattern.test(value)) {
+                resolve(true)
+            } else {
+                reject(false);
+            }
+        });
+        return fieldPromise;
+    }
+
     handleSubmit(event){
+        if(!this.state.stateValidation){
+            this.notify('Invalid State Input');
+            return;
+        } else if(!this.state.zipcodeValidation){
+            this.notify('Invalid Zipcode Input');
+            return;
+        }
+
         if(this.props.hallId){
             API.editHall(this.props.hallId,this.state.hallName, this.state.street, this.state.city, this.state.state, this.state.zipcode, 
                 this.state.totalScreens).then((data)=> {
@@ -190,7 +222,17 @@ class HallForm extends Component {
                                 onChange={(event) => {
                                     this.setState({
                                         state: event.target.value
-                                    });
+                                    }),this.validateField('state', event.target.value)
+                                    .then((res)=>{
+                                        this.setState({
+                                            stateValidation: res
+                                        })
+                                    })
+                                    .catch((err) => {
+                                        this.setState({
+                                            stateValidation: err
+                                        })
+                                    })
                                 }}
                                 >
                             </input>
@@ -211,7 +253,17 @@ class HallForm extends Component {
                                 onChange={(event) => {
                                     this.setState({
                                         zipcode: event.target.value
-                                    });
+                                    }),this.validateField('zipcode', event.target.value)
+                                    .then((res)=>{
+                                        this.setState({
+                                            zipcodeValidation: res
+                                        })
+                                    })
+                                    .catch((err) => {
+                                        this.setState({
+                                            zipcodeValidation: err
+                                        })
+                                    })
                                 }}
                                 >
                             </input>
