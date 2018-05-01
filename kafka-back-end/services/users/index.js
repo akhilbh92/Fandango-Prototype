@@ -64,7 +64,8 @@ module.exports = {
             const profile = await usermodel.findAll({
                 where:{
                     userId:userId,
-                }
+                },
+                attributes: { exclude: ['password_hash','is_archive','createdAt','updatedAt'] }
             });
             cb(null,profile[0])
         }catch (e) {
