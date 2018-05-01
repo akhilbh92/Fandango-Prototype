@@ -33,16 +33,18 @@ var movieRevenueByAdmin = require('./services/adminanalytics/movieRevenueByAdmin
 var movieReviewGraph = require('./services/adminanalytics/movieReviewGraph');
 var traceDiagram = require('./services/adminanalytics/traceDiagram');
 var getAllUsers = require('./services/adminanalytics/getAllUsers');
+var insertTrace = require('./services/adminanalytics/insertTrace');
 
-const userService = Object.assign(require('./services/users'),require('./services/ratings'),
-    require('./services/movieschedule/getmovieschedulebydate'),require('./services/Billing'));
+const userService = Object.assign(require('./services/users'), require('./services/ratings'),
+    require('./services/movieschedule/getmovieschedulebydate'), require('./services/Billing'));
 
 consumer.addTopics(['request'], function (err, added) {
-    if(err) {
+    if (err) {
         console.log(`AddTopics Error: ${err}`);
-    } else if(added){
+    } else if (added) {
         console.log(`Topics added: ${added}`);
-    }});
+    }
+});
 
 
 /*****************************/
@@ -159,10 +161,13 @@ consumer.on('message', (message) => {
         case 'getUsers':
             handler = getAllUsers;
             break;
+        case 'trace':
+            handler = insertTrace;
+            break;
         default:
-        console.log('DEFAULT HANDLER');
+            console.log('DEFAULT HANDLER');
             userService[data.data.key](data.data.value, function (err, res) {
-                if(err){
+                if (err) {
                     res = err;
                 }
                 console.log('after handle: %o', res);

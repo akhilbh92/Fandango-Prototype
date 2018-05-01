@@ -183,12 +183,29 @@ h1, h2, h3, h4, h5, h6 {
 
 .sub-genre{
     margin-left: 15px;
+    width: 100px;
+    text-align: center;
+    background-color: white;
+    color: #32b4ff;
+    border-radius: 0px;
+}
+
+.sub-genre-bot{
+    margin-left: 15px;
+    width: 100px;
+    text-align: left;
+    padding-left: 0px;
     background-color: white;
     color: #32b4ff;
     border-radius: 0px;
 }
 
 .sub-genre:hover {
+    background-color: #32b4ff !important; ;
+    color: white !important;
+}
+
+.sub-genre-bot:hover {
     background-color: #32b4ff !important; ;
     color: white !important;
 }

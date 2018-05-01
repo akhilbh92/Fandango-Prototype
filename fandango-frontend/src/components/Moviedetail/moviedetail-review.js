@@ -4,9 +4,16 @@ import './moviedetail.css'
 import MovieReview from "./MovieOverview/MovieReview";
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
-
+import { log1, pageNames } from "../../App";
 
 class Movie_detail_review extends Component {
+
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("View Movie Reviews");
+        }
+    }
+
     render(){
         let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
         if(this.props.movie.photos)background =  this.props.movie.photos;
@@ -84,7 +91,8 @@ class Movie_detail_review extends Component {
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
 

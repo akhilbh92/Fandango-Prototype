@@ -4,11 +4,19 @@ import HomeHeader from './../AfterLogin/HomeHeader'
 import MovieDetailBox from '../MovieDetailBox/MovieDetailBox'
 import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
 import {connect} from "react-redux";
+import { Link } from 'react-router-dom';
+import { log1, pageNames } from "../../App";
 import { Link } from 'react-router-dom'
 import Price_Filter from './PriceFilter/pricefilter';
 
 
 class Movie_Tickets extends Component{
+
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("Shows Details");
+        }
+    }
 
     CustomDate(props){
 
@@ -54,8 +62,8 @@ class Movie_Tickets extends Component{
         let count = 4;
 
         for (let i=0;i<7;i++){
-
             date.setDate(date.getDate() + 1);
+
             if(i === this.state.highlightedKey){
                 result.push(<li test={i} id={"datepickerLI_"+count} key={i} onClick={(e)=>{this.handleDateClick(e)}}>
                     <div test={i} style={{background: "rgb(51, 51, 51) none repeat scroll 0% 0% / auto padding-box border-box",color: "rgb(255, 255, 255)"}} id={"datepickerA_"+(count+1)}> <span test={i} style={{background: "rgb(241, 85, 0) none repeat scroll 0% 0% / auto padding-box border-box",color: "rgb(255, 255, 255)"}} id={"datepickerSPAN_"+(count+2)}>{this.state.dayNames[date.getDay()]}</span> <span test={i} style={{color: "rgb(255, 255, 255)"}} id={"datepickerSPAN_"+(count+3)}>{this.state.monthNames[date.getMonth()]}</span> <span test={i} style={{color: "rgb(255, 255, 255)"}} id={"datepickerSPAN_"+(count+4)}>{date.getDate()}</span></div>
@@ -66,7 +74,6 @@ class Movie_Tickets extends Component{
                 </li>);
             }
             count = count + 5;
-
         }
         return result;
     }
@@ -184,7 +191,8 @@ class Movie_Tickets extends Component{
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
 

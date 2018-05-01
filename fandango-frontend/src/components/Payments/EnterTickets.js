@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {doneBooking} from "../../actions";
 import {bindActionCreators} from "redux";
 import * as API from './../../api/apicall_for_users';
+import { log1, pageNames } from "../../App";
 
 
 class EnterTickets extends Component{
@@ -40,6 +41,12 @@ class EnterTickets extends Component{
         }
     }
 
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("Buy Tickets");
+        }
+    }
+
     handleAuthorize = (userdata) => {
         this.setState({
             ticketerror: '',
@@ -64,9 +71,9 @@ class EnterTickets extends Component{
 
     doPayment = (userdata) => {
         API.bookMovie(userdata.payload)
-            .then((res)=>{
+            .then(
                 window.location = "/purchasehistory"
-            });
+            );
     }
 
 
@@ -159,6 +166,9 @@ class EnterTickets extends Component{
     doPayment2 = (userdata) => {
         if(this.state.carderror != 1 && this.state.expirationerror != 1 && this.state.nameerror != 1 && this.state.cvverror != 1 && this.state.ticket2error != 1) {
             API.bookMovie(userdata.payload)
+                .then(
+                    window.location = "/purchasehistory"
+                );
         }
     }
 
@@ -339,7 +349,8 @@ class EnterTickets extends Component{
 function mapStateToProps(state) {
     return {
         booking: state.doneBooking,
-        schedule: state.selectedSchedule
+        schedule: state.selectedSchedule,
+        user: state.loginUser
     }
 }
 function matchDispatchToProps(dispatch) {

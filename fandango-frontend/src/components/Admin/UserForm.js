@@ -3,6 +3,9 @@ import { Alert, Button } from 'react-bootstrap';
 import * as API from '../../api/API';
 import { ToastContainer, toast } from 'react-toastify';
 import emailRegex from '../Helper/EmailRegex';
+import stateRegex from '../Helper/StateRegex';
+import zipcodeRegex from '../Helper/ZipcodeRegex';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 
 class UserForm extends Component {
@@ -23,7 +26,9 @@ class UserForm extends Component {
             phoneNumber: '',
             hallId: '',
             isDeleted: false,
-            emailValidation: false
+            emailValidation: 'NA',
+            stateValidation: 'NA',
+            zipcodeValidation: 'NA'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -54,6 +59,12 @@ class UserForm extends Component {
                 case 'email':
                     pattern = emailRegex;
                     break;
+                case 'state':
+                    pattern = stateRegex;
+                    break;
+                case 'zipcode':
+                    pattern = zipcodeRegex;
+                    break;
             }
             if(pattern.test(value)) {
                 resolve(true);
@@ -69,9 +80,15 @@ class UserForm extends Component {
             this.notify('Please fill all mandatory fields');
             return;
         } else if(!this.state.emailValidation){
-            this.notify('Invalid Email Input');
+            this.notify('Invalid Email field Input');
             return;
-        }
+        } else if(!this.state.stateValidation){
+            this.notify('Invalid State field Input');
+            return;
+        } else if(!this.state.zipcodeValidation){
+            this.notify('Invalid Zipcode field Input');
+            return;
+        }  
         
 
         let updatedUserDetails = {
@@ -90,7 +107,8 @@ class UserForm extends Component {
 
         if(this.props.userDetails) {
             API.updateUserDetails(updatedUserDetails). then((result) => {
-                    this.notify('User Profile updated successfully');
+                console.log(result);
+                    this.notify('User Profile details updated successfully');
                 }).catch((err)=>{
                     this.notify(err);
                 });
@@ -253,7 +271,17 @@ class UserForm extends Component {
                                 onChange={(event) => {
                                     this.setState({
                                         state: event.target.value
-                                    });
+                                    }),this.validateField('state', event.target.value)
+                                    .then((res)=>{
+                                        this.setState({
+                                            stateValidation: res
+                                        })
+                                    })
+                                    .catch((err) => {
+                                        this.setState({
+                                            stateValidation: err
+                                        })
+                                    })
                                 }}
                                 >
                             </input>
@@ -274,7 +302,17 @@ class UserForm extends Component {
                                 onChange={(event) => {
                                     this.setState({
                                         zipcode: event.target.value
-                                    });
+                                    }),this.validateField('zipcode', event.target.value)
+                                    .then((res)=>{
+                                        this.setState({
+                                            zipcodeValidation: res
+                                        })
+                                    })
+                                    .catch((err) => {
+                                        this.setState({
+                                            zipcodeValidation: err
+                                        })
+                                    })
                                 }}
                                 >
                             </input>
@@ -323,6 +361,8 @@ class UserForm extends Component {
                         </div>
                     </div>
                 </div>
+                <br />
+                
                 <br />
                 <div className="col-sm-3"> </div>                
                 <div className="col-sm-5"> <p id='response-message'> User Profile added successfully </p> </div>

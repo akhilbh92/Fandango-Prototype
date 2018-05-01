@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import HomeHeader from './HomeHeader';
 import {Link} from 'react-router-dom';
 import avengers from './../MoviesList/avengers.jpg';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { log1, pageNames } from "../../App";
 import * as API from './../../api/apicall_for_users';
 
 class PurchaseHistory extends Component{
+
 
     constructor(props){
         super(props);
@@ -12,10 +16,12 @@ class PurchaseHistory extends Component{
         this.state={
             purchases: []
         }
-
     }
 
     componentDidMount(){
+    if (this.props.user !== undefined) {
+            pageNames.push("Purchase History");
+            }
         API.getPurchaseHistory({})
             .then((result) => {
                 console.log(result);
@@ -56,8 +62,8 @@ class PurchaseHistory extends Component{
 
 
                     </div>
-                )
-            })
+                );
+            });
         }
     }
 
@@ -83,13 +89,18 @@ class PurchaseHistory extends Component{
                     </div>
 
                     {this.renderPurchases()}
-
-
-
                 </div>
             </div>
         )
     }
 }
 
-export  default PurchaseHistory;
+function mapStateToProps(state) {
+    return {
+        user: state.loginUser
+    }
+}
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(PurchaseHistory);

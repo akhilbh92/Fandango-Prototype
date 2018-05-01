@@ -6,8 +6,9 @@ import './header.css';
 import fandangoLogo from './fandango-logo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
 import { doSignOut } from '../../api/apicall_for_users';
-import { loginUser } from "../../actions";
+import { loginUser, selectedTrace } from "../../actions";
 import {searchCriteria} from "../../actions";
+import { log1, pageNames } from "../../App";
 
 class CommonHeader extends Component {
 
@@ -19,8 +20,8 @@ class CommonHeader extends Component {
   }
 
   signout() {
-    doSignOut({}).then((response) => {
-
+    doSignOut({pageNames:this.props.trace}).then((response) => {
+      
       window.location = "/"
         this.props.loginUser(null);
     })
@@ -82,7 +83,7 @@ class CommonHeader extends Component {
                 <button className="fan-btn fan-btn-style-go" type="button" onClick={() => this.handleSearch(this.props.searchCriteria(this.state))}>Go</button>
               </form>
             </li>
-            <li className="drop-menu"><Link to="/allmovies">MOVIES</Link>
+            {/* <li className="drop-menu"><Link to="/allmovies">MOVIES</Link> */}
               {/* <div className="fulldrop">
                 <div className="column">
                   <ul>
@@ -126,8 +127,8 @@ class CommonHeader extends Component {
                   </ul>
                 </div>
               </div> */}
-            </li>
-            <li className="drop-menu"><a href="">MOVIE TIMES + TICKETS</a>
+            {/* </li> */}
+            <li className="drop-menu"><a href=""><Link to="/allmovies">MOVIE TIMES + TICKETS</Link></a>
               {/* <div className="fulldrop">
                 <div className="column large-column">
                   <h3>Where are you located? Here are our top cities</h3>
@@ -180,11 +181,12 @@ class CommonHeader extends Component {
 function mapStateToProps(state) {
   return {
     user: state.loginUser,
-    criteria: state.searchCriteria
+    criteria: state.searchCriteria,
+    trace: state.selectedTrace
   }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUser: loginUser, searchCriteria: searchCriteria }, dispatch)
+  return bindActionCreators({ loginUser: loginUser, searchCriteria: searchCriteria, selectedTrace: selectedTrace }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(CommonHeader);
