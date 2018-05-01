@@ -25,7 +25,8 @@ passport.use('local', new LocalStrategy({
                         done(null, {
                             "userId": results.userId,
                             "role": results.role,
-                            "hall_id":results.hall_id
+                            "hall_id":results.hall_id,
+                            "email":results.email
                         });
                     }else{
                         done(null, false, 'Incorrect Email or Password');
