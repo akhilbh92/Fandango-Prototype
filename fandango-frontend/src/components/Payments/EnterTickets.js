@@ -14,12 +14,12 @@ class EnterTickets extends Component{
         super(props);
 
         this.state = {
-            movie_schedule_id: "700ef24c-b1f6-47e0-9686-883af1938b0a",
+            movie_schedule_id: this.props.schedule.movie_schedule_id,
             total_price:1,
             tax:'',
             no_of_seats:0,
             status:"A",
-            price: 10,
+            price: this.props.schedule.price,
             card: '',
             name: '',
             expiration: '',
@@ -198,7 +198,7 @@ class EnterTickets extends Component{
 
                         <Link to="">Select a new Showtime</Link>
                         <hr />
-                        Price: $ 11
+                        Price: $ {this.state.price}
                         <hr />
                         <div>
                             CARD NO: 9999 4444 2222 1111<br />
@@ -334,7 +334,8 @@ class EnterTickets extends Component{
 
 function mapStateToProps(state) {
     return {
-        booking: state.doneBooking
+        booking: state.doneBooking,
+        schedule: state.selectedSchedule
     }
 }
 function matchDispatchToProps(dispatch) {
