@@ -9,7 +9,8 @@ class Search extends Component {
         this.state = {
             initialItems: [],
             items: [],
-            routePath: ''
+            routePath: '',
+            isClicked: false
         }
         this.filterList = this.filterList.bind(this);
     }
@@ -107,7 +108,7 @@ class Search extends Component {
                     <strong>Warning!</strong> Please Select Movies or Theatres.
                 </Alert>
                 {
-                    this.props.forStats &&
+                    this.props.forStats && !this.state.isClicked &&
                     <ul> <StatsList items={this.state.items} />  </ul>
                 }
                 {
@@ -145,7 +146,7 @@ class StatsList extends Component {
                 {
                     this.props.items.map(function (item, index) {
                         return (
-                            <Link className="list-group-item" to={route + item.id} data-category={item} key={index}>{item.movie_name}</Link>
+                            <Link className="list-group-item" to={route + item.id} data-category={item} onClick = {()=>{this.setState({isClicked: true})}} key={index}>{item.movie_name}</Link>
                         );
                     })
                 }

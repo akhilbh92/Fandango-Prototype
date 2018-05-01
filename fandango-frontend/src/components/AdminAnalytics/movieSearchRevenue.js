@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import NavBar from '../Admin/Navigation';
 import '../Admin/admin.css';
 import '../MovieHall/subheader.css';
+
 class MovieSearchRevenue extends Component{
     constructor(props){
         super(props);
