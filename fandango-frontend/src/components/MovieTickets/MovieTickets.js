@@ -8,12 +8,21 @@ import { Link } from 'react-router-dom';
 import { log1, pageNames } from "../../App";
 import Price_Filter from './PriceFilter/pricefilter';
 
+
 class Movie_Tickets extends Component{
 
     componentDidMount() {
         if (this.props.user !== undefined) {
             pageNames.push("Shows Details");
         }
+    }
+
+    CustomDate(props){
+
+        var d = new Date(props);
+
+        var today = new Date(props);
+        return d.setDate(today.getDate()-1);
     }
 
     componentWillMount() {
@@ -81,6 +90,18 @@ class Movie_Tickets extends Component{
         return [year, month, day].join('-');
     }
 
+    handlePriceFilter(minPrice,maxPrice){
+        if(minPrice === "" || maxPrice === ""){
+            minPrice = null;
+            maxPrice = null;
+        }
+        this.setState({
+            ...this.state,
+            "minPrice":minPrice,
+            "maxPrice":maxPrice
+        })
+    }
+
     render(){
         const MovieHallsDate = new Date();
         MovieHallsDate.setDate(this.state.startDate.getDate()+this.state.highlightedKey);
@@ -142,14 +163,14 @@ class Movie_Tickets extends Component{
                             </div>
                         {/*</div>*/}
                     {/*</div>*/}
-                    <Price_Filter/>
+                    <Price_Filter onGo={(minPrice,maxPrice)=>this.handlePriceFilter(minPrice,maxPrice)}/>
                     {/*Filters code*/}
                     <div style={{display:"flex",width:"74.35%",height:"100%",paddingTop:"10px"}}>
                         <div className="msp__movie-details-container">
                             <MovieDetailBox/>
                         </div>
                         <div className="theaters">
-                            <MovieHallsBox date={this.formatDate(MovieHallsDate)}/>
+                            <MovieHallsBox date={this.formatDate(MovieHallsDate)} minPrice={this.state.minPrice} maxPrice={this.state.maxPrice}/>
                         </div>
                     </div>
 
