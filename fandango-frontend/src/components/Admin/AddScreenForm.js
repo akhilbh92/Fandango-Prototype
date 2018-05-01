@@ -43,11 +43,6 @@ class AddScreenForm extends Component {
     }
 
     handleSubmit(){
-        if(typeof(this.state.totalSeats) === 'string'){
-            this.notify('Total No. of Seats must be a number');
-            return;
-        }
-
         if(this.props.screenId){
             API.editScreen(this.props.screenId, this.state.screenType, 
                 this.state.totalSeats, false).then((result)=>{
@@ -96,6 +91,7 @@ class AddScreenForm extends Component {
                             <label htmlFor="screenType"
                                 className="col-form-label label-color"><strong> Screen Type </strong></label>
                                 <input className="form-control"
+                                    type="text"
                                     id="screenType"
                                     name="screenType"
                                     value={this.state.screenType}
@@ -118,6 +114,7 @@ class AddScreenForm extends Component {
                                 <input className="form-control"
                                     id="totalSeats"
                                     name="totalSeats"
+                                    type="number"
                                     value={this.state.totalSeats}
                                     required 
                                     onChange={(event) => {
