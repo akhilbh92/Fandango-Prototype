@@ -34,6 +34,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-authenticate": "^1.2.0",
+    "redis": "^2.8.0",
     "serve-favicon": "~2.4.5",
     "server": "^1.0.18",
     "shortid": "^2.2.8",
