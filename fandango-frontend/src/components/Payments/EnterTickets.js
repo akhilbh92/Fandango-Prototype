@@ -7,6 +7,12 @@ import {doneBooking} from "../../actions";
 import {bindActionCreators} from "redux";
 import * as API from './../../api/apicall_for_users';
 import { log1, pageNames } from "../../App";
+import * as CardValidator from '../Helper/CardValidator';
+let state_regex_pattern = require('../Helper/StateRegex');
+let zipcode_regex = require('../Helper/ZipcodeRegex');
+let emailRegex = require('../Helper/EmailRegex');
+let phoneNoRegex = require('../Helper/PhoneNumberRegex');
+
 
 
 class EnterTickets extends Component{
@@ -36,12 +42,21 @@ class EnterTickets extends Component{
             cvverror: '',
             cvvmessage: '',
             ticket2error: '',
-            ticket2message: ''
+            ticket2message: '',
+            credit_card_number: ''
 
         }
     }
 
     componentDidMount() {
+        API.getProfile()
+            .then((status) => {
+                this.setState({
+                    credit_card_number: status.data.credit_card_number
+                })
+            })
+
+
         if (this.props.user !== undefined) {
             pageNames.push("Buy Tickets");
         }
@@ -70,10 +85,12 @@ class EnterTickets extends Component{
 
 
     doPayment = (userdata) => {
-        API.bookMovie(userdata.payload)
-            .then(
-                window.location = "/purchasehistory"
-            );
+        if(this.state.ticketerror != 1) {
+            API.bookMovie(userdata.payload)
+                .then(
+                    window.location = "/purchasehistory"
+                );
+        }
     }
 
 
@@ -95,7 +112,7 @@ class EnterTickets extends Component{
 
     handleCard = (userdata) => {
 
-        if (this.state.card.length != 12 ) {
+        if (this.state.card == "" || !CardValidator.validateCardNumber(this.state.card) ) {
             this.setState({
                 cardmessage: 'Invalid card no',
                 carderror: 1,
@@ -109,7 +126,7 @@ class EnterTickets extends Component{
 
     handleExpiration = (userdata) => {
 
-        if ( this.state.expiration.length != 4) {
+        if ( this.state.expiration == "" || !CardValidator.validateExpiration(this.state.expiration)) {
             this.setState({
                 expirationmessage: 'Invalid expiration format',
                 expirationerror: 1,
@@ -172,6 +189,50 @@ class EnterTickets extends Component{
         }
     }
 
+    renderCard(){
+        console.log(this.state.credit_card_number);
+        if(this.state.credit_card_number === null || this.state.credit_card_number === undefined ){
+            return(
+                <div></div>
+            )
+        }
+        else{
+
+            return(
+
+                <div>
+                    CARD NO: {this.state.credit_card_number}<br />
+
+
+                    Tickets:
+                    <input
+                        type="number"
+                        style={{ width:'50px', marginLeft: '42%'}}
+                        onChange={(event) => {
+                            this.setState({
+                                no_of_seats: event.target.value,
+                                total_price: this.state.price * event.target.value,
+                                tax: 0.09 * (this.state.price * event.target.value) ,
+
+                                type: true
+                            });
+                        }}
+                    />
+                    <Message message={this.state.ticketmessage} />
+
+                    <br />
+
+                    <button type="button"  className="btn" style={{backgroundColor: '#F15500',color: 'white'}}
+                            onClick={ () => this.handleAuthorize(this.props.doneBooking(this.state))}>USE THIS CARD</button>
+
+                <hr />
+                </div>
+
+
+            )
+        }
+    }
+
 
 
     render(){
@@ -199,7 +260,7 @@ class EnterTickets extends Component{
                     </header>
                 </div>
 
-                <div className="open-form" style={{ minHeight: '825px', marginTop: '25px', paddingBottom: '50px'}}>
+                <div className="open-form" style={{ minHeight: '525px', marginTop: '25px', paddingBottom: '50px'}}>
                     <div className="sub-panel">
                         <p className="join-header">FANDANGO<span class="page-header-emphasis">VIP</span>
 
@@ -214,37 +275,10 @@ class EnterTickets extends Component{
                         <hr />
                         Price: $ {this.state.price}
                         <hr />
-                        <div>
-                            CARD NO: 9999 4444 2222 1111<br />
-
-
-                            Tickets:
-                            <input
-                                type="number"
-                                style={{ width:'50px', marginLeft: '42%'}}
-                                onChange={(event) => {
-                                    this.setState({
-                                        no_of_seats: event.target.value,
-                                        total_price: this.state.price * event.target.value,
-                                        tax: 0.09 * (this.state.price * event.target.value) ,
-
-                                        type: true
-                                    });
-                                }}
-                            />
-                            <Message message={this.state.ticketmessage} />
-
-                            <br />
-
-                            <button type="button"  className="btn" style={{backgroundColor: '#F15500',color: 'white'}}
-                                                onClick={ () => this.handleAuthorize(this.props.doneBooking(this.state))}>USE THIS CARD</button>
-
-
-                        </div>
-                        <hr />
+                        {this.renderCard()}
 
                         <div>
-                            USE ANOTHER CARD<br />
+                            ENTER YOUR CARD<br />
 
                             Tickets:
                             <input
@@ -268,7 +302,6 @@ class EnterTickets extends Component{
                                 type="number"
                                 id="CardnumberBox"
                                 required
-                                autoFocus
                                 onChange={(event) => {
                                     this.setState({
                                         card: event.target.value,
@@ -278,12 +311,11 @@ class EnterTickets extends Component{
                             />
                             <Message message={this.state.cardmessage} />
 
-                            <label for="ExpirationBox" >EXPIRATION DATE:(mmyy format) </label>
+                            <label for="ExpirationBox" >EXPIRATION DATE:(mm/yy format) </label>
                             <input
-                                type="number"
+                                type="text"
                                 id="ExpirationBox"
                                 required
-                                autoFocus
                                 onChange={(event) => {
                                     this.setState({
                                         expiration: event.target.value,
@@ -299,7 +331,6 @@ class EnterTickets extends Component{
                                 type="text"
                                 id="NameBox"
                                 required
-                                autoFocus
                                 onChange={(event) => {
                                     this.setState({
                                         name: event.target.value,
@@ -315,7 +346,6 @@ class EnterTickets extends Component{
                                 type="number"
                                 id="ZipBox"
                                 required
-                                autoFocus
                                 onChange={(event) => {
                                     this.setState({
                                         cvv: event.target.value,
@@ -334,6 +364,10 @@ class EnterTickets extends Component{
                             className="btn btn-warning"
                             style={{ backgroundColor: "#F15500"}} onClick={ () => this.handleBuy(this.props.doneBooking(this.state))}>BUY TICKETS</button>
 
+                        <Link to="/movietickets"><button
+                            type="button"
+                            className="btn btn-warning"
+                            style={{ backgroundColor: "#F15500", marginLeft: '5px'}} >CANCEL PAYMENT</button></Link>
 
                     </div>
 
