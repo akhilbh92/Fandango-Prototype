@@ -185,7 +185,7 @@ class EnterTickets extends Component{
                     </header>
                 </div>
 
-                <div className="open-form" style={{ minHeight: '825px', marginTop: '25px'}}>
+                <div className="open-form" style={{ minHeight: '825px', marginTop: '25px', paddingBottom: '50px'}}>
                     <div className="sub-panel">
                         <p className="join-header">FANDANGO<span class="page-header-emphasis">VIP</span>
 
@@ -230,7 +230,7 @@ class EnterTickets extends Component{
                         <hr />
 
                         <div>
-                            USE ANOTHER CARD
+                            USE ANOTHER CARD<br />
 
                             Tickets:
                             <input
