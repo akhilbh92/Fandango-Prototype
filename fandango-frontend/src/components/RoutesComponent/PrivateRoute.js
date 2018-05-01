@@ -2,15 +2,8 @@ import { connect } from "react-redux";
 import { checkLogin } from '../../api/apicall_for_users';
 import React, { Component } from 'react';
 import Loading from './loading.gif';
-
-import {
-    Route,
-    Redirect,
-} from 'react-router-dom'
-
-
-
-
+import { Route, Redirect } from 'react-router-dom'
+let RoutingMap = require('./RoutingMap');
 
 class PrivateRoute extends Component {
 
@@ -31,11 +24,21 @@ class PrivateRoute extends Component {
     render() {
         const response = this.state;
         if (response === null) {
-            return <div><img style={{'textAlign':'center','marginTop':'100px'}} src={Loading} /></div>
+            return <div><img style={{ 'textAlign': 'center', 'marginTop': '100px' }} src={Loading} /></div>
         } else {
+            console.log("response :", response["data"]);
             if (typeof response["data"] === "object") {
-                this.props.SetSession(response["data"]);
-                return <this.props.componentname {...this.props.dataprops} />
+                if (RoutingMap[response["data"].role].indexOf(this.props.dataprops.location.pathname) > -1) {
+                    console.log("inside if")
+                    this.props.SetSession(response["data"]);
+                    return <this.props.componentname {...this.props.dataprops} />
+                } else {
+                    console.log("else")
+                    this.props.SetSession(response["data"]);
+                    return <Redirect to={{
+                        pathname: '/pagenotfound',
+                    }} />;
+                }
             } else {
                 return <Redirect to={{
                     pathname: '/login',

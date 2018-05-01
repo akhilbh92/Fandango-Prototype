@@ -39,6 +39,7 @@ import ClicksPerPage from '../AdminAnalytics/clicksPerPage';
 import MovieReviewGraph from '../AdminAnalytics/movieReviewGraph';
 import RevenueByMoviePerHall from '../AdminAnalytics/RevenueByMoviePerHall';
 import TraceDiagram from '../AdminAnalytics/trace_diagram';
+import PageNotFound from '../ErrorHandler/PageNotFound';
 
 class RoutesComponent extends Component {
 
@@ -48,7 +49,6 @@ class RoutesComponent extends Component {
     }
 
     redirectURL = (url) => {
-        debugger;
         this.props.history.push(url);
 
     };
@@ -78,17 +78,17 @@ class RoutesComponent extends Component {
                 <PrivateRoute exact path="/cancelbooking" component={CancelBooking} />
                 <PrivateRoute exact path="/searchbill" component={SearchBill} />
                 <Route exact path="/moviedetail" component={Movie_detail} />
-                <Route exact path="/admin" component={AdminHome} />
-                <Route exact path="/admin/movies/:movieId" component={EditMovieForm} />
-                <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
-                <Route exact path="/admin/addMovie" component={AddMovieForm} />
-                <Route exact path="/admin/addHall" component={AddHallForm} />
-                <Route exact path="/admin/addUser" component={AddUser} />
-                <Route exact path="/admin/updateUser" component={UpdateUser} />
+                <PrivateRoute exact path="/admin" component={AdminHome} />
+                <PrivateRoute exact path="/admin/movies/:movieId" component={EditMovieForm} />
+                <PrivateRoute exact path="/admin/halls/:hallId" component={EditHallForm} />
+                <PrivateRoute exact path="/admin/addMovie" component={AddMovieForm} />
+                <PrivateRoute exact path="/admin/addHall" component={AddHallForm} />
+                <PrivateRoute exact path="/admin/addUser" component={AddUser} />
+                <PrivateRoute exact path="/admin/updateUser" component={UpdateUser} />
                 <PrivateRoute exact path="/movierevenue" component={RevenueByMovie} />
                 <Route exact path="/moviedetailreview" component={Movie_detail_review} />
                 <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
-                <Route exact path="/toptenmovies" component={TopTenMoviesByRevenue} />
+                <PrivateRoute exact path="/toptenmovies" component={TopTenMoviesByRevenue} />
                 <Route exact path="/movietickets" component={MovieTickets} />
                 <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
                 <Route exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
@@ -99,9 +99,9 @@ class RoutesComponent extends Component {
                     </div>
                 )} />
                 <Route exact path="/paymentinfo" component={PaymentInfo} />
-                <Route exact path="/citywiserevenue" component={MovieSearchRevenue} />
-                <Route exact path="/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />
-                <Route exact path="/toptenhalls" component={TopTenHallByTicketsSold} />
+                <PrivateRoute exact path="/citywiserevenue" component={MovieSearchRevenue} />
+                <PrivateRoute exact path="/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />
+                <PrivateRoute exact path="/toptenhalls" component={TopTenHallByTicketsSold} />
                 <PrivateRoute exact path="/test" component={Home} />
                 <PrivateRoute exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
@@ -111,10 +111,11 @@ class RoutesComponent extends Component {
                         <SearchResult redirectURL={this.redirectURL} />
                     </div>
                 )} />
-                <Route exact path="/clicksperpage" component={ClicksPerPage} />
-                <Route exact path="/moviereviewgraph" component={MovieReviewGraph} />
-                <Route exact path="/movierevenueperhall" component={RevenueByMoviePerHall} />
-                <Route exact path="/tracediagram" component={TraceDiagram}/>
+                <PrivateRoute exact path="/clicksperpage" component={ClicksPerPage} />
+                <PrivateRoute exact path="/moviereviewgraph" component={MovieReviewGraph} />
+                <PrivateRoute exact path="/movierevenueperhall" component={RevenueByMoviePerHall} />
+                <PrivateRoute exact path="/tracediagram" component={TraceDiagram} />
+                <Route exact path="/pagenotfound" component={PageNotFound} />
             </div>
         );
     }

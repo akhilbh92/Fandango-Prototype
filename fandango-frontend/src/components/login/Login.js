@@ -71,7 +71,8 @@ class Login extends Component {
         if (this.state.emailerror != 1 && this.state.passworderror != 1) {
             API.doLogin(userdata)
                 .then((status) => {
-                    if (status.meta.message == "login successful") {
+                    console.log("status :",status);
+                    if (status !== undefined && status.meta !== undefined && status.meta.message == "login successful") {
                         this.props.loginUser(status.data);
                         console.log("YOu need:" + this.props.user.role);
                         console.log("YOu also need:" + this.props.user.userId);
