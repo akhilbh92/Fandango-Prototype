@@ -79,8 +79,8 @@ class RoutesComponent extends Component {
                 <PrivateRoute exact path="/searchbill" component={SearchBill} />
                 <Route exact path="/moviedetail" component={Movie_detail} />
                 <PrivateRoute exact path="/admin" component={AdminHome} />
-                <PrivateRoute exact path="/admin/movies/:movieId" component={EditMovieForm} />
-                <PrivateRoute exact path="/admin/halls/:hallId" component={EditHallForm} />
+                <Route exact path="/admin/movies/:movieId" component={EditMovieForm} />
+                <Route exact path="/admin/halls/:hallId" component={EditHallForm} />
                 <PrivateRoute exact path="/admin/addMovie" component={AddMovieForm} />
                 <PrivateRoute exact path="/admin/addHall" component={AddHallForm} />
                 <PrivateRoute exact path="/admin/addUser" component={AddUser} />
@@ -91,15 +91,10 @@ class RoutesComponent extends Component {
                 <Route exact path="/movietickets" component={MovieTickets} />
                 <PrivateRoute exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
                 <PrivateRoute exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
-                <PrivateRoute exact path="/entertickets" render={() => (
-                    <div>
-
-                        <EnterTickets redirectURL={this.redirectURL} />
-                    </div>
-                )} />
+                <PrivateRoute exact path="/entertickets" component={EnterTickets} />
                 <PrivateRoute exact path="/admin/toptenmoviesbyrevenue" component={TopTenMoviesByRevenue} />
                 <PrivateRoute exact path="/admin/citywiserevenue" component={MovieSearchRevenue} />
-                <PrivateRoute exact path="/admin/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />
+                <Route exact path="/admin/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />
                 <PrivateRoute exact path="/admin/toptenhalls" component={TopTenHallByTicketsSold} />
                 <PrivateRoute exact path="/test" component={Home} />
                 <PrivateRoute exact path="/mhadmin" component={MovieHallAdminHome} />

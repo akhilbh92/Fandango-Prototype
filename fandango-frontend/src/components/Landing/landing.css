@@ -9,3 +9,6 @@
 .mr-bottom-25{
     margin-bottom: 25px;
 }
+.first-carousel .carousel-control{
+    width: 0px;
+}

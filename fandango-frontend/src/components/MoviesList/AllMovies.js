@@ -1,31 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './movies.css'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectedMovie } from "../../actions";
+import {selectedMovie} from "../../actions";
 import * as API from './../../api/apicall_for_users';
-import { log1, pageNames } from "../../App";
+import {log1} from "../../App";
 
-class AllMovies extends Component {
+class AllMovies extends Component{
 
-    constructor(props) {
+    constructor(props){
         super(props);
 
-        this.state = {
+        this.state={
             filter: '',
+            filterRating: -1,
             movies: [],
-            movies_tofilter: []
+            movies_tofilter: [],
+            showfiltertext: ""
 
         }
         this.handleCaptureLessSeen = this.handleCaptureLessSeen.bind(this);
+        this.filterMovies = this.filterMovies.bind(this);
+        this.filterMoviesByRating = this.filterMoviesByRating.bind(this);
     }
 
-    componentDidMount() {
-        if (this.props.user !== undefined) {
-            pageNames.push("Movie Listing");
-        }
+    componentDidMount(){
         API.getMovies({})
             .then((result) => {
                 this.setState({
@@ -37,68 +38,98 @@ class AllMovies extends Component {
 
 
     filterMovies = (filter) => {
-        let msg = '{"event":"section_click","section_name":"filter_genre","genre_name":"' + filter.toString() + '"}';
+        let msg = '{"event":"section_click","section_name":"filter_genre","genre_name":"'+filter.toString()+'"}';
         log1.info(msg);
         this.setState({
             filter: filter,
+            showfiltertext: "yes",
             movies_tofilter: this.state.movies.filter(movie => movie.genres.toLocaleLowerCase().includes(filter.toLowerCase()))
         })
 
         console.log(this.state.movies);
     }
 
-
-    renderTitle() {
-        if (this.state.filter == "") {
-            return (
-                <div className="page-header-container">
-                    <div className="row">
-                        <div className="large-12 columns">
-                            <h2 className="page-header">SHOWING ALL MOVIES</h2>
-                        </div>
-                    </div>
-                </div>
-
+    filterMoviesByRating = (filterRating) => {
+        this.setState({
+            filterRating: filterRating,
+            showfiltertext: "no",
+            movies_tofilter: this.state.movies.filter(movie =>
+                movie.avgrating > filterRating &&  movie.avgrating <= (filterRating+1)
             )
-        }
+        })
+        console.log(this.state.movies_tofilter);
 
-        else {
-            return (
-                <div className="page-header-container">
-                    <div className="row">
-                        <div className="large-12 columns">
-                            <h2 className="page-header">SHOWING <span style={{ color: '#F15500' }}>"{this.state.filter}"</span> MOVIES</h2>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
     }
 
 
-    handleCaptureLessSeen() {
-        /*
-                log1.info('{"event":"page_click","page_name":"AllMovies","count":"1"}');
-        */
+    renderTitle(){
+        if(this.state.showfiltertext == "no"){
+            return(
+            <div className="page-header-container">
+                <div className="row">
+                    <div className="large-12 columns">
+                        <h2 className="page-header">SHOWING MOVIES WITH <span style={{ color: '#f15500'}}>"RATINGS IN BETWEEN {this.state.filterRating}-{this.state.filterRating+1}"</span></h2>
+                    </div>
+                </div>
+            </div>
+
+            )
+
+        }
+        else {
+            if (this.state.filter == "") {
+                return (
+                    <div className="page-header-container">
+                        <div className="row">
+                            <div className="large-12 columns">
+                                <h2 className="page-header">SHOWING ALL MOVIES</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                )
+            }
+
+            else {
+                return (
+                    <div className="page-header-container">
+                        <div className="row">
+                            <div className="large-12 columns">
+                                <h2 className="page-header">SHOWING <span
+                                    style={{color: '#F15500'}}>"{this.state.filter}"</span> MOVIES</h2>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        }
+        }
+
+
+    handleCaptureLessSeen(){
+/*
+        log1.info('{"event":"page_click","page_name":"AllMovies","count":"1"}');
+*/
         let msg = '{"event":"section_click","section_name":"movie_Listing"}';
         log1.info(msg);
     }
 
-    renderMovies() {
-        if (this.state.movies_tofilter.length == 0) {
-            return (<h3 className="col-md-offset-2 col-md-8" style={{ textAlign: 'left', marginTop: '20px' }}>
+    renderMovies(){
+            if(this.state.movies_tofilter.length == 0){
+            return(<h3 className="col-md-offset-2 col-md-8" style={{ textAlign: 'left', marginTop: '20px'}}>
                 NO MATCHING RESULTS
             </h3>)
         }
         return this.state.movies_tofilter.map((movie) => {
-            return (
+            console.log("1");
+            return(
                 <div className="col-md-offset-2 col-md-8 list-moviedetails" onClick={this.handleCaptureLessSeen}>
                     <div className="img-style">
                         <img src={movie.photos} className="img-peculiar"
-                            alt={movie.movie_name + "Movie Poster"} />
+                        alt={movie.movie_name + "Movie Poster"}/>
                     </div>
                     <div className="movie-heading">
-                        <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{movie.movie_name}</h4>
+                        <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{ movie.movie_name}</h4>
                     </div>
                     <div className="movie-extra-details">
                         <h5 className="gap">Release date: {movie.release_date}</h5>
@@ -116,7 +147,7 @@ class AllMovies extends Component {
                         </h5>
                     </div>
                     <div className="book-now">
-                        <button type="button" className="btn buy-tickets"> BUY TICKETS</button>
+                        <button type="button" className="btn buy-tickets" onClick={() => this.handleBooking(this.props.selectedMovie(movie))}> BUY TICKETS</button>
                     </div>
                 </div>
             )
@@ -128,17 +159,22 @@ class AllMovies extends Component {
         this.props.redirectURL("/moviedetail");
     }
 
+    handleBooking = () => {
+        this.props.redirectURL("/movietickets");
+    }
 
-    render() {
-        return (
+
+
+    render(){
+        return(
             <div>
                 <div className="site-wrap">
-                    <HomeHeader />
+                    <HomeHeader/>
 
                     <div className="page-header-container">
                         <div className="row">
                             <div className="large-12 columns">
-                                <h4 className="page-header">FILTER BY MOVIE GENRES</h4>
+                                <h4 className="page-header">FILTERS</h4>
                             </div>
                         </div>
                     </div>
@@ -154,6 +190,18 @@ class AllMovies extends Component {
                             <button type="button" className="btn sub-genre" onClick={() => this.filterMovies("romance")}>ROMANCE</button>
                             <button type="button" className="btn sub-genre" onClick={() => this.filterMovies("sci-fi")}>SCI-FI</button>
                             <button type="button" className="btn sub-genre" onClick={() => this.filterMovies("animated")}>ANIMATED</button>
+                        </ul>
+                    </div>
+
+
+                    <div className="genre-list">
+                        <ul>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(0)}>RATINGS (0-1)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(1)}>RATINGS (1-2)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(2)}>RATINGS (2-3)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(3)}>RATINGS (3-4)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(4)}>RATINGS (4-5)</button>
+
                         </ul>
                     </div>
 
@@ -175,13 +223,12 @@ class AllMovies extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        movie: state.selectedMovie,
-        user: state.loginUser
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
     }
 }
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ selectedMovie: selectedMovie }, dispatch)
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({selectedMovie: selectedMovie}, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(AllMovies);

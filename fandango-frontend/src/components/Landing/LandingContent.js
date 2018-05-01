@@ -6,6 +6,9 @@ import slide1 from './slide1.jpg';
 import slide2 from './slide2.jpg';
 import slide3 from './slide3.jpg';
 import * as API from '../../api/API';
+import {bindActionCreators} from "redux";
+import {selectedMovie} from "../../actions";
+import {connect} from "react-redux";
 
 class LandingContent extends Component {
 
@@ -19,6 +22,7 @@ class LandingContent extends Component {
         };
 
         this.handleSelect = this.handleSelect.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -40,13 +44,16 @@ class LandingContent extends Component {
             direction: e.direction
         });
     }
+    handleSubmit = () => {
+        window.location=("/moviedetail");
+    }
 
 
     render() {
         const firstSixNode =
             this.state.topMovies.map((movie, index) => {
                 if (index <= 5) {
-                    return <div key={index} className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} /></div >;
+                    return <div key={index} className="col-md-2 float-left" > <img alt="Movie Poster" className="carousel-img" src={movie.photos !== null ? movie.photos : moviePicture} onClick={() => this.handleSubmit(this.props.selectedMovie(movie))} /></div >;
                 } else {
                     return '';
                 }
@@ -62,7 +69,7 @@ class LandingContent extends Component {
         return (
             <div>
                 {this.state.topMovies !== undefined && this.state.topMovies.length > 0 &&
-                    <div className="col-md-offset-1 col-md-10 mr-top-25">
+                    <div className="col-md-offset-1 col-md-10 mr-top-25 first-carousel">
                         <Carousel
                             activeIndex={this.state.index}
                             direction={this.state.direction}
@@ -104,4 +111,12 @@ class LandingContent extends Component {
     }
 }
 
-export default LandingContent;
+function mapStateToProps(state){
+    return{
+        movie: state.selectedMovie
+    }
+}
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({selectedMovie: selectedMovie}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(LandingContent);

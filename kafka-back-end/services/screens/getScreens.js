@@ -5,13 +5,13 @@ function handle_request(msg, callback){
     if(!msg.screenNum) {
         condition = {
             hall_id : msg.hall_id,
-            is_archive: true
+            is_archive: false
         }
     } else {
         condition = {
             hall_id: msg.hall_id,
             screen_num: msg.screenNum,
-            is_archive: true
+            is_archive: false
         }
     }
     console.log(`Incoming Query message: ${JSON.stringify(condition)}`);

@@ -17,7 +17,7 @@ class AddUser extends Component {
             fName: '',
             email: '',
             password: '',
-            emailValidation: false
+            emailValidation: 'NA'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }

@@ -6,7 +6,8 @@ import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
 import { log1, pageNames } from "../../App";
-
+import { Link } from 'react-router-dom'
+import Price_Filter from './PriceFilter/pricefilter';
 
 class Movie_Tickets extends Component{
 
@@ -33,7 +34,9 @@ class Movie_Tickets extends Component{
                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                 ],
                 dayNames: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
-                highlightedKey : 0
+                highlightedKey : 0,
+                minPrice:null,
+                maxPrice:null
             }
     }
 
@@ -130,7 +133,18 @@ class Movie_Tickets extends Component{
                             </section>
                         </div>
                     </div>
-                    <div style={{display:"flex",width:"74.35%",height:"100%"}}>
+
+                    {/*Filters code*/}
+                    {/*<div className="page-header-container2">*/}
+                        {/*<div className="row2">*/}
+                            <div className="large-122 columns2">
+                                <h4 className="page-header2">FILTER BY MOVIE PRICE</h4>
+                            </div>
+                        {/*</div>*/}
+                    {/*</div>*/}
+                    <Price_Filter/>
+                    {/*Filters code*/}
+                    <div style={{display:"flex",width:"74.35%",height:"100%",paddingTop:"10px"}}>
                         <div className="msp__movie-details-container">
                             <MovieDetailBox/>
                         </div>
