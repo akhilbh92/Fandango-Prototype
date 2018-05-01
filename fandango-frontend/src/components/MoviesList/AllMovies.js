@@ -8,6 +8,10 @@ import {selectedMovie} from "../../actions";
 import * as API from './../../api/apicall_for_users';
 import {log1} from "../../App";
 import {selectedTrace} from '../../actions'
+import Rating from 'react-rating';
+import stargrey from './../Moviedetail/MovieOverview/star-grey.png';
+import staryellow from './../Moviedetail/MovieOverview/staryellow.png';
+
 
 class AllMovies extends Component{
 
@@ -140,6 +144,14 @@ class AllMovies extends Component{
                     <div className="img-style">
                         <img src={movie.photos} className="img-peculiar"
                         alt={movie.movie_name + "Movie Poster"}/>
+                        <div  style={{ height: '30px', paddingTop:'170px', marginLeft: '10px'}}>
+                        <Rating className="img-peculiar" style={{ height: '30px', paddingTop:'170px'}}
+                            placeholderRating={movie.avgrating}
+                            emptySymbol={<img src={stargrey} className="icon"/>}
+                            placeholderSymbol={<img src={staryellow} className="icon"/>}
+                            fullSymbol={<img src={staryellow} className="icon"/>}
+                        />
+                        </div>
                     </div>
                     <div className="movie-heading">
                         <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{ movie.movie_name}</h4>

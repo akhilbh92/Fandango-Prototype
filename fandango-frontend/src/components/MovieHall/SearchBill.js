@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SubHeader from './SubHeader';
+import NavBar from '../Admin/Navigation';
 var dateFormat = require('dateformat');
 
 class SearchBill extends Component {
@@ -92,7 +93,7 @@ class SearchBill extends Component {
             accessor: 'booking_date',
             width: 200,
             style: { 'textAlign': 'right' },
-            Cell: props => (<span className="visual-sub-title" style={{ 'fontWeight': '600' }}>{dateFormat(props.row._original.release_date, "dddd, mmmm dS, yyyy")}</span>)
+            Cell: props => (<span className="visual-sub-title" style={{ 'fontWeight': '600' }}>{dateFormat(props.row._original.booking_date, "dddd, mmmm dS, yyyy")}</span>)
         }, {
             Header: 'Customer Name',
             accessor: 'first_name',
@@ -118,9 +119,14 @@ class SearchBill extends Component {
         }]
 
         return (
-            <div>
+            <div className="admin-sub-header">
                 <CommonHeader />
-                <SubHeader />
+                {this.props.user.role == 2 &&
+                    <SubHeader />
+                }
+                {this.props.user.role == 1 &&
+                    <NavBar />
+                }
                 <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
