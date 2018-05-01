@@ -39,6 +39,7 @@ class AccountPreferences extends Component {
             confirmPassword: '',
             credit_card_number: '',
             expiration: '',
+            photo: '',
             basicInfoSubmitted: false,
             emailSubmitted: false,
             phoneSubmitted: false,
@@ -53,6 +54,7 @@ class AccountPreferences extends Component {
         this.updatePaymentDetails = this.updatePaymentDetails.bind(this);
         this.updatePasswordDetails = this.updatePasswordDetails.bind(this);
         this.validateCreditCardNo = this.validateCreditCardNo.bind(this);
+        this.uploadPhotos = this.uploadPhotos.bind(this);
     }
     componentDidMount() {
         API.getProfile({ userId: this.props.user.userId })
@@ -273,6 +275,21 @@ class AccountPreferences extends Component {
 
     }
 
+    uploadPhotos(){
+        const data = new FormData();
+        data.append('file', this.uploadInput.files[0]);
+        data.append('filename', this.state.userId);
+        data.append('filefolder', 'profileImages');
+        API.uploadFile(data).then((res)=> {
+            res.json().then((body)=> {
+                console.log(body);
+                  this.setState({   
+                        photo: `http://localhost:3001${body.file}`
+                    });
+            });
+        })
+    }
+
     render() {
         return (
             <div>
@@ -370,6 +387,19 @@ class AccountPreferences extends Component {
                             {this.state.basicInfoSubmitted && (!this.state.zipcode || !(this.validateZipcode())) &&
                                 <div><div style={{ float: 'left', paddingTop: '0px' }} className="help-block first-element">Zipcode is Invalid</div><br /></div>
                             }
+                        </div>
+                        <div className="form-group row">
+                        <h5 className="first-element">Profile Picture</h5>
+                            <div className={'col-sm-9' }>
+                                <div id="photo-upload"> 
+                                    <input ref={(ref) => {this.uploadInput = ref;}} type="file" accept='image/*'/>
+                                    {
+                                        this.state.photo && 
+                                        <img id="pic" src={this.state.photo} alt="img" />
+                                    }
+                                </div>
+                                <button id="upload-button"  className="btn btn-primary" onClick={this.uploadPhotos}> Upload </button>
+                            </div>
                         </div>
                         <button type="button" className="btn  save-button" onClick={this.updateBasicInfoDetails}>
                             SAVE

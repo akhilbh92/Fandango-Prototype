@@ -1,6 +1,7 @@
 .carousel-img{
     width: 200px !important;
     height: 250px !important;
+    cursor: pointer;
 }
 .lg-carousel-img{
     width: 100% !important;

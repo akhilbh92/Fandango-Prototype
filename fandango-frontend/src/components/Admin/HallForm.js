@@ -370,7 +370,7 @@ class HallForm extends Component {
                 }
                 <br /> <br />
                 <div className="col-sm-2"> </div>   
-                <Button  id="dlt-btn" className="col-sm-2 btn btn-primary" onClick={this.handleDelete}> Delete this Hall </Button>
+                <Button  id="dlt-btn" className="col-sm-2 btn btn-danger" onClick={this.handleDelete}> Delete this Hall </Button>
                 <div className="col-sm-5"> </div>     
                 <Button id="submit-button"  className="col-sm-1 btn btn-primary" onClick={this.handleSubmit}> Save Hall </Button>
                 <ToastContainer />
