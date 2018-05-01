@@ -4,10 +4,17 @@ import './moviedetail.css'
 import MovieCrew from "./MovieCrew/MovieCrew";
 import {Link} from 'react-router-dom'
 import {connect} from "react-redux";
-
+import { log1, pageNames } from "../../App";
 
 
 class Movie_detail_crew extends Component {
+    
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("View Movie Cast");
+        }
+    }
+
     render(){
         let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
         if(this.props.movie.photos)background =  this.props.movie.photos;
@@ -84,7 +91,8 @@ class Movie_detail_crew extends Component {
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
 

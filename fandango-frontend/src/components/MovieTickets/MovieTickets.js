@@ -4,10 +4,17 @@ import HomeHeader from './../AfterLogin/HomeHeader'
 import MovieDetailBox from '../MovieDetailBox/MovieDetailBox'
 import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
 import {connect} from "react-redux";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { log1, pageNames } from "../../App";
 
 
 class Movie_Tickets extends Component{
+
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("Shows Details");
+        }
+    }
 
     componentWillMount() {
         document.body.style.backgroundColor = "#EBEBEB"
@@ -149,7 +156,8 @@ class Movie_Tickets extends Component{
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
 

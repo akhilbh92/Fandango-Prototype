@@ -1,10 +1,10 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './moviedetail.css'
 import MoveOverview from './MovieOverview/MovieOverview'
 import { Link } from 'react-router-dom'
-import {connect} from "react-redux";
-import {log1} from "../../App";
+import { connect } from "react-redux";
+import { log1, pageNames } from "../../App";
 
 
 class Movie_detail extends Component {
@@ -12,7 +12,7 @@ class Movie_detail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ActiveComponent: <MoveOverview/>
+            ActiveComponent: <MoveOverview />
         }
         this.handleLogs = this.handleLogs.bind(this);
     }
@@ -22,33 +22,36 @@ class Movie_detail extends Component {
         log1.info('{"event":"page_click","page_name":"MovieDetail","count":"1"}');
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("Movie Details");
+        }
         log1.info(`{"event":"movie_click","movie_id":"${this.props.movie.id}","movie_name":"${this.props.movie.movie_name}","count":"1"}`);
     }
 
-    render(){
+    render() {
         let background = "//images.fandango.com/ImageRenderer/300/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/207628/fmc_mc_Rampage.jpg";
-        if(this.props.movie.photos)background =  this.props.movie.photos;
+        if (this.props.movie.photos) background = this.props.movie.photos;
 
-        return(
+        return (
             <div onClick={this.handleLogs}>
-                <HomeHeader/>
+                <HomeHeader />
                 <div className="movie-detail-main">
                     <div className="movie-detail-mop">
                         <div className="movie-detail-background">
                             <svg width="100%" height="100%">
                                 <defs>
                                     <filter id="backgroundBlur" width="150%" height="150%" x="-25%" y="-25%"
-                                            color-interpolation-filters="sRGB">
+                                        color-interpolation-filters="sRGB">
                                         <feGaussianBlur stdDeviation="7"></feGaussianBlur>
                                         <feColorMatrix type="matrix"
-                                                       values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0 0 0 0 10 0"></feColorMatrix>
+                                            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0 0 0 0 10 0"></feColorMatrix>
                                         <feComposite in2="SourceGraphic" operator="in"></feComposite>
                                     </filter>
                                 </defs>
                                 <image className="js-backgroundBlur-image" x="0" y="0" width="100%" height="110%"
-                                       xlinkHref={background}
-                                       preserveAspectRatio="xMidYMid slice" filter="url(#backgroundBlur)"></image>
+                                    xlinkHref={background}
+                                    preserveAspectRatio="xMidYMid slice" filter="url(#backgroundBlur)"></image>
                             </svg>
                         </div>
                         <div className="movie-detail-background-next">
@@ -68,12 +71,12 @@ class Movie_detail extends Component {
                                         </h1>
                                         <ul className="movie-detail-section-subnav">
                                             <li className="movie-detail-section-subnav-item">
-                                                <label className="movie-detail-section-subnav-item-link" onClick={()=>this.setState({...this.state,ActiveComponent:<MoveOverview/>})}>
+                                                <label className="movie-detail-section-subnav-item-link" onClick={() => this.setState({ ...this.state, ActiveComponent: <MoveOverview /> })}>
                                                     Overview
                                                 </label>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <Link to = "/movietickets" className="movie-detail-section-subnav-item-link">
+                                                <Link to="/movietickets" className="movie-detail-section-subnav-item-link">
                                                     Movie Times + tickets
                                                 </Link>
                                             </li>
@@ -92,14 +95,14 @@ class Movie_detail extends Component {
                                 </div>
                             </section>
                             <div className="footer-overview">
-                                <h4 className="footer-overview-font">{this.props.movie.movie_name}   <span style={{ color: "#f15500"}}>Synopsis</span></h4>
-                                <div style={{marginLeft: "25%", width:"50%", textAlign: "center",marginTop: '20px'}}>
-                                <h4 className="footer-overview-font" style={{ paddingTop: '0px'}}>{this.props.movie.description} </h4>
+                                <h4 className="footer-overview-font">{this.props.movie.movie_name}   <span style={{ color: "#f15500" }}>Synopsis</span></h4>
+                                <div style={{ marginLeft: "25%", width: "50%", textAlign: "center", marginTop: '20px' }}>
+                                    <h4 className="footer-overview-font" style={{ paddingTop: '0px' }}>{this.props.movie.description} </h4>
                                 </div>
                             </div>
                             {this.state.ActiveComponent}
                         </div>
-                            {/*<MovieCrew/>*/}
+                        {/*<MovieCrew/>*/}
                     </div>
 
                 </div>
@@ -108,9 +111,10 @@ class Movie_detail extends Component {
     };
 }
 
-function mapStateToProps(state){
-    return{
-        movie: state.selectedMovie
+function mapStateToProps(state) {
+    return {
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
 

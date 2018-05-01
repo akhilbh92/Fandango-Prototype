@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {doneBooking} from "../../actions";
 import {bindActionCreators} from "redux";
 import * as API from './../../api/apicall_for_users';
+import { log1, pageNames } from "../../App";
 
 
 class EnterTickets extends Component{
@@ -37,6 +38,12 @@ class EnterTickets extends Component{
             ticket2error: '',
             ticket2message: ''
 
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("Buy Tickets");
         }
     }
 
@@ -335,7 +342,8 @@ class EnterTickets extends Component{
 function mapStateToProps(state) {
     return {
         booking: state.doneBooking,
-        schedule: state.selectedSchedule
+        schedule: state.selectedSchedule,
+        user: state.loginUser
     }
 }
 function matchDispatchToProps(dispatch) {

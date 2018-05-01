@@ -1,19 +1,19 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import HomeHeader from './../AfterLogin/HomeHeader'
 import './movies.css'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {selectedMovie} from "../../actions";
+import { selectedMovie } from "../../actions";
 import * as API from './../../api/apicall_for_users';
-import {log1} from "../../App";
+import { log1, pageNames } from "../../App";
 
-class AllMovies extends Component{
+class AllMovies extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state={
+        this.state = {
             filter: '',
             movies: [],
             movies_tofilter: []
@@ -22,7 +22,10 @@ class AllMovies extends Component{
         this.handleCaptureLessSeen = this.handleCaptureLessSeen.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("Movie Listing");
+        }
         API.getMovies({})
             .then((result) => {
                 this.setState({
@@ -34,7 +37,7 @@ class AllMovies extends Component{
 
 
     filterMovies = (filter) => {
-        let msg = '{"event":"section_click","section_name":"filter_genre","genre_name":"'+filter.toString()+'"}';
+        let msg = '{"event":"section_click","section_name":"filter_genre","genre_name":"' + filter.toString() + '"}';
         log1.info(msg);
         this.setState({
             filter: filter,
@@ -45,8 +48,8 @@ class AllMovies extends Component{
     }
 
 
-    renderTitle(){
-        if(this.state.filter == "") {
+    renderTitle() {
+        if (this.state.filter == "") {
             return (
                 <div className="page-header-container">
                     <div className="row">
@@ -59,43 +62,43 @@ class AllMovies extends Component{
             )
         }
 
-            else{
-                return(
-                    <div className="page-header-container">
-                        <div className="row">
-                            <div className="large-12 columns">
-                                <h2 className="page-header">SHOWING <span style={{color: '#F15500'}}>"{this.state.filter}"</span> MOVIES</h2>
-                            </div>
+        else {
+            return (
+                <div className="page-header-container">
+                    <div className="row">
+                        <div className="large-12 columns">
+                            <h2 className="page-header">SHOWING <span style={{ color: '#F15500' }}>"{this.state.filter}"</span> MOVIES</h2>
                         </div>
                     </div>
-                )
-            }
+                </div>
+            )
         }
+    }
 
 
-    handleCaptureLessSeen(){
-/*
-        log1.info('{"event":"page_click","page_name":"AllMovies","count":"1"}');
-*/
+    handleCaptureLessSeen() {
+        /*
+                log1.info('{"event":"page_click","page_name":"AllMovies","count":"1"}');
+        */
         let msg = '{"event":"section_click","section_name":"movie_Listing"}';
         log1.info(msg);
     }
 
-    renderMovies(){
-            if(this.state.movies_tofilter.length == 0){
-            return(<h3 className="col-md-offset-2 col-md-8" style={{ textAlign: 'left', marginTop: '20px'}}>
+    renderMovies() {
+        if (this.state.movies_tofilter.length == 0) {
+            return (<h3 className="col-md-offset-2 col-md-8" style={{ textAlign: 'left', marginTop: '20px' }}>
                 NO MATCHING RESULTS
             </h3>)
         }
         return this.state.movies_tofilter.map((movie) => {
-            return(
+            return (
                 <div className="col-md-offset-2 col-md-8 list-moviedetails" onClick={this.handleCaptureLessSeen}>
                     <div className="img-style">
                         <img src={movie.photos} className="img-peculiar"
-                        alt={movie.movie_name + "Movie Poster"}/>
+                            alt={movie.movie_name + "Movie Poster"} />
                     </div>
                     <div className="movie-heading">
-                        <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{ movie.movie_name}</h4>
+                        <h4 className="movie-link" onClick={() => this.handleSubmit(this.props.selectedMovie(movie))}>{movie.movie_name}</h4>
                     </div>
                     <div className="movie-extra-details">
                         <h5 className="gap">Release date: {movie.release_date}</h5>
@@ -126,11 +129,11 @@ class AllMovies extends Component{
     }
 
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <div className="site-wrap">
-                    <HomeHeader/>
+                    <HomeHeader />
 
                     <div className="page-header-container">
                         <div className="row">
@@ -172,12 +175,13 @@ class AllMovies extends Component{
     }
 }
 
-function mapStateToProps(state){
-    return{
-        movie: state.selectedMovie
+function mapStateToProps(state) {
+    return {
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({selectedMovie: selectedMovie}, dispatch)
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ selectedMovie: selectedMovie }, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(AllMovies);

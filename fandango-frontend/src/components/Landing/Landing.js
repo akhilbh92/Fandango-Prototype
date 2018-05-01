@@ -13,7 +13,7 @@ class Landing extends Component {
         return (
             <div className="container-body" id="outer-container">
                 <CommonHeader />
-                <ContentHeader />
+                {/* <ContentHeader /> */}
                 <LandingContent />
             </div>
         )
