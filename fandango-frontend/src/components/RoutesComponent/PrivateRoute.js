@@ -28,6 +28,7 @@ class PrivateRoute extends Component {
         } else {
             console.log("response :", response["data"]);
             if (typeof response["data"] === "object") {
+                console.log("this.props.dataprops.location.pathname :::",this.props.dataprops.location.pathname)
                 if (RoutingMap[response["data"].role].indexOf(this.props.dataprops.location.pathname) > -1) {
                     this.props.SetSession(response["data"]);
                     return <this.props.componentname {...this.props.dataprops} />

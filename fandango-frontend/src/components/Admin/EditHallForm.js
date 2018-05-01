@@ -17,6 +17,7 @@ class EditHallForm extends Component {
     }
     componentDidMount(){
         API.getScreensByHall({hallId: this.props.match.params.hallId}).then((result)=>{
+            console.log(`Result Screens: ${JSON.stringify(result)}`);
             this.setState({
                 allScreens : result.data,
                 group: 'Theatres',
