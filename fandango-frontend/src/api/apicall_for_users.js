@@ -169,3 +169,20 @@ export const bookMovie = (payload) =>
             return error;
         });
 
+export const getPurchaseHistory = (payload) =>
+    fetch(`${api}/getPurchaseHistory`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .then(res =>{
+            return res;
+        })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
