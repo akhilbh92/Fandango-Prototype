@@ -18,7 +18,8 @@ function editMovieRouterFn(req, res, next){
           cast: req.body.cast,
           movie_length: req.body.movieLength,
           release_date: req.body.releaseDate,
-          genres: req.body.genres
+          genres: req.body.genres,
+          is_archive: req.body.is_archive
     }, function(err,results){
       console.log('In Kafka: %o', results);
         if(err){

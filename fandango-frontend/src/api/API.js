@@ -358,7 +358,7 @@ export const uploadFile = function (data, movieName) {
 };
 
 
-export const addMovie = (movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres) =>
+export const addMovie = (movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres, is_archive) =>
     fetch(`${api}/addMovie`, {
         method: 'POST',
         headers: {
@@ -366,15 +366,16 @@ export const addMovie = (movieName, description, trailer, photos, seeItIn, cast,
             'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({ movieName, description, trailer, photos, seeItIn, cast, releaseDate, movieLength, genres })
+        body: JSON.stringify({ movieName, description, trailer, photos, seeItIn, cast, releaseDate, movieLength, genres, is_archive })
     }).then(res => {
         return successHandler(res);
     }).catch(error => {
         return error;
     });
+    
 
-export const editMovie = (movieId, movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres) =>
-    fetch(`${api}/getMovies`, {
+export const editMovie = (movieId, movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres, is_archive) =>
+    fetch(`${api}/editMovie`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -383,7 +384,7 @@ export const editMovie = (movieId, movieName, description, trailer, photos, seeI
         credentials: 'include',
         body: JSON.stringify({
             id: movieId,
-            movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres
+            movieName, description, trailer, photos, seeItIn, cast, movieLength, releaseDate, genres, is_archive
         })
     }).then(res => {
         return successHandler(res);
@@ -391,7 +392,7 @@ export const editMovie = (movieId, movieName, description, trailer, photos, seeI
         return error;
     });
 
-export const editHall = (hallId, hallName, street, city, state, zipcode, totalScreens) =>
+export const editHall = (hallId, hallName, street, city, state, zipcode, totalScreens, is_archive) =>
     fetch(`${api}/editHall`, {
         method: 'POST',
         headers: {
@@ -402,7 +403,7 @@ export const editHall = (hallId, hallName, street, city, state, zipcode, totalSc
         body: JSON.stringify({
             id: hallId,
             hallName, street, city, state, zipcode,
-            screen_nums: totalScreens
+            screen_nums: totalScreens, is_archive
         })
     }).then(res => {
         return successHandler(res);
@@ -410,7 +411,7 @@ export const editHall = (hallId, hallName, street, city, state, zipcode, totalSc
         return error;
     });
 
-export const addHall = (hallName, street, city, state, zipcode, totalScreens) =>
+export const addHall = (hallName, street, city, state, zipcode, totalScreens, is_archive) =>
     fetch(`${api}/addHall`, {
         method: 'POST',
         headers: {
@@ -419,7 +420,7 @@ export const addHall = (hallName, street, city, state, zipcode, totalScreens) =>
         },
         credentials: 'include',
         body: JSON.stringify({
-            hallName, street, city, state, zipcode,
+            hallName, street, city, state, zipcode, is_archive,
             screen_nums: totalScreens
         })
     }).then(res => {
@@ -428,7 +429,7 @@ export const addHall = (hallName, street, city, state, zipcode, totalScreens) =>
         return error;
     });
 
-export const addScreen = (hallId, screenNum, screenType, totalSeats) =>
+export const addScreen = (hallId, screenNum, screenType, totalSeats, is_archive) =>
     fetch(`${api}/addScreen`, {
         method: 'POST',
         headers: {
@@ -437,7 +438,7 @@ export const addScreen = (hallId, screenNum, screenType, totalSeats) =>
         },
         credentials: 'include',
         body: JSON.stringify({
-            hallId, screenNum, screenType, totalSeats
+            hallId, screenNum, screenType, totalSeats, is_archive
         })
     }).then(res => {
         return successHandler(res);
@@ -456,6 +457,23 @@ export const updateProfile = (userId, email, role, first_name, last_name,
         credentials: 'include',
         body: JSON.stringify({
             userId, email, role, first_name, last_name, address, city, state, zipcode, phone_number, hall_id
+        })
+    }).then(res => {
+        return successHandler(res);
+    }).catch(error => {
+        return error;
+    });
+
+export const editScreen = (screenId, screenType, totalSeats, is_archive) =>
+    fetch(`${api}/editScreen`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            screenId, screenType, totalSeats, is_archive
         })
     }).then(res => {
         return successHandler(res);
