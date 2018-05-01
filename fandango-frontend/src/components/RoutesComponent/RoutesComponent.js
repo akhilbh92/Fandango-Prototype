@@ -88,20 +88,20 @@ class RoutesComponent extends Component {
                 <PrivateRoute exact path="/movierevenue" component={RevenueByMovie} />
                 <Route exact path="/moviedetailreview" component={Movie_detail_review} />
                 <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
-                <PrivateRoute exact path="/toptenmovies" component={TopTenMoviesByRevenue} />
                 <Route exact path="/movietickets" component={MovieTickets} />
                 <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
                 <Route exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
+                <Route exact path="/paymentinfo" component={PaymentInfo} />
                 <Route exact path="/entertickets" render={() => (
                     <div>
 
                         <EnterTickets redirectURL={this.redirectURL} />
                     </div>
                 )} />
-                <Route exact path="/paymentinfo" component={PaymentInfo} />
-                <PrivateRoute exact path="/citywiserevenue" component={MovieSearchRevenue} />
-                <PrivateRoute exact path="/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />
-                <PrivateRoute exact path="/toptenhalls" component={TopTenHallByTicketsSold} />
+                <Route exact path="/admin/toptenmoviesbyrevenue" component={TopTenMoviesByRevenue} />
+                <PrivateRoute exact path="/admin/citywiserevenue" component={MovieSearchRevenue} />
+                <PrivateRoute exact path="/admin/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />
+                <PrivateRoute exact path="/admin/toptenhalls" component={TopTenHallByTicketsSold} />
                 <PrivateRoute exact path="/test" component={Home} />
                 <PrivateRoute exact path="/mhadmin" component={MovieHallAdminHome} />
                 <Route exact path="/purchasehistory" component={PurchaseHistory} />
@@ -111,10 +111,10 @@ class RoutesComponent extends Component {
                         <SearchResult redirectURL={this.redirectURL} />
                     </div>
                 )} />
-                <PrivateRoute exact path="/clicksperpage" component={ClicksPerPage} />
-                <PrivateRoute exact path="/moviereviewgraph" component={MovieReviewGraph} />
-                <PrivateRoute exact path="/movierevenueperhall" component={RevenueByMoviePerHall} />
-                <PrivateRoute exact path="/tracediagram" component={TraceDiagram} />
+                <PrivateRoute exact path="/admin/clicksperpage" component={ClicksPerPage} />
+                <PrivateRoute exact path="/admin/moviereviewgraph" component={MovieReviewGraph} />
+                <PrivateRoute exact path="/admin/movierevenueperhall" component={RevenueByMoviePerHall} />
+                <PrivateRoute exact path="/admin/tracediagram" component={TraceDiagram}/>
                 <Route exact path="/pagenotfound" component={PageNotFound} />
             </div>
         );

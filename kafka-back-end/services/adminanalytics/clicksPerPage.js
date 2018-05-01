@@ -2,6 +2,7 @@ var moment = require('moment');
 
 // Add MongoDB connections
 const MongoClient = require('mongodb').MongoClient;
+
 var mongoURL = 'mongodb://admin:admin@ds263619.mlab.com:63619/fandango';
 
 var clicksPerPageCollection;
@@ -37,11 +38,12 @@ function handle_request(msg, callback) {
                                             callback(err, null);
                                             return;
                                         }
-                                        clicksPerPageCollection.aggregate([{ $match: { event: "section_click" } },
-                                        { $group: { _id: "$genre_name", total_count: { $sum: 1 } } }],
-                                            function (err, result3) {
-                                                if (err) {
-                                                    callback(err, null);
+                                        console.log(result2);
+                                        clicksPerPageCollection.aggregate([{$match:{event:"section_click"}},
+                                                {$group: {_id:"$section_name",total_count:{$sum:1}}}],
+                                            function(err, result3) {
+                                                if(err) {
+                                                    callback(err,null);
                                                     return;
                                                 }
                                                 callback(null, { "page_clicks": result1, "movie_clicks": result2, "section_clicks": result3 });

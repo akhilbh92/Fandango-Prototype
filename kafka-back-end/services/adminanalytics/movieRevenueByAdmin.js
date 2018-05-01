@@ -15,7 +15,7 @@ function handle_request(msg, callback) {
     if (msg.movie_id) {
         query = query + "AND ms.movie_id = " + msg.movie_id
     }
-    query = query + " group by halls.hall_name order by total_revenue desc;";
+    query = query + " group by halls.hall_name,halls.id order by total_revenue desc;";
     console.log(`Incoming Query message:`, query);
     db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT })
         .then((movieRevenueList) => {
