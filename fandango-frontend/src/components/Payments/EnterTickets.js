@@ -7,6 +7,7 @@ import {doneBooking} from "../../actions";
 import {bindActionCreators} from "redux";
 import * as API from './../../api/apicall_for_users';
 import { log1, pageNames } from "../../App";
+import {selectedTrace} from '../../actions'
 import * as CardValidator from '../Helper/CardValidator';
 let state_regex_pattern = require('../Helper/StateRegex');
 let zipcode_regex = require('../Helper/ZipcodeRegex');
@@ -50,18 +51,22 @@ class EnterTickets extends Component{
     }
 
     componentDidMount() {
-        console.log(this.state.available_)
+
+        if (this.props.user !== undefined) {
+            let pages = this.props.trace;
+            pages.push("Buy Tickets");
+            if (this.props.user !== undefined && this.props.user.role == 3) {
+                this.props.selectedTrace(pages)
+            }
+        }
+
+        console.log(this.state.available_seats);
         API.getProfile()
             .then((status) => {
                 this.setState({
                     credit_card_number: status.data.credit_card_number
                 })
-            })
-
-
-        if (this.props.user !== undefined) {
-            pageNames.push("Buy Tickets");
-        }
+            });
     }
 
     handleAuthorize = (userdata) => {
@@ -387,11 +392,12 @@ function mapStateToProps(state) {
     return {
         booking: state.doneBooking,
         schedule: state.selectedSchedule,
-        user: state.loginUser
+        user: state.loginUser,
+        trace: state.selectedTrace
     }
 }
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ doneBooking: doneBooking }, dispatch)
+    return bindActionCreators({ doneBooking: doneBooking, selectedTrace: selectedTrace }, dispatch)
 }
 
 

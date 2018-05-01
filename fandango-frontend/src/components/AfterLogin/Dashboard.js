@@ -5,12 +5,15 @@ import {Link} from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { log1, pageNames } from "../../App";
+import {selectedTrace} from '../../actions'
 
 class Dashboard extends  Component {
 
     componentDidMount() {
-        if (this.props.user !== undefined) {
-            pageNames.push("User Dashboard");
+        let pages = this.props.trace;
+        pages.push("User Dashboard");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
         }
     }
 
@@ -100,10 +103,11 @@ class Dashboard extends  Component {
 }
 function mapStateToProps(state) {
     return {
-        user: state.loginUser
+        user: state.loginUser,
+        trace: state.selectedTrace
     }
 }
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({selectedTrace: selectedTrace}, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(Dashboard);

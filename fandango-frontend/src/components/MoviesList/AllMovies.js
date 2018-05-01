@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import {selectedMovie} from "../../actions";
 import * as API from './../../api/apicall_for_users';
 import {log1} from "../../App";
+import {selectedTrace} from '../../actions'
 
 class AllMovies extends Component{
 
@@ -27,6 +28,13 @@ class AllMovies extends Component{
     }
 
     componentDidMount(){
+
+        let pages = this.props.trace;
+        pages.push("Movie Listing");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
+        }
+
         API.getMovies({})
             .then((result) => {
                 this.setState({
@@ -157,11 +165,11 @@ class AllMovies extends Component{
 
     handleSubmit = () => {
         this.props.redirectURL("/moviedetail");
-    }
+    };
 
     handleBooking = () => {
         this.props.redirectURL("/movietickets");
-    }
+    };
 
 
 
@@ -225,10 +233,11 @@ class AllMovies extends Component{
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        trace: state.selectedTrace
     }
 }
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({selectedMovie: selectedMovie}, dispatch)
+    return bindActionCreators({selectedMovie: selectedMovie,selectedTrace: selectedTrace}, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(AllMovies);

@@ -5,13 +5,16 @@ import MovieCrew from "./MovieCrew/MovieCrew";
 import {Link} from 'react-router-dom'
 import {connect} from "react-redux";
 import { log1, pageNames } from "../../App";
-
+import {selectedTrace} from "../../actions";
+import {bindActionCreators} from "redux";
 
 class Movie_detail_crew extends Component {
     
     componentDidMount() {
-        if (this.props.user !== undefined) {
-            pageNames.push("View Movie Cast");
+        let pages = this.props.trace;
+        pages.push("Cast & Crew");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
         }
     }
 
@@ -92,9 +95,13 @@ class Movie_detail_crew extends Component {
 function mapStateToProps(state){
     return{
         movie: state.selectedMovie,
-        user: state.loginUser
+        user: state.loginUser,
+        trace: state.selectedTrace
     }
 }
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({selectedTrace: selectedTrace}, dispatch)
+}
 
-export default connect(mapStateToProps)(Movie_detail_crew);
+export default connect(mapStateToProps, matchDispatchToProps)(Movie_detail_crew);

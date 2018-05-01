@@ -19,14 +19,14 @@ class CommonHeader extends Component {
         }
     }
 
-    signout() {
-        doSignOut({pageNames:this.props.trace}).then((response) => {
-
-            window.location = "/"
-            this.props.loginUser(null);
-            this.props.selectedTrace(null);
-        })
-    }
+  signout() {
+    doSignOut({pageNames:this.props.trace}).then((response) => {
+      
+      window.location = "/"
+        this.props.loginUser(null);
+        this.props.selectedTrace([]);
+    })
+  }
 
     handleSearch = (userdata) => {
         console.log(userdata);

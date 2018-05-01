@@ -5,12 +5,12 @@ var kafka = require('../../kafka/client');
 
 // Main function to logout user route
 let logoutRouterFn = function (req, res, next) {
-    console.log("in logout------------------", req.user.email);
+    console.log("in logout------------------", req.user.userId);
     let pageNames = req.body.pageNames;
     pageNames.unshift("Log In");
     pageNames.push("Logout");
     kafka.make_request('admin', 'trace', {
-        userid: req.user.email,
+        userid: req.user.userId,
         pages: pageNames
     }, function (err, results) {
         console.log('In Kafka: %o', results);

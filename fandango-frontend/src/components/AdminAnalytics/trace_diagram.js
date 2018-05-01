@@ -23,17 +23,21 @@ class TraceDiagram extends Component {
             userList: [],
             pages_list_data: [],
             user_id:"",
-            header_user_id: ""
+            header_user_id: "",
+            user_email:""
 
         };
     }
     componentDidMount() {
         API.getUsers()
             .then((resultData) => {
+                console.log("getUsers returned result is",resultData);
+
                 if (!!resultData.data) {
                     this.setState({
                         userList: resultData.data,
-                        user_id: resultData.data[0].email,
+                        user_email: resultData.data[0].email,
+                        user_id: resultData.data[0].userId,
                     });
                 } else {
                     console.log("No Users Available");
@@ -46,33 +50,46 @@ class TraceDiagram extends Component {
     searchUsers() {
         this.setState({ submitted: true });
         if (!!this.state.user_id) {
-            this.setState({ isSearched: true,header_user_id: this.state.user_id});
+            this.setState({ isSearched: true,header_user_id: this.state.user_email});
             API.getTraceDiagram({ user_id: this.state.user_id })
                 .then((resultData) => {
                     if (!!resultData.data) {
+                        console.log("Data retrieved from API getTraceDiagram is",resultData.data);
                         const pages_data = resultData.data.pages;
                         let page_index = [];
                         let page_array = [];
                         pages_data.forEach((page_seq,index) => {
                             page_index.push(++index);
                             switch (page_seq){
-                                case 'allmovies':
+                                case 'Log In':
                                     page_array.push(1);
-                                    break;
-                                case 'moviedetail':
+                                case 'Home':
                                     page_array.push(2);
-                                    break;
-                                case 'movieoverview':
+                                case 'User Dashboard':
                                     page_array.push(3);
-                                    break;
-                                case 'signup':
+                                case 'Account Preferences':
                                     page_array.push(4);
-                                    break;
-                                case 'login':
+                                case 'Movie Listing':
                                     page_array.push(5);
-                                    break;
+                                case 'Movie Details':
+                                    page_array.push(6);
+                                case 'Cast & Crew':
+                                    page_array.push(7);
+                                case 'Movie Reviews':
+                                    page_array.push(8);
+                                case 'Update Review':
+                                    page_array.push(9);
+                                case 'Add Review':
+                                    page_array.push(10);
+                                case 'Shows Listing':
+                                    page_array.push(11);
+                                case 'Buy Tickets':
+                                    page_array.push(12);
+                                case 'Purchase History':
+                                    page_array.push(13);
+                                case 'Logout':
+                                    page_array.push(14);
                             }
-                            //page_array.push(page_seq);
                         });
                         console.log(`${JSON.stringify(page_index)}`);
                         console.log(`${JSON.stringify(page_array)}`);
@@ -81,7 +98,7 @@ class TraceDiagram extends Component {
                                 labels: page_index,
                                 datasets:[
                                     {
-                                        label:`Trace Diagram for ${this.state.user_id}`,
+                                        label:`Trace Diagram for ${this.state.user_email}`,
                                         borderColor: "#80b6f4",
                                         data: page_array,
                                         fill:false
@@ -100,7 +117,8 @@ class TraceDiagram extends Component {
 
     clearSearch() {
         this.setState({
-            user_id: this.state.userList[0].email,
+            user_email: this.state.userList[0].email,
+            user_id: this.state.userList[0].userId,
             header_user_id:"",
             pages_list_data: [],
             submitted: false,
@@ -117,7 +135,7 @@ class TraceDiagram extends Component {
                 <NavBar/>
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
-                        <h2 className="schedule-page-header">Trace Diagram For <span className="page-header-emphasis"> {(this.state.isSearched && this.state.header_user_id) ? this.state.user_id: ' User'}</span></h2>
+                        <h2 className="schedule-page-header">Trace Diagram For <span className="page-header-emphasis"> {(this.state.isSearched && this.state.header_user_id) ? this.state.header_user_id: ' User'}</span></h2>
                     </div>
                 </div>
                 <div className="col-md-offset-2 col-md-8 preferences-view">
@@ -132,12 +150,14 @@ class TraceDiagram extends Component {
                                         style={{ 'marginTop': '5px', 'height': '40px' }}
                                         value={this.state.user_id}
                                         onChange={(event) => {
+                                            var xyz = event.nativeEvent.target.selectedIndex;
                                             this.setState({
-                                                user_id: event.target.value
+                                                user_id: event.target.value,
+                                                user_email: event.nativeEvent.target[xyz].text
                                             });
                                         }}>
                                     {this.state.userList.map((userObj, key) => {
-                                        return <option key={key} value={userObj.email}>{userObj.email}</option>;
+                                        return <option key={key} value={userObj.userId}>{userObj.email}</option>;
                                     })}
                                 </select>
                             </div>
@@ -157,14 +177,14 @@ class TraceDiagram extends Component {
                     </form>
                 </div>
                 {this.state.isSearched &&
-                <div className="col-md-offset-2 col-md-8 pd-left-0 mr-top-15">
-                    <div className="col-md-12 pd-left-0">
+                <div /*className="col-md-offset-2 col-md-8 pd-left-0 mr-top-15"*/>
+                    <div /*className="col-md-12 pd-left-0"*/>
                         <Line
                             data = {this.state.pages_list_data}
                             width={1000}
                             height = {500}
                             options={{
-                                maintainAspectRatio:false,
+                                maintainAspectRatio:true,
                                 legend: {
                                     position: 'bottom',
                                 },
@@ -173,12 +193,12 @@ class TraceDiagram extends Component {
                                         display: true,
                                         scaleLabel: {
                                             display: true,
-                                            labelString: `${this.state.user_id}'s Navigation Flow`,
+                                            labelString: `${this.state.user_email}'s Navigation Flow`,
                                             fontColor:'rgb(255,0,0)',
                                             fontStyle: "bold",
                                         },
                                         ticks: {
-                                            autoSkip: true,
+                                            /*autoSkip: true,*/
                                             stepSize: 1,
                                             min: 0,
                                             max: 100
@@ -190,8 +210,8 @@ class TraceDiagram extends Component {
                                     yAxes: [{
                                         display: true,
                                         afterFit: function(scale) {
-                                            scale.width = 120,
-                                            scale.height = 80
+                                            scale.width = 200,
+                                            scale.height = 200
                                         },
                                         scaleLabel: {
                                             display: true,
@@ -204,27 +224,45 @@ class TraceDiagram extends Component {
                                             fontColor: "rgba(0,0,0,0.5)",
 */
                                             fontStyle: "bold",
+/*
                                             padding: 10,
+*/
                                             stepSize: 1,
-                                            callback: function (label, index, labels) {
+                                            callback: function (label, index, page_array) {
                                                 switch (label) {
-                                                    case 0:
-                                                        return 'home';
                                                     case 1:
-                                                        return 'allmovies';
+                                                        return 'Log In';
                                                     case 2:
-                                                        return 'moviedetail';
+                                                        return 'Home';
                                                     case 3:
-                                                        return 'movieoverview';
+                                                        return 'User Dashboard';
                                                     case 4:
-                                                        return 'signup';
+                                                        return 'Account Preferences';
                                                     case 5:
-                                                        return 'login';
+                                                        return 'Movie Listing';
+                                                    case 6:
+                                                        return 'Movie Details';
+                                                    case 7:
+                                                        return 'Cast & Crew';
+                                                    case 8:
+                                                        return 'Movie Reviews';
+                                                    case 9:
+                                                        return 'Update Review';
+                                                    case 10:
+                                                        return 'Add Review';
+                                                    case 11:
+                                                        return 'Shows Listing';
+                                                    case 12:
+                                                        return 'Buy Tickets';
+                                                    case 13:
+                                                        return 'Purchase History';
+                                                    case 14:
+                                                        return 'Logout';
                                                 }
                                             }
                                         },
                                         gridLines: {
-                                            display: false,
+                                            display: true,
                                             zeroLineColor: "transparent"
                                         }
                                     }]

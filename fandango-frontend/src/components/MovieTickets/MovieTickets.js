@@ -7,13 +7,17 @@ import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
 import { log1, pageNames } from "../../App";
 import Price_Filter from './PriceFilter/pricefilter';
+import {selectedTrace} from '../../actions'
+import {bindActionCreators} from "redux"
 
 
 class Movie_Tickets extends Component{
 
     componentDidMount() {
-        if (this.props.user !== undefined) {
-            pageNames.push("Shows Details");
+        let pages = this.props.trace;
+        pages.push("Shows Listing");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
         }
     }
 
@@ -192,9 +196,13 @@ class Movie_Tickets extends Component{
 function mapStateToProps(state){
     return{
         movie: state.selectedMovie,
-        user: state.loginUser
+        user: state.loginUser,
+        trace: state.selectedTrace
     }
 }
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({selectedTrace: selectedTrace}, dispatch)
+}
 
-export default connect(mapStateToProps)(Movie_Tickets);
+export default connect(mapStateToProps,matchDispatchToProps)(Movie_Tickets);

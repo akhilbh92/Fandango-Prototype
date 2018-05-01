@@ -5,12 +5,16 @@ import MovieAddReview from "./MovieOverview/MovieAddReview";
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import { log1, pageNames } from "../../App";
+import {selectedTrace} from '../../actions'
+import {bindActionCreators} from "redux";
 
 class Movie_detail_addreview extends Component {
 
     componentDidMount() {
-        if (this.props.user !== undefined) {
-            pageNames.push("Add Movie Review");
+        let pages = this.props.trace;
+        pages.push("Add Review");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
         }
     }
 
@@ -91,9 +95,13 @@ class Movie_detail_addreview extends Component {
 function mapStateToProps(state){
     return{
         movie: state.selectedMovie,
-        user: state.loginUser
+        user: state.loginUser,
+        trace: state.selectedTrace
     }
 }
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({selectedTrace: selectedTrace}, dispatch)
+}
 
-export default connect(mapStateToProps)(Movie_detail_addreview);
+export default connect(mapStateToProps,matchDispatchToProps)(Movie_detail_addreview);

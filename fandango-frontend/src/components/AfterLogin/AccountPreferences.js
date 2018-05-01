@@ -6,6 +6,7 @@ import * as API from '../../api/API';
 import { ToastContainer, toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {selectedTrace} from '../../actions'
 import * as CardValidator from '../Helper/CardValidator';
 import * as API_USER from './../../api/apicall_for_users';
 import { doSignOut } from '../../api/apicall_for_users';
@@ -14,6 +15,7 @@ let state_regex_pattern = require('../Helper/StateRegex');
 let zipcode_regex = require('../Helper/ZipcodeRegex');
 let emailRegex = require('../Helper/EmailRegex');
 let phoneNoRegex = require('../Helper/PhoneNumberRegex');
+
 
 class AccountPreferences extends Component {
 
@@ -61,6 +63,13 @@ class AccountPreferences extends Component {
         this.uploadPhotos = this.uploadPhotos.bind(this);
     }
     componentDidMount() {
+
+        let pages = this.props.trace;
+        pages.push("Account Preferences");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
+        }
+
         API.getProfile({ userId: this.props.user.userId })
             .then((resultData) => {
                 if (!!resultData.data) {
@@ -593,11 +602,12 @@ class AccountPreferences extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.loginUser
+        user: state.loginUser,
+        trace: state.selectedTrace
     }
 }
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ loginUser: loginUser }, dispatch)
+    return bindActionCreators({ loginUser: loginUser,selectedTrace:selectedTrace }, dispatch)
 }
 
 

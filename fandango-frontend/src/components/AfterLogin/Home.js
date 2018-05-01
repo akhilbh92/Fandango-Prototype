@@ -18,7 +18,7 @@ class Home extends Component {
 
     componentDidMount() {
         let pages = this.props.trace;
-        //pages.push("Home");
+        pages.push("Home");
         if (this.props.user !== undefined && this.props.user.role == 3) {
             this.props.selectedTrace(pages)
         }

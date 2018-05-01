@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { log1, pageNames } from "../../App";
 import * as API from './../../api/apicall_for_users';
+import {selectedTrace} from '../../actions'
+
 
 class PurchaseHistory extends Component{
 
@@ -19,9 +21,12 @@ class PurchaseHistory extends Component{
     }
 
     componentDidMount(){
-    if (this.props.user !== undefined) {
-            pageNames.push("Purchase History");
-            }
+        let pages = this.props.trace;
+        pages.push("Purchase History");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
+        }
+
         API.getPurchaseHistory({})
             .then((result) => {
                 console.log(result);
@@ -97,10 +102,11 @@ class PurchaseHistory extends Component{
 
 function mapStateToProps(state) {
     return {
-        user: state.loginUser
+        user: state.loginUser,
+        trace: state.selectedTrace
     }
 }
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({selectedTrace: selectedTrace}, dispatch)
 }
 export default connect(mapStateToProps, matchDispatchToProps)(PurchaseHistory);
