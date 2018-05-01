@@ -10,7 +10,7 @@ function handle_request(msg, callback){
             callback(null, movie)
         });
     }else{
-        let sql = "select id,movie_name,description,see_it_in,trailer,photos,cast,movie_length,release_date,genres,t1.createdAt,t1.updatedAt,AVG(ratings.rating) AS avgrating " +
+        let sql = "select t1.id,movie_name,description,see_it_in,trailer,photos,cast,movie_length,release_date,genres,t1.createdAt,t1.updatedAt,AVG(ratings.rating) AS avgrating " +
             "FROM movies as t1 " +
             "LEFT OUTER JOIN ratings on ratings.movie_id=t1.id " +
             "GROUP BY t1.id";
