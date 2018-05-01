@@ -6,7 +6,6 @@ import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
 import { log1, pageNames } from "../../App";
-import { Link } from 'react-router-dom'
 import Price_Filter from './PriceFilter/pricefilter';
 
 
