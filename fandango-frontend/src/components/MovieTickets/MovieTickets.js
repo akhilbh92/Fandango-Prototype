@@ -6,7 +6,6 @@ import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom';
 import { log1, pageNames } from "../../App";
-import { Link } from 'react-router-dom'
 import Price_Filter from './PriceFilter/pricefilter';
 
 class Movie_Tickets extends Component{
@@ -53,7 +52,7 @@ class Movie_Tickets extends Component{
         let count = 4;
 
         for (let i=0;i<7;i++){
-            date.setDate(date.getDate() + 1);
+            
 
             if(i === this.state.highlightedKey){
                 result.push(<li test={i} id={"datepickerLI_"+count} key={i} onClick={(e)=>{this.handleDateClick(e)}}>
@@ -65,6 +64,7 @@ class Movie_Tickets extends Component{
                 </li>);
             }
             count = count + 5;
+            date.setDate(date.getDate() + 1);
         }
         return result;
     }
@@ -83,7 +83,7 @@ class Movie_Tickets extends Component{
 
     render(){
         const MovieHallsDate = new Date();
-        MovieHallsDate.setDate(this.state.startDate.getDate()+this.state.highlightedKey+1);
+        MovieHallsDate.setDate(this.state.startDate.getDate()+this.state.highlightedKey);
 
         return (
             <div>
