@@ -42,9 +42,18 @@ class UserForm extends Component {
     componentDidMount(){
         console.log(this.props.userDetails);
         API.getHalls().then(obj => {
-            this.setState({
-                allHalls: obj.data
-            });
+            obj.data.forEach((hall)=>{
+                if(hall.id === this.props.userDetails.hall_id){
+                    this.setState({
+                        hallName : hall.hall_name,
+                        allHalls: obj.data
+                    })
+                } else {
+                    this.setState({
+                        allHalls: obj.data
+                    });
+                }
+            })
         });
         if(this.props.userDetails) {
         let res = this.props.userDetails;
