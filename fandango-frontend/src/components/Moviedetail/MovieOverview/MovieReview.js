@@ -18,7 +18,8 @@ class MovieReview extends Component {
         this.state={
             movie_id: this.props.movie.id.toString(),
             reviews: [],
-            ratings: ''
+            ratings: '',
+            display: ''
         }
     }
 
@@ -40,8 +41,8 @@ class MovieReview extends Component {
 
     renderLink(){
         var display = "yes";
-        if (this.props.user === undefined) {
-            display == "yes"
+        if (this.props.user === undefined || this.props.user === null) {
+            display = "semi"
         }
         else if(this.props.user !== undefined && this.props.user !== null) {
             this.state.reviews.map((review) => {
@@ -55,6 +56,13 @@ class MovieReview extends Component {
 
         if(display == "no"){
             return (<div></div>)
+        }
+        else if(display == "semi") {
+            return(
+                <div className="submit-review">
+                    <Link to="/login"> LOGIN HERE TO WRITE REVIEW!!</Link>
+                </div>
+            )
         }
         else{
             return(
