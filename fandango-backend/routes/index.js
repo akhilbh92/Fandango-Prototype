@@ -11,6 +11,9 @@ var getScreen = require('./admin/getScreen');
 var editMovie = require('./admin/editMovie');
 var editHall = require('./admin/editHall');
 var editScreen = require('./admin/editScreen');
+var deleteMovie = require('./admin/deleteMovie');
+var deleteHall = require('./admin/deleteHall');
+var deleteScreen = require('./admin/deleteScreen');
 var getUserByEmail = require('./admin/getUserByEmail');
 var getLimitedMovies = require('./admin/getLimitedMovies');
 var addMovieSchedule = require('./moviehall/addMovieSchedule');
@@ -80,14 +83,29 @@ router.post('/editMovie', function (req, res, next) {
   editMovie.editMovieRouterFn(req, res, next);
 });
 
+router.post('/deleteMovie', function (req, res, next) {
+  console.log('DELETE MOVIE API');
+  deleteMovie.deleteMovieRouterFn(req, res, next);
+});
+
 router.post('/editHall', function (req, res, next) {
   console.log('EDIT HALL API');
   editHall.editHallRouterFn(req, res, next);
 });
 
+router.post('/deleteHall', function (req, res, next) {
+  console.log('DELETE HALL API');
+  deleteHall.deleteHallRouterFn(req, res, next);
+});
+
 router.post('/editScreen', function (req, res, next) {
   console.log('EDIT SCREEN API');
   editScreen.editScreenRouterFn(req, res, next);
+});
+
+router.post('/deleteScreen', function (req, res, next) {
+  console.log('DELETE SCREEN API');
+  deleteScreen.deleteScreenRouterFn(req, res, next);
 });
 
 router.post('/getUserByEmail', function (req, res, next) {
