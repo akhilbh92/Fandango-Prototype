@@ -134,7 +134,7 @@ class AddScreenForm extends Component {
                         >
                             <Glyphicon glyph="trash" /> 
                         </Button>
-                        <Button id="submit-user"  className="btn btn-primary" id="save" onClick={this.handleSubmit}> Save Screen </Button>
+                        <Button id="submit-user" className="btn btn-primary" id="save" onClick={this.handleSubmit}> Save Screen </Button>
                         <ToastContainer />
                         </div>
                         </Col>

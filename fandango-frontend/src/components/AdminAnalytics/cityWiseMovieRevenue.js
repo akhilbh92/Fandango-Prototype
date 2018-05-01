@@ -8,7 +8,9 @@ import NavBar from '../Admin/Navigation';
 import '../Admin/admin.css';
 import '../MovieHall/subheader.css';
 
+
 class CityWiseMovieRevenue extends Component {
+
     constructor(props){
         super(props);
 
@@ -22,6 +24,11 @@ class CityWiseMovieRevenue extends Component {
             console.log(`Data is ${JSON.stringify(resultData)}`);
             if (resultData.data) {
                 const movie_city_data = resultData.data;
+                if (!Array.isArray(movie_city_data) || !movie_city_data.length) {
+                    document.getElementById('no-db').innerHTML = 'No Revenue for this  movie';
+                    document.getElementById('no-db').style.color = 'red';
+                    return;
+                  }
                 this.setState({movie_name:resultData.data[0].movie_name});
                 let city_names = [];
                 let city_revenue = [];
@@ -65,6 +72,7 @@ class CityWiseMovieRevenue extends Component {
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
                         <h2 className="schedule-page-header">Revenue for <span className="page-header-emphasis">{this.state.movie_name}</span> movie</h2>
                     </div>
+                    <p id='no-db'> </p>
                 </div>
                 <div className="col-md-offset-4 col-md-4 col-md-offset-4">
                     <Pie
