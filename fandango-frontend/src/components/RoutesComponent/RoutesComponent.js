@@ -57,12 +57,7 @@ class RoutesComponent extends Component {
         return (
             <div>
                 <Route exact path="/" component={Landing} />
-                <Route exact path="/login" render={() => (
-                    <div>
-
-                        <Login redirectURL={this.redirectURL} />
-                    </div>
-                )} />
+                <PrivateRoute exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <PrivateRoute exact path="/schedulemovie" component={ScheduleMovie} />
                 <PrivateRoute exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
