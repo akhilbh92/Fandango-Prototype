@@ -19,6 +19,9 @@ const Hall =  db.sequelize.define('hall', {
     },
     screen_nums: {
         type: Sequelize.INTEGER
+    },
+    is_archive: {
+        type: Sequelize.BOOLEAN
     }
     });
 

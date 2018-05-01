@@ -12,7 +12,8 @@ function addScreenRouterFn(req, res, next){
           hall_id: req.body.hallId,
           screen_type: req.body.screenType,
           total_seats: req.body.totalSeats,
-          screen_num: req.body.screenNum
+          screen_num: req.body.screenNum,
+          is_archive: req.body.is_archive
     }, function(err,results){
       console.log('In Kafka: %o', results);
         if(err){

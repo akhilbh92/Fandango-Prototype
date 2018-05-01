@@ -15,11 +15,15 @@ class AllMovies extends Component{
 
         this.state={
             filter: '',
+            filterRating: -1,
             movies: [],
-            movies_tofilter: []
+            movies_tofilter: [],
+            showfiltertext: ""
 
         }
         this.handleCaptureLessSeen = this.handleCaptureLessSeen.bind(this);
+        this.filterMovies = this.filterMovies.bind(this);
+        this.filterMoviesByRating = this.filterMoviesByRating.bind(this);
     }
 
     componentDidMount(){
@@ -38,38 +42,64 @@ class AllMovies extends Component{
         log1.info(msg);
         this.setState({
             filter: filter,
+            showfiltertext: "yes",
             movies_tofilter: this.state.movies.filter(movie => movie.genres.toLocaleLowerCase().includes(filter.toLowerCase()))
         })
 
         console.log(this.state.movies);
     }
 
+    filterMoviesByRating = (filterRating) => {
+        this.setState({
+            filterRating: filterRating,
+            showfiltertext: "no",
+            movies_tofilter: this.state.movies.filter(movie => movie.avgrating > (Number)(this.state.filterRating))
+        })
+
+    }
+
 
     renderTitle(){
-        if(this.state.filter == "") {
-            return (
-                <div className="page-header-container">
-                    <div className="row">
-                        <div className="large-12 columns">
-                            <h2 className="page-header">SHOWING ALL MOVIES</h2>
-                        </div>
+        if(this.state.showfiltertext == "no"){
+            return(
+            <div className="page-header-container">
+                <div className="row">
+                    <div className="large-12 columns">
+                        <h2 className="page-header">SHOWING MOVIES WITH <span style={{ color: '#f15500'}}>"RATINGS > {this.state.filterRating}"</span></h2>
                     </div>
                 </div>
+            </div>
 
             )
-        }
 
-            else{
-                return(
+        }
+        else {
+            if (this.state.filter == "") {
+                return (
                     <div className="page-header-container">
                         <div className="row">
                             <div className="large-12 columns">
-                                <h2 className="page-header">SHOWING <span style={{color: '#F15500'}}>"{this.state.filter}"</span> MOVIES</h2>
+                                <h2 className="page-header">SHOWING ALL MOVIES</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                )
+            }
+
+            else {
+                return (
+                    <div className="page-header-container">
+                        <div className="row">
+                            <div className="large-12 columns">
+                                <h2 className="page-header">SHOWING <span
+                                    style={{color: '#F15500'}}>"{this.state.filter}"</span> MOVIES</h2>
                             </div>
                         </div>
                     </div>
                 )
             }
+        }
         }
 
 
@@ -113,7 +143,7 @@ class AllMovies extends Component{
                         </h5>
                     </div>
                     <div className="book-now">
-                        <button type="button" className="btn buy-tickets"> BUY TICKETS</button>
+                        <button type="button" className="btn buy-tickets" onClick={() => this.handleBooking(this.props.selectedMovie(movie))}> BUY TICKETS</button>
                     </div>
                 </div>
             )
@@ -125,6 +155,11 @@ class AllMovies extends Component{
         this.props.redirectURL("/moviedetail");
     }
 
+    handleBooking = () => {
+        this.props.redirectURL("/movietickets");
+    }
+
+
 
     render(){
         return(
@@ -135,7 +170,7 @@ class AllMovies extends Component{
                     <div className="page-header-container">
                         <div className="row">
                             <div className="large-12 columns">
-                                <h4 className="page-header">FILTER BY MOVIE GENRES</h4>
+                                <h4 className="page-header">FILTERS</h4>
                             </div>
                         </div>
                     </div>
@@ -151,6 +186,18 @@ class AllMovies extends Component{
                             <button type="button" className="btn sub-genre" onClick={() => this.filterMovies("romance")}>ROMANCE</button>
                             <button type="button" className="btn sub-genre" onClick={() => this.filterMovies("sci-fi")}>SCI-FI</button>
                             <button type="button" className="btn sub-genre" onClick={() => this.filterMovies("animated")}>ANIMATED</button>
+                        </ul>
+                    </div>
+
+
+                    <div className="genre-list">
+                        <ul>
+                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("1")}>RATINGS>1</button>
+                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("2")}>RATINGS>2</button>
+                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("3")}>RATINGS>3</button>
+                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("4")}>RATINGS>4</button>
+                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("5")}>RATINGS>5</button>
+
                         </ul>
                     </div>
 

@@ -94,9 +94,9 @@ class AddUser extends Component {
                 </div>
                     <br />
                     <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="email"
-                            className="col-sm-2 col-form-label label-color"><strong> Email </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Email </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="email"
@@ -125,9 +125,9 @@ class AddUser extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="password"
-                            className="col-sm-2 col-form-label label-color"><strong> Set Password </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Set Password </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="password"

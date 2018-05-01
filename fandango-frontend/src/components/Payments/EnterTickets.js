@@ -64,7 +64,11 @@ class EnterTickets extends Component{
 
     doPayment = (userdata) => {
         API.bookMovie(userdata.payload)
+            .then((res)=>{
+                window.location = "/purchasehistory"
+            });
     }
+
 
     handleBuy = (userdata) => {
         this.setState({
@@ -196,7 +200,7 @@ class EnterTickets extends Component{
 
                         <hr />
 
-                        <Link to="">Select a new Showtime</Link>
+                        <Link to="/movietickets">Select a new Showtime</Link>
                         <hr />
                         Price: $ {this.state.price}
                         <hr />

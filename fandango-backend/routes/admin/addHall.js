@@ -14,7 +14,8 @@ function addHallRouterFn(req, res, next){
           city: req.body.city,
           state: req.body.state,
           zipcode : req.body.zipcode,
-          screen_nums: req.body.screen_nums
+          screen_nums: req.body.screen_nums,
+          is_archive: req.body.is_archive
     }, function(err,results){
       console.log('In Kafka: %o', results);
         if(err){

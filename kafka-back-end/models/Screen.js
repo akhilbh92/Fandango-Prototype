@@ -13,6 +13,9 @@ const Screen =  db.sequelize.define('screen', {
     },
     total_seats: {
         type: Sequelize.INTEGER
+    },
+    is_archive: {
+        type: Sequelize.BOOLEAN
     }
 });
 
