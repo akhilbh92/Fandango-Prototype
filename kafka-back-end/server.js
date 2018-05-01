@@ -15,7 +15,6 @@ var editMovieHandler = require('./services/movies/editMovie');
 var addHallHandler = require('./services/halls/addHall');
 var getHallsHandler = require('./services/halls/getHalls');
 var editHallHandler = require('./services/halls/editHall');
-var deleteHallHandler = require('./services/halls/deleteHall');
 var addScreenHandler = require('./services/screens/addScreen');
 var getScreensHandler = require('./services/screens/getScreens');
 var editScreenHandler = require('./services/screens/editScreen');
