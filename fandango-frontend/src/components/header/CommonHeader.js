@@ -64,7 +64,7 @@ class CommonHeader extends Component {
                       className="fan-input style-search"
                       type="text"
                       name="q"
-                      placeholder="Enter City + State, ZIP Code, or Movie"
+                      placeholder="Search Movie"
                       onChange={(event) => {
                           this.setState({
                               criteria: event.target.value,

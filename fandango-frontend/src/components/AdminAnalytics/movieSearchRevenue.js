@@ -22,7 +22,7 @@ class MovieSearchRevenue extends Component{
 
     render(){
         return(
-            <div>
+            <div className="admin-sub-header">
             <CommonHeader />
             <NavBar/>
 

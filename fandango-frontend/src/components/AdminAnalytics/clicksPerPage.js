@@ -123,7 +123,7 @@ class ClicksPerPage extends Component{
     }
 
     render(){
-        return(<div>
+        return(<div className="admin-sub-header">
                 <CommonHeader />
                 <NavBar/>
 

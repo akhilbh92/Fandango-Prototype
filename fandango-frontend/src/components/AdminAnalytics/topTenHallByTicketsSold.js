@@ -68,7 +68,7 @@ class TopTenHallByTicketsSold extends Component{
     }
 
     render(){
-        return(<div onClick={this.handleClick}>
+        return(<div onClick={this.handleClick} className="admin-sub-header">
                 <CommonHeader />
                 <NavBar/>
 

@@ -112,7 +112,7 @@ class TraceDiagram extends Component {
     render() {
 
         return (
-            <div>
+            <div className="admin-sub-header">
                 <CommonHeader />
                 <NavBar/>
                 <div className=" col-md-12 page-header-container">

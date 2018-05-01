@@ -67,7 +67,7 @@ class MovieRevenueByAdmin extends Component {
         }]
 
         return (
-            <div>
+            <div className="admin-sub-header">
                 <CommonHeader />
                 <NavBar />
                 <ToastContainer />
