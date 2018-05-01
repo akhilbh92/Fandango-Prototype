@@ -11,7 +11,7 @@ class App extends Component {
         var ajaxAppender = new log4javascript.AjaxAppender('http://localhost:3001/api/logger');
         //ajaxAppender.setBatchSize(1); // send in batches of 10
         ajaxAppender.setTimed(true);
-        ajaxAppender.setTimerInterval(10); // send every 1 seconds (unit is milliseconds)
+        ajaxAppender.setTimerInterval(1); // send every 1 seconds (unit is milliseconds)
         ajaxAppender.setSendAllOnUnload(); // send all remaining messages on window.beforeunload()
         log1.addAppender(ajaxAppender);
     }
