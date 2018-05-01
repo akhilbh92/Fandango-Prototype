@@ -16,9 +16,9 @@ class PageNotFound extends Component {
                     <div class="cloud x5"></div>
                 </div>
                 <div class='c'>
-                    <div class='_404'>404</div>
-                    <div class='_1'>THE PAGE</div>
-                    <div class='_2'>WAS NOT FOUND</div>
+                    <div class='_404'>401</div>
+                    {/* <div class='_1'>THE PAGE</div> */}
+                    <div class='_2'>YOU ARE NOT AUTHORIZED</div>
                 </div>
             </div>
         );
