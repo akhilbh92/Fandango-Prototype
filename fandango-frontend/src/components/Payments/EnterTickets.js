@@ -64,9 +64,9 @@ class EnterTickets extends Component{
 
     doPayment = (userdata) => {
         API.bookMovie(userdata.payload)
-            .then((res)=>{
+            .then(
                 window.location = "/purchasehistory"
-            });
+            );
     }
 
 
@@ -159,6 +159,9 @@ class EnterTickets extends Component{
     doPayment2 = (userdata) => {
         if(this.state.carderror != 1 && this.state.expirationerror != 1 && this.state.nameerror != 1 && this.state.cvverror != 1 && this.state.ticket2error != 1) {
             API.bookMovie(userdata.payload)
+                .then(
+                    window.location = "/purchasehistory"
+                );
         }
     }
 

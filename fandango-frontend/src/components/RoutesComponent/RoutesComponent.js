@@ -91,12 +91,7 @@ class RoutesComponent extends Component {
                 <Route exact path="/movietickets" component={MovieTickets} />
                 <PrivateRoute exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
                 <PrivateRoute exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
-                <PrivateRoute exact path="/entertickets" render={() => (
-                    <div>
-
-                        <EnterTickets redirectURL={this.redirectURL} />
-                    </div>
-                )} />
+                <PrivateRoute exact path="/entertickets" component={EnterTickets} />
                 <PrivateRoute exact path="/admin/toptenmoviesbyrevenue" component={TopTenMoviesByRevenue} />
                 <PrivateRoute exact path="/admin/citywiserevenue" component={MovieSearchRevenue} />
                 <PrivateRoute exact path="/admin/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />

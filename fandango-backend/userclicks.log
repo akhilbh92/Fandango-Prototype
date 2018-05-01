@@ -499,3 +499,38 @@
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:36.961Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:41.756Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:42.812Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-05-01T06:29:47.977Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"action","level":"info","message":"","timestamp":"2018-05-01T06:29:49.289Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"drama","level":"info","message":"","timestamp":"2018-05-01T06:29:50.356Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"comedy","level":"info","message":"","timestamp":"2018-05-01T06:29:52.121Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"kids","level":"info","message":"","timestamp":"2018-05-01T06:29:53.116Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"horror","level":"info","message":"","timestamp":"2018-05-01T06:29:54.566Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"romance","level":"info","message":"","timestamp":"2018-05-01T06:29:55.799Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"sci-fi","level":"info","message":"","timestamp":"2018-05-01T06:29:56.705Z"}
+{"event":"section_click","section_name":"filter_genre","genre_name":"","level":"info","message":"","timestamp":"2018-05-01T06:40:44.549Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T06:53:58.285Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T06:54:20.181Z"}
+{"event":"page_click","page_name":"Home","count":"1","level":"info","message":"","timestamp":"2018-05-01T06:54:22.739Z"}
+{"event":"section_click","section_name":"movie_Listing","level":"info","message":"","timestamp":"2018-05-01T06:54:26.654Z"}
+{"event":"section_click","section_name":"movie_Listing","level":"info","message":"","timestamp":"2018-05-01T06:54:27.723Z"}
+{"event":"movie_click","movie_id":"1","movie_name":"Avengers: Infinity War","count":"1","level":"info","message":"","timestamp":"2018-05-01T06:54:27.726Z"}
+{"event":"page_click","page_name":"MovieDetail","count":"1","level":"info","message":"","timestamp":"2018-05-01T06:54:44.728Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T06:56:41.950Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T06:56:54.673Z"}
+{"event":"page_click","page_name":"Home","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:00:46.255Z"}
+{"event":"section_click","section_name":"movie_Listing","level":"info","message":"","timestamp":"2018-05-01T07:00:48.043Z"}
+{"event":"movie_click","movie_id":"1","movie_name":"Avengers: Infinity War","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:00:48.048Z"}
+{"event":"page_click","page_name":"MovieDetail","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:00:50.001Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:21:30.030Z"}
+{"event":"page_click","page_name":"Signup","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:21:32.254Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:21:33.673Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:21:49.773Z"}
+{"event":"page_click","page_name":"Home","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:21:58.141Z"}
+{"event":"section_click","section_name":"movie_Listing","level":"info","message":"","timestamp":"2018-05-01T07:22:00.520Z"}
+{"event":"page_click","page_name":"MovieDetail","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:28:37.047Z"}
+{"event":"movie_click","movie_id":"2","movie_name":"A Quiet Place","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:28:58.206Z"}
+{"event":"page_click","page_name":"MovieDetail","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:30:02.377Z"}
+{"event":"movie_click","movie_id":"1","movie_name":"Avengers: Infinity War","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:30:09.149Z"}
+{"event":"page_click","page_name":"Home","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:52:51.417Z"}
+{"event":"page_click","page_name":"Home","count":"1","level":"info","message":"","timestamp":"2018-05-01T07:52:53.659Z"}
+{"event":"page_click","page_name":"Home","count":"1","level":"info","message":"","timestamp":"2018-05-01T08:18:08.009Z"}
