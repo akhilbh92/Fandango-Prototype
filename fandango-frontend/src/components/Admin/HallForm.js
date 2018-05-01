@@ -36,6 +36,7 @@ class HallForm extends Component {
 
     componentDidMount(){
         if (this.props.hallId){
+            console.log('comp did mount');
             let allScreens = this.props.allScreens;
             document.getElementById('submit-button').innerHTML = 'Update Hall';
             document.getElementById('form-header').innerHTML = 'Edit Hall Details';
@@ -198,7 +199,8 @@ class HallForm extends Component {
 
 
     render(){
-        console.log(`Deleted Screens: ${this.state.deletedScreens}`);
+        console.log(`Screens Array length: ${this.props.allScreens}`);
+        console.log(`Hall ID: ${this.props.hallId}`);
         if(this.state.isDeleted){
             return <Redirect to='/admin'  />
         } 
@@ -371,7 +373,7 @@ class HallForm extends Component {
                 <br /> <br />
                 <div className="col-sm-2"> </div>   
                 <Button  id="dlt-btn" className="col-sm-2 btn btn-primary" onClick={this.handleDelete}> Delete this Hall </Button>
-                <div className="col-sm-7"> </div>     
+                <div className="col-sm-5"> </div>     
                 <Button id="submit-button"  className="col-sm-1 btn btn-primary" onClick={this.handleSubmit}> Save Hall </Button>
                 <ToastContainer />
                 <br /> <br />
