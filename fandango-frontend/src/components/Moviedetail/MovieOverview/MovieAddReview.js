@@ -13,7 +13,7 @@ class MovieAddReview extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rating: '',
+            rating: 0,
             movie_id: this.props.movie.id.toString(),
             review_title: '',
             review_body: ''
@@ -114,7 +114,7 @@ class MovieAddReview extends Component {
                         <h3 className="addreview-header-font">PLEASE RATE THE MOVIE FROM 1-5 STARS</h3>
                         <div className="addreview-header-star">
                             <Rating
-                                id="rating"
+                                placeholderValue={0}
                                 emptySymbol={<img src={stargrey} className="icon" />}
                                 placeholderSymbol={<img src={staryellow} className="icon" />}
                                 fullSymbol={<img src={staryellow} className="icon" />}

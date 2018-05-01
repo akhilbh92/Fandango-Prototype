@@ -6,7 +6,6 @@ import URLRegex from '../Helper/URLRegex';
 import  { Redirect } from 'react-router-dom';
 
 
-
 class MovieForm extends React.Component {
     notify = (msg) => toast(msg);
 
@@ -77,11 +76,12 @@ class MovieForm extends React.Component {
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
         data.append('filename', this.state.movieName);
+        data.append('filefolder', 'posters');
         API.uploadFile(data).then((res)=> {
             res.json().then((body)=> {
                 console.log(body);
                   this.setState({   
-                        photos: `http://localhost:3001${body.file}`
+                        photos: `http://myec2.ddns.net:3001${body.file}`
                     });
             });
         })
@@ -347,7 +347,7 @@ class MovieForm extends React.Component {
                     </div>
                     <br /> <br /> <br />
                     <div className="col-sm-2"> </div>   
-                    <Button  id="dlt-btn" className="col-sm-2 btn btn-primary" onClick={this.handleDelete}> Delete this Movie </Button>
+                    <Button  id="dlt-btn" className="col-sm-2 btn btn-danger" onClick={this.handleDelete}> Delete this Movie </Button>
                     <div className="col-sm-6"> </div>     
                     <Button id="submit-button"  className="col-sm-1 btn btn-primary" onClick={this.handleSubmit}> Add Movie </Button>
                     <ToastContainer />

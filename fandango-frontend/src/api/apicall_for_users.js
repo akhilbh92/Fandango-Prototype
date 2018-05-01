@@ -1,4 +1,4 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001';
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://myec2.ddns.net:3001';
 
 const headers = {
     'Accept': 'application/json'
@@ -186,6 +186,24 @@ export const getPurchaseHistory = (payload) =>
             console.log("This is error");
             return error;
         });
+
+export const deleteUser = (payload) =>
+        fetch(`${api}/deleteUser`, {
+            method: 'POST',
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            },
+            credentials:'include',
+            body: JSON.stringify(payload)
+        }).then(res => res.json())
+            .then(res =>{
+                return res;
+            })
+            .catch(error => {
+                console.log("This is error");
+                return error;
+            });
 
 export const getProfile = (payload) =>
     fetch(`${api}/getProfile`, {

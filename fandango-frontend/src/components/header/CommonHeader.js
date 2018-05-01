@@ -12,79 +12,80 @@ import { log1, pageNames } from "../../App";
 
 class CommonHeader extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-       criteria: ''
+    constructor(props){
+        super(props);
+        this.state = {
+            criteria: ''
+        }
     }
-  }
 
-  signout() {
-    doSignOut({pageNames:this.props.trace}).then((response) => {
-      
-      window.location = "/"
-        this.props.loginUser(null);
-    })
-  }
+    signout() {
+        doSignOut({pageNames:this.props.trace}).then((response) => {
+
+            window.location = "/"
+            this.props.loginUser(null);
+            this.props.selectedTrace(null);
+        })
+    }
 
     handleSearch = (userdata) => {
         console.log(userdata);
         window.location = "/searchresult"
     }
 
-  render() {
-    return (
-      <div>
-        <div className="brand-bar">
-          <div className="col-md-12">
-            <div className="col-md-offset-8 col-md-4 float-right header-link">
-              <a href="">Gift Cards</a> |
-            <a href="">Offers</a> |
-            {(this.props.user === undefined || this.props.user === null) && <Link to="/login"
-                className="hide-logged-in">Sign In</Link>}
-              {(this.props.user !== undefined && this.props.user !== null) && <button
-                className="btn btn-link hide-logged-in" type="button" onClick={() => { this.signout() }}>Sign Out</button>}
-            </div>
-          </div>
-        </div>
-        <div>
-          <ul className="fandango-nav">
-            <li>
-              <LinkContainer to={this.props.user !== undefined && this.props.user !== null && this.props.user.role == 1 ? '/admin' :
-                this.props.user !== undefined && this.props.user !== null && this.props.user.role == 2 ? '/mhadmin' : this.props.user !== undefined && this.props.user !== null && this.props.user.role == 3 ? '/home' : '/'}>
-                <a>
-                  <img alt="Fandango Poster" src={fandangoLogo} className="header-logo" />
-                </a>
-              </LinkContainer>
-            </li>
-            <li id="global-search">
-              <form action="/search" autoComplete="off" role="search" noValidate="">
-                <div className="fan-autocomplete">
-                  <div className="fan-autocomplete-results"></div>
-                  <input
-                      className="fan-input style-search"
-                      type="text"
-                      name="q"
-                      placeholder="Search Movie"
-                      onChange={(event) => {
-                          this.setState({
-                              criteria: event.target.value,
-                              type: true
-                          });
-                      }}
-                  />
+    render() {
+        return (
+            <div>
+                <div className="brand-bar">
+                    <div className="col-md-12">
+                        <div className="col-md-offset-8 col-md-4 float-right header-link">
+                            <a href="">Gift Cards</a> |
+                            <a href="">Offers</a> |
+                            {(this.props.user === undefined || this.props.user === null) && <Link to="/login"
+                                                                                                  className="hide-logged-in">Sign In</Link>}
+                            {(this.props.user !== undefined && this.props.user !== null) && <button
+                                className="btn btn-link hide-logged-in" type="button" onClick={() => { this.signout() }}>Sign Out</button>}
+                        </div>
+                    </div>
                 </div>
-                <input
-                    type="hidden"
-                    name="mode"
-                    value="general"
+                <div>
+                    <ul className="fandango-nav">
+                        <li>
+                            <LinkContainer to={this.props.user !== undefined && this.props.user !== null && this.props.user.role == 1 ? '/admin' :
+                                this.props.user !== undefined && this.props.user !== null && this.props.user.role == 2 ? '/mhadmin' : this.props.user !== undefined && this.props.user !== null && this.props.user.role == 3 ? '/home' : '/'}>
+                                <a>
+                                    <img alt="Fandango Poster" src={fandangoLogo} className="header-logo" />
+                                </a>
+                            </LinkContainer>
+                        </li>
+                        <li id="global-search">
+                            <form action="/search" autoComplete="off" role="search" noValidate="">
+                                <div className="fan-autocomplete">
+                                    <div className="fan-autocomplete-results"></div>
+                                    <input
+                                        className="fan-input style-search"
+                                        type="text"
+                                        name="q"
+                                        placeholder="Search Movie"
+                                        onChange={(event) => {
+                                            this.setState({
+                                                criteria: event.target.value,
+                                                type: true
+                                            });
+                                        }}
+                                    />
+                                </div>
+                                <input
+                                    type="hidden"
+                                    name="mode"
+                                    value="general"
 
-                />
-                <button className="fan-btn fan-btn-style-go" type="button" onClick={() => this.handleSearch(this.props.searchCriteria(this.state))}>Go</button>
-              </form>
-            </li>
-            {/* <li className="drop-menu"><Link to="/allmovies">MOVIES</Link> */}
-              {/* <div className="fulldrop">
+                                />
+                                <button className="fan-btn fan-btn-style-go" type="button" onClick={() => this.handleSearch(this.props.searchCriteria(this.state))}>Go</button>
+                            </form>
+                        </li>
+                        {/* <li className="drop-menu"><Link to="/allmovies">MOVIES</Link> */}
+                        {/* <div className="fulldrop">
                 <div className="column">
                   <ul>
                     <li>.</li>
@@ -127,9 +128,9 @@ class CommonHeader extends Component {
                   </ul>
                 </div>
               </div> */}
-            {/* </li> */}
-            <li className="drop-menu"><a href=""><Link to="/allmovies">MOVIE TIMES + TICKETS</Link></a>
-              {/* <div className="fulldrop">
+                        {/* </li> */}
+                        <li className="drop-menu"><a href=""><Link to="/allmovies">MOVIE TIMES + TICKETS</Link></a>
+                            {/* <div className="fulldrop">
                 <div className="column large-column">
                   <h3>Where are you located? Here are our top cities</h3>
                 </div>
@@ -166,27 +167,27 @@ class CommonHeader extends Component {
                   </ul>
                 </div>
               </div> */}
-            </li>
-            {(this.props.user !== undefined && this.props.user !== null) && <li><Link to="/dashboard">MY <span className="vip-text">VIP</span> ACCOUNT</Link></li>}
-            {(this.props.user === undefined || this.props.user === null) && <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>}
-          </ul>
-        </div>
-        <div style={{ borderTop: '3px solid rgb(241, 85, 0)' }}></div>
+                        </li>
+                        {(this.props.user !== undefined && this.props.user !== null) && <li><Link to="/dashboard">MY <span className="vip-text">VIP</span> ACCOUNT</Link></li>}
+                        {(this.props.user === undefined || this.props.user === null) && <li><Link to="/signup">JOIN FANDANGO <span className="vip-text">VIP</span></Link></li>}
+                    </ul>
+                </div>
+                <div style={{ borderTop: '3px solid rgb(241, 85, 0)' }}></div>
 
-      </div>
-    )
-  }
+            </div>
+        )
+    }
 }
 
 function mapStateToProps(state) {
-  return {
-    user: state.loginUser,
-    criteria: state.searchCriteria,
-    trace: state.selectedTrace
-  }
+    return {
+        user: state.loginUser,
+        criteria: state.searchCriteria,
+        trace: state.selectedTrace
+    }
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUser: loginUser, searchCriteria: searchCriteria, selectedTrace: selectedTrace }, dispatch)
+    return bindActionCreators({ loginUser: loginUser, searchCriteria: searchCriteria, selectedTrace: selectedTrace }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(CommonHeader);

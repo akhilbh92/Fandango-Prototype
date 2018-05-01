@@ -129,7 +129,7 @@ class AddScreenForm extends Component {
                         </Col>
                         <Col md={3}>
                         <div className="screenButton">
-                        <Button bsSize="small" className="btn btn-primary" id="trash" 
+                        <Button bsSize="small" className="btn btn-primary" id="trash" type="submit"
                                 onClick={this.dismiss} 
                         >
                             <Glyphicon glyph="trash" /> 
