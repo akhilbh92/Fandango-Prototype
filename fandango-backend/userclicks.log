@@ -499,3 +499,10 @@
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:36.961Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:41.756Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:42.812Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T02:02:32.320Z"}
+{"event":"page_click","page_name":"Signup","count":"1","level":"info","message":"","timestamp":"2018-05-01T02:02:51.618Z"}
+{"event":"page_click","page_name":"Signup","count":"1","level":"info","message":"","timestamp":"2018-05-01T02:02:58.524Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T02:03:00.222Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T02:03:11.056Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T02:05:15.477Z"}
+{"event":"page_click","page_name":"Login","count":"1","level":"info","message":"","timestamp":"2018-05-01T02:05:25.779Z"}

@@ -67,8 +67,8 @@ class RoutesComponent extends Component {
                 <PrivateRoute exact path="/schedulemovie" component={ScheduleMovie} />
                 <PrivateRoute exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
                 <PrivateRoute exact path="/home" component={Home} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/preferences" component={AccountPreferences} />
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <PrivateRoute exact path="/preferences" component={AccountPreferences} />
                 <Route exact path="/allmovies" render={() => (
                     <div>
 
@@ -89,22 +89,21 @@ class RoutesComponent extends Component {
                 <Route exact path="/moviedetailreview" component={Movie_detail_review} />
                 <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
                 <Route exact path="/movietickets" component={MovieTickets} />
-                <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
-                <Route exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
-                <Route exact path="/paymentinfo" component={PaymentInfo} />
-                <Route exact path="/entertickets" render={() => (
+                <PrivateRoute exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <PrivateRoute exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
+                <PrivateRoute exact path="/entertickets" render={() => (
                     <div>
 
                         <EnterTickets redirectURL={this.redirectURL} />
                     </div>
                 )} />
-                <Route exact path="/admin/toptenmoviesbyrevenue" component={TopTenMoviesByRevenue} />
+                <PrivateRoute exact path="/admin/toptenmoviesbyrevenue" component={TopTenMoviesByRevenue} />
                 <PrivateRoute exact path="/admin/citywiserevenue" component={MovieSearchRevenue} />
                 <PrivateRoute exact path="/admin/citywiserevenue/:movieId" component={CityWiseMovieRevenue} />
                 <PrivateRoute exact path="/admin/toptenhalls" component={TopTenHallByTicketsSold} />
                 <PrivateRoute exact path="/test" component={Home} />
                 <PrivateRoute exact path="/mhadmin" component={MovieHallAdminHome} />
-                <Route exact path="/purchasehistory" component={PurchaseHistory} />
+                <PrivateRoute exact path="/purchasehistory" component={PurchaseHistory} />
                 <Route exact path="/searchresult" render={() => (
                     <div>
 
