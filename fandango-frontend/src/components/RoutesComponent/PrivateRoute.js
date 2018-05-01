@@ -28,25 +28,51 @@ class PrivateRoute extends Component {
         } else {
             console.log("response :", response["data"]);
             if (typeof response["data"] === "object") {
-                console.log("this.props.dataprops.location.pathname :::",this.props.dataprops.location.pathname)
+                console.log("insdie if")
+                if (this.props.dataprops.location.pathname == '/login') {
+                    if (response["data"].role == 1) {
+                        this.props.SetSession(response["data"]);
+                        return <Redirect to={{
+                            pathname: '/home',
+                        }} />;
+                    } else if (response["data"].role == 2) {
+                        this.props.SetSession(response["data"]);
+                        return <Redirect to={{
+                            pathname: '/mhadmin',
+                        }} />;
+                    } else if (response["data"].role == 3) {
+                        this.props.SetSession(response["data"]);
+                        return <Redirect to={{
+                            pathname: '/admin',
+                        }} />;
+                    }
+                }
                 if (RoutingMap[response["data"].role].indexOf(this.props.dataprops.location.pathname) > -1) {
                     this.props.SetSession(response["data"]);
                     return <this.props.componentname {...this.props.dataprops} />
                 } else {
-                    console.log("else")
                     this.props.SetSession(response["data"]);
                     return <Redirect to={{
                         pathname: '/pagenotfound',
                     }} />;
                 }
             } else {
-                return <Redirect to={{
-                    pathname: '/login',
-                }} />;
+                if (this.props.dataprops.location.pathname == '/login') {
+                    return <this.props.componentname {...this.props.dataprops} redirectURL={this.redirectURL} />
+                } else {
+                    return <Redirect to={{
+                        pathname: '/login',
+                    }} />;
+                }
             }
         }
     }
+    redirectURL = (url) => {
+        window.location = url;
+    };
 }
+
+
 
 PrivateRoute = connect(
     null,
