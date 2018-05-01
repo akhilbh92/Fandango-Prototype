@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import * as API from '../../api/API';
+import * as deleteAPI from '../../api/apicall_for_users';
 import { ToastContainer, toast } from 'react-toastify';
 import emailRegex from '../Helper/EmailRegex';
 import stateRegex from '../Helper/StateRegex';
@@ -25,16 +26,25 @@ class UserForm extends Component {
             zipcode: '',
             phoneNumber: '',
             hallId: '',
+            hallName: 'Select Hall',
+            allHalls: '',
             isDeleted: false,
             emailValidation: 'NA',
             stateValidation: 'NA',
             zipcodeValidation: 'NA'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount(){
         console.log(this.props.userDetails);
+        API.getHalls().then(obj => {
+            this.setState({
+                allHalls: obj.data
+            });
+        });
         if(this.props.userDetails) {
         let res = this.props.userDetails;
         this.setState({
@@ -75,6 +85,22 @@ class UserForm extends Component {
         return fieldPromise;
     }
 
+    handleSelect(event){
+        let res = event.split('-');
+        this.setState({
+            hallId : res[0],
+            hallName: res[1]
+        });
+    }
+
+    handleDelete(){
+        let payload = { deleteuserId: this.state.userId }
+        deleteAPI.deleteUser(payload).then((res)=>{
+            this.notify(res.data);
+            console.log(res);
+        })
+    }
+
     handleSubmit(){
         if(this.state.role === ''|| this.state.firstName === '' || this.state.lastName === '' || this.state.email === '' || this.state.city === '' || this.state.zipcode === '') {
             this.notify('Please fill all mandatory fields');
@@ -90,10 +116,9 @@ class UserForm extends Component {
             return;
         }  
         
-
         let updatedUserDetails = {
             user_id : this.state.userId, 
-            email: this.props.email, 
+            email: this.state.email, 
             role: this.state.role, 
             first_name: this.state.firstName, 
             last_name: this.state.lastName, 
@@ -106,9 +131,9 @@ class UserForm extends Component {
         }
 
         if(this.props.userDetails) {
-            API.updateUserDetails(updatedUserDetails). then((result) => {
+            API.updateUserDetails(updatedUserDetails).then((result) => {
                 console.log(result);
-                    this.notify('User Profile details updated successfully');
+                    this.notify(result.message);
                 }).catch((err)=>{
                     this.notify(err);
                 });
@@ -116,6 +141,13 @@ class UserForm extends Component {
     }
 
     render(){
+        let allHalls = Object.values(this.state.allHalls);
+        let count = -1;
+        console.log(JSON.stringify(allHalls));
+        let hallItems = allHalls.map((hall, index)=>{
+            count = count++;
+            return  <MenuItem key={index} eventKey={hall.id + '-' + hall.hall_name}> {hall.hall_name}</MenuItem>
+        });
         return (
             <div className='UpdateUserForm'> 
                 <br />
@@ -341,32 +373,25 @@ class UserForm extends Component {
                     </div>
                 </div>
                 <br />
-                <div className= "admin-forms">
-                    <div className="form-group row">
-                        <label htmlFor="hallId"
-                            className="col-sm-2 col-form-label label-color"><strong> Hall ID </strong></label>
-                        <div className={'col-sm-9' }>
-                            <input className="form-control"
-                                id="hallId"
-                                name="hallId"
-                                value={this.state.hallId}
-                                required 
-                                onChange={(event) => {
-                                    this.setState({
-                                        hallId: event.target.value
-                                    });
-                                }}
-                                >
-                            </input>
-                        </div>
-                    </div>
+                <div className = "admin-forms"> 
+                <div className="form-group row halldrop">
+                <label htmlFor="hallId"
+                    className="col-sm-2 col-form-label label-color"><strong> Hall Name </strong></label>
+                    <DropdownButton
+                        id = 'hallName-btn'
+                        bsStyle = 'primary'
+                        title = {this.state.hallName}
+                        onSelect = {this.handleSelect}
+                        >
+                        {hallItems}
+                    </DropdownButton>  
                 </div>
-                <br />
-                
-                <br />
-                <div className="col-sm-3"> </div>                
-                <div className="col-sm-5"> <p id='response-message'> User Profile added successfully </p> </div>
-                <Button id="submit-user"  className="col-sm-2 btn btn-primary" onClick={this.handleSubmit}> Update User </Button>
+                </div>
+                <br /> <br /> <br />
+                <div className="col-sm-2"> </div>                
+                <Button id="submit-user"  className="col-sm-1 btn btn-danger" onClick={this.handleDelete}> Delete this User </Button>
+                <div className="col-sm-6"> </div>                
+                <Button id="submit-user"  className="col-sm-1 btn btn-primary" onClick={this.handleSubmit}> Update User </Button>
                 <ToastContainer />
                 <br/> <br/>
                 </form>

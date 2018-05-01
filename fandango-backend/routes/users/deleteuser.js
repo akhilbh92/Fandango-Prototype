@@ -55,7 +55,7 @@ let deleteUserRouterFn = async function (req, res, next) {
     try {
         await checkAuthUserById(userId);
         await DeleteUserInDb(deleteUserId);
-        let resObj = new resFormat("User delete successfully");
+        let resObj = new resFormat("User deleted successfully");
         return res.status(resObj.getStatus()).json(resObj.log());
 
     } catch (err) {

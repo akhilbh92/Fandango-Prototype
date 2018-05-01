@@ -162,3 +162,8 @@
 #dlt-btn{
     display: none;
 }
+
+.halldrop .dropdown {
+    float: left;
+    padding-left: 15px;
+}
