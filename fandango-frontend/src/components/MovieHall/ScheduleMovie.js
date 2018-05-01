@@ -38,7 +38,7 @@ class ScheduleMovie extends Component {
             width: 150,
             style: { 'whiteSpace': 'unset' },
             Cell: props => (<img className="visual-thumb img-size" alt="I Feel Pretty showtimes and tickets"
-                src="//images.fandango.com/ImageRenderer/200/0/redesign/static/img/default_poster.png/0/images/masterrepository/Fandango/204918/SuperTroopers2_OfficialPost.jpg" />)
+                src={props.row._original.photos}/>)
         }, {
             Header: 'Movie Name',
             accessor: 'movie_name',

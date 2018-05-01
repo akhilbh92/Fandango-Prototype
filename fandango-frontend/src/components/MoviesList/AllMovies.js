@@ -73,11 +73,23 @@ class AllMovies extends Component{
         }
 
 
+    handleCaptureLessSeen(){
+/*
+        log1.info('{"event":"page_click","page_name":"AllMovies","count":"1"}');
+*/
+        let msg = '{"event":"section_click","section_name":"movie_Listing"}';
+        log1.info(msg);
+    }
 
     renderMovies(){
+            if(this.state.movies_tofilter.length == 0){
+            return(<h3 className="col-md-offset-2 col-md-8" style={{ textAlign: 'left', marginTop: '20px'}}>
+                NO MATCHING RESULTS
+            </h3>)
+        }
         return this.state.movies_tofilter.map((movie) => {
             return(
-                <div className="col-md-offset-2 col-md-8 list-moviedetails">
+                <div className="col-md-offset-2 col-md-8 list-moviedetails" onClick={this.handleCaptureLessSeen}>
                     <div className="img-style">
                         <img src={movie.photos} className="img-peculiar"
                         alt={movie.movie_name + "Movie Poster"}/>
@@ -113,9 +125,6 @@ class AllMovies extends Component{
         this.props.redirectURL("/moviedetail");
     }
 
-    handleCaptureLessSeen(section_type){
-        alert(section_type);
-    }
 
     render(){
         return(

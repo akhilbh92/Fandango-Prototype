@@ -2,7 +2,8 @@ var moment = require('moment');
 
 // Add MongoDB connections
 const MongoClient = require('mongodb').MongoClient;
-var mongoURL = 'mongodb://localhost:54000/fandango';
+
+var mongoURL = 'mongodb://admin:admin@ds263619.mlab.com:63619/fandango';
 
 var traceCollection;
 MongoClient.connect(mongoURL, function (err, db) {

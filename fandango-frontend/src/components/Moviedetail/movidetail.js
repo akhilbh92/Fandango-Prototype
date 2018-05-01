@@ -14,6 +14,12 @@ class Movie_detail extends Component {
         this.state = {
             ActiveComponent: <MoveOverview/>
         }
+        this.handleLogs = this.handleLogs.bind(this);
+    }
+
+
+    handleLogs() {
+        log1.info('{"event":"page_click","page_name":"MovieDetail","count":"1"}');
     }
 
     componentDidMount(){
@@ -25,7 +31,7 @@ class Movie_detail extends Component {
         if(this.props.movie.photos)background =  this.props.movie.photos;
 
         return(
-            <div>
+            <div onClick={this.handleLogs}>
                 <HomeHeader/>
                 <div className="movie-detail-main">
                     <div className="movie-detail-mop">
@@ -77,9 +83,9 @@ class Movie_detail extends Component {
                                                 </Link>
                                             </li>
                                             <li className="movie-detail-section-subnav-item">
-                                                <a className="movie-detail-section-subnav-item-link">
+                                                <Link to={"moviedetailcrew"} className="movie-detail-section-subnav-item-link">
                                                     CAST
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>

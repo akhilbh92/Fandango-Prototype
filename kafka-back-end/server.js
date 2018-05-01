@@ -32,6 +32,7 @@ var clicksPerPage = require('./services/adminanalytics/clicksPerPage');
 var movieRevenueByAdmin = require('./services/adminanalytics/movieRevenueByAdmin');
 var movieReviewGraph = require('./services/adminanalytics/movieReviewGraph');
 var traceDiagram = require('./services/adminanalytics/traceDiagram');
+var getAllUsers = require('./services/adminanalytics/getAllUsers');
 
 const userService = Object.assign(require('./services/users'),require('./services/ratings'),
     require('./services/movieschedule/getmovieschedulebydate'),require('./services/Billing'));
@@ -150,6 +151,9 @@ consumer.on('message', (message) => {
             break;
         case 'tracediagram':
             handler = traceDiagram;
+            break;
+        case 'getUsers':
+            handler = getAllUsers;
             break;
         default:
             userService[data.data.key](data.data.value, function (err, res) {

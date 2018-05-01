@@ -1,8 +1,12 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Doughnut} from 'react-chartjs-2';
+import {Doughnut,Bar,Pie,Line} from 'react-chartjs-2';
 import * as API from  '../../api/API';
-
+import CommonHeader from '../header/CommonHeader';
+import { withRouter } from 'react-router-dom';
+import NavBar from '../Admin/Navigation';
+import '../Admin/admin.css';
+import '../MovieHall/subheader.css';
 
 class MovieReviewGraph extends Component{
     constructor(props){
@@ -52,10 +56,73 @@ class MovieReviewGraph extends Component{
     }
 
     render(){
-        return(<div>
-                <Doughnut
-                    data = {this.state.Data}
-                    options = {{ maintainAspectRatio: true }} />
+        return(<div className="admin-sub-header">
+                <CommonHeader />
+                <NavBar/>
+
+                <div className=" col-md-12 page-header-container">
+                    <div className="col-md-offset-4 col-md-8 pd-left-0">
+                        <h2 className="schedule-page-header">Graph for <span className="page-header-emphasis">Reviews on Movies</span></h2>
+                    </div>
+                </div>
+
+                <div className="col-md-offset-1 col-md-10">
+
+                    <div className="col-md-6">
+                        <Doughnut
+                            data = {this.state.Data}
+                            options = {{ maintainAspectRatio: true,
+                                legend: {
+                                    position: 'left',
+                                    labels: {
+                                        boxWidth: 10
+                                    }
+                                }}} />
+                    </div>
+
+                    <div className="col-md-6">
+                        <Bar
+                            data = {this.state.Data}
+                            width={150}
+                            height={300}
+                            options = {{
+                                maintainAspectRatio: false,
+                                legend: {
+                                    position: 'bottom',
+                                }
+                            }} />
+                    </div>
+                </div>
+                <div className="col-md-offset-1 col-md-10">
+                    <div className="col-md-6">
+                        <Pie
+                            width={150}
+                            height={300}
+                            data = {this.state.Data}
+                            options = {{
+                                maintainAspectRatio: false,
+                                legend: {
+                                    position: 'left',
+                                    labels: {
+                                        boxWidth: 10
+                                    }
+                                }
+                            }} />
+                    </div>
+
+                    <div className="col-md-6">
+                        <Line
+                            width={150}
+                            height={300}
+                            data = {this.state.Data}
+                            options = {{
+                                maintainAspectRatio: false,
+                                legend: {
+                                    position: 'bottom',
+                                }
+                            }} />
+                    </div>
+                </div>
             </div>
         );
     }

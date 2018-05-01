@@ -14,23 +14,155 @@ class EnterTickets extends Component{
         super(props);
 
         this.state = {
-            movie_schedule_id: "700ef24c-b1f6-47e0-9686-883af1938b0a",
+            movie_schedule_id: this.props.schedule.movie_schedule_id,
             total_price:1,
             tax:'',
             no_of_seats:0,
             status:"A",
-            price: 10
+            price: this.props.schedule.price,
+            card: '',
+            name: '',
+            expiration: '',
+            cvv: '',
+            ticketerror: '',
+            ticketmessage: '',
+            carderror: '',
+            cardmessage: '',
+            expirationerror: '',
+            expirationmessage: '',
+            nameerror: '',
+            namemessage: '',
+            cvverror: '',
+            cvvmessage: '',
+            ticket2error: '',
+            ticket2message: ''
 
         }
     }
 
-    handleBuy = (userdata) => {
-     API.bookMovie(userdata.payload)
+    handleAuthorize = (userdata) => {
+        this.setState({
+            ticketerror: '',
+            ticketmessage: '',
+            type: true
+        }, () => this.handleTickets(userdata));
     }
+    handleTickets = (userdata) => {
+
+        if (this.state.no_of_seats == 0 || this.state.no_of_seats > 60) {
+            this.setState({
+                ticketmessage: 'Invalid no. of seats or You have demanded more seats than available',
+                ticketerror: 1,
+                type: true
+            }, () => this.doPayment(userdata));
+        }
+        else {
+            this.doPayment(userdata);
+        }
+    }
+
+
+    doPayment = (userdata) => {
+        API.bookMovie(userdata.payload)
+    }
+
+    handleBuy = (userdata) => {
+        this.setState({
+            carderror: '',
+            cardmessage: '',
+            expirationerror: '',
+            expirationmessage: '',
+            nameerror: '',
+            namemessage: '',
+            cvverror: '',
+            cvvmessage: '',
+            ticket2error: '',
+            ticket2message: '',
+            type: true
+        }, () => this.handleCard(userdata));
+    }
+
+    handleCard = (userdata) => {
+
+        if (this.state.card.length != 12 ) {
+            this.setState({
+                cardmessage: 'Invalid card no',
+                carderror: 1,
+                type: true
+            }, () => this.handleExpiration(userdata));
+        }
+        else {
+            this.handleExpiration(userdata);
+        }
+    }
+
+    handleExpiration = (userdata) => {
+
+        if ( this.state.expiration.length != 4) {
+            this.setState({
+                expirationmessage: 'Invalid expiration format',
+                expirationerror: 1,
+                type: true
+            }, () => this.handleName(userdata));
+        }
+        else {
+            this.handleName(userdata);
+        }
+    }
+
+    handleName = (userdata) => {
+
+        if (this.state.name.length == 0 ) {
+            this.setState({
+                namemessage: 'Name cannot be empty',
+                nameerror: 1,
+                type: true
+            }, () => this.handleCVV(userdata));
+        }
+        else {
+            this.handleCVV(userdata);
+        }
+    }
+
+    handleCVV = (userdata) => {
+
+        if (this.state.cvv.length != 3 ) {
+            this.setState({
+                cvvmessage: 'Invalid cvv',
+                cvverror: 1,
+                type: true
+            }, () => this.handleTickets2(userdata));
+        }
+        else {
+            this.handleTickets2(userdata);
+        }
+    }
+
+    handleTickets2 = (userdata) => {
+
+        if (this.state.no_of_seats == 0 || this.state.no_of_seats > 60) {
+            this.setState({
+                ticket2message: 'Invalid no. of seats or You have demanded more seats than available',
+                ticket2error: 1,
+                type: true
+            }, () => this.doPayment2(userdata));
+        }
+        else {
+            this.doPayment2(userdata);
+        }
+    }
+
+    doPayment2 = (userdata) => {
+        if(this.state.carderror != 1 && this.state.expirationerror != 1 && this.state.nameerror != 1 && this.state.cvverror != 1 && this.state.ticket2error != 1) {
+            API.bookMovie(userdata.payload)
+        }
+    }
+
+
 
     render(){
         return(
-            <div className="site-wrep signin vipsignin">
+            <div className="site-wrep signin vipsignin" style={{ }} >
                 <div>
                     <header id="registration-header" class="registration-header" role="banner">
                         <nav  className="nav-bar">
@@ -53,7 +185,7 @@ class EnterTickets extends Component{
                     </header>
                 </div>
 
-                <div className="open-form">
+                <div className="open-form" style={{ minHeight: '825px', marginTop: '25px', paddingBottom: '50px'}}>
                     <div className="sub-panel">
                         <p className="join-header">FANDANGO<span class="page-header-emphasis">VIP</span>
 
@@ -66,9 +198,12 @@ class EnterTickets extends Component{
 
                         <Link to="">Select a new Showtime</Link>
                         <hr />
-                        Price: $ 11
+                        Price: $ {this.state.price}
                         <hr />
                         <div>
+                            CARD NO: 9999 4444 2222 1111<br />
+
+
                             Tickets:
                             <input
                                 type="number"
@@ -83,9 +218,102 @@ class EnterTickets extends Component{
                                     });
                                 }}
                             />
+                            <Message message={this.state.ticketmessage} />
+
+                            <br />
+
+                            <button type="button"  className="btn" style={{backgroundColor: '#F15500',color: 'white'}}
+                                                onClick={ () => this.handleAuthorize(this.props.doneBooking(this.state))}>USE THIS CARD</button>
+
 
                         </div>
                         <hr />
+
+                        <div>
+                            USE ANOTHER CARD<br />
+
+                            Tickets:
+                            <input
+                                type="number"
+                                style={{ width:'50px', marginLeft: '42%'}}
+                                onChange={(event) => {
+                                    this.setState({
+                                        no_of_seats: event.target.value,
+                                        total_price: this.state.price * event.target.value,
+                                        tax: 0.09 * (this.state.price * event.target.value) ,
+
+                                        type: true
+                                    });
+                                }}
+                            />
+                            <Message message={this.state.ticket2message} />
+
+
+                            <label for="CardnumberBox" >CARD NUMBER:</label>
+                            <input
+                                type="number"
+                                id="CardnumberBox"
+                                required
+                                autoFocus
+                                onChange={(event) => {
+                                    this.setState({
+                                        card: event.target.value,
+                                        type: true
+                                    });
+                                }}
+                            />
+                            <Message message={this.state.cardmessage} />
+
+                            <label for="ExpirationBox" >EXPIRATION DATE:(mmyy format) </label>
+                            <input
+                                type="number"
+                                id="ExpirationBox"
+                                required
+                                autoFocus
+                                onChange={(event) => {
+                                    this.setState({
+                                        expiration: event.target.value,
+                                        type: true
+                                    });
+                                }}
+                            />
+                            <Message message={this.state.expirationmessage} />
+
+
+                            <label for="NameBox" >NAME ON THE CARD: </label>
+                            <input
+                                type="text"
+                                id="NameBox"
+                                required
+                                autoFocus
+                                onChange={(event) => {
+                                    this.setState({
+                                        name: event.target.value,
+                                        type: true
+                                    });
+                                }}
+                            />
+                            <Message message={this.state.namemessage} />
+
+
+                            <label for="ZipBox" >CVV: </label>
+                            <input
+                                type="number"
+                                id="ZipBox"
+                                required
+                                autoFocus
+                                onChange={(event) => {
+                                    this.setState({
+                                        cvv: event.target.value,
+                                        type: true
+                                    });
+                                }}
+                            />
+                            <Message message={this.state.cvvmessage} />
+
+                            <br />
+
+                        </div>
 
                         <button
                             type="button"
@@ -106,7 +334,8 @@ class EnterTickets extends Component{
 
 function mapStateToProps(state) {
     return {
-        booking: state.doneBooking
+        booking: state.doneBooking,
+        schedule: state.selectedSchedule
     }
 }
 function matchDispatchToProps(dispatch) {

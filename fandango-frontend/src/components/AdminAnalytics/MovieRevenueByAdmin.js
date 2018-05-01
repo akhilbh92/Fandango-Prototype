@@ -9,6 +9,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+/*
+import Navigation from '../Admin/Navigation';
+*/
+import NavBar from "../Admin/Navigation";
+
 class MovieRevenueByAdmin extends Component {
 
     notify = (message) => toast(message);
@@ -62,8 +67,9 @@ class MovieRevenueByAdmin extends Component {
         }]
 
         return (
-            <div>
+            <div className="admin-sub-header">
                 <CommonHeader />
+                <NavBar />
                 <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">

@@ -7,6 +7,8 @@ import { loginUser } from "../../actions";
 import * as API from './../../api/apicall_for_users';
 import Message from '../Message/Message'
 import './login.css'
+import {log1} from "../../App";
+
 
 class Login extends Component {
 
@@ -26,6 +28,7 @@ class Login extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleLogs = this.handleLogs.bind(this);
     }
 
     handleSubmit = (userdata) => {
@@ -71,7 +74,8 @@ class Login extends Component {
         if (this.state.emailerror != 1 && this.state.passworderror != 1) {
             API.doLogin(userdata)
                 .then((status) => {
-                    if (status.meta.message == "login successful") {
+                    console.log("status :",status);
+                    if (status !== undefined && status.meta !== undefined && status.meta.message == "login successful") {
                         this.props.loginUser(status.data);
                         console.log("YOu need:" + this.props.user.role);
                         console.log("YOu also need:" + this.props.user.userId);
@@ -92,9 +96,13 @@ class Login extends Component {
         };
     }
 
+    handleLogs() {
+        log1.info('{"event":"page_click","page_name":"Login","count":"1"}');
+    }
+
     render() {
         return (
-            <div className="site-wrep signin vipsignin">
+            <div className="site-wrep signin vipsignin"  onClick={this.handleLogs}>
                 <div>
                     <header id="registration-header" className="registration-header" role="banner">
                         <nav className="nav-bar">

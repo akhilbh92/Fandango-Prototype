@@ -64,7 +64,8 @@ module.exports = {
             const profile = await usermodel.findAll({
                 where:{
                     userId:userId,
-                }
+                },
+                attributes: { exclude: ['password_hash','is_archive','createdAt','updatedAt'] }
             });
             cb(null,profile[0])
         }catch (e) {
@@ -101,6 +102,22 @@ module.exports = {
             cb(null,"User Profile Updated Successfully");
         }catch (e) {
             cb(null,e);
+        }
+    },
+    getPurchaseHistory: function(body,cb){
+        let sql2 = "select no_of_seats,total_price,movie_name,photos,hall_name from billings AS bill " +
+            "INNER JOIN movie_schedules as schedule on bill.movie_schedule_id=schedule.id " +
+            "INNER JOIN halls on schedule.hall_id=halls.id " +
+            "INNER JOIN movies on schedule.movie_id=movies.id where bill.user_id=\'<userId>\'";
+
+        sql2 = sql2.replace('<userId>', body["userId"]);
+
+        try{
+            usermodel.sequelize.query(sql2).spread((results, metadata) => {
+                cb(null,results);
+            });
+        }catch (err) {
+            cb(err,null);
         }
     }
 };

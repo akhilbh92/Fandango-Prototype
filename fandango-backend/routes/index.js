@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-
 var addMovie = require('./admin/addMovie');
 var getMovie = require('./admin/getMovie');
 var addHall = require('./admin/addHall');
@@ -29,6 +28,7 @@ var topTenHallByTickets = require('./admin/topTenHallByTickets');
 var MovieRevenueByAdmin = require('./admin/movieRevenueByAdmin');
 var movieReviewGraph = require('./admin/movieReviewGraph');
 var traceDiagramByAdmin = require('./admin/traceDiagramByAdmin');
+var getUsers = require('./admin/getUsers');
 
 //acquiring user logic
 const Signup = require('./users/sign_up');
@@ -42,6 +42,7 @@ const addRating = require('./ratings/addrating');
 const getRatings = require('./ratings/getRatings');
 const getmovieschedulebydate = require('./movieschedule/getmovieschedulebydate');
 const bookMovie = require('./Billing/bookMovie');
+const getPurchaseHistory = require('./users/getPurchaseHistory');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -49,132 +50,79 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/addMovie', function (req, res, next) {
-  console.log('ADD MOVIE API');
   addMovie.addMovieRouterFn(req, res, next);
 });
-
 router.post('/getMovies', function (req, res, next) {
-  console.log('GET MOVIES API');
   getMovie.getMovieRouterFn(req, res, next);
 });
 
+router.get('/getUsers', function (req, res, next) {
+    console.log('GET All Users API');
+    getUsers.getUsersRouterFn(req, res, next);
+});
+
+
 router.post('/addHall', function (req, res, next) {
-  console.log('ADD HALL API');
   addHall.addHallRouterFn(req, res, next);
 });
-
 router.post('/getHalls', function (req, res, next) {
-  console.log('GET HALLS API');
   getHall.getHallRouterFn(req, res, next);
 });
-
 router.post('/addScreen', function (req, res, next) {
-  console.log('ADD SCREEN API');
   addScreen.addScreenRouterFn(req, res, next);
 });
-
 router.post('/getScreens', function (req, res, next) {
-  console.log('GET SCREENS API');
   getScreen.getScreenRouterFn(req, res, next);
 });
-
 router.post('/editMovie', function (req, res, next) {
-  console.log('EDIT MOVIE API');
   editMovie.editMovieRouterFn(req, res, next);
 });
-
-router.post('/deleteMovie', function (req, res, next) {
-  console.log('DELETE MOVIE API');
-  deleteMovie.deleteMovieRouterFn(req, res, next);
-});
-
 router.post('/editHall', function (req, res, next) {
-  console.log('EDIT HALL API');
   editHall.editHallRouterFn(req, res, next);
 });
-
-router.post('/deleteHall', function (req, res, next) {
-  console.log('DELETE HALL API');
-  deleteHall.deleteHallRouterFn(req, res, next);
-});
-
 router.post('/editScreen', function (req, res, next) {
-  console.log('EDIT SCREEN API');
   editScreen.editScreenRouterFn(req, res, next);
 });
-
-router.post('/deleteScreen', function (req, res, next) {
-  console.log('DELETE SCREEN API');
-  deleteScreen.deleteScreenRouterFn(req, res, next);
-});
-
 router.post('/getUserByEmail', function (req, res, next) {
-  console.log('GET USER BY EMAIL API');
   getUserByEmail.getUserByEmailRouterFn(req, res, next);
 });
-
-
 router.post('/getLimitedMovie', function (req, res, next) {
-  console.log('GET Limited MOVIES API');
   getLimitedMovies.getLimitedMovieRouterFn(req, res, next);
 });
-
 router.post('/getRevenueByMovie', function (req, res, next) {
-  console.log('GET Revenue by MOVIES API');
   getRevenueByMovie.getRevenueByMovieRouterFn(req, res, next);
 });
-
 router.post('/getCityWiseRevenueByMovie', function (req, res, next) {
-    console.log('GET City Wise Revenue by MOVIE');
     cityWiseMovieRevenue.cityWiseMovieRevenueRouterFn(req, res, next);
 });
-
 router.get('/topTenMoviesByRevenue', function (req, res, next) {
-    console.log('GET Top TEN movies by Revenue API');
     topTenMoviesByRevenue.topTenMoviesByRevenueRouterFn(req, res, next);
 });
-
 router.get('/topTenHallByTickets', function (req, res, next) {
-    console.log('GET Top TEN Halls by no of tickets sold Last Month API');
     topTenHallByTickets.topTenHallByTicketsRouterFn(req, res, next);
 });
-
 router.post('/movierevenuebyadmin', function (req, res, next) {
-    console.log('GET Revenue by MOVIES API by fandango admin');
     MovieRevenueByAdmin.MovieRevenueByAdminRouterFn(req, res, next);
 });
-
-
 router.get('/moviereviewgraph', function (req, res, next) {
-    console.log('GET Movies by Reviews API by fandango admin');
     movieReviewGraph.movieReviewGraphRouterFn(req, res, next);
 });
-
 router.post('/tracediagram', function (req, res, next) {
     console.log('GET trace diagram for a user by fandango admin');
     traceDiagramByAdmin.traceDiagramByAdminRouterFn(req, res, next);
 });
-
 router.post('/addMovieSchedule', function (req, res, next) {
-  console.log('ADD MOVIE SCHEDULE API');
   addMovieSchedule.addMovieScheduleRouterFn(req, res, next);
 });
-
 router.post('/getMovieSchedules', function (req, res, next) {
-  console.log('GET MOVIE SCHEDULES API');
   getMovieSchedule.getMovieScheduleRouterFn(req, res, next);
 });
-
 router.delete('/deleteMovieSchedule', function (req, res, next) {
-  console.log('Delete MOVIE SCHEDULES API');
   deleteMovieSchedule.deleteMovieScheduleRouterFn(req, res, next);
 });
-
 router.post('/cancelBooking', function (req,res,next) {
-  console.log('CANCEL BOOKING API');
   cancelBooking.cancelBookingRouterFn(req,res,next);
 });
-
 router.post('/searchBooking', function (req,res,next) {
   console.log('CANCEL BOOKING API');
   searchBooking.searchBookingRouterFn(req,res,next);
@@ -238,6 +186,10 @@ router.post('/getmovieschedulebydate', function (req,res,next) {
 router.post('/bookMovie', function (req,res,next) {
     console.log('BOOOK MOVIE API');
     bookMovie.bookMovieRouterFn(req,res,next)
+});
+
+router.post('/getPurchaseHistory', function (req,res,next) {
+    getPurchaseHistory.getPurchaseHistoryRouterFn(req,res,next)
 });
 
 module.exports = router;

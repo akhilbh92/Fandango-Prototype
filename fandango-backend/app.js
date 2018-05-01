@@ -89,9 +89,7 @@ var methodOverride = require('method-override');
 var fs = require('fs');
 var winston = require( 'winston' );
 var read_by_line = require('readline');
-
 var userClicks = require('./routes/admin/userclicks');
-
 // React Server URL
 var reactServerURL = 'http://localhost:3000';
 

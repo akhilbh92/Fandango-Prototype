@@ -188,15 +188,11 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0px;
 }
 
-.btn:hover {
+.sub-genre:hover {
     background-color: #32b4ff !important; ;
     color: white !important;
 }
 
-.btn:active {
-    background-color: #32b4ff !important; ;
-    color: white !important;
-}
 
 .movie-link{
     text-decoration: underline;

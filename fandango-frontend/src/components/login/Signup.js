@@ -5,6 +5,7 @@ import './login.css';
 import { ToastContainer, toast } from 'react-toastify';
 import * as API from  './../../api/apicall_for_users';
 import Message from '../Message/Message'
+import {log1} from "../../App";
 
 
 class Signup extends Component{
@@ -30,7 +31,11 @@ class Signup extends Component{
         }
 
         this.handleSignUp = this.handleSignUp.bind(this);
+        this.handleLogs = this.handleLogs.bind(this);
+    }
 
+    handleLogs() {
+        log1.info('{"event":"page_click","page_name":"Signup","count":"1"}');
     }
 
     handleSignUp = (userdata) => {
@@ -160,7 +165,7 @@ class Signup extends Component{
 
     render(){
         return(
-            <div className="site-wrep signin vipsignin">
+            <div className="site-wrep signin vipsignin" onClick={this.handleLogs}>
                 <ToastContainer />
                 <div>
                     <header id="registration-header" className="registration-header" role="banner">

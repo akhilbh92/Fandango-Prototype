@@ -3,6 +3,7 @@ import Search from './Search';
 import NavBar from './Navigation';
 import HallForm from './HallForm';
 import CommonHeader from '../header/CommonHeader';
+import '../MovieHall/subheader.css';
 
 class AddHallForm extends Component {
     constructor(props) {

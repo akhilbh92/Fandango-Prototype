@@ -5,6 +5,7 @@ import { Alert, Button } from 'react-bootstrap';
 import * as API from '../../api/apicall_for_users';
 import { ToastContainer, toast } from 'react-toastify';
 import emailRegex from '../Helper/EmailRegex';
+import '../MovieHall/subheader.css';
 
 class AddUser extends Component {
 

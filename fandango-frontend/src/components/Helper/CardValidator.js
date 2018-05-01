@@ -1,7 +1,6 @@
 var valid = require('card-validator');
 
 export const validateCardNumber = (creditCardNumber) => {
-    console.log("creditCardNumber :",creditCardNumber);
     if (!!creditCardNumber) {
         return valid.number(creditCardNumber).isValid;
     } else {

@@ -1,7 +1,12 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Bar,Pie} from 'react-chartjs-2';
+import {Bar,Pie,Line} from 'react-chartjs-2';
 import * as API from  '../../api/API';
+import CommonHeader from '../header/CommonHeader';
+import { withRouter } from 'react-router-dom';
+import NavBar from '../Admin/Navigation';
+import '../Admin/admin.css';
+import '../MovieHall/subheader.css';
 
 class ClicksPerPage extends Component{
     constructor(props){
@@ -35,7 +40,7 @@ class ClicksPerPage extends Component{
                             labels: page_names,
                             datasets:[
                                 {
-                                    label:'Total Clicks Per Page Dashboard',
+                                    label:'Dashboard for Total Clicks Per Page',
                                     data: total_clicks,
                                     backgroundColor:[
                                         'rgba(255,105,145,0.6)',
@@ -97,7 +102,7 @@ class ClicksPerPage extends Component{
                             labels: section_names,
                             datasets:[
                                 {
-                                    label:'Capturing Genres which is less seen',
+                                    label:'DashBoard for Capturing which sections are less seen',
                                     data: total_clicks_section,
                                     backgroundColor:[
                                         'rgba(255,105,145,0.6)',
@@ -118,23 +123,63 @@ class ClicksPerPage extends Component{
     }
 
     render(){
-        return(<div>
-                <div>
-                <Pie
-                    data = {this.state.PageClicksData}
-                    options = {{ maintainAspectRatio: true }} />
-            </div>
-            <div>
-                <Pie
-                    data = {this.state.MovieClicksData}
-                    options = {{ maintainAspectRatio: true }} />
-            </div>
-            <div>
-                <Bar
-                    Label = "Capturing Genres which is less seen"
-                    data = {this.state.SectionClicksData}
-                    options = {{ maintainAspectRatio: true }} />
-            </div>
+        return(<div className="admin-sub-header">
+                <CommonHeader />
+                <NavBar/>
+
+                <div className=" col-md-12 page-header-container">
+                    <div className="col-md-offset-4 col-md-8 pd-left-0">
+                        <h2 className="schedule-page-header">Graph for <span className="page-header-emphasis">User Clicks Per Page</span></h2>
+                    </div>
+                </div>
+
+                <div className="col-md-offset-4 col-md-4 col-md-offset-4">
+                    <Bar
+                        data = {this.state.PageClicksData}
+                        width={150}
+                        height={300}
+                        options = {{
+                            maintainAspectRatio: false,
+                            legend: {
+                                position: 'bottom',
+                            }
+                        }} />
+                </div>
+                <div className="col-md-offset-1 col-md-10">
+                    <div className=" col-md-12 page-header-container">
+                        <div className="col-md-offset-2 col-md-10 pd-left-0">
+                            <h2 className="schedule-page-header">Graphs for <span className="page-header-emphasis"> Movie Clicks, Less Seen Section</span></h2>
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <Pie
+                            width={150}
+                            height={300}
+                            data = {this.state.MovieClicksData}
+                            options = {{
+                                maintainAspectRatio: false,
+                                legend: {
+                                    position: 'left',
+                                    labels: {
+                                        boxWidth: 10
+                                    }
+                                }
+                            }} />
+                    </div>
+
+                    <div className="col-md-6">
+                        <Line
+                            width={150}
+                            height={300}
+                            data = {this.state.SectionClicksData}
+                            options = {{
+                                maintainAspectRatio: false,
+                                legend: {
+                                    position: 'bottom',
+                                }
+                            }} />
+                    </div>
+                </div>
             </div>
         );
     }
