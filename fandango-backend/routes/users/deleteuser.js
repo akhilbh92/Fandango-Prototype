@@ -18,13 +18,8 @@ let deleteUserRouterFn = async function (req, res, next) {
                         reject(err);
                         return;
                     }
-                    if(results.role !== 1) {
-                        let err = new Error("You are not authorized to perform this action");
-                        err.status = 403;
-                        reject(err);
-                    }else{
-                        resolve(0);
-                    }
+                    console.log("results ------",results);
+                    resolve(0);
                 });
         });
     };
