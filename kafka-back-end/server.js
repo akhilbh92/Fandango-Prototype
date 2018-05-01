@@ -15,6 +15,7 @@ var editMovieHandler = require('./services/movies/editMovie');
 var addHallHandler = require('./services/halls/addHall');
 var getHallsHandler = require('./services/halls/getHalls');
 var editHallHandler = require('./services/halls/editHall');
+var deleteHallHandler = require('./services/halls/deleteHall');
 var addScreenHandler = require('./services/screens/addScreen');
 var getScreensHandler = require('./services/screens/getScreens');
 var editScreenHandler = require('./services/screens/editScreen');
@@ -107,6 +108,10 @@ consumer.on('message', (message) => {
         case 'editHall':
             handler = editHallHandler;
             break;
+        case 'deleteHall':
+            console.log('DELETE HALL HANDLER');
+            handler = deleteHallHandler;
+            break;
         case 'editScreen':
             handler = editScreenHandler;
             break;
@@ -156,6 +161,7 @@ consumer.on('message', (message) => {
             handler = getAllUsers;
             break;
         default:
+        console.log('DEFAULT HANDLER');
             userService[data.data.key](data.data.value, function (err, res) {
                 if(err){
                     res = err;
@@ -187,7 +193,7 @@ consumer.on('message', (message) => {
     }
 
     handler.handle_request(data.data.value, function (err, res) {
-        console.log('after handle: %o', res);
+        // console.log('after handle: %o', res);
         var payloads = [{
             topic: data.replyTo,
             messages: JSON.stringify({

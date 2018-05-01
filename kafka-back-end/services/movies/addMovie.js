@@ -13,7 +13,8 @@ function handle_request(msg, callback){
         cast: msg.cast,
         movie_length: msg.movieLength,
         release_date: msg.releaseDate,
-        genres: msg.genres
+        genres: msg.genres,
+        is_archive: msg.is_archive
         });
     }).then((addedMovie) => {
         let result= {};

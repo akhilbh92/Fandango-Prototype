@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import * as API from '../../api/API';
 import { ToastContainer, toast } from 'react-toastify';
+import emailRegex from '../Helper/EmailRegex';
 
 
 class UserForm extends Component {
@@ -20,7 +21,9 @@ class UserForm extends Component {
             state: '',
             zipcode: '',
             phoneNumber: '',
-            hallId: ''
+            hallId: '',
+            isDeleted: false,
+            emailValidation: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -41,21 +44,56 @@ class UserForm extends Component {
                 phoneNumber: res.phone_number,
                 hallId: res.hall_id
             });
-            // document.getElementById('form-header').innerHTML = 'Update User Profile';
-            // document.getElementById('submit-user').innerHTML = 'Update User';
-            // document.getElementById('response-message').innerHTML = 'User Profile updated successfully';
         }
     }
 
+    validateField(fieldType, value){
+        let fieldPromise = new Promise(function(resolve, reject){
+            let pattern;
+            switch (fieldType){
+                case 'email':
+                    pattern = emailRegex;
+                    break;
+            }
+            if(pattern.test(value)) {
+                resolve(true);
+            } else {
+                reject(false);
+            }
+        });
+        return fieldPromise;
+    }
+
     handleSubmit(){
+        if(this.state.role === ''|| this.state.firstName === '' || this.state.lastName === '' || this.state.email === '' || this.state.city === '' || this.state.zipcode === '') {
+            this.notify('Please fill all mandatory fields');
+            return;
+        } else if(!this.state.emailValidation){
+            this.notify('Invalid Email Input');
+            return;
+        }
+        
+
+        let updatedUserDetails = {
+            user_id : this.state.userId, 
+            email: this.props.email, 
+            role: this.state.role, 
+            first_name: this.state.firstName, 
+            last_name: this.state.lastName, 
+            address: this.state.address, 
+            city: this.state.city, 
+            state: this.state.state, 
+            zipcode: this.state.zipcode, 
+            phone_number: this.state.phoneNumber, 
+            hall_id: (this.state.hallId ? this.state.hallId: null)
+        }
+
         if(this.props.userDetails) {
-        API.updateProfile(this.state.userId, this.props.email, this.state.role, this.state.firstName, this.state.lastName, 
-            this.state.address, this.state.city, this.state.state, this.state.zipcode, this.state.phoneNumber, 
-            this.state.hallId). then((result) => {
-                this.notify('User Profile updated successfully');
-            }).catch((err)=>{
-                this.notify(err);
-            });
+            API.updateUserDetails(updatedUserDetails). then((result) => {
+                    this.notify('User Profile updated successfully');
+                }).catch((err)=>{
+                    this.notify(err);
+                });
         } 
     }
 
@@ -67,9 +105,9 @@ class UserForm extends Component {
                 <br /><br />
                 <form> 
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="role"
-                            className="col-sm-2 col-form-label label-color"><strong> Role </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Role </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="role"
@@ -88,9 +126,9 @@ class UserForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="firstName"
-                            className="col-sm-2 col-form-label label-color"><strong> First Name </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> First Name </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="firstName"
@@ -109,9 +147,9 @@ class UserForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="lastName"
-                            className="col-sm-2 col-form-label label-color"><strong> Last Name </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Last Name </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="lastName"
@@ -130,9 +168,9 @@ class UserForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="email"
-                            className="col-sm-2 col-form-label label-color"><strong> Email </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Email </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="email"
@@ -142,7 +180,17 @@ class UserForm extends Component {
                                 onChange={(event) => {
                                     this.setState({
                                         email: event.target.value
-                                    });
+                                    }),this.validateField('email', event.target.value)
+                                    .then((res)=>{
+                                        this.setState({
+                                            emailValidation: res
+                                        })
+                                    })
+                                    .catch((err) => {
+                                        this.setState({
+                                            emailValidation: err
+                                        })
+                                    })
                                 }}
                                 >
                             </input>
@@ -172,9 +220,9 @@ class UserForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="city"
-                            className="col-sm-2 col-form-label label-color"><strong> City </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> City </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="city"
@@ -214,9 +262,9 @@ class UserForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="zipcode"
-                            className="col-sm-2 col-form-label label-color"><strong> Zipcode </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Zipcode </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="zipcode"

@@ -28,6 +28,9 @@ const Movie =  db.sequelize.define('movie', {
     },
     genres: {
         type: Sequelize.STRING
+    },
+    is_archive: {
+        type: Sequelize.BOOLEAN
     }
 });
 

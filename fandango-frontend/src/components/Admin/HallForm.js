@@ -5,6 +5,7 @@ import AddScreenForm from './AddScreenForm';
 import { ToastContainer, toast } from 'react-toastify';
 import stateRegex from '../Helper/StateRegex';
 import zipcodeRegex from '../Helper/ZipcodeRegex';
+import  { Redirect } from 'react-router-dom';
 
 class HallForm extends Component {
     notify = (msg) => toast(msg);
@@ -23,19 +24,22 @@ class HallForm extends Component {
             screensArray: [],
             isHallSaved: false,
             stateValidation: false,
-            zipcodeValidation: false
+            zipcodeValidation: false,
+            isDeleted: false,
+            deletedScreens: []
           };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addScreen = this.addScreen.bind(this);
-        // this.handleChildUnmount = this.handleChildUnmount.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleChildUnmount = this.handleChildUnmount.bind(this);
     }
 
     componentDidMount(){
-        console.log(this.props.allScreens);
         if (this.props.hallId){
             let allScreens = this.props.allScreens;
             document.getElementById('submit-button').innerHTML = 'Update Hall';
             document.getElementById('form-header').innerHTML = 'Edit Hall Details';
+            document.getElementById('dlt-btn').style.display = 'block';
             API.getHallById(this.props.hallId).then((result)=> {
                 console.log((result.data)[0]);
                 let res = (result.data)[0];
@@ -51,8 +55,9 @@ class HallForm extends Component {
                     screensAdded: allScreens.length,
                     screensArray: allScreens.map((screen, index)=> {
                       return  <AddScreenForm key={index} 
-                        unmountMe={this.handleChildUnmount(screen.screen_numd-1).bind(this)} 
-                        hallId = {this.state.hallId}
+                        unmountMe={this.handleChildUnmount} 
+                        screenId={screen.id}
+                        hallId = {this.props.hallId}
                         screenType = {screen.screen_type}
                         totalSeats = {screen.total_seats}
                         screenNumber={screen.screen_num}
@@ -65,30 +70,63 @@ class HallForm extends Component {
 
     addScreen() {
         const screensArray = this.state.screensArray;
+        let deletedScreens = this.state.deletedScreens;
+
         if(this.state.totalScreens < this.state.screensAdded + 1){
             this.notify('Screen Number exceeded the Max No. of Screens in that Hall');
             return;
         }
-        this.setState({
-            screensAdded: this.state.screensAdded + 1,
-            screensArray: screensArray.concat(
-                    <AddScreenForm key={this.state.screensAdded} 
-                        unmountMe={this.handleChildUnmount(this.state.screensAdded-1).bind(this)} 
-                        hallId = {this.state.hallId}
-                        screenNumber={this.state.screensAdded + 1}
-                    />
-                )
-        });
+
+        if(deletedScreens.length > 0){
+            let screenNum =  Math.min(...deletedScreens);
+            // console.log(`Min Screen Number: ${screenNum}`);
+            let index = deletedScreens.indexOf(screenNum);
+            deletedScreens.splice(index, 1);
+            // console.log(`Index of Min: ${deletedScreens}`);
+            this.setState({
+                deletedScreens: deletedScreens,
+                screensAdded: this.state.screensAdded + 1,
+                screensArray: screensArray.concat(
+                        <AddScreenForm key={this.state.screensAdded} 
+                            unmountMe={this.handleChildUnmount} 
+                            hallId={this.state.hallId}
+                            screenNumber={screenNum+1}
+                        />
+                    )
+            });
+        } else {
+            this.setState({
+                screensAdded: this.state.screensAdded + 1,
+                screensArray: screensArray.concat(
+                        <AddScreenForm key={this.state.screensAdded} 
+                            unmountMe={this.handleChildUnmount} 
+                            hallId={this.state.hallId}
+                            screenNumber={this.state.screensAdded + 1}
+                        />
+                    )
+            });
+        }
     }
 
-    handleChildUnmount(index){
-        return((event)=> {
-            const screensArray = this.state.screensArray;
+    handleChildUnmount(deletedScreen){
+        let screensArray = this.state.screensArray;
+        let deletedScreens = this.state.deletedScreens;
+        screensArray = screensArray.filter((screen, index)=> {
+            return index != deletedScreen
+        });
+        if(this.state.screensAdded === 1){
+            this.setState({
+                screensAdded: 0,
+                deletedScreens: [],
+                screensArray: []
+            })
+        } else {
             this.setState({
                 screensAdded: this.state.screensAdded - 1,
-                screensArray: screensArray.splice(index, 1)
+                deletedScreens: deletedScreens.concat(deletedScreen),
+                screensArray: screensArray
             });
-        })
+        }
     }
 
     validateField(fieldType, value){
@@ -111,23 +149,43 @@ class HallForm extends Component {
         return fieldPromise;
     }
 
+    handleDelete(){
+        API.editHall(this.props.hallId,this.state.hallName, this.state.street, this.state.city, this.state.state, this.state.zipcode, 
+            this.state.totalScreen, true).then((result)=>{
+            this.notify('Hall deleted successfully');
+        }).then((res)=>{
+            setTimeout(()=>{
+                this.setState({
+                    isDeleted: true
+                })
+            }, 2000);
+        })
+    }
+
     handleSubmit(event){
-        if(!this.state.stateValidation){
+        if(this.state.hallName === ''|| this.state.city === '' || this.state.zipcode === '' || this.state.totalScreens === '') {
+            this.notify('Please fill all mandatory fields');
+            return;
+        } else if(!this.state.stateValidation){
             this.notify('Invalid State Input');
             return;
         } else if(!this.state.zipcodeValidation){
             this.notify('Invalid Zipcode Input');
             return;
-        }
+        }  else  if(typeof(this.state.totalScreens) != 'number'){
+            this.notify('Total No. of screens must be a number');
+            return;
+        } 
+        
 
         if(this.props.hallId){
             API.editHall(this.props.hallId,this.state.hallName, this.state.street, this.state.city, this.state.state, this.state.zipcode, 
-                this.state.totalScreens).then((data)=> {
+                this.state.totalScreens, false).then((data)=> {
                     this.notify('Hall updated successfully');
                 });
         } else {
             API.addHall(this.state.hallName, this.state.street, this.state.city, this.state.state, this.state.zipcode, 
-                this.state.totalScreens).then((result)=> {
+                this.state.totalScreens, false).then((result)=> {
                     this.setState({
                         hallId: result.data.data.id,
                         isHallSaved : true
@@ -140,6 +198,11 @@ class HallForm extends Component {
 
 
     render(){
+        console.log(`Deleted Screens: ${this.state.deletedScreens}`);
+        if(this.state.isDeleted){
+            return <Redirect to='/admin'  />
+        } 
+
         return (
             <div id="hallForm">  
             <br />
@@ -147,10 +210,10 @@ class HallForm extends Component {
             <form> 
             <br /><br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="hallName"
-                            className="col-sm-2 col-form-label label-color"><strong> Hall Name </strong></label>
-                        <div className={'col-sm-9' }>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Hall Name </strong></label>
+                        <div className={'col-sm-7' }>
                             <input className="form-control"
                                 id="hallName"
                                 name="hallName"
@@ -189,9 +252,9 @@ class HallForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="city"
-                            className="col-sm-2 col-form-label label-color"><strong> City  </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> City  </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="city"
@@ -241,9 +304,9 @@ class HallForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="zipcode"
-                            className="col-sm-2 col-form-label label-color"><strong> ZipCode  </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> ZipCode  </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="zipcode"
@@ -272,9 +335,9 @@ class HallForm extends Component {
                 </div>
                 <br />
                 <div className= "admin-forms">
-                    <div className="form-group row">
+                    <div className="admin form-group required row">
                         <label htmlFor="totalScreens"
-                            className="col-sm-2 col-form-label label-color"><strong> Total No. of Screens  </strong></label>
+                            className="col-sm-2 col-form-label control-label label-color"><strong> Total No. of Screens  </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
                                 id="totalScreens"
@@ -294,7 +357,8 @@ class HallForm extends Component {
                 <br />
                 { this.state.isHallSaved && 
                     <div> 
-                        {this.state.screensArray} 
+                        {/* {this.state.deletedScreen ? this.state.screensArray : this.state.screensArray.splice(this.state.deletedScreen, 1)}  */}
+                        {this.state.screensArray}
                         <br />
                         <div className="col-sm-1"> </div>
                         <div className="form-buttons"> 
@@ -304,8 +368,11 @@ class HallForm extends Component {
                         </div>  
                     </div> 
                 }
-                <div className="col-sm-5"> <p id='response-message'> Hall added successfully </p> </div>
-                <Button id="submit-button"  className="btn btn-primary" onClick={this.handleSubmit}> Save Hall </Button>
+                <br /> <br />
+                <div className="col-sm-2"> </div>   
+                <Button  id="dlt-btn" className="col-sm-2 btn btn-primary" onClick={this.handleDelete}> Delete this Hall </Button>
+                <div className="col-sm-7"> </div>     
+                <Button id="submit-button"  className="col-sm-1 btn btn-primary" onClick={this.handleSubmit}> Save Hall </Button>
                 <ToastContainer />
                 <br /> <br />
             </form>

@@ -17,7 +17,7 @@ class AddScreenForm extends Component {
             screenType: '',
             totalSeats: '',
             allScreens: [],
-            hallId: '',
+            hallId: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.dismiss = this.dismiss.bind(this);
@@ -43,20 +43,40 @@ class AddScreenForm extends Component {
     }
 
     handleSubmit(){
-        API.addScreen(this.props.hallId, this.props.screenNumber, this.state.screenType, 
-            this.state.totalSeats).then((result)=>{
-                this.notify(result.meta.message);
-        }).catch((err)=> {
-            this.notify(err);
-        });
+        if(typeof(this.state.totalSeats) === 'string'){
+            this.notify('Total No. of Seats must be a number');
+            return;
+        }
+
+        if(this.props.screenId){
+            API.editScreen(this.props.screenId, this.state.screenType, 
+                this.state.totalSeats, false).then((result)=>{
+                    this.notify(result.meta.message);
+            }).catch((err)=> {
+                this.notify(err);
+            });
+        } else {
+            API.addScreen(this.props.hallId, this.props.screenNumber, this.state.screenType, 
+                this.state.totalSeats, false).then((result)=>{
+                    this.notify(result.meta.message);
+            }).catch((err)=> {
+                this.notify(err);
+            });
+        }
     }
 
     dismiss() {
-        console.log('dismiss');
-        this.props.unmountMe();
+        this.props.unmountMe(this.props.screenNumber - 1);
+        API.editScreen(this.props.screenId, this.state.screenType, 
+            this.state.totalSeats, true).then((result)=>{
+                this.notify('Screen deleted successfully');
+        }).catch((err)=> {
+            this.notify(err);
+        });
     } 
 
     render(){
+        console.log(`HALLID: ${this.props.hallId}`);
         return (
             <div className="screenForm"> 
             <div>
@@ -112,11 +132,11 @@ class AddScreenForm extends Component {
                         </Col>
                         <Col md={3}>
                         <div className="screenButton">
-                        {/* <Button bsSize="small" className="btn btn-primary" id="trash" 
+                        <Button bsSize="small" className="btn btn-primary" id="trash" 
                                 onClick={this.dismiss} 
                         >
                             <Glyphicon glyph="trash" /> 
-                        </Button> */}
+                        </Button>
                         <Button id="submit-user"  className="btn btn-primary" id="save" onClick={this.handleSubmit}> Save Screen </Button>
                         <ToastContainer />
                         </div>

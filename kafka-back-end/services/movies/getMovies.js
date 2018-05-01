@@ -2,6 +2,7 @@ var modelMovie = require('./../../models/Movie');
 
 function handle_request(msg, callback){
     console.log(`Incoming message: ${JSON.stringify(msg)}`);
+<<<<<<< Updated upstream
 
     if(Object.keys(msg).length !== 0){
         modelMovie.Movie.findAll({
@@ -23,6 +24,18 @@ function handle_request(msg, callback){
             callback(err,null);
         }
     }
+=======
+    if(JSON.stringify(msg) === '{}'){
+        msg = {
+            is_archive: 0
+        }
+    }
+    modelMovie.Movie.findAll({
+        where : [msg]
+    }).then((movie) => {
+        callback(null, movie)
+    });
+>>>>>>> Stashed changes
 }
 
 module.exports = {

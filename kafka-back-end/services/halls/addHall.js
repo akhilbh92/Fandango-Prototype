@@ -11,7 +11,8 @@ function handle_request(msg, callback){
             city: msg.city,
             state: msg.state,
             zipcode : msg.zipcode,
-            screen_nums: msg.screen_nums
+            screen_nums: msg.screen_nums,
+            is_archive: msg.is_archive
         });
     }).then((addedHall) => {
         let result= {};
