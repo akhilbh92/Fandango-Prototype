@@ -67,8 +67,8 @@ class RoutesComponent extends Component {
                 <PrivateRoute exact path="/schedulemovie" component={ScheduleMovie} />
                 <PrivateRoute exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
                 <PrivateRoute exact path="/home" component={Home} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/preferences" component={AccountPreferences} />
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <PrivateRoute exact path="/preferences" component={AccountPreferences} />
                 <Route exact path="/allmovies" render={() => (
                     <div>
 
@@ -90,9 +90,9 @@ class RoutesComponent extends Component {
                 <Route exact path="/moviedetailcrew" component={Movie_detail_crew} />
                 <Route exact path="/admin/toptenmoviesbyrevenue" component={TopTenMoviesByRevenue} />
                 <Route exact path="/movietickets" component={MovieTickets} />
-                <Route exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
-                <Route exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
-                <Route exact path="/entertickets" render={() => (
+                <PrivateRoute exact path="/moviedetailaddreview" component={Movie_detail_addreview} />
+                <PrivateRoute exact path="/moviedetailupdatereview" component={Movie_detail_updatereview} />
+                <PrivateRoute exact path="/entertickets" render={() => (
                     <div>
 
                         <EnterTickets redirectURL={this.redirectURL} />
