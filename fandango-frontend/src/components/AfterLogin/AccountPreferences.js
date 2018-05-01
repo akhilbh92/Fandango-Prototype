@@ -75,7 +75,8 @@ class AccountPreferences extends Component {
                         email: resultData.data.email,
                         phone_number: resultData.data.phone_number,
                         credit_card_number: resultData.data.credit_card_number,
-                        expiration: resultData.data.expiration
+                        expiration: resultData.data.expiration,
+                        photo:resultData.data.profile_image
                     });
                 } else {
                     console.log("No User From this ID Available");
@@ -186,6 +187,7 @@ class AccountPreferences extends Component {
             updatedUserObj.city = this.state.city;
             updatedUserObj.state = this.state.state;
             updatedUserObj.zipcode = this.state.zipcode;
+            updatedUserObj.profile_image = this.state.photo;
             this.updateUserDetails(updatedUserObj);
             this.setState({ basicInfoSubmitted: false });
         }
