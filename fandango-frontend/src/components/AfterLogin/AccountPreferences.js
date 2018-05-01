@@ -7,6 +7,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CardValidator from '../Helper/CardValidator';
+import * as API_USER from './../../api/apicall_for_users';
+import { doSignOut } from '../../api/apicall_for_users';
+import { loginUser } from "../../actions";
 let state_regex_pattern = require('../Helper/StateRegex');
 let zipcode_regex = require('../Helper/ZipcodeRegex');
 let emailRegex = require('../Helper/EmailRegex');
@@ -53,6 +56,7 @@ class AccountPreferences extends Component {
         this.updatePaymentDetails = this.updatePaymentDetails.bind(this);
         this.updatePasswordDetails = this.updatePasswordDetails.bind(this);
         this.validateCreditCardNo = this.validateCreditCardNo.bind(this);
+        this.deleteAccount = this.deleteAccount.bind(this);
     }
     componentDidMount() {
         API.getProfile({ userId: this.props.user.userId })
@@ -273,6 +277,18 @@ class AccountPreferences extends Component {
 
     }
 
+    deleteAccount() {
+        API_USER.deleteUser({ deleteuserId: this.props.user.userId })
+            .then((resultData) => {
+                doSignOut({ pageNames: [] }).then((response) => {
+                    window.location = "/"
+                    this.props.loginUser(null);
+                })
+            }).catch(error => {
+                this.notify(error);
+            });
+    }
+
     render() {
         return (
             <div>
@@ -295,6 +311,8 @@ class AccountPreferences extends Component {
                     </div>
                     <div className="col-md-offset-2 col-md-8 preferences-view">
                         <h2 className="account-font">BASIC INFORMATION</h2>
+                        <button className="btn save-button" onClick={this.deleteAccount}
+                            style={{ float: "right", marginTop: '10px' }}>Delete Account</button>
                     </div>
 
                     <div className="col-md-offset-2 col-md-8 preferences-expand">
@@ -547,7 +565,7 @@ function mapStateToProps(state) {
     }
 }
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({ loginUser: loginUser }, dispatch)
 }
 
 
