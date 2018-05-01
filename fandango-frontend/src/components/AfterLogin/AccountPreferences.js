@@ -284,7 +284,7 @@ class AccountPreferences extends Component {
             res.json().then((body)=> {
                 console.log(body);
                   this.setState({   
-                        photo: `http://localhost:3001${body.file}`
+                        photo: `http://myec2.ddns.net:3001${body.file}`
                     });
             });
         })

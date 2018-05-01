@@ -81,7 +81,7 @@ class MovieForm extends React.Component {
             res.json().then((body)=> {
                 console.log(body);
                   this.setState({   
-                        photos: `http://localhost:3001${body.file}`
+                        photos: `http://myec2.ddns.net:3001${body.file}`
                     });
             });
         })
