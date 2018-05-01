@@ -112,7 +112,7 @@ class MovieForm extends React.Component {
         } else  if(!this.state.trailerValidation){
             this.notify('Inavlid Trailer Input');
             return;
-        } else  if(typeof(this.state.movieLength) != 'number'){
+        } else  if(Number.isInteger(this.state.movieLength)){
             this.notify('Movie Length must be a number');
             return;
         } else {
@@ -239,6 +239,7 @@ class MovieForm extends React.Component {
                                 className="col-sm-2 col-form-label label-color"><strong> Movie Length </strong></label>
                             <div className={'col-sm-9' }>
                                 <input className="form-control"
+                                type="number"
                                     id="movieLength"
                                     name="movieLength"
                                     value={this.state.movieLength}
