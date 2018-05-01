@@ -23,8 +23,11 @@ class MovieAddReview extends Component {
     }
 
     AddReview = (userdata) => {
-        API.addRating(userdata);
-        window.location = "/moviedetailreview"
+        API.addRating(userdata)
+            .then( (res) => {
+                    window.location = "/moviedetailreview"
+                }
+            )
     }
 
     render() {
