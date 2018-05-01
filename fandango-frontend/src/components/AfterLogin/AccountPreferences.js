@@ -532,7 +532,7 @@ class AccountPreferences extends Component {
                         </div>
                         <button type="button" className="btn  save-button" onClick={this.updatePaymentDetails}>
                             SAVE
-                            </button>
+                        </button>
                     </div>
                 </div>
             </div>

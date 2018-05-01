@@ -27,6 +27,7 @@ class EnterTickets extends Component{
             no_of_seats:0,
             status:"A",
             price: this.props.schedule.price,
+            available_seats: this.props.schedule.available_seats,
             card: '',
             name: '',
             expiration: '',
@@ -273,7 +274,8 @@ class EnterTickets extends Component{
 
                         <Link to="/movietickets">Select a new Showtime</Link>
                         <hr />
-                        Price: $ {this.state.price}
+                        Price: $ {this.state.price} <br />
+                        Available Seats: {this.state.available_seats}
                         <hr />
                         {this.renderCard()}
 

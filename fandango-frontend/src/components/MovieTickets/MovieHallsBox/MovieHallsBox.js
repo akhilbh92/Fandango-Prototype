@@ -60,15 +60,16 @@ class Movie_Halls extends Component{
             const schedule_ids = schedules[i].id.split(',');
             const show_time = schedules[i].show_time.split(',');
             const price = schedules[i].price.split(',');
+            const available_seats = schedules[i].available_seats.split(',');
             const availableshowtimes = [];
 
             for(let k=0;k<show_time.length;k++){
                 if(this.props.minPrice!==null && this.props.maxPrice!==null){
                     if(price[k] >= this.props.minPrice && price[k] <= this.props.maxPrice){
-                        availableshowtimes.push(<li key={k} id="movehallsLI_41"><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k]))} id="movehallsA_42">{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
+                        availableshowtimes.push(<li key={k} id="movehallsLI_41"><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k],available_seats[k] ))} id="movehallsA_42">{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
                     }
                 }else{
-                    availableshowtimes.push(<li key={k} id="movehallsLI_41"><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k]))} id="movehallsA_42">{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
+                    availableshowtimes.push(<li key={k} id="movehallsLI_41"><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k], available_seats[k]))} id="movehallsA_42">{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
                 }
 
             }
