@@ -70,14 +70,4 @@ describe('Authentication Test Cases', function () {
 			});
 	});
 
-	it('User should logout', function (done) {
-		chai.request(CLIENT_URL)
-			.post('/Signout')
-			.send()
-			.end(function (err, res) {
-				assert.equal(res.status, 200);
-				done();
-			});
-	});
-	
 });

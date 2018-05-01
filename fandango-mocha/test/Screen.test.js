@@ -35,7 +35,7 @@ describe('Screen Module Test Cases', function () {
         chai.request(CLIENT_URL)
             .post('/addScreen')
             .send({
-                hallId: hallId,
+                hallId: Number(hallId),
                 screenType: "IMAX",
                 totalSeats: 25,
                 screenNum: screenNum
@@ -53,8 +53,8 @@ describe('Screen Module Test Cases', function () {
         chai.request(CLIENT_URL)
             .post('/editScreen')
             .send({
-                id: screenId,
-                hallId: hallId,
+                screenId: Number(screenId),
+                hallId: Number(hallId),
                 screenType: "Digital 3D",
                 totalSeats: 25,
                 screenNum: screenNum
@@ -69,7 +69,7 @@ describe('Screen Module Test Cases', function () {
         chai.request(CLIENT_URL)
             .post('/getScreens')
             .send({
-                hallId: hallId,
+                hallId: Number(hallId),
                 screenNum: screenNum
             })
             .end(function (err, res) {
@@ -81,7 +81,7 @@ describe('Screen Module Test Cases', function () {
     it('Get All Screens By Hall from the system', function (done) {
         chai.request(CLIENT_URL)
             .post('/getScreens')
-            .send({ hallId: hallId })
+            .send({ hallId: Number(hallId) })
             .end(function (err, res) {
                 assert.equal(res.status, 200);
                 done();
