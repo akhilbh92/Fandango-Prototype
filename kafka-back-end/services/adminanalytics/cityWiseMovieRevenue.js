@@ -13,7 +13,7 @@ function handle_request(msg, callback) {
     if (msg.movie_id) {
         query = query + " AND movie_schedules.movie_id = " + msg.movie_id
     }
-    query = query + " GROUP BY halls.city order by total_price desc;";
+    query = query + " GROUP BY halls.city,movies.movie_name order by average desc;";
     console.log(`Incoming Query message:`, query);
     db.sequelize.query(query, { type: db.sequelize.QueryTypes.SELECT })
         .then((cityWiseMovieRevenueList) => {

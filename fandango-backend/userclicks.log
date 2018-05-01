@@ -487,3 +487,15 @@
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-30T06:13:14.848Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-30T23:03:32.773Z"}
 {"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-30T23:03:33.953Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-30T23:29:04.033Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-30T23:29:05.570Z"}
+{"event":"section_click","section_name":"movie_Listing","level":"info","message":"","timestamp":"2018-04-30T23:33:56.552Z"}
+{"event":"movie_click","movie_id":"1","movie_name":"Avengers: Infinity War","count":"1","level":"info","message":"","timestamp":"2018-04-30T23:33:56.556Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-30T23:57:54.780Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-04-30T23:57:55.831Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:24.289Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:25.152Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:35.533Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:36.961Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:41.756Z"}
+{"event":"page_click","page_name":"TopTenHallsPage","count":"1","level":"info","message":"","timestamp":"2018-05-01T00:03:42.812Z"}
