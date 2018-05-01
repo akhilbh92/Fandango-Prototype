@@ -17,7 +17,7 @@ class UpdateUser extends Component {
             email: '',
             userDetails: '',
             userDetailsArrived: false,
-            emailValidation: false
+            emailValidation: 'NA'
         };
         this.getUser = this.getUser.bind(this);
     }

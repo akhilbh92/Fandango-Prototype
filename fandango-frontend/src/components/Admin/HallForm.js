@@ -23,8 +23,8 @@ class HallForm extends Component {
             screensAdded: 0,
             screensArray: [],
             isHallSaved: false,
-            stateValidation: false,
-            zipcodeValidation: false,
+            stateValidation: 'NA',
+            zipcodeValidation: 'NA',
             isDeleted: false,
             deletedScreens: []
           };
@@ -168,15 +168,12 @@ class HallForm extends Component {
             this.notify('Please fill all mandatory fields');
             return;
         } else if(!this.state.stateValidation){
-            this.notify('Invalid State Input');
+            this.notify('Invalid State field Input');
             return;
         } else if(!this.state.zipcodeValidation){
-            this.notify('Invalid Zipcode Input');
+            this.notify('Invalid Zipcode field Input');
             return;
-        }  else  if(typeof(this.state.totalScreens) != 'number'){
-            this.notify('Total No. of screens must be a number');
-            return;
-        } 
+        }  
         
 
         if(this.props.hallId){
@@ -342,6 +339,7 @@ class HallForm extends Component {
                             className="col-sm-2 col-form-label control-label label-color"><strong> Total No. of Screens  </strong></label>
                         <div className={'col-sm-9' }>
                             <input className="form-control"
+                                type="number"
                                 id="totalScreens"
                                 name="totalScreens"
                                 value={this.state.totalScreens}
