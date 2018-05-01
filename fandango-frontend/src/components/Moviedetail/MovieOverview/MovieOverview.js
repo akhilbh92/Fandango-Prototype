@@ -43,7 +43,7 @@ class MovieOverview extends Component {
                         <div id="DIV_3">
                             <div id="DIV_4">
                                 <YouTube
-                                    videoId={this.props.movie.trailer}
+                                    videoId={this.props.movie.trailer.slice(-11)}
                                     autoplay={true}
                                     opts={{"height": '125%',"width": '130%'}}
                                 />
