@@ -20,6 +20,7 @@ function handle_request(msg, callback) {
 
     if (!!msg.userid) {
         console.log("inside if")
+        msg.logged_date = new Date(Date.now()).toISOString();
         traceCollection.insert(msg, function (err, item) {
             if (err) {
                 callback(err, null);
