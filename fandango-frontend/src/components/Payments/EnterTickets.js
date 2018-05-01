@@ -50,6 +50,7 @@ class EnterTickets extends Component{
     }
 
     componentDidMount() {
+        console.log(this.state.available_)
         API.getProfile()
             .then((status) => {
                 this.setState({
@@ -72,7 +73,7 @@ class EnterTickets extends Component{
     }
     handleTickets = (userdata) => {
 
-        if (this.state.no_of_seats == 0 || this.state.no_of_seats > 60) {
+        if (this.state.no_of_seats == 0 || this.state.no_of_seats > this.state.available_seats) {
             this.setState({
                 ticketmessage: 'Invalid no. of seats or You have demanded more seats than available',
                 ticketerror: 1,
@@ -169,7 +170,7 @@ class EnterTickets extends Component{
 
     handleTickets2 = (userdata) => {
 
-        if (this.state.no_of_seats == 0 || this.state.no_of_seats > 60) {
+        if (this.state.no_of_seats == 0 || this.state.no_of_seats > this.state.available_seats) {
             this.setState({
                 ticket2message: 'Invalid no. of seats or You have demanded more seats than available',
                 ticket2error: 1,

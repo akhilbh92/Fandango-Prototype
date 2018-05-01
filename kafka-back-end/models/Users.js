@@ -52,7 +52,8 @@ const Users = db.sequelize.define('users', {
         defaultValue: null
     },
     is_archive: {
-        type: Sequelize.DataTypes.BOOLEAN
+        type: Sequelize.DataTypes.BOOLEAN,
+        defaultValue: false
     }
 });
 

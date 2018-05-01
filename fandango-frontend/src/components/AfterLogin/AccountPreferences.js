@@ -7,6 +7,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CardValidator from '../Helper/CardValidator';
+import * as API_USER from './../../api/apicall_for_users';
+import { doSignOut } from '../../api/apicall_for_users';
+import { loginUser } from "../../actions";
 let state_regex_pattern = require('../Helper/StateRegex');
 let zipcode_regex = require('../Helper/ZipcodeRegex');
 let emailRegex = require('../Helper/EmailRegex');
@@ -54,6 +57,7 @@ class AccountPreferences extends Component {
         this.updatePaymentDetails = this.updatePaymentDetails.bind(this);
         this.updatePasswordDetails = this.updatePasswordDetails.bind(this);
         this.validateCreditCardNo = this.validateCreditCardNo.bind(this);
+        this.deleteAccount = this.deleteAccount.bind(this);
         this.uploadPhotos = this.uploadPhotos.bind(this);
     }
     componentDidMount() {
@@ -71,7 +75,8 @@ class AccountPreferences extends Component {
                         email: resultData.data.email,
                         phone_number: resultData.data.phone_number,
                         credit_card_number: resultData.data.credit_card_number,
-                        expiration: resultData.data.expiration
+                        expiration: resultData.data.expiration,
+                        photo:resultData.data.profile_image
                     });
                 } else {
                     console.log("No User From this ID Available");
@@ -182,6 +187,7 @@ class AccountPreferences extends Component {
             updatedUserObj.city = this.state.city;
             updatedUserObj.state = this.state.state;
             updatedUserObj.zipcode = this.state.zipcode;
+            updatedUserObj.profile_image = this.state.photo;
             this.updateUserDetails(updatedUserObj);
             this.setState({ basicInfoSubmitted: false });
         }
@@ -275,17 +281,29 @@ class AccountPreferences extends Component {
 
     }
 
-    uploadPhotos(){
+    deleteAccount() {
+        API_USER.deleteUser({ deleteuserId: this.props.user.userId })
+            .then((resultData) => {
+                doSignOut({ pageNames: [] }).then((response) => {
+                    window.location = "/"
+                    this.props.loginUser(null);
+                })
+            }).catch(error => {
+                this.notify(error);
+            });
+    }
+
+    uploadPhotos() {
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
         data.append('filename', this.state.userId);
         data.append('filefolder', 'profileImages');
-        API.uploadFile(data).then((res)=> {
-            res.json().then((body)=> {
+        API.uploadFile(data).then((res) => {
+            res.json().then((body) => {
                 console.log(body);
-                  this.setState({   
-                        photo: `http://myec2.ddns.net:3001${body.file}`
-                    });
+                this.setState({
+                    photo: `http://myec2.ddns.net:3001${body.file}`
+                });
             });
         })
     }
@@ -312,6 +330,8 @@ class AccountPreferences extends Component {
                     </div>
                     <div className="col-md-offset-2 col-md-8 preferences-view">
                         <h2 className="account-font">BASIC INFORMATION</h2>
+                        <button className="btn save-button" onClick={this.deleteAccount}
+                            style={{ float: "right", marginTop: '10px' }}>Delete Account</button>
                     </div>
 
                     <div className="col-md-offset-2 col-md-8 preferences-expand">
@@ -389,16 +409,16 @@ class AccountPreferences extends Component {
                             }
                         </div>
                         <div className="form-group row">
-                        <h5 className="first-element">Profile Picture</h5>
-                            <div className={'col-sm-9' }>
-                                <div id="photo-upload"> 
-                                    <input ref={(ref) => {this.uploadInput = ref;}} type="file" accept='image/*'/>
+                            <h5 className="first-element">Profile Picture</h5>
+                            <div className={'col-sm-9'}>
+                                <div id="photo-upload">
+                                    <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept='image/*' />
                                     {
-                                        this.state.photo && 
+                                        this.state.photo &&
                                         <img id="pic" src={this.state.photo} alt="img" />
                                     }
                                 </div>
-                                <button id="upload-button"  className="btn btn-primary" onClick={this.uploadPhotos}> Upload </button>
+                                <button id="upload-button" className="btn btn-primary" onClick={this.uploadPhotos}> Upload </button>
                             </div>
                         </div>
                         <button type="button" className="btn  save-button" onClick={this.updateBasicInfoDetails}>
@@ -577,7 +597,7 @@ function mapStateToProps(state) {
     }
 }
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch)
+    return bindActionCreators({ loginUser: loginUser }, dispatch)
 }
 
 
