@@ -29,6 +29,7 @@ class UserForm extends Component {
             hallName: 'Select Hall',
             allHalls: '',
             isDeleted: false,
+            emailChanged: false,
             emailValidation: 'NA',
             stateValidation: 'NA',
             zipcodeValidation: 'NA'
@@ -115,19 +116,34 @@ class UserForm extends Component {
             this.notify('Invalid Zipcode field Input');
             return;
         }  
-        
-        let updatedUserDetails = {
-            user_id : this.state.userId, 
-            email: this.state.email, 
-            role: this.state.role, 
-            first_name: this.state.firstName, 
-            last_name: this.state.lastName, 
-            address: this.state.address, 
-            city: this.state.city, 
-            state: this.state.state, 
-            zipcode: this.state.zipcode, 
-            phone_number: this.state.phoneNumber, 
-            hall_id: (this.state.hallId ? this.state.hallId: null)
+        let updatedUserDetails;
+        if(this.state.emailChanged){
+            updatedUserDetails = {
+                userId : this.state.userId, 
+                email: this.state.email, 
+                role: this.state.role, 
+                first_name: this.state.firstName, 
+                last_name: this.state.lastName, 
+                address: this.state.address, 
+                city: this.state.city, 
+                state: this.state.state, 
+                zipcode: this.state.zipcode, 
+                phone_number: this.state.phoneNumber, 
+                hall_id: (this.state.hallId ? this.state.hallId: null)
+            }
+        } else {
+            updatedUserDetails = {
+                userId : this.state.userId, 
+                role: this.state.role, 
+                first_name: this.state.firstName, 
+                last_name: this.state.lastName, 
+                address: this.state.address, 
+                city: this.state.city, 
+                state: this.state.state, 
+                zipcode: this.state.zipcode, 
+                phone_number: this.state.phoneNumber, 
+                hall_id: (this.state.hallId ? this.state.hallId: null)
+            }
         }
 
         if(this.props.userDetails) {
@@ -229,7 +245,8 @@ class UserForm extends Component {
                                 required 
                                 onChange={(event) => {
                                     this.setState({
-                                        email: event.target.value
+                                        email: event.target.value,
+                                        emailChanged: true
                                     }),this.validateField('email', event.target.value)
                                     .then((res)=>{
                                         this.setState({
