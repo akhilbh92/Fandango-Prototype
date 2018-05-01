@@ -5,7 +5,7 @@ let routingMap = {
         "/admin/toptenmoviesbyrevenue", "/admin/clicksperpage", "/admin/moviereviewgraph", "/admin/movierevenueperhall",
         "/admin/tracediagram", "/searchbill", "/preferences", "/dashboard"
     ],
-    "3": ["/home", "/entertickets", "/moviedetailupdatereview", "/dashboard", "/preferences", "/purchasehistory"]
+    "3": ["/home", "/entertickets", "/moviedetailupdatereview", "/dashboard", "/preferences", "/purchasehistory","/moviedetailaddreview"]
 };
 
 module.exports = routingMap;

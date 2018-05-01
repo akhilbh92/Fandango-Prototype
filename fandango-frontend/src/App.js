@@ -4,6 +4,7 @@ import {BrowserRouter} from 'react-router-dom';
 import RoutesComponent from "./components/RoutesComponent/RoutesComponent";
 import log4javascript from 'log4javascript';
 var log1 = log4javascript.getLogger();
+var pageNames = [];
 class App extends Component {
 
     componentDidMount(){
@@ -26,4 +27,4 @@ class App extends Component {
     }
 }
 
-export {App,log1};
+export {App,log1,pageNames};

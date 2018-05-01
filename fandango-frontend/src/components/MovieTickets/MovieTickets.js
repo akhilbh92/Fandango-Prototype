@@ -4,11 +4,26 @@ import HomeHeader from './../AfterLogin/HomeHeader'
 import MovieDetailBox from '../MovieDetailBox/MovieDetailBox'
 import MovieHallsBox from './MovieHallsBox/MovieHallsBox'
 import {connect} from "react-redux";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { log1, pageNames } from "../../App";
 import Price_Filter from './PriceFilter/pricefilter';
 
 
 class Movie_Tickets extends Component{
+
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("Shows Details");
+        }
+    }
+
+    CustomDate(props){
+
+        var d = new Date(props);
+
+        var today = new Date(props);
+        return d.setDate(today.getDate()-1);
+    }
 
     componentWillMount() {
         document.body.style.backgroundColor = "#EBEBEB"
@@ -46,7 +61,7 @@ class Movie_Tickets extends Component{
         let count = 4;
 
         for (let i=0;i<7;i++){
-            date.setDate(date.getDate() + 1);
+            
 
             if(i === this.state.highlightedKey){
                 result.push(<li test={i} id={"datepickerLI_"+count} key={i} onClick={(e)=>{this.handleDateClick(e)}}>
@@ -58,6 +73,7 @@ class Movie_Tickets extends Component{
                 </li>);
             }
             count = count + 5;
+            date.setDate(date.getDate() + 1);
         }
         return result;
     }
@@ -74,9 +90,21 @@ class Movie_Tickets extends Component{
         return [year, month, day].join('-');
     }
 
+    handlePriceFilter(minPrice,maxPrice){
+        if(minPrice === "" || maxPrice === ""){
+            minPrice = null;
+            maxPrice = null;
+        }
+        this.setState({
+            ...this.state,
+            "minPrice":minPrice,
+            "maxPrice":maxPrice
+        })
+    }
+
     render(){
         const MovieHallsDate = new Date();
-        MovieHallsDate.setDate(this.state.startDate.getDate()+this.state.highlightedKey+1);
+        MovieHallsDate.setDate(this.state.startDate.getDate()+this.state.highlightedKey);
 
         return (
             <div>
@@ -135,14 +163,14 @@ class Movie_Tickets extends Component{
                             </div>
                         {/*</div>*/}
                     {/*</div>*/}
-                    <Price_Filter/>
+                    <Price_Filter onGo={(minPrice,maxPrice)=>this.handlePriceFilter(minPrice,maxPrice)}/>
                     {/*Filters code*/}
                     <div style={{display:"flex",width:"74.35%",height:"100%",paddingTop:"10px"}}>
                         <div className="msp__movie-details-container">
                             <MovieDetailBox/>
                         </div>
                         <div className="theaters">
-                            <MovieHallsBox date={this.formatDate(MovieHallsDate)}/>
+                            <MovieHallsBox date={this.formatDate(MovieHallsDate)} minPrice={this.state.minPrice} maxPrice={this.state.maxPrice}/>
                         </div>
                     </div>
 
@@ -163,7 +191,8 @@ class Movie_Tickets extends Component{
 
 function mapStateToProps(state){
     return{
-        movie: state.selectedMovie
+        movie: state.selectedMovie,
+        user: state.loginUser
     }
 }
 

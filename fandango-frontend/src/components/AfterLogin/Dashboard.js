@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import './dashboard.css';
 import HomeHeader from './HomeHeader';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { log1, pageNames } from "../../App";
 
 class Dashboard extends  Component {
+
+    componentDidMount() {
+        if (this.props.user !== undefined) {
+            pageNames.push("User Dashboard");
+        }
+    }
 
     render() {
         return (
@@ -89,4 +98,12 @@ class Dashboard extends  Component {
         )
     }
 }
-export default Dashboard;
+function mapStateToProps(state) {
+    return {
+        user: state.loginUser
+    }
+}
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({}, dispatch)
+}
+export default connect(mapStateToProps, matchDispatchToProps)(Dashboard);

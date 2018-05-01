@@ -1,6 +1,7 @@
 .carousel-img{
     width: 200px !important;
     height: 250px !important;
+    cursor: pointer;
 }
 .lg-carousel-img{
     width: 100% !important;
@@ -8,4 +9,7 @@
 }
 .mr-bottom-25{
     margin-bottom: 25px;
+}
+.first-carousel .carousel-control{
+    width: 0px;
 }

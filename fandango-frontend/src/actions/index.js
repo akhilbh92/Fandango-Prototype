@@ -27,6 +27,15 @@ export const selectedSchedule = (movie_schedule_id, price ) => {
     }
 };
 
+export const selectedTrace = (traceinfo) => {
+    console.log(traceinfo);
+    return{
+        type: 'SELECTED_TRACE',
+        payload: traceinfo
+    }
+};
+
+
 export const doneBooking = (bookinginfo) => {
     console.log(bookinginfo);
     return{

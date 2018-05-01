@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 
 import HomeHeader from './HomeHeader';
 import LandingContent from '../Landing/LandingContent';
-import {log1} from "../../App";
+import { log1, pageNames } from "../../App";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {selectedTrace} from '../../actions'
+
 
 class Home extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.handleLogs = this.handleLogs.bind(this);
 
+    }
+
+    componentDidMount() {
+        let pages = this.props.trace;
+        pages.push("Login");
+        pages.push("Home");
+        if (this.props.user !== undefined && this.props.user.role == 3) {
+            this.props.selectedTrace(pages)
+        }
     }
 
     handleLogs() {
@@ -26,4 +39,14 @@ class Home extends Component {
     }
 }
 
-export default (Home);
+function mapStateToProps(state) {
+    return {
+        user: state.loginUser,
+        trace: state.selectedTrace
+    }
+}
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({selectedTrace: selectedTrace}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Home);

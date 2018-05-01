@@ -53,8 +53,11 @@ class AllMovies extends Component{
         this.setState({
             filterRating: filterRating,
             showfiltertext: "no",
-            movies_tofilter: this.state.movies.filter(movie => movie.avgrating > (Number)(this.state.filterRating))
+            movies_tofilter: this.state.movies.filter(movie =>
+                movie.avgrating > filterRating &&  movie.avgrating <= (filterRating+1)
+            )
         })
+        console.log(this.state.movies_tofilter);
 
     }
 
@@ -65,7 +68,7 @@ class AllMovies extends Component{
             <div className="page-header-container">
                 <div className="row">
                     <div className="large-12 columns">
-                        <h2 className="page-header">SHOWING MOVIES WITH <span style={{ color: '#f15500'}}>"RATINGS > {this.state.filterRating}"</span></h2>
+                        <h2 className="page-header">SHOWING MOVIES WITH <span style={{ color: '#f15500'}}>"RATINGS IN BETWEEN {this.state.filterRating}-{this.state.filterRating+1}"</span></h2>
                     </div>
                 </div>
             </div>
@@ -118,6 +121,7 @@ class AllMovies extends Component{
             </h3>)
         }
         return this.state.movies_tofilter.map((movie) => {
+            console.log("1");
             return(
                 <div className="col-md-offset-2 col-md-8 list-moviedetails" onClick={this.handleCaptureLessSeen}>
                     <div className="img-style">
@@ -192,11 +196,11 @@ class AllMovies extends Component{
 
                     <div className="genre-list">
                         <ul>
-                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("1")}>RATINGS>1</button>
-                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("2")}>RATINGS>2</button>
-                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("3")}>RATINGS>3</button>
-                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("4")}>RATINGS>4</button>
-                            <button type="button" className="btn sub-genre" onClick={() => this.filterMoviesByRating("5")}>RATINGS>5</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(0)}>RATINGS (0-1)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(1)}>RATINGS (1-2)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(2)}>RATINGS (2-3)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(3)}>RATINGS (3-4)</button>
+                            <button type="button" className="btn sub-genre-bot" onClick={() => this.filterMoviesByRating(4)}>RATINGS (4-5)</button>
 
                         </ul>
                     </div>
