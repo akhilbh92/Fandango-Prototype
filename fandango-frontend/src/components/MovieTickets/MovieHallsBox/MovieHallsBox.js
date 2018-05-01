@@ -62,14 +62,24 @@ class Movie_Halls extends Component{
             const price = schedules[i].price.split(',');
             const available_seats = schedules[i].available_seats.split(',');
             const availableshowtimes = [];
+            let show_status = "movehallsLI_41";
+            let show_status2 = "movehallsSPAN_28";
 
             for(let k=0;k<show_time.length;k++){
+
+                if(available_seats[k] <=0 ){
+                    show_status = "movehallsLI_27";
+                    show_status2 = "movehallsSPAN_28";
+                }else{
+                    show_status = "movehallsLI_41";
+                    show_status2 = "movehallsA_42";
+                }
                 if(this.props.minPrice!==null && this.props.maxPrice!==null){
                     if(price[k] >= this.props.minPrice && price[k] <= this.props.maxPrice){
-                        availableshowtimes.push(<li key={k} id="movehallsLI_41"><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k],available_seats[k] ))} id="movehallsA_42">{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
+                        availableshowtimes.push(<li key={k} id={show_status}><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k],available_seats[k] ))} id={show_status2}>{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
                     }
                 }else{
-                    availableshowtimes.push(<li key={k} id="movehallsLI_41"><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k], available_seats[k]))} id="movehallsA_42">{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
+                    availableshowtimes.push(<li key={k} id={show_status}><button onClick={() => this.handleShowTime(this.props.selectedSchedule(schedule_ids[k], price[k], available_seats[k]))} id={show_status2}>{this.tConvert(show_time[k].substring(0,show_time[k].length-3))}</button></li>);
                 }
 
             }
