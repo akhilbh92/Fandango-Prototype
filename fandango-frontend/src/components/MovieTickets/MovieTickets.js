@@ -13,6 +13,7 @@ import {bindActionCreators} from "redux"
 
 class Movie_Tickets extends Component{
 
+
     componentDidMount() {
         let pages = this.props.trace;
         pages.push("Shows Listing");
@@ -49,7 +50,14 @@ class Movie_Tickets extends Component{
                 highlightedKey : 0,
                 minPrice:null,
                 maxPrice:null
-            }
+            };
+
+        this.handleLogs = this.handleLogs.bind(this);
+    }
+
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Show Listing","count":"1"}');
     }
 
     handleDateClick(e){
@@ -111,7 +119,7 @@ class Movie_Tickets extends Component{
         MovieHallsDate.setDate(this.state.startDate.getDate()+this.state.highlightedKey);
 
         return (
-            <div>
+            <div onClick={this.handleLogs}>
                 <HomeHeader/>
                 {/*<div className="tickets-page">*/}
 

@@ -47,7 +47,12 @@ class EnterTickets extends Component{
             ticket2message: '',
             credit_card_number: ''
 
-        }
+        };
+        this.handleLogs = this.handleLogs.bind(this);
+    }
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Buy Tickets","count":"1"}');
     }
 
     componentDidMount() {
@@ -244,7 +249,7 @@ class EnterTickets extends Component{
 
     render(){
         return(
-            <div className="site-wrep signin vipsignin" style={{ }} >
+            <div className="site-wrep signin vipsignin" style={{ }} onClick={this.handleLogs}>
                 <div>
                     <header id="registration-header" class="registration-header" role="banner">
                         <nav  className="nav-bar">

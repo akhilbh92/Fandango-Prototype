@@ -11,6 +11,7 @@ import * as CardValidator from '../Helper/CardValidator';
 import * as API_USER from './../../api/apicall_for_users';
 import { doSignOut } from '../../api/apicall_for_users';
 import { loginUser } from "../../actions";
+import {log1} from "../../App";
 let state_regex_pattern = require('../Helper/StateRegex');
 let zipcode_regex = require('../Helper/ZipcodeRegex');
 let emailRegex = require('../Helper/EmailRegex');
@@ -61,6 +62,7 @@ class AccountPreferences extends Component {
         this.validateCreditCardNo = this.validateCreditCardNo.bind(this);
         this.deleteAccount = this.deleteAccount.bind(this);
         this.uploadPhotos = this.uploadPhotos.bind(this);
+        this.handleLogs = this.handleLogs.bind(this);
     }
     componentDidMount() {
 
@@ -93,6 +95,10 @@ class AccountPreferences extends Component {
             }).catch(error => {
                 this.notify(error);
             });
+    }
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Account Preferences","count":"1"}');
     }
 
     validateState() {
@@ -319,7 +325,7 @@ class AccountPreferences extends Component {
 
     render() {
         return (
-            <div>
+            <div onClick={this.handleLogs}>
                 <ToastContainer />
                 <div className="site-wrap" >
                     <HomeHeader />

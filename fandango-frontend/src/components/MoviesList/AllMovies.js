@@ -22,9 +22,14 @@ class AllMovies extends Component{
             showfiltertext: ""
 
         }
+        this.handleLogs = this.handleLogs.bind(this);
         this.handleCaptureLessSeen = this.handleCaptureLessSeen.bind(this);
         this.filterMovies = this.filterMovies.bind(this);
         this.filterMoviesByRating = this.filterMoviesByRating.bind(this);
+    }
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Movie Listing","count":"1"}');
     }
 
     componentDidMount(){
@@ -175,7 +180,7 @@ class AllMovies extends Component{
 
     render(){
         return(
-            <div>
+            <div onClick={this.handleLogs()}>
                 <div className="site-wrap">
                     <HomeHeader/>
 

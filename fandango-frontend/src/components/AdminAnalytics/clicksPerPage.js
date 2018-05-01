@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Bar,Pie,Line} from 'react-chartjs-2';
+import {Bar,Pie,Line,Doughnut} from 'react-chartjs-2';
 import * as API from  '../../api/API';
 import CommonHeader from '../header/CommonHeader';
 import { withRouter } from 'react-router-dom';
@@ -43,12 +43,34 @@ class ClicksPerPage extends Component{
                                     label:'Dashboard for Total Clicks Per Page',
                                     data: total_clicks,
                                     backgroundColor:[
+                                        /*'rgba(255,105,145,0.6)',
+                                        'rgba(155,100,210,0.6)',
+                                        'rgba(90,178,255,0.6)',
+                                        'rgba(240,134,67,0.6)',
+                                        'rgba(120,120,120,0.6)',
+                                        'rgba(250,55,197,0.6)'*/
                                         'rgba(255,105,145,0.6)',
                                         'rgba(155,100,210,0.6)',
                                         'rgba(90,178,255,0.6)',
                                         'rgba(240,134,67,0.6)',
                                         'rgba(120,120,120,0.6)',
-                                        'rgba(250,55,197,0.6)'
+                                        'rgba(250,55,197,0.6)',
+                                        'rgba(0,0,0,0.5)',
+                                        'rgba(0,0,128,0.5)',
+                                        'rgba(0,0,255,0.5)',
+                                        'rgba(0,128,0,0.5)',
+                                        'rgba(0,128,128,0.5)',
+                                        'rgba(0,255,0,0.5)',
+                                        'rgba(0,255,255,0.5)',
+                                        'rgba(128,0,0,0.5)',
+                                        'rgba(128,0,128,0.5)',
+                                        'rgba(128,128,0,0.5)',
+                                        'rgba(128,128,128,0.5)',
+                                        'rgba(192,192,192,0.5)',
+                                        'rgba(255,0,0,0.5)',
+                                        'rgba(255,0,255,0.5)',
+                                        'rgba(255,255,0,0.5)',
+                                        'rgba(255,255,255,0.5)'
                                     ]
                                 }
                             ]
@@ -79,7 +101,29 @@ class ClicksPerPage extends Component{
                                         'rgba(90,178,255,0.6)',
                                         'rgba(240,134,67,0.6)',
                                         'rgba(120,120,120,0.6)',
-                                        'rgba(250,55,197,0.6)'
+                                        'rgba(250,55,197,0.6)',
+                                        'rgba(255,105,145,0.6)',
+                                        'rgba(155,100,210,0.6)',
+                                        'rgba(90,178,255,0.6)',
+                                        'rgba(240,134,67,0.6)',
+                                        'rgba(120,120,120,0.6)',
+                                        'rgba(250,55,197,0.6)',
+                                        'rgba(0,0,0,0.5)',
+                                        'rgba(0,0,128,0.5)',
+                                        'rgba(0,0,255,0.5)',
+                                        'rgba(0,128,0,0.5)',
+                                        'rgba(0,128,128,0.5)',
+                                        'rgba(0,255,0,0.5)',
+                                        'rgba(0,255,255,0.5)',
+                                        'rgba(128,0,0,0.5)',
+                                        'rgba(128,0,128,0.5)',
+                                        'rgba(128,128,0,0.5)',
+                                        'rgba(128,128,128,0.5)',
+                                        'rgba(192,192,192,0.5)',
+                                        'rgba(255,0,0,0.5)',
+                                        'rgba(255,0,255,0.5)',
+                                        'rgba(255,255,0,0.5)',
+                                        'rgba(255,255,255,0.5)'
                                     ]
                                 }
                             ]
@@ -110,7 +154,23 @@ class ClicksPerPage extends Component{
                                         'rgba(90,178,255,0.6)',
                                         'rgba(240,134,67,0.6)',
                                         'rgba(120,120,120,0.6)',
-                                        'rgba(250,55,197,0.6)'
+                                        'rgba(250,55,197,0.6)',
+                                        'rgba(0,0,0,0.5)',
+                                        'rgba(0,0,128,0.5)',
+                                        'rgba(0,0,255,0.5)',
+                                        'rgba(0,128,0,0.5)',
+                                        'rgba(0,128,128,0.5)',
+                                        'rgba(0,255,0,0.5)',
+                                        'rgba(0,255,255,0.5)',
+                                        'rgba(128,0,0,0.5)',
+                                        'rgba(128,0,128,0.5)',
+                                        'rgba(128,128,0,0.5)',
+                                        'rgba(128,128,128,0.5)',
+                                        'rgba(192,192,192,0.5)',
+                                        'rgba(255,0,0,0.5)',
+                                        'rgba(255,0,255,0.5)',
+                                        'rgba(255,255,0,0.5)',
+                                        'rgba(255,255,255,0.5)'
                                     ]
                                 }
                             ]
@@ -134,7 +194,7 @@ class ClicksPerPage extends Component{
                 </div>
 
                 <div className="col-md-offset-4 col-md-4 col-md-offset-4">
-                    <Bar
+                    <Doughnut
                         data = {this.state.PageClicksData}
                         width={150}
                         height={300}

@@ -10,6 +10,15 @@ import {bindActionCreators} from "redux";
 
 class Movie_detail_updatereview extends Component {
 
+    constructor(props){
+        super(props);
+        this.handleLogs = this.handleLogs.bind(this);
+    }
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Update Review","count":"1"}');
+    }
+
     componentDidMount() {
         let pages = this.props.trace;
         pages.push("Update Review");
@@ -23,7 +32,7 @@ class Movie_detail_updatereview extends Component {
         if(this.props.movie.photos)background =  this.props.movie.photos;
 
         return(
-            <div>
+            <div onClick={this.handleLogs}>
                 <HomeHeader/>
                 <div className="movie-detail-main">
                     <div className="movie-detail-mop">

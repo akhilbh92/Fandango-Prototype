@@ -17,7 +17,8 @@ class PurchaseHistory extends Component{
 
         this.state={
             purchases: []
-        }
+        };
+        this.handleLogs = this.handleLogs.bind(this);
     }
 
     componentDidMount(){
@@ -34,6 +35,10 @@ class PurchaseHistory extends Component{
                     purchases: result.data
                 });
             });
+    }
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Purchase history","count":"1"}');
     }
 
     renderPurchases() {
@@ -74,7 +79,7 @@ class PurchaseHistory extends Component{
 
     render(){
         return(
-            <div>
+            <div onClick={this.handleLogs}>
                 <div className="site-wrap">
                     <HomeHeader/>
 

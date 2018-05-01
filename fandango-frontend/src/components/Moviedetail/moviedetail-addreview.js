@@ -9,6 +9,14 @@ import {selectedTrace} from '../../actions'
 import {bindActionCreators} from "redux";
 
 class Movie_detail_addreview extends Component {
+    constructor(props){
+        super(props);
+        this.handleLogs = this.handleLogs.bind(this);
+    }
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Add Review","count":"1"}');
+    }
 
     componentDidMount() {
         let pages = this.props.trace;
@@ -23,7 +31,7 @@ class Movie_detail_addreview extends Component {
         if(this.props.movie.photos)background =  this.props.movie.photos;
 
         return(
-            <div>
+            <div onClick={this.handleLogs}>
                 <HomeHeader/>
                 <div className="movie-detail-main">
                     <div className="movie-detail-mop">

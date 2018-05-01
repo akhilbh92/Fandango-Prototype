@@ -9,6 +9,11 @@ import {selectedTrace} from '../../actions'
 
 class Dashboard extends  Component {
 
+    constructor(props){
+        super(props);
+        this.handleLogs = this.handleLogs.bind(this);
+    }
+
     componentDidMount() {
         let pages = this.props.trace;
         pages.push("User Dashboard");
@@ -17,9 +22,13 @@ class Dashboard extends  Component {
         }
     }
 
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"User Dashboard","count":"1"}');
+    }
+
     render() {
         return (
-            <div>
+            <div onClick={this.handleLogs}>
                 <div className="site-wrap">
                     <HomeHeader/>
 

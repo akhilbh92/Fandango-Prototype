@@ -10,6 +10,15 @@ import {bindActionCreators} from "redux";
 
 class Movie_detail_review extends Component {
 
+    constructor(props){
+        super(props);
+        this.handleLogs = this.handleLogs.bind(this);
+    }
+
+    handleLogs(){
+        log1.info('{"event":"page_click","page_name":"Movie Review","count":"1"}');
+    }
+
     componentDidMount() {
         let pages = this.props.trace;
         pages.push("Movie Reviews");
@@ -24,7 +33,7 @@ class Movie_detail_review extends Component {
 
         return(
 
-            <div>
+            <div onClick={this.handleLogs}>
                 <HomeHeader/>
                 <div className="movie-detail-main">
                     <div className="movie-detail-mop">

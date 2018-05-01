@@ -63,32 +63,46 @@ class TraceDiagram extends Component {
                             switch (page_seq){
                                 case 'Log In':
                                     page_array.push(1);
+                                    break;
                                 case 'Home':
                                     page_array.push(2);
+                                    break;
                                 case 'User Dashboard':
                                     page_array.push(3);
+                                    break;
                                 case 'Account Preferences':
                                     page_array.push(4);
+                                    break;
                                 case 'Movie Listing':
                                     page_array.push(5);
+                                    break;
                                 case 'Movie Details':
                                     page_array.push(6);
+                                    break;
                                 case 'Cast & Crew':
                                     page_array.push(7);
+                                    break;
                                 case 'Movie Reviews':
                                     page_array.push(8);
+                                    break;
                                 case 'Update Review':
                                     page_array.push(9);
+                                    break;
                                 case 'Add Review':
                                     page_array.push(10);
+                                    break;
                                 case 'Shows Listing':
                                     page_array.push(11);
+                                    break;
                                 case 'Buy Tickets':
                                     page_array.push(12);
+                                    break;
                                 case 'Purchase History':
                                     page_array.push(13);
+                                    break;
                                 case 'Logout':
                                     page_array.push(14);
+                                    break;
                             }
                         });
                         console.log(`${JSON.stringify(page_index)}`);
@@ -177,14 +191,14 @@ class TraceDiagram extends Component {
                     </form>
                 </div>
                 {this.state.isSearched &&
-                <div /*className="col-md-offset-2 col-md-8 pd-left-0 mr-top-15"*/>
-                    <div /*className="col-md-12 pd-left-0"*/>
+                <div className="col-md-offset-2 col-md-8 pd-left-0 mr-top-15">
+                    <div className="col-md-12 pd-left-0">
                         <Line
                             data = {this.state.pages_list_data}
                             width={1000}
-                            height = {500}
+                            height = {400}
                             options={{
-                                maintainAspectRatio:true,
+                                maintainAspectRatio:false,
                                 legend: {
                                     position: 'bottom',
                                 },
@@ -201,7 +215,8 @@ class TraceDiagram extends Component {
                                             /*autoSkip: true,*/
                                             stepSize: 1,
                                             min: 0,
-                                            max: 100
+                                            max: 100,
+                                            autoRotation: -45
                                         },
                                         gridLines: {
                                             display: false,
@@ -210,8 +225,8 @@ class TraceDiagram extends Component {
                                     yAxes: [{
                                         display: true,
                                         afterFit: function(scale) {
-                                            scale.width = 200,
-                                            scale.height = 200
+                                            scale.width = 100,
+                                            scale.height = 80
                                         },
                                         scaleLabel: {
                                             display: true,
@@ -224,45 +239,57 @@ class TraceDiagram extends Component {
                                             fontColor: "rgba(0,0,0,0.5)",
 */
                                             fontStyle: "bold",
-/*
                                             padding: 10,
-*/
                                             stepSize: 1,
-                                            callback: function (label, index, page_array) {
+                                            callback: function (label, index, labels) {
                                                 switch (label) {
                                                     case 1:
                                                         return 'Log In';
+                                                        break;
                                                     case 2:
                                                         return 'Home';
+                                                        break;
                                                     case 3:
                                                         return 'User Dashboard';
+                                                        break;
                                                     case 4:
                                                         return 'Account Preferences';
+                                                        break;
                                                     case 5:
                                                         return 'Movie Listing';
+                                                        break;
                                                     case 6:
                                                         return 'Movie Details';
+                                                        break;
                                                     case 7:
                                                         return 'Cast & Crew';
+                                                        break;
                                                     case 8:
                                                         return 'Movie Reviews';
+                                                        break;
                                                     case 9:
                                                         return 'Update Review';
+                                                        break;
                                                     case 10:
                                                         return 'Add Review';
+                                                        break;
                                                     case 11:
                                                         return 'Shows Listing';
+                                                        break;
                                                     case 12:
                                                         return 'Buy Tickets';
+                                                        break;
                                                     case 13:
                                                         return 'Purchase History';
+                                                        break;
                                                     case 14:
                                                         return 'Logout';
+                                                        break;
                                                 }
                                             }
                                         },
                                         gridLines: {
-                                            display: true,
+                                            display: false,
                                             zeroLineColor: "transparent"
                                         }
                                     }]

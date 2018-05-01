@@ -21,7 +21,7 @@ class Movie_detail extends Component {
 
 
     handleLogs() {
-        log1.info('{"event":"page_click","page_name":"MovieDetail","count":"1"}');
+        log1.info('{"event":"page_click","page_name":"Movie Detail","count":"1"}');
     }
 
     componentDidMount() {
