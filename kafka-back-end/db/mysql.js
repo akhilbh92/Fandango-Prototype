@@ -2,7 +2,8 @@
 const Sequelize = require ('sequelize');
 
     const sequelize = new Sequelize('fandango', 'root', 'password', {
-        host: 'localhost',
+        /*host: 'localhost',*/
+        host:'myec2.ddns.net',
         port: 3306,
         dialect: 'mysql',
         operatorsAliases: false,

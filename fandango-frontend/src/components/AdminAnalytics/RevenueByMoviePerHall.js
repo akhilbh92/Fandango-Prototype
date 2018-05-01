@@ -5,6 +5,7 @@ import '../MovieHall/moviehall.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
+import NavBar from '../Admin/Navigation';
 
 class RevenueByMoviePerHall extends Component {
 
@@ -86,6 +87,7 @@ class RevenueByMoviePerHall extends Component {
         return (
             <div>
                 <CommonHeader />
+                <NavBar/>
                 <ToastContainer />
                 <div className=" col-md-12 page-header-container">
                     <div className="col-md-offset-2 col-md-10 pd-left-0">
