@@ -12,6 +12,7 @@ module.exports = {
                     is_archive: false
                 }
             });
+            console.log("user[0] :",user[0]);
             cb(null, user[0]);
         } catch (e) {
             cb(e, null);
@@ -45,6 +46,7 @@ module.exports = {
     },
     deleteUser: async function (body, cb) {
         const deletionUserId = body.userId;
+        console.log("deletionUserId :",deletionUserId);
         try {
             const user = await usermodel.update({
                 is_archive: true
