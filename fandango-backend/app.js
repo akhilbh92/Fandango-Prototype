@@ -116,7 +116,7 @@ var logger1 = new (winston.Logger)({
     transports: [
         new (winston.transports.File)({
             name: 'analytics',
-            filename: 'userclicks.log',
+            filename: 'userclicks',
             level: 'info'
         }),
         new (winston.transports.File)({

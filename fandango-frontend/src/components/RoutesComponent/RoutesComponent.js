@@ -60,7 +60,7 @@ class RoutesComponent extends Component {
                 <PrivateRoute exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <PrivateRoute exact path="/schedulemovie" component={ScheduleMovie} />
-                <PrivateRoute exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
+                <Route exact path="/schedulemovie/:movieId" component={ScheduleMovieTimeOverview} />
                 <PrivateRoute exact path="/home" component={Home} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/preferences" component={AccountPreferences} />
